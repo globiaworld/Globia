@@ -1,69 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Globia - Remote Jobs & Resources</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; background-color: #f4f4f4; }
-        header, footer { background: #003366; color: #fff; padding: 20px 0; text-align: center; }
-        main { padding: 20px; max-width: 900px; margin: auto; }
-        h1, h2 { color: #003366; }
-        section { margin-bottom: 40px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        a { color: #003366; text-decoration: none; font-weight: bold; }
-        a:hover { text-decoration: underline; }
-        video { width: 100%; max-height: 500px; margin-top: 10px; border-radius: 5px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Globia - Remote Jobs & Resources</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; line-height:1.6; }
+header, footer { background:#003366; color:#fff; text-align:center; padding:20px 0; }
+main { max-width:900px; margin:auto; padding:20px; }
+h1,h2 { color:#003366; }
+section { background:#fff; padding:20px; margin-bottom:40px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+a { color:#003366; font-weight:bold; text-decoration:none; }
+a:hover { text-decoration:underline; }
+video { width:100%; max-height:500px; margin-top:10px; border-radius:5px; outline:none; }
+.video-level { margin-bottom: 30px; }
+</style>
 </head>
 <body>
 
 <header>
-    <h1>Globia - Remote Jobs & Resources</h1>
+<h1>Globia - Remote Jobs & Resources</h1>
 </header>
 
 <main>
-    <!-- Introduction Section -->
-    <section id="intro">
-        <h2>Welcome to Globia</h2>
-        <p>Find the best remote and on-site job resources here, including sample resumes and training videos to guide you through the process.</p>
-    </section>
 
-    <!-- Video Section -->
-    <section id="video-section">
-        <h2>Watch Our Training Video</h2>
-        <video controls>
-            <source src="files/3044749UHD3840x2160_24fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
+<section id="intro">
+<h2>Welcome to Remote Jobs</h2>
+<p>Discover the best resources for remote work, including training videos and sample resumes.</p>
+</section>
+
+<script>
+  // ===========================
+  // ✅VIDEO MANAGEMENT SECTION
+  // ===========================
+  // Add or update videos here only
+  var videos = [
+    { level: "Beginner", file: "files/3044749UHD3840x2160_24fps.mp4" }
+    // { level: "Intermediate", file: "files/video2.mp4" },
+    // { level: "Advanced", file: "files/video3.mp4" }
+  ];
+
+  videos.forEach(function(v){
+    document.write(`
+      <section class="video-level">
+        <h2>${v.level} Level Training Video</h2>
+        <video controls controlsList="nodownload" preload="metadata">
+          <source src="${v.file}" type="video/mp4">
+          Your browser does not support the video tag.
         </video>
         <p>
-            If the video does not play, you can download it here: 
-            <a href="files/3044749UHD3840x2160_24fps.mp4" download>Download Video</a>
+          <a href="${v.file}" download>Download ${v.level} Video</a>
         </p>
-    </section>
+      </section>
+    `);
+  });
 
-    <!-- Sample Resume Section -->
+  // ===========================
+  // ✅ RESUME DOWNLOAD SECTION
+  // ===========================
+  var resumeFile = "files/sample-resume.pdf";
+  document.write(`
     <section id="resume-section">
-        <h2>Download Sample Resume</h2>
-        <p>
-            Access our professional resume template to help you apply for remote and on-site jobs: 
-            <a href="files/sample-resume.pdf" target="_blank">Download Resume PDF</a>
-        </p>
+      <h2>Download Sample Resume</h2>
+      <p><a href="${resumeFile}" target="_blank">Download Resume PDF</a></p>
     </section>
+  `);
+</script>
 
-    <!-- Skills / Lessons Section -->
-    <section id="skills">
-        <h2>Essential Skills for Remote Jobs</h2>
-        <ul>
-            <li>Data entry and management</li>
-            <li>Customer service & support</li>
-            <li>Medical billing & coding basics</li>
-            <li>Communication and time management</li>
-        </ul>
-    </section>
+<section id="skills">
+<h2>Essential Skills for Remote Jobs</h2>
+<ul>
+<li>Data entry & management</li>
+<li>Customer support & communication</li>
+<li>Time management & organization</li>
+<li>Technical literacy</li>
+</ul>
+</section>
+
 </main>
 
 <footer>
-    <p>&copy; 2026 Globia. All rights reserved.</p>
+<p>&copy; 2026 Globia. All rights reserved.</p>
 </footer>
 
 </body>

@@ -64,15 +64,6 @@ a:hover { text-decoration:underline; }
 <h2>Our Courses</h2>
 <script>
 <script>
-// FILTER COURSES
-document.getElementById('courseSearch').addEventListener('input', function() {
-    var filter = this.value.toLowerCase();
-    document.querySelectorAll('.course-card').forEach(function(card) {
-        var text = card.querySelector('.course-info h3').innerText.toLowerCase();
-        card.style.display = text.includes(filter) ? 'flex' : 'none';
-    });
-});
-</script>
 /* ==== COURSES ARRAY ==== */
 var courses = [
   {

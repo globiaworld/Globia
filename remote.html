@@ -3,130 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Globia - Remote Jobs</title>
+<title>Globia - Remote Courses</title>
 <style>
-body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; line-height:1.6; }
-header, footer { background:#003366; color:#fff; text-align:center; padding:20px 0; }
-header img { width:50px; vertical-align:middle; margin-right:10px; }
-header h1 { display:inline; font-weight:bold; font-size:2rem; vertical-align:middle; }
-header p.motto { font-size:1rem; margin-top:5px; font-style:italic; color:#e0e0e0; }
-main { max-width:1100px; margin:auto; padding:20px; }
-section { background:#fff; padding:20px; margin-bottom:40px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-h2 { color:#003366; margin-top:0; }
-a { color:#003366; font-weight:bold; text-decoration:none; }
-a:hover { text-decoration:underline; }
-.video-level { margin-bottom:30px; }
-.video-level video { width:100%; max-height:500px; border-radius:5px; }
-.course-card { display:flex; align-items:flex-start; margin-bottom:20px; padding:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:#f9f9f9; position:relative; }
-.course-card img { width:60px; margin-right:15px; }
-.course-card .course-info { flex:1; }
-.course-card button.lock { background:#ccc; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; }
-.course-card button.lock:hover { background:#aaa; }
-.jobs-salary { font-size:0.95rem; color:#555; margin-top:5px; }
-.lock-overlay { display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); color:#fff; justify-content:center; align-items:center; border-radius:8px; }
-.lock-overlay button { padding:10px 20px; font-size:1rem; border:none; border-radius:5px; background:gold; cursor:pointer; }
-.locked { position:relative; }
+body { font-family: 'Arial', sans-serif; margin:0; padding:0; background:#f0f4f8; }
+header {
+  background:#87CEEB; color:#fff; padding:30px 20px; display:flex; align-items:center; flex-wrap:wrap;
+}
+header img { width:60px; height:60px; margin-right:15px; }
+header h1 {
+  font-size:3rem; font-weight:900; color:#ffffff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  margin:0;
+}
+header p {
+  width:100%; font-size:1.2rem; margin-left:75px; margin-top:5px;
+  font-style:italic; color:#e0e0e0;
+}
+section { padding:30px 20px; max-width:1200px; margin:auto; }
+#courseSearch { width:100%; padding:15px; margin-bottom:25px; border-radius:50px; border:1px solid #ccc; font-size:1.1rem; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+#coursesContainer { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:25px; }
+.course-card {
+  display:flex; flex-direction:column; align-items:center;
+  background:#fff; padding:20px; border-radius:25px; box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.course-card:hover { transform: translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.2); }
+.course-icon img { width:100px; height:100px; object-fit:contain; margin-bottom:15px; }
+.course-info h3 { margin:0 0 10px 0; font-size:1.5rem; text-align:center; color:#00BFFF; }
+.tier { display:flex; align-items:center; justify-content:center; margin:5px 0; font-weight:bold; }
+.tier img { width:25px; height:25px; margin-right:8px; }
+.course-info p { margin:5px 0; text-align:center; color:#333; }
+.video-container video { max-width:100%; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); margin-top:10px; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-<img src="files/globe.png" alt="Globe Icon">
-<h1>Globia</h1>
-<p class="motto">Empowering Your Career, Anywhere</p>
+  <img src="files/icons/globe.png" alt="Globia Logo">
+  <h1>Globia</h1>
+  <p>Empower Your Career</p>
 </header>
 
-<main>
-
-<!-- REMOTE JOBS -->
-<section id="remote-jobs">
-<h2>Remote Jobs</h2>
-<img src="files/remote-icon.png" alt="Remote Jobs Icon" style="width:50px;">
-<p class="jobs-salary">Available Jobs: 120 | Expected Salary: $2,500 - $4,500/month</p>
+<section id="courses">
+  <h2 style="text-align:center; margin-bottom:20px; color:#00BFFF;">Remote Courses</h2>
+  <input type="text" id="courseSearch" placeholder="Search courses...">
+  <div id="coursesContainer"></div>
 </section>
 
-<!-- COURSES -->
-<section id="courses">
-<h2>Our Courses</h2>
-
 <script>
-var courses = [
-  {
-    category: "Engineering",
-    icon: "files/engineering.png",
-    free: { price: "Free", jobs: 30, salary: "$2,500 - $3,500", videos:["files/eng_free1.mp4","files/eng_free2.mp4"] },
-    vip: { price: "$49.99", jobs: 45, salary: "$3,500 - $5,000", videos:["files/eng_vip1.mp4"], locked:true },
-    vvip: { price: "$199.99", jobs: 60, salary: "$5,000 - $7,500", videos:["files/eng_vvip1.mp4"], locked:true }
+// Remote Courses Data
+const courses = [
+  { category:"Engineering", icon:"files/icons/engineering.png",
+    free:{price:"Free", jobs:8, salary:"$2,100-$3,200", videos:[], description:"Remote engineering fundamentals.", icon:"files/icons/free.png"},
+    vip:{price:"$49.99", jobs:12, salary:"$3,200-$4,500", videos:["files/videos/remote_eng_vip.mp4"], icon:"files/icons/vip.png"},
+    vvip:{price:"$199.99", jobs:18, salary:"$4,500-$6,000", videos:["files/videos/remote_eng_vvip.mp4"], icon:"files/icons/vvip.png"}
   },
-  {
-    category: "IT & Software",
-    icon: "files/it.png",
-    free: { price: "Free", jobs: 40, salary: "$2,500 - $4,000", videos:["files/it_free1.mp4"] },
-    vip: { price: "$49.99", jobs: 50, salary: "$4,000 - $5,500", videos:["files/it_vip1.mp4"], locked:true },
-    vvip: { price: "$199.99", jobs: 70, salary: "$5,500 - $8,000", videos:["files/it_vvip1.mp4"], locked:true }
+  { category:"IT & Software", icon:"files/icons/it.png",
+    free:{price:"Free", jobs:6, salary:"$2,200-$3,300", videos:[], description:"Remote IT basics.", icon:"files/icons/free.png"},
+    vip:{price:"$49.99", jobs:10, salary:"$3,300-$4,800", videos:["files/videos/remote_it_vip.mp4"], icon:"files/icons/vip.png"},
+    vvip:{price:"$199.99", jobs:15, salary:"$4,800-$6,200", videos:["files/videos/remote_it_vvip.mp4"], icon:"files/icons/vvip.png"}
   },
-  {
-    category: "Health & Allied",
-    icon: "files/health.png",
-    free: { price: "Free", jobs: 25, salary: "$2,800 - $3,800", videos:["files/health_free1.mp4"] },
-    vip: { price: "$49.99", jobs: 35, salary: "$3,800 - $5,000", videos:["files/health_vip1.mp4"], locked:true },
-    vvip: { price: "$199.99", jobs: 50, salary: "$5,000 - $7,500", videos:["files/health_vvip1.mp4"], locked:true }
+  { category:"Health & Allied", icon:"files/icons/health.png",
+    free:{price:"Free", jobs:5, salary:"$2,100-$3,100", videos:[], description:"Remote healthcare fundamentals.", icon:"files/icons/free.png"},
+    vip:{price:"$49.99", jobs:9, salary:"$3,100-$4,500", videos:["files/videos/remote_health_vip.mp4"], icon:"files/icons/vip.png"},
+    vvip:{price:"$199.99", jobs:12, salary:"$4,500-$6,000", videos:["files/videos/remote_health_vvip.mp4"], icon:"files/icons/vvip.png"}
   },
-  {
-    category: "Business & Management",
-    icon: "files/business.png",
-    free: { price: "Free", jobs: 20, salary: "$2,500 - $3,500", videos:["files/biz_free1.mp4"] },
-    vip: { price: "$49.99", jobs: 30, salary: "$3,500 - $5,000", videos:["files/biz_vip1.mp4"], locked:true },
-    vvip: { price: "$199.99", jobs: 40, salary: "$5,000 - $6,500", videos:["files/biz_vvip1.mp4"], locked:true }
-  },
-  {
-    category: "Creative Arts",
-    icon: "files/creative.png",
-    free: { price: "Free", jobs: 15, salary: "$2,200 - $3,200", videos:["files/creative_free1.mp4"] },
-    vip: { price: "$49.99", jobs: 25, salary: "$3,500 - $5,000", videos:["files/creative_vip1.mp4"], locked:true },
-    vvip: { price: "$199.99", jobs: 35, salary: "$5,000 - $7,000", videos:["files/creative_vvip1.mp4"], locked:true }
+  { category:"Business & Management", icon:"files/icons/business.png",
+    free:{price:"Free", jobs:7, salary:"$2,400-$3,400", videos:[], description:"Remote business skills.", icon:"files/icons/free.png"},
+    vip:{price:"$49.99", jobs:13, salary:"$3,400-$4,900", videos:["files/videos/remote_biz_vip.mp4"], icon:"files/icons/vip.png"},
+    vvip:{price:"$199.99", jobs:18, salary:"$4,900-$6,500", videos:["files/videos/remote_biz_vvip.mp4"], icon:"files/icons/vvip.png"}
   }
 ];
 
-courses.forEach(function(c){
-  ["free","vip","vvip"].forEach(function(tier){
-    var course = c[tier];
-    var lockedClass = (course.locked) ? "locked" : "";
-    document.write(`
-      <div class="course-card ${lockedClass}">
-        <img src="${c.icon}" alt="${c.category} Icon">
-        <div class="course-info">
-          <h3>${c.category} - ${tier.toUpperCase()} (${course.price})</h3>
-          <p class="jobs-salary">Jobs: ${course.jobs} | Expected Salary: ${course.salary}</p>
-          ${course.videos.map(v=>`<video controls preload="metadata"><source src="${v}" type="video/mp4">Your browser does not support video.</video>`).join("")}
-        </div>
-        ${course.locked ? `<div class="lock-overlay" style="display:flex;"><button onclick="unlock(this)">Unlock</button></div>` : ""}
+// Render Courses
+const container = document.getElementById('coursesContainer');
+function renderCourses() {
+  container.innerHTML = "";
+  courses.forEach(course => {
+    const card = document.createElement('div');
+    card.className = 'course-card';
+    card.innerHTML = `
+      <div class="course-icon"><img src="${course.icon}" alt="${course.category}"></div>
+      <div class="course-info">
+        <h3>${course.category}</h3>
+        <div class="tier"><img src="${course.free.icon}" alt="Free">Free: ${course.free.price} | Jobs: ${course.free.jobs} | Salary: ${course.free.salary}</div>
+        <p>${course.free.description}</p>
+        ${course.free.videos.map(v=>`<div class="video-container"><video controls><source src="${v}" type="video/mp4">Your browser does not support video.</video></div>`).join("")}
+
+        <div class="tier"><img src="${course.vip.icon}" alt="VIP">VIP: ${course.vip.price} | Jobs: ${course.vip.jobs} | Salary: ${course.vip.salary}</div>
+        ${course.vip.videos.map(v=>`<div class="video-container"><video controls><source src="${v}" type="video/mp4">Your browser does not support video.</video></div>`).join("")}
+
+        <div class="tier"><img src="${course.vvip.icon}" alt="VVIP">VVIP: ${course.vvip.price} | Jobs: ${course.vvip.jobs} | Salary: ${course.vvip.salary}</div>
+        ${course.vvip.videos.map(v=>`<div class="video-container"><video controls><source src="${v}" type="video/mp4">Your browser does not support video.</video></div>`).join("")}
       </div>
-    `);
+    `;
+    container.appendChild(card);
+  });
+}
+renderCourses();
+
+// Search Functionality
+document.getElementById('courseSearch').addEventListener('input', function(){
+  const filter = this.value.toLowerCase();
+  document.querySelectorAll('.course-card').forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(filter) ? 'flex':'none';
   });
 });
-
-function unlock(btn){
-  var overlay = btn.parentElement;
-  overlay.style.display = "none";
-  overlay.parentElement.classList.remove("locked");
-}
 </script>
-
-</section>
-
-<!-- RESUME -->
-<section id="resume">
-<h2>Sample Resume</h2>
-<p><a href="files/sample-resume.pdf" target="_blank">Download Resume PDF</a></p>
-</section>
-
-</main>
-
-<footer>
-<p>&copy; 2026 Globia. All rights reserved.</p>
-</footer>
 
 </body>
 </html>

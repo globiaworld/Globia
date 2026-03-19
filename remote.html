@@ -3,73 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Globia - Remote Jobs & Resources</title>
+<title>Globia - Remote Jobs</title>
 <style>
 body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; line-height:1.6; }
 header, footer { background:#003366; color:#fff; text-align:center; padding:20px 0; }
-main { max-width:900px; margin:auto; padding:20px; }
-h1,h2 { color:#003366; }
+header img { width:50px; vertical-align:middle; margin-right:10px; }
+header h1 { display:inline; font-weight:bold; font-size:2rem; vertical-align:middle; }
+header p.motto { font-size:1rem; margin-top:5px; font-style:italic; color:#e0e0e0; }
+main { max-width:1100px; margin:auto; padding:20px; }
 section { background:#fff; padding:20px; margin-bottom:40px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+h2 { color:#003366; margin-top:0; }
 a { color:#003366; font-weight:bold; text-decoration:none; }
 a:hover { text-decoration:underline; }
-video { width:100%; max-height:500px; margin-top:10px; border-radius:5px; outline:none; }
-.video-level { margin-bottom: 30px; }
+.video-level { margin-bottom:30px; }
+.video-level video { width:100%; max-height:500px; border-radius:5px; }
+.course-card { display:flex; align-items:flex-start; margin-bottom:20px; padding:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:#f9f9f9; position:relative; }
+.course-card img { width:60px; margin-right:15px; }
+.course-card .course-info { flex:1; }
+.course-card button.lock { background:#ccc; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; }
+.course-card button.lock:hover { background:#aaa; }
+.jobs-salary { font-size:0.95rem; color:#555; margin-top:5px; }
+.lock-overlay { display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); color:#fff; justify-content:center; align-items:center; border-radius:8px; }
+.lock-overlay button { padding:10px 20px; font-size:1rem; border:none; border-radius:5px; background:gold; cursor:pointer; }
+.locked { position:relative; }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-<h1>Globia - Remote Jobs & Resources</h1>
+<img src="files/globe.png" alt="Globe Icon">
+<h1>Globia</h1>
+<p class="motto">Empowering Your Career, Anywhere</p>
 </header>
 
 <main>
 
-<section id="intro">
-<h2>Welcome to Remote Jobs</h2>
-<p>Discover resources and training videos to succeed in remote jobs.</p>
+<!-- REMOTE JOBS -->
+<section id="remote-jobs">
+<h2>Remote Jobs</h2>
+<img src="files/remote-icon.png" alt="Remote Jobs Icon" style="width:50px;">
+<p class="jobs-salary">Available Jobs: 120 | Expected Salary: $2,500 - $4,500/month</p>
 </section>
 
-<script>
-  // ===========================
-  // VIDEO MANAGEMENT
-  // ===========================
-  var videos = [
-    { level: "Beginner", file: "files/3044749UHD3840x2160_24fps.mp4" }
-    // Add more videos here for different levels
-  ];
+<!-- COURSES -->
+<section id="courses">
+<h2>Our Courses</h2>
 
-  videos.forEach(function(v){
+<script>
+var courses = [
+  {
+    category: "Engineering",
+    icon: "files/engineering.png",
+    free: { price: "Free", jobs: 30, salary: "$2,500 - $3,500", videos:["files/eng_free1.mp4","files/eng_free2.mp4"] },
+    vip: { price: "$49.99", jobs: 45, salary: "$3,500 - $5,000", videos:["files/eng_vip1.mp4"], locked:true },
+    vvip: { price: "$199.99", jobs: 60, salary: "$5,000 - $7,500", videos:["files/eng_vvip1.mp4"], locked:true }
+  },
+  {
+    category: "IT & Software",
+    icon: "files/it.png",
+    free: { price: "Free", jobs: 40, salary: "$2,500 - $4,000", videos:["files/it_free1.mp4"] },
+    vip: { price: "$49.99", jobs: 50, salary: "$4,000 - $5,500", videos:["files/it_vip1.mp4"], locked:true },
+    vvip: { price: "$199.99", jobs: 70, salary: "$5,500 - $8,000", videos:["files/it_vvip1.mp4"], locked:true }
+  },
+  {
+    category: "Health & Allied",
+    icon: "files/health.png",
+    free: { price: "Free", jobs: 25, salary: "$2,800 - $3,800", videos:["files/health_free1.mp4"] },
+    vip: { price: "$49.99", jobs: 35, salary: "$3,800 - $5,000", videos:["files/health_vip1.mp4"], locked:true },
+    vvip: { price: "$199.99", jobs: 50, salary: "$5,000 - $7,500", videos:["files/health_vvip1.mp4"], locked:true }
+  },
+  {
+    category: "Business & Management",
+    icon: "files/business.png",
+    free: { price: "Free", jobs: 20, salary: "$2,500 - $3,500", videos:["files/biz_free1.mp4"] },
+    vip: { price: "$49.99", jobs: 30, salary: "$3,500 - $5,000", videos:["files/biz_vip1.mp4"], locked:true },
+    vvip: { price: "$199.99", jobs: 40, salary: "$5,000 - $6,500", videos:["files/biz_vvip1.mp4"], locked:true }
+  },
+  {
+    category: "Creative Arts",
+    icon: "files/creative.png",
+    free: { price: "Free", jobs: 15, salary: "$2,200 - $3,200", videos:["files/creative_free1.mp4"] },
+    vip: { price: "$49.99", jobs: 25, salary: "$3,500 - $5,000", videos:["files/creative_vip1.mp4"], locked:true },
+    vvip: { price: "$199.99", jobs: 35, salary: "$5,000 - $7,000", videos:["files/creative_vvip1.mp4"], locked:true }
+  }
+];
+
+courses.forEach(function(c){
+  ["free","vip","vvip"].forEach(function(tier){
+    var course = c[tier];
+    var lockedClass = (course.locked) ? "locked" : "";
     document.write(`
-      <section class="video-level">
-        <h2>${v.level} Level Training Video</h2>
-        <video controls controlsList="nodownload" preload="metadata">
-          <source src="${v.file}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <p>
-          <a href="${v.file}" download>Download ${v.level} Video</a>
-        </p>
-      </section>
+      <div class="course-card ${lockedClass}">
+        <img src="${c.icon}" alt="${c.category} Icon">
+        <div class="course-info">
+          <h3>${c.category} - ${tier.toUpperCase()} (${course.price})</h3>
+          <p class="jobs-salary">Jobs: ${course.jobs} | Expected Salary: ${course.salary}</p>
+          ${course.videos.map(v=>`<video controls preload="metadata"><source src="${v}" type="video/mp4">Your browser does not support video.</video>`).join("")}
+        </div>
+        ${course.locked ? `<div class="lock-overlay" style="display:flex;"><button onclick="unlock(this)">Unlock</button></div>` : ""}
+      </div>
     `);
   });
+});
 
-  var resumeFile = "files/sample-resume.pdf";
-  document.write(`
-    <section id="resume-section">
-      <h2>Download Sample Resume</h2>
-      <p><a href="${resumeFile}" target="_blank">Download Resume PDF</a></p>
-    </section>
-  `);
+function unlock(btn){
+  var overlay = btn.parentElement;
+  overlay.style.display = "none";
+  overlay.parentElement.classList.remove("locked");
+}
 </script>
 
-<section id="skills">
-<h2>Essential Skills for Remote Jobs</h2>
-<ul>
-<li>Data entry & management</li>
-<li>Customer support & communication</li>
-<li>Time management & organization</li>
-<li>Technical literacy</li>
-</ul>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+<h2>Sample Resume</h2>
+<p><a href="files/sample-resume.pdf" target="_blank">Download Resume PDF</a></p>
 </section>
 
 </main>

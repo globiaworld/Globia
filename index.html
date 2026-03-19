@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Globia - Remote Courses</title>
+<title>Globia - Home</title>
 <style>
 /* General */
 body { font-family: 'Arial', sans-serif; margin:0; padding:0; background:#f0f4f8; }
@@ -16,21 +16,18 @@ header p { width:100%; font-size:1.4rem; margin-top:15px; font-style:italic; col
 #banner { display:flex; overflow:hidden; width:100%; background:#fff; border-radius:20px; margin:20px 0; height:180px; }
 #banner img { height:180px; flex-shrink:0; margin-right:10px; border-radius:15px; object-fit:cover; transition: transform 0.5s; }
 
-/* Courses */
-section { padding:30px 20px; max-width:1200px; margin:auto; }
-#courseSearch { width:100%; padding:15px; margin-bottom:25px; border-radius:50px; border:1px solid #ccc; font-size:1.1rem; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
-#coursesContainer { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:25px; }
-.course-card { display:flex; flex-direction:column; align-items:center; background:#fff; padding:20px; border-radius:25px; box-shadow:0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; cursor:pointer; }
-.course-card:hover { transform: translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.2); }
-.course-icon img { width:100px; height:100px; object-fit:contain; margin-bottom:15px; }
-.course-info h3 { margin:0 0 10px 0; font-size:1.5rem; text-align:center; color:#00BFFF; }
-.tier { display:flex; align-items:center; justify-content:center; margin:5px 0; font-weight:bold; flex-wrap:wrap; }
-.tier img { width:25px; height:25px; margin-right:8px; }
-.course-info p { margin:5px 0; text-align:center; color:#333; }
-button.view-more { background:#00BFFF; color:#fff; border:none; padding:10px 20px; border-radius:20px; margin-top:10px; cursor:pointer; font-weight:bold; transition: background 0.3s; }
-button.view-more:hover { background:#009ACD; }
-.course-details { display:none; margin-top:15px; width:100%; }
-.course-details .video-container video { max-width:100%; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); margin-top:10px; }
+/* Main navigation buttons */
+#navButtons { display:flex; justify-content:center; flex-wrap:wrap; gap:30px; margin:30px 0; }
+.nav-btn { background:#00BFFF; color:#fff; border:none; padding:20px 40px; border-radius:25px; font-size:1.5rem; cursor:pointer; font-weight:bold; transition: background 0.3s; text-decoration:none; display:flex; align-items:center; gap:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.nav-btn:hover { background:#009ACD; }
+
+/* Tiers */
+#tiers { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:25px; max-width:1200px; margin:auto; margin-bottom:40px; }
+.tier-card { background:#fff; padding:20px; border-radius:25px; box-shadow:0 10px 25px rgba(0,0,0,0.1); text-align:center; transition: transform 0.3s, box-shadow 0.3s; }
+.tier-card:hover { transform: translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.2); }
+.tier-card img { width:60px; height:60px; margin-bottom:10px; }
+.tier-card h3 { margin:10px 0; color:#00BFFF; }
+.tier-card p { color:#333; font-weight:bold; }
 
 /* Footer */
 footer { text-align:center; padding:30px 20px; background:#87CEEB; color:#fff; font-size:1rem; }
@@ -41,7 +38,7 @@ footer { text-align:center; padding:30px 20px; background:#87CEEB; color:#fff; f
 <header>
   <img src="files/icons/globe.png" alt="Globia Logo">
   <h1>Globia</h1>
-  <p>Empower Your Career Remotely</p>
+  <p>Empower Your Career</p>
 </header>
 
 <!-- Top Rotating Banner -->
@@ -53,11 +50,34 @@ footer { text-align:center; padding:30px 20px; background:#87CEEB; color:#fff; f
   <img src="files/images/uk.jpg" alt="UK">
 </div>
 
-<section id="courses">
-  <h2 style="text-align:center; margin-bottom:20px; color:#00BFFF;">Remote Courses</h2>
-  <input type="text" id="courseSearch" placeholder="Search remote courses...">
-  <div id="coursesContainer"></div>
+<!-- Navigation Buttons -->
+<div id="navButtons">
+  <a href="onsite.html" class="nav-btn">On-Site Courses</a>
+  <a href="remote.html" class="nav-btn">Remote Courses</a>
+</div>
+
+<!-- Highlighted Tiers -->
+<section id="tiers">
+  <div class="tier-card">
+    <img src="files/icons/free.png" alt="Free Tier">
+    <h3>Free</h3>
+    <p>Access basic courses | Jobs: 10 | Salary: $2,000-$3,200</p>
+  </div>
+  <div class="tier-card">
+    <img src="files/icons/vip.png" alt="VIP Tier">
+    <h3>VIP</h3>
+    <p>Unlock VIP content | $49.99 | Jobs: 15 | Salary: $3,200-$4,500</p>
+  </div>
+  <div class="tier-card">
+    <img src="files/icons/vvip.png" alt="VVIP Tier">
+    <h3>VVIP</h3>
+    <p>Full access | $199.99 | Jobs: 20 | Salary: $4,500-$6,000</p>
+  </div>
 </section>
+
+<footer>
+  <div>All rights reserved ©2025 Globia</div>
+</footer>
 
 <script>
 // Banner Auto-Scroll
@@ -68,74 +88,7 @@ setInterval(() => {
   if(scrollPos > banner.scrollWidth - banner.clientWidth) scrollPos = 0;
   banner.scrollLeft = scrollPos;
 }, 30);
-
-// Courses Data
-const courses = [
-  { category:"Remote IT", icon:"files/icons/it.png",
-    free:{price:"Free", jobs:10, salary:"$2,000-$3,200", videos:[], description:"Basic IT remote skills.", icon:"files/icons/free.png"},
-    vip:{price:"$49.99", jobs:15, salary:"$3,200-$4,500", videos:["files/videos/remote_it_vip1.mp4"], icon:"files/icons/vip.png"},
-    vvip:{price:"$199.99", jobs:20, salary:"$4,500-$6,000", videos:["files/videos/remote_it_vvip1.mp4"], icon:"files/icons/vvip.png"}
-  },
-  { category:"Remote Engineering", icon:"files/icons/engineering.png",
-    free:{price:"Free", jobs:8, salary:"$2,100-$3,300", videos:[], description:"Engineering basics remotely.", icon:"files/icons/free.png"},
-    vip:{price:"$49.99", jobs:12, salary:"$3,300-$4,800", videos:["files/videos/remote_eng_vip1.mp4"], icon:"files/icons/vip.png"},
-    vvip:{price:"$199.99", jobs:18, salary:"$4,800-$6,200", videos:["files/videos/remote_eng_vvip1.mp4"], icon:"files/icons/vvip.png"}
-  }
-];
-
-// Render Courses
-const container = document.getElementById('coursesContainer');
-function renderCourses() {
-  container.innerHTML = "";
-  courses.forEach(course => {
-    const card = document.createElement('div');
-    card.className = 'course-card';
-    card.innerHTML = `
-      <div class="course-icon"><img src="${course.icon}" alt="${course.category}"></div>
-      <div class="course-info">
-        <h3>${course.category}</h3>
-        <div class="tier"><img src="${course.free.icon}" alt="Free">Free: ${course.free.price} | Jobs: ${course.free.jobs} | Salary: ${course.free.salary}</div>
-        <p>${course.free.description}</p>
-        <button class="view-more">Click to View More</button>
-        <div class="course-details">
-          <div class="tier"><img src="${course.vip.icon}" alt="VIP">VIP: ${course.vip.price} | Jobs: ${course.vip.jobs} | Salary: ${course.vip.salary}</div>
-          ${course.vip.videos.map(v=>`<div class="video-container"><video controls><source src="${v}" type="video/mp4"></video></div>`).join("")}
-          <div class="tier"><img src="${course.vvip.icon}" alt="VVIP">VVIP: ${course.vvip.price} | Jobs: ${course.vvip.jobs} | Salary: ${course.vvip.salary}</div>
-          ${course.vvip.videos.map(v=>`<div class="video-container"><video controls><source src="${v}" type="video/mp4"></video></div>`).join("")}
-        </div>
-      </div>
-    `;
-    container.appendChild(card);
-
-    // Expand/collapse functionality
-    const btn = card.querySelector('.view-more');
-    const details = card.querySelector('.course-details');
-    btn.addEventListener('click', () => {
-      if(details.style.display === 'block'){
-        details.style.display = 'none';
-        btn.textContent = 'Click to View More';
-      } else {
-        details.style.display = 'block';
-        btn.textContent = 'Click to Collapse';
-      }
-    });
-  });
-}
-renderCourses();
-
-// Search Function
-document.getElementById('courseSearch').addEventListener('input', function(){
-  const filter = this.value.toLowerCase();
-  document.querySelectorAll('.course-card').forEach(card=>{
-    const text = card.innerText.toLowerCase();
-    card.style.display = text.includes(filter) ? 'flex':'none';
-  });
-});
 </script>
-
-<footer>
-  <div>All rights reserved ©2025 Globia</div>
-</footer>
 
 </body>
 </html>

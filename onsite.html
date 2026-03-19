@@ -3,82 +3,60 @@
 <head>
     <title>Globia - On-Site Jobs Pathway</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        .container { padding: 40px 20px; max-width: 900px; margin: auto; }
-        .section { background: white; margin: 20px auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1, h2, h3 { margin-bottom: 15px; }
-        p { font-size: 16px; line-height: 1.5; }
-        .lesson { background: #e9ecef; margin: 10px 0; padding: 15px; border-radius: 8px; text-align: left; }
-        button { padding: 12px 25px; margin: 10px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
-        .vip { background: #0056b3; color: white; }
-        .vvip { background: #d9534f; color: white; }
-        .counter { font-size: 20px; color: #007BFF; font-weight: bold; }
-        .coming-soon { font-style: italic; color: #666; }
-        video { max-width: 100%; height: auto; border-radius: 8px; }
+        body { font-family: Arial; background: #f4f4f4; text-align: center; }
+        .container { padding: 40px; max-width: 900px; margin: auto; }
+        .section { background: white; margin: 20px; padding: 25px; border-radius: 10px; }
+        .lesson { background: #e9ecef; margin: 10px; padding: 10px; border-radius: 6px; text-align: left; }
+        button { padding: 12px 20px; margin: 10px; border: none; border-radius: 6px; cursor: pointer; }
+        .vip { background: blue; color: white; }
+        .vvip { background: red; color: white; }
+        video { width: 100%; max-width: 500px; }
     </style>
 </head>
+
 <body>
-
 <div class="container">
-    <h1>🌐 Globia - On-Site Jobs Pathway</h1>
-    <p>Learn skills, complete courses, and access on-site job opportunities worldwide.</p>
 
-    <!-- Free Lessons Section -->
-    <div class="section">
-        <h2>🎓 Free Lessons</h2>
-        <div class="lesson"><strong>Lesson 1:</strong> Introduction to On-Site Work</div>
-        <div class="lesson"><strong>Lesson 2:</strong> Resume & Cover Letter Basics</div>
-        <div class="lesson"><strong>Lesson 3:</strong> Essential Skills for On-Site Jobs</div>
+<h1>🌐 On-Site Jobs Pathway</h1>
 
-        <!-- PDF Lesson -->
-        <div class="lesson">
-            <strong>Lesson 4:</strong> Sample Resume Template
-            <br>
-            <a href="files/sample-resume.pdf" target="_blank">Download PDF</a>
-        </div>
+<div class="section">
+<h2>🎓 Free Lessons</h2>
 
-        <!-- Test Video Lesson -->
-        <div class="lesson">
-            <strong>Lesson 5:</strong> Test Video
-            <br>
-            <video controls>
-                <source src="files/3044749UHD3840x2160_24fps.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+<div class="lesson">Lesson 1: Introduction to On-Site Work</div>
+<div class="lesson">Lesson 2: Resume & Cover Letter</div>
+<div class="lesson">Lesson 3: Essential Skills</div>
 
-        <p>Complete these lessons to see how many opportunities are available to you!</p>
-    </div>
-
-    <!-- VIP/VVIP Placeholder Section -->
-    <div class="section">
-        <h2>🔒 VIP/VVIP Full Lessons</h2>
-        <p class="coming-soon">Full course lessons, videos, and detailed job links will unlock for VIP/VVIP users.</p>
-        <button class="vip">Get VIP — $49.99 / month</button>
-        <button class="vvip">Get VVIP — $199 / year</button>
-    </div>
-
-    <!-- Job Opportunity Counter -->
-    <div class="section">
-        <h2>💼 Available Job Opportunities</h2>
-        <p>On-site jobs currently available for this pathway:</p>
-        <div class="counter" id="jobCounter">38</div>
-        <p>Keep learning to unlock full course and job links!</p>
-        <p class="coming-soon">Real job links for VIP/VVIP will appear here once integrated.</p>
-    </div>
-
-    <!-- Navigation -->
-    <div class="section">
-        <button onclick="location.href='index.html'">← Back to Home</button>
-        <button onclick="location.href='remote.html'">Go to Remote Jobs →</button>
-    </div>
+<div class="lesson">
+Lesson 4: Resume Template <br>
+<a href="files/sample-resume.pdf" target="_blank">Download PDF</a>
 </div>
 
+<div class="lesson">
+Lesson 5: Video Lesson <br>
+<video controls>
+<source src="files/3044749UHD3840x2160_24fps.mp4" type="video/mp4">
+</video>
+</div>
+
+</div>
+
+<div class="section">
+<h2>🔒 VIP / VVIP</h2>
+<p>Unlock full course and job links</p>
+<button class="vip">VIP - $49.99</button>
+<button class="vvip">VVIP - $199/year</button>
+</div>
+
+<div class="section">
+<h2>💼 Job Opportunities</h2>
+<p>Available jobs: <b>38</b></p>
+</div>
+
+<div class="section">
+<button onclick="location.href='index.html'">Back Home</button>
+<button onclick="location.href='remote.html'">Remote Jobs</button>
+</div>
+
+</div>
 </body>
 </html>

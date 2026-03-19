@@ -1,62 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Globia - Remote Jobs Pathway</title>
-    <style>
-        body { font-family: Arial; background: #f4f4f4; text-align: center; }
-        .container { padding: 40px; max-width: 900px; margin: auto; }
-        .section { background: white; margin: 20px; padding: 25px; border-radius: 10px; }
-        .lesson { background: #e9ecef; margin: 10px; padding: 10px; border-radius: 6px; text-align: left; }
-        button { padding: 12px 20px; margin: 10px; border: none; border-radius: 6px; cursor: pointer; }
-        .vip { background: blue; color: white; }
-        .vvip { background: red; color: white; }
-        video { width: 100%; max-width: 500px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Globia - Remote Jobs & Resources</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; line-height:1.6; }
+header, footer { background:#003366; color:#fff; text-align:center; padding:20px 0; }
+main { max-width:900px; margin:auto; padding:20px; }
+h1,h2 { color:#003366; }
+section { background:#fff; padding:20px; margin-bottom:40px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+a { color:#003366; font-weight:bold; text-decoration:none; }
+a:hover { text-decoration:underline; }
+video { width:100%; max-height:500px; margin-top:10px; border-radius:5px; outline:none; }
+.video-level { margin-bottom: 30px; }
+</style>
 </head>
-
 <body>
-<div class="container">
 
-<h1>🌐 Remote Jobs Pathway</h1>
+<header>
+<h1>Globia - Remote Jobs & Resources</h1>
+</header>
 
-<div class="section">
-<h2>🎓 Free Lessons</h2>
+<main>
 
-<div class="lesson">Lesson 1: Introduction to Remote Work</div>
-<div class="lesson">Lesson 2: Resume & Cover Letter</div>
-<div class="lesson">Lesson 3: Essential Skills</div>
+<section id="intro">
+<h2>Welcome to Remote Jobs</h2>
+<p>Discover resources and training videos to succeed in remote jobs.</p>
+</section>
 
-<div class="lesson">
-Lesson 4: Resume Template <br>
-<a href="files/sample-resume.pdf" target="_blank">Download PDF</a>
-</div>
+<script>
+  // ===========================
+  // VIDEO MANAGEMENT
+  // ===========================
+  var videos = [
+    { level: "Beginner", file: "files/3044749UHD3840x2160_24fps.mp4" }
+    // Add more videos here for different levels
+  ];
 
-<div class="lesson">
-Lesson 5: Video Lesson <br>
-<video controls>
-<source src="files/3044749UHD3840x2160_24fps.mp4" type="video/mp4">
-</video>
-</div>
+  videos.forEach(function(v){
+    document.write(`
+      <section class="video-level">
+        <h2>${v.level} Level Training Video</h2>
+        <video controls controlsList="nodownload" preload="metadata">
+          <source src="${v.file}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>
+          <a href="${v.file}" download>Download ${v.level} Video</a>
+        </p>
+      </section>
+    `);
+  });
 
-</div>
+  var resumeFile = "files/sample-resume.pdf";
+  document.write(`
+    <section id="resume-section">
+      <h2>Download Sample Resume</h2>
+      <p><a href="${resumeFile}" target="_blank">Download Resume PDF</a></p>
+    </section>
+  `);
+</script>
 
-<div class="section">
-<h2>🔒 VIP / VVIP</h2>
-<p>Unlock full course and job links</p>
-<button class="vip">VIP - $49.99</button>
-<button class="vvip">VVIP - $199/year</button>
-</div>
+<section id="skills">
+<h2>Essential Skills for Remote Jobs</h2>
+<ul>
+<li>Data entry & management</li>
+<li>Customer support & communication</li>
+<li>Time management & organization</li>
+<li>Technical literacy</li>
+</ul>
+</section>
 
-<div class="section">
-<h2>💼 Job Opportunities</h2>
-<p>Available jobs: <b>42</b></p>
-</div>
+</main>
 
-<div class="section">
-<button onclick="location.href='index.html'">Back Home</button>
-<button onclick="location.href='onsite.html'">On-Site Jobs</button>
-</div>
+<footer>
+<p>&copy; 2026 Globia. All rights reserved.</p>
+</footer>
 
-</div>
 </body>
 </html>

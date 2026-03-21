@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobiaWorld Tourism</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background:#f4f4f4;
+}
+
+/* NAVBAR */
+.navbar {
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  background:#111;
+  color:white;
+}
+
+.navbar a {
+  color:white;
+  text-decoration:none;
+  margin-left:15px;
+}
+
+/* HERO */
+.hero {
+  height:70vh;
+  background:url('https://source.unsplash.com/1600x900/?travel,africa') center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+}
+
+.hero h1 {
+  font-size:3rem;
+}
+
+.search input {
+  margin-top:20px;
+  padding:12px;
+  width:260px;
+  border:none;
+  border-radius:5px;
+}
+
+/* INTRO */
+.intro {
+  padding:40px;
+  text-align:center;
+  background:white;
+}
+
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  padding:40px;
+}
+
+/* CARD */
+.card {
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.card:hover {
+  transform:translateY(-5px);
+}
+
+.card img {
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
+
+.card h3 {
+  text-align:center;
+  padding:10px;
+}
+
+/* PACKAGES */
+.packages {
+  background:#fff;
+  padding:40px;
+  text-align:center;
+}
+
+.package-box {
+  display:inline-block;
+  margin:15px;
+  padding:20px;
+  border-radius:10px;
+  background:#ff7e5f;
+  color:white;
+}
+
+/* CTA */
+.cta {
+  background:#1E90FF;
+  color:white;
+  padding:40px;
+  text-align:center;
+}
+
+.cta button {
+  margin-top:15px;
+  padding:15px 30px;
+  border:none;
+  background:white;
+  color:#1E90FF;
+  font-weight:bold;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer {
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>GlobiaWorld</h2>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Destinations</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Explore Africa & The World</h1>
+  <p>Travel. Discover. Experience.</p>
+
+  <div class="search">
+    <input type="text" id="searchBox" placeholder="Search country..." onkeyup="searchCountries()">
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <h2>Top Travel Destinations</h2>
+  <p>Discover amazing places and opportunities across the globe.</p>
+</div>
+
+<!-- COUNTRIES -->
+<div class="grid" id="countryGrid">
+
+  <div class="card" onclick="openCountry('kenya.html')">
+    <img src="https://source.unsplash.com/400x300/?kenya">
+    <h3>Kenya</h3>
+  </div>
+
+  <div class="card" onclick="openCountry('southafrica.html')">
+    <img src="https://source.unsplash.com/400x300/?cape-town">
+    <h3>South Africa</h3>
+  </div>
+
+  <div class="card" onclick="openCountry('tanzania.html')">
+    <img src="https://source.unsplash.com/400x300/?zanzibar">
+    <h3>Tanzania</h3>
+  </div>
+
+  <div class="card" onclick="openCountry('egypt.html')">
+    <img src="https://source.unsplash.com/400x300/?pyramids">
+    <h3>Egypt</h3>
+  </div>
+
+  <div class="card" onclick="openCountry('nigeria.html')">
+    <img src="https://source.unsplash.com/400x300/?lagos">
+    <h3>Nigeria</h3>
+  </div>
+
+</div>
+
+<!-- PACKAGES -->
+<div class="packages">
+  <h2>Popular Packages</h2>
+  <div class="package-box">Safari Adventure</div>
+  <div class="package-box">Beach Holiday</div>
+  <div class="package-box">City Tours</div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>Start Your Journey Today</h2>
+  <button>Book Now</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 All rights reserved.
+</footer>
+
+<script>
+function openCountry(page){
+  window.location.href = page;
+}
+
+function searchCountries(){
+  let input = document.getElementById("searchBox").value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card=>{
+    let text = card.innerText.toLowerCase();
+    card.style.display = text.includes(input) ? "block" : "none";
+  });
+}
+</script>
+
+</body>
+</html>

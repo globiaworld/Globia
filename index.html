@@ -4,54 +4,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GlobiaWorld</title>
+  <!-- Google Fonts for modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* Reset some defaults */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      background: #f4f4f4;
-      padding: 100px;
-    }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fceabb, #f8b500); /* subtle warm gradient */
       color: #333;
+      padding: 50px 20px;
     }
+
+    /* Main heading with brackets and floating shadow */
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 4rem;
+      color: #fff;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      color: #fff;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
     p {
-      font-size: 20px;
-      margin-bottom: 40px;
-      color: #555;
+      font-size: 1.5rem;
+      margin-bottom: 50px;
+      color: rgba(255,255,255,0.9);
     }
+
+    /* Button styles */
     .btn {
       display: inline-block;
-      margin: 10px;
-      padding: 20px 40px;
-      font-size: 18px;
-      color: white;
-      border-radius: 8px;
+      margin: 15px;
+      padding: 20px 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 12px;
       text-decoration: none;
-      transition: background 0.3s;
+      color: #fff;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    /* Education button */
     .education {
-      background: #1E90FF; /* Sky Blue */
+      background-color: #1E90FF; /* Sky Blue */
     }
+
     .education:hover {
-      background: #187bcd;
+      background-color: #187bcd;
     }
+
+    /* Tourism button with sunset gradient */
     .tourism {
-      background: #20B2AA; /* Teal for Tourism */
+      background: linear-gradient(45deg, #ff7e5f, #feb47b); /* sunset color */
     }
-    .tourism:hover {
-      background: #1a8c80;
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+      .btn {
+        padding: 15px 40px;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<h1>Welcome to GlobiaWorld</h1>
-<p>Explore Knowledge. Explore Opportunities.</p>
+  <h1><span>[GlobiaWorld]</span></h1>
+  <p>Explore Knowledge & Opportunities</p>
 
-<a href="/education" class="btn education">Go to Education</a>
-<a href="/tourism" class="btn tourism">Go to Tourism</a>
+  <a href="/education" class="btn education">Go to Education</a>
+  <a href="/tourism" class="btn tourism">Go to Tourism</a>
 
 </body>
 </html>

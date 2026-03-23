@@ -3,14 +3,7 @@
 <head>
 <title>Contact / Book Now</title>
 
-<style><script>
-function clearForm() {
-    setTimeout(function() {
-        document.querySelector("form").reset();
-        alert("✅ Booking sent successfully!");
-    }, 100); 
-}
-</script>
+<style>
 body { 
     font-family: Arial; 
     margin:0; 
@@ -102,8 +95,9 @@ footer {
 
 <h1>Book Your Trip</h1>
 
-<!-- FORM THAT SENDS TO YOUR EMAIL -->
-    <form action="https://formspree.io/f/mreynezg" method="POST" onsubmit="clearForm()">
+<!-- ✅ WORKING FORM -->
+<form action="https://formspree.io/f/abcdwxyz" method="POST">
+
     <input type="text" name="name" placeholder="Your Name" required>
     
     <input type="email" name="email" placeholder="Your Email" required>
@@ -111,11 +105,18 @@ footer {
     <input type="text" name="destination" placeholder="Destination" required>
     
     <textarea name="message" placeholder="Additional Notes"></textarea>
+
+    <!-- Send replies to your Gmail -->
     <input type="hidden" name="_replyto" value="josedrash22@gmail.com">
-     <button type="submit">Submit</button>
+
+    <!-- Redirect after submit -->
+    <input type="hidden" name="_next" value="thankyou.html">
+
+    <button type="submit">Submit</button>
+
 </form>
 
-<!-- WHATSAPP -->
+<!-- ✅ WHATSAPP BUTTON -->
 <a class="whatsapp" 
 href="https://wa.me/971567533605?text=Hello%20I%20want%20to%20book%20a%20trip" 
 target="_blank">

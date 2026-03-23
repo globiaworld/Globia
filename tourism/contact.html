@@ -2,16 +2,87 @@
 <html>
 <head>
 <title>Contact / Book Now</title>
+
 <style>
-body { font-family: Arial; margin:0; padding:0; }
-nav { background:#222; padding:15px; text-align:center; }
-nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
-form { max-width:500px; margin:20px auto; display:flex; flex-direction:column; }
-input, textarea { padding:10px; margin:10px 0; }
-button { padding:12px; background:#ff7e5f; color:white; border:none; border-radius:5px; cursor:pointer; }
-a.whatsapp { display:block; text-align:center; margin-top:20px; padding:12px; background:#25d366; color:white; text-decoration:none; border-radius:5px; }
-footer { background:#222; color:white; text-align:center; padding:15px; margin-top:30px; }
+body { 
+    font-family: Arial; 
+    margin:0; 
+    padding:0; 
+    background:#f5f5f5;
+}
+
+nav { 
+    background:#222; 
+    padding:15px; 
+    text-align:center; 
+}
+
+nav a { 
+    color:white; 
+    margin:0 15px; 
+    text-decoration:none; 
+    font-weight:bold; 
+}
+
+h1 {
+    text-align:center;
+    margin:20px 0;
+}
+
+form { 
+    max-width:500px; 
+    margin:20px auto; 
+    display:flex; 
+    flex-direction:column; 
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input, textarea { 
+    padding:12px; 
+    margin:10px 0; 
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button { 
+    padding:12px; 
+    background:#ff7e5f; 
+    color:white; 
+    border:none; 
+    border-radius:5px; 
+    cursor:pointer; 
+    font-size:16px;
+}
+
+button:hover {
+    background:#e5674f;
+}
+
+a.whatsapp { 
+    display:block; 
+    text-align:center; 
+    margin:20px auto; 
+    width:250px;
+    padding:12px; 
+    background:#25d366; 
+    color:white; 
+    text-decoration:none; 
+    border-radius:5px; 
+    font-weight:bold;
+}
+
+footer { 
+    background:#222; 
+    color:white; 
+    text-align:center; 
+    padding:15px; 
+    margin-top:30px; 
+}
 </style>
+
 </head>
 <body>
 
@@ -22,19 +93,30 @@ footer { background:#222; color:white; text-align:center; padding:15px; margin-t
 <a href="/tourism/contact.html">Contact</a>
 </nav>
 
-<h1 style="text-align:center; margin:20px 0;">Book Your Trip</h1>
+<h1>Book Your Trip</h1>
 
-<form>
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
-<input type="text" placeholder="Destination" required>
-<textarea placeholder="Additional Notes"></textarea>
-<button type="submit">Submit</button>
+<!-- FORM THAT SENDS TO YOUR EMAIL -->
+<form action="https://formspree.io/f/xqkrnqjw" method="POST">
+    
+    <input type="text" name="name" placeholder="Your Name" required>
+    
+    <input type="email" name="email" placeholder="Your Email" required>
+    
+    <input type="text" name="destination" placeholder="Destination" required>
+    
+    <textarea name="message" placeholder="Additional Notes"></textarea>
+
+    <button type="submit">Submit</button>
 </form>
 
-<a class="whatsapp" href="https://wa.me/971567533605" target="_blank">Contact via WhatsApp</a>
+<!-- WHATSAPP -->
+<a class="whatsapp" 
+href="https://wa.me/971567533605?text=Hello%20I%20want%20to%20book%20a%20trip" 
+target="_blank">
+Chat on WhatsApp
+</a>
 
-<footer>© 2025 All rights reserved.</footer>
+<footer>© 2026 All rights reserved.</footer>
 
 </body>
 </html>

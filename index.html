@@ -1,21 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Platform</title>
 <style>
-body { margin:0; font-family:Arial; background:#0a1f44; color:white; text-align:center; }
-.hero { height:100vh; display:flex; flex-direction:column; justify-content:center; }
-.btn { padding:15px 30px; margin:10px; background:#ff6600; color:white; text-decoration:none; border-radius:5px; }
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #0a1f44, #112b5c);
+    color:white;
+    text-align:center;
+}
+nav {
+    background:#0a1f44;
+    padding:15px;
+    text-align:center;
+}
+nav a {
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:18px;
+}
+.hero {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+               url('images/conference.jpg') center/cover no-repeat;
+}
+.hero h1 {
+    font-size:3em;
+    margin-bottom:20px;
+}
+.hero p {
+    font-size:1.2em;
+    margin-bottom:30px;
+}
+.btn {
+    padding:15px 30px;
+    margin:10px;
+    background:#ff6600;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+    font-weight:bold;
+    font-size:1.1em;
+    transition: 0.3s;
+}
+.btn:hover {
+    background:#e65c00;
+}
+footer {
+    background:#0a1f44;
+    padding:20px;
+    font-size:14px;
+}
 </style>
 </head>
 
 <body>
-<div class="hero">
-<h1>Global Services Platform</h1>
-<p>Tourism & International Conferences</p>
 
-<a href="conference.html" class="btn">Conferences</a>
-<a href="tourism.html" class="btn">Tourism</a>
-</div>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="conference.html">Conferences</a>
+    <a href="tourism.html">Tourism</a>
+</nav>
+
+<section class="hero">
+    <h1>Global Services Platform</h1>
+    <p>Connecting Tourism & International Conferences</p>
+    <a href="conference.html" class="btn">Explore Conferences</a>
+    <a href="tourism.html" class="btn">Explore Tourism</a>
+</section>
+
+<footer>
+    &copy; 2026 Global Platform. All rights reserved.
+</footer>
+
 </body>
 </html>

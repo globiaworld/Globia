@@ -1,160 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobiaWorld</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body, html {
-      height: 100%;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    /* Container for split screen */
-    .split-screen {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    /* Upper half: background image */
-    .upper {
-      flex: 1;
-      background-image: url('images/landing.jpg'); /* Replace with your image */
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      text-align: center;
-    }
-
-    /* Dark overlay on image */
-    .upper::before {
-      content: "";
-      position: absolute;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: rgba(0,0,0,0.1);
-      z-index:0;
-    }
-
-    .upper-content {
-      position: relative;
-      z-index:1;
-    }
-
-    .upper h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 4rem;
-      text-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      margin-bottom: 15px;
-    }
-
-    .upper h1 span {
-      text-shadow: 0 8px 25px rgba(0,0,0,0.5);
-    }
-
-    .upper p {
-      font-size: 1.5rem;
-      color: rgba(255,255,255,0.95);
-    }
-
-    /* Lower half: plain sky blue */
-    .lower {
-      flex: 1;
-      background-color: #1E90FF; /* Sky Blue */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* Buttons */
-    .btn {
-      margin: 10px;
-      padding: 20px 50px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      border-radius: 12px;
-      text-decoration: none;
-      color: #fff;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-
-    .education {
-      background-color: #87CEFA; /* lighter sky blue for button */
-    }
-
-    .education:hover {
-      background-color: #6bb0e6;
-    }
-
-    .tourism {
-      background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Sunset gradient */
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.9);
-      padding: 10px;
-      background-color: #1C86EE; /* slightly darker than lower section */
-    }
-
-    @media (max-width: 768px) {
-      .upper h1 {
-        font-size: 3rem;
-      }
-      .upper p {
-        font-size: 1.2rem;
-      }
-      .btn {
-        padding: 15px 40px;
-        font-size: 1rem;
-      }
-    }
-  </style>
+<title>Global Platform</title>
+<style>
+body { margin:0; font-family:Arial; background:#0a1f44; color:white; text-align:center; }
+.hero { height:100vh; display:flex; flex-direction:column; justify-content:center; }
+.btn { padding:15px 30px; margin:10px; background:#ff6600; color:white; text-decoration:none; border-radius:5px; }
+</style>
 </head>
+
 <body>
+<div class="hero">
+<h1>Global Services Platform</h1>
+<p>Tourism & International Conferences</p>
 
-  <div class="split-screen">
-    <!-- Upper image section -->
-    <div class="upper">
-      <div class="upper-content">
-        <h1><span>[GlobiaWorld]</span></h1>
-        <p>Explore the magical world, learn, and get opportunities</p>
-      </div>
-    </div>
-
-    <!-- Lower plain color section with buttons -->
-    <div class="lower">
-      <a href="/education" class="btn education">Go to Education</a>
-      <a href="/tourism" class="btn tourism">Go to Tourism</a>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 All rights reserved.
-  </footer>
-
+<a href="conference.html" class="btn">Conferences</a>
+<a href="tourism.html" class="btn">Tourism</a>
+</div>
 </body>
 </html>

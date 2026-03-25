@@ -12,40 +12,69 @@ nav { background:#0a1f44; padding:15px; text-align:center; }
 nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
 
 .hero {
-    height:50vh;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-               url('images/conference1.jpg') center/cover;
-    display:flex; justify-content:center; align-items:center;
-    color:white; font-size:2em;
+  height:60vh;
+  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+             url('images/conference1.jpg') center/cover;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  color:white; text-align:center;
 }
 
-.section { padding:40px; text-align:center; }
+.section { padding:50px 20px; text-align:center; }
 
 .grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
 }
 
 .card {
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-    text-align:left;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  text-align:left;
 }
 
 .ad-box {
-    background:#0a1f44;
-    color:white;
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
+  background:#0a1f44;
+  color:white;
+  padding:10px;
+  border-radius:8px;
+  margin-top:10px;
 }
 
 video { width:100%; margin-top:10px; border-radius:10px; }
 
-footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
+input, select {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+.btn {
+  background:#ff6600;
+  color:white;
+  padding:10px;
+  border:none;
+  cursor:pointer;
+}
+
+.chatbox {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:300px;
+  background:white;
+  border-radius:10px;
+}
+
+.chat-header { background:#0a1f44; color:white; padding:10px; }
+.chat-body { height:200px; overflow:auto; padding:10px; }
+.chat-input { display:flex; }
+.chat-input input { flex:1; padding:10px; }
+.chat-input button { background:#ff6600; color:white; border:none; padding:10px; }
+
+footer { background:#0a1f44; color:white; padding:20px; }
 </style>
 </head>
 
@@ -54,42 +83,112 @@ footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
 <nav>
 <a href="index.html">Home</a>
 <a href="conference.html">Conferences</a>
-<a href="tourism.html">Tourism</a>
 </nav>
 
-<div class="hero">International Conferences</div>
+<section class="hero">
+<h1>International Conferences</h1>
+<p>Connect • Learn • Grow</p>
+</section>
 
+<!-- CONFERENCES -->
 <section class="section">
-<h2>Upcoming Conferences</h2>
+<h2>Available Conferences</h2>
 <div class="grid" id="conferenceContainer"></div>
 </section>
+
+<!-- BOOKING -->
+<section class="section">
+<h2>Book Your Seat</h2>
+
+<form id="bookingForm">
+<input id="name" placeholder="Full Name" required>
+<input id="email" placeholder="Email" required>
+
+<select id="eventSelect"></select>
+
+<select id="ticket">
+<option value="Regular">Regular</option>
+<option value="VIP">VIP</option>
+<option value="VVIP">VVIP</option>
+</select>
+
+<button class="btn">Confirm Booking</button>
+</form>
+
+<p id="confirmation" style="color:green;"></p>
+</section>
+
+<!-- AI CHAT -->
+<div class="chatbox">
+<div class="chat-header">Assistant</div>
+<div class="chat-body" id="chat"></div>
+<div class="chat-input">
+<input id="msg">
+<button onclick="sendMsg()">Send</button>
+</div>
+</div>
 
 <footer>© 2026 Global Conferences</footer>
 
 <script>
-async function loadConferences(){
-  const res = await fetch("http://localhost:5000/events");
-  const events = await res.json();
+let eventsData=[];
 
-  let container = document.getElementById("conferenceContainer");
-  container.innerHTML="";
+/* LOAD CONFERENCES */
+async function loadEvents(){
+ const res=await fetch("http://localhost:5000/events");
+ const events=await res.json();
 
-  events.forEach(e=>{
-    container.innerHTML += `
-    <div class="card">
-      <h3>${e.name}</h3>
-      <p>${e.location} | ${e.date}</p>
+ eventsData=events;
 
-      <div class="ad-box">
-        ${e.description || "Professional international conference."}
-      </div>
+ let container=document.getElementById("conferenceContainer");
+ let select=document.getElementById("eventSelect");
 
-      ${e.video ? `<video controls src="videos/${e.video}"></video>` : ""}
-    </div>
-    `;
-  });
+ container.innerHTML="";
+ select.innerHTML="";
+
+ events.forEach((e,i)=>{
+  container.innerHTML+=`
+  <div class="card">
+    <h3>${e.name}</h3>
+    <p>${e.location} | ${e.date}</p>
+    <div class="ad-box">${e.description}</div>
+    ${e.video ? `<video controls src="videos/${e.video}"></video>` : ""}
+  </div>`;
+  select.innerHTML+=`<option value="${i}">${e.name}</option>`;
+ });
 }
-loadConferences();
+loadEvents();
+
+/* BOOKING */
+document.getElementById("bookingForm").addEventListener("submit", async e=>{
+ e.preventDefault();
+
+ const name=document.getElementById("name").value;
+ const email=document.getElementById("email").value;
+ const event=eventsData[document.getElementById("eventSelect").value];
+ const ticket=document.getElementById("ticket").value;
+
+ await fetch("http://localhost:5000/book",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({name,email,event:event.name,ticket})
+ });
+
+ document.getElementById("confirmation").innerText =
+  `✅ Booked: ${event.name} (${ticket})`;
+
+ document.getElementById("bookingForm").reset();
+});
+
+/* SIMPLE AI */
+async function sendMsg(){
+ let m=document.getElementById("msg").value;
+ let chat=document.getElementById("chat");
+
+ chat.innerHTML+="<p><b>You:</b>"+m+"</p>";
+
+ chat.innerHTML+="<p><b>AI:</b> Please contact support for full assistance.</p>";
+}
 </script>
 
 </body>

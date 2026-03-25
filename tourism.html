@@ -3,9 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Global Tourism</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Global Conferences</title>
+
+<style>
+body { margin:0; font-family:Arial; background:#f4f4f4; }
+
+nav { background:#0a1f44; padding:15px; text-align:center; }
+nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
+
+.hero {
+    height:50vh;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+               url('images/conference1.jpg') center/cover;
+    display:flex; justify-content:center; align-items:center;
+    color:white; font-size:2em;
+}
+
+.section { padding:40px; text-align:center; }
+
+.grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.card {
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    text-align:left;
+}
+
+.ad-box {
+    background:#0a1f44;
+    color:white;
+    padding:10px;
+    margin-top:10px;
+    border-radius:8px;
+}
+
+video { width:100%; margin-top:10px; border-radius:10px; }
+
+footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
+</style>
 </head>
+
 <body>
 
 <nav>
@@ -14,116 +57,39 @@
 <a href="tourism.html">Tourism</a>
 </nav>
 
-<section class="hero">
-<h1>Explore Global Destinations</h1>
-<p>Your next adventure starts here</p>
-<a href="#loginBox" class="btn">Login / Register</a>
-<a href="#tours" class="btn">View Tours</a>
+<div class="hero">International Conferences</div>
+
+<section class="section">
+<h2>Upcoming Conferences</h2>
+<div class="grid" id="conferenceContainer"></div>
 </section>
 
-<section class="section" id="loginBox">
-<h2>Login / Register</h2>
-<input type="text" id="username" placeholder="Username">
-<input type="password" id="password" placeholder="Password">
-<button class="btn" onclick="login()">Login / Register</button>
-<p id="loginMsg"></p>
-</section>
+<footer>© 2026 Global Conferences</footer>
 
-<section class="section" id="tours">
-<h2>Featured Tours</h2>
-<div class="grid" id="tourContainer"></div>
-</section>
-
-<section class="section" id="booking" style="display:none;">
-<h2>Book Your Trip</h2>
-<form id="bookingForm">
-<input type="text" id="fullName" placeholder="Full Name">
-<input type="email" id="email" placeholder="Email">
-<select id="tourSelect"></select>
-<select id="ticket">
-<option value="0">Regular</option>
-<option value="150">VIP ($150)</option>
-<option value="300">Premium ($300)</option>
-</select>
-<button class="btn">Pay & Book</button>
-</form>
-</section>
-
-<div class="chatbox">
-<div class="chat-header">AI Travel Assistant</div>
-<div class="chat-body" id="chatBody"></div>
-<div class="chat-input">
-<input id="chatInput" placeholder="Ask about tours...">
-<button onclick="sendMessage()">Send</button>
-</div>
-</div>
-
-<footer>
-&copy; 2026 Global Tourism
-</footer>
-
-<script src="https://js.stripe.com/v3/"></script>
 <script>
-let loggedIn = false;
-function login() {
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
-  if(!user||!pass){ document.getElementById("loginMsg").innerText="Enter credentials"; return; }
-  localStorage.setItem("user", user);
-  loggedIn=true;
-  document.getElementById("loginMsg").innerText="Welcome, "+user+"!";
-  document.getElementById("booking").style.display="block";
-}
-
-async function loadTours(){
+async function loadConferences(){
   const res = await fetch("http://localhost:5000/events");
-  const tours = await res.json();
-  let container = document.getElementById("tourContainer");
-  let select = document.getElementById("tourSelect");
-  container.innerHTML = "";
-  select.innerHTML = "";
-  tours.forEach((tour,i)=>{
+  const events = await res.json();
+
+  let container = document.getElementById("conferenceContainer");
+  container.innerHTML="";
+
+  events.forEach(e=>{
     container.innerHTML += `
-      <div class="card">
-        <h3>${tour.name}</h3>
-        <p>${tour.location} | ${tour.date}</p>
-        <div class="ad-box">${tour.description || "Experience unforgettable tours."}</div>
-        ${tour.video ? `<video controls src="videos/${tour.video}"></video>` : ""}
-      </div>`;
-    select.innerHTML += `<option value="${i}">${tour.name}</option>`;
+    <div class="card">
+      <h3>${e.name}</h3>
+      <p>${e.location} | ${e.date}</p>
+
+      <div class="ad-box">
+        ${e.description || "Professional international conference."}
+      </div>
+
+      ${e.video ? `<video controls src="videos/${e.video}"></video>` : ""}
+    </div>
+    `;
   });
 }
-loadTours();
-
-const stripe = Stripe("YOUR_PUBLIC_KEY");
-document.getElementById("bookingForm").addEventListener("submit", async e=>{
-  e.preventDefault();
-  if(!loggedIn){ alert("Please login first"); return; }
-  const price = document.getElementById("ticket").value;
-  const res = await fetch("http://localhost:5000/create-checkout-session",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({price})
-  });
-  const data = await res.json();
-  stripe.redirectToCheckout({ sessionId: data.id });
-});
-
-async function sendMessage(){
-  const msg = document.getElementById("chatInput").value;
-  const chat = document.getElementById("chatBody");
-  if(!msg) return;
-  chat.innerHTML += "<p><b>You:</b> "+msg+"</p>";
-  const res = await fetch("http://localhost:5000/chat",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({message: msg})
-  });
-  const data = await res.json();
-  chat.innerHTML += "<p><b>AI:</b> "+data.reply+"</p>";
-  document.getElementById("chatInput").value="";
-  chat.scrollTop = chat.scrollHeight;
-}
+loadConferences();
 </script>
 
 </body>

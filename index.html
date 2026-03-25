@@ -1,28 +1,97 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Platform</title>
-<link rel="stylesheet" href="css/style.css">
+<style>
+/* Reset & basic styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* NAVIGATION */
+nav {
+  background: #0a1f44;
+  padding: 15px;
+  text-align: center;
+}
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+
+  /* Background image with overlay */
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('images/conference1.jpg') center/cover no-repeat;
+}
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 15px 30px;
+  margin: 10px;
+  background: #ff6600;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #e65c00;
+}
+
+/* FOOTER */
+footer {
+  background: #0a1f44;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+</style>
 </head>
+
 <body>
 
 <nav>
-<a href="index.html">Home</a>
-<a href="conference.html">Conferences</a>
-<a href="tourism.html">Tourism</a>
+  <a href="index.html">Home</a>
+  <a href="conference.html">Conferences</a>
+  <a href="tourism.html">Tourism</a>
 </nav>
 
 <section class="hero">
-<h1>Global Services Platform</h1>
-<p>Connecting Tourism & International Conferences</p>
-<a href="conference.html" class="btn">Explore Conferences</a>
-<a href="tourism.html" class="btn">Explore Tourism</a>
+  <h1>Global Services Platform</h1>
+  <p>Connecting Tourism & International Conferences</p>
+  <a href="conference.html" class="btn">Explore Conferences</a>
+  <a href="tourism.html" class="btn">Explore Tourism</a>
 </section>
 
 <footer>
-&copy; 2026 Global Platform. All rights reserved.
+  &copy; 2026 Global Platform. All rights reserved.
 </footer>
 
 </body>

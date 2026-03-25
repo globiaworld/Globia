@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Global Conferences</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+body { margin:0; font-family:Arial; background:#f4f4f4; }
+nav { background:#0a1f44; padding:15px; text-align:center; }
+nav a { color:white; margin:0 15px; text-decoration:none; }
+
+.hero {
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('images/conference.jpg') center/cover;
+height:60vh; display:flex; align-items:center; justify-content:center; color:white;
+}
+
+.section { padding:50px 20px; text-align:center; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+
+.card {
+background:white; padding:20px; border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.btn {
+background:#ff6600; color:white; padding:10px 20px;
+border:none; border-radius:5px; cursor:pointer;
+}
+
+.ad-box {
+background:#0a1f44; color:white; padding:15px; margin-top:10px; border-radius:8px;
+}
+
+.chatbox {
+position:fixed; bottom:20px; right:20px;
+width:300px; background:white; border-radius:10px;
+}
+.chat-header { background:#0a1f44; color:white; padding:10px; }
+.chat-body { height:200px; overflow:auto; padding:10px; }
+.chat-input { display:flex; }
+.chat-input input { flex:1; padding:10px; }
+.chat-input button { background:#ff6600; color:white; border:none; }
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="#events">Events</a>
+<a href="#booking">Booking</a>
+</nav>
+
+<section class="hero">
+<h1>Global Conferences Platform</h1>
+</section>
+
+<!-- EVENTS -->
+<section class="section" id="events">
+<h2>Upcoming Conferences</h2>
+<div class="grid" id="eventsContainer"></div>
+</section>
+
+<!-- BOOKING -->
+<section class="section" id="booking">
+<h2>Book Conference</h2>
+
+<form id="bookingForm">
+<input type="text" placeholder="Name" required>
+<input type="email" placeholder="Email" required>
+
+<select id="eventSelect"></select>
+
+<select id="ticket">
+<option value="0">Free</option>
+<option value="99">VIP ($99)</option>
+<option value="199">VVIP ($199)</option>
+</select>
+
+<button class="btn">Pay & Book</button>
+</form>
+</section>
+
+<!-- MAP -->
+<section class="section">
+<h2>Global Locations</h2>
+<iframe src="https://maps.google.com/maps?q=world&t=&z=2&output=embed"
+width="100%" height="300"></iframe>
+</section>
+
+<footer style="background:#0a1f44;color:white;text-align:center;padding:20px;">
+© 2026 Global Platform
+</footer>
+
+<!-- CHAT -->
+<div class="chatbox">
+<div class="chat-header">AI Assistant</div>
+<div class="chat-body" id="chatBody"></div>
+<div class="chat-input">
+<input id="chatInput">
+<button onclick="sendMessage()">Send</button>
+</div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+
+/* LOAD EVENTS */
+async function loadEvents(){
+const res = await fetch("http://localhost:5000/events");
+const events = await res.json();
+
+let container = document.getElementById("eventsContainer");
+let select = document.getElementById("eventSelect");
+
+container.innerHTML="";
+select.innerHTML="";
+
+events.forEach((e,i)=>{
+container.innerHTML += `
+<div class="card">
+<h3>${e.name}</h3>
+<p>${e.location}</p>
+<p>${e.date}</p>
+
+<div class="ad-box">
+<p>${e.description || "Professional global conference experience."}</p>
+</div>
+
+</div>
+`;
+
+select.innerHTML += `<option value="${i}">${e.name}</option>`;
+});
+}
+
+loadEvents();
+
+/* PAYMENT */
+const stripe = Stripe("YOUR_PUBLIC_KEY");
+
+document.getElementById("bookingForm").addEventListener("submit", async (e)=>{
+e.preventDefault();
+
+const price = document.getElementById("ticket").value;
+
+const res = await fetch("http://localhost:5000/create-checkout-session",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({price})
+});
+
+const data = await res.json();
+stripe.redirectToCheckout({ sessionId: data.id });
+});
+
+/* AI CHAT */
+async function sendMessage(){
+let msg = document.getElementById("chatInput").value;
+let chat = document.getElementById("chatBody");
+
+chat.innerHTML += "<p><b>You:</b>"+msg+"</p>";
+
+const res = await fetch("http://localhost:5000/chat",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({message:msg})
+});
+
+const data = await res.json();
+
+chat.innerHTML += "<p><b>AI:</b>"+data.reply+"</p>";
+}
+</script>
+
+</body>
+</html>

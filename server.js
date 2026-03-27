@@ -1,40 +1,33 @@
-
 const express = require("express");
 const cors = require("cors");
-const multer = require("multer");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static("uploads"));
+app.use(express.static(__dirname)); // SERVE videos & images
 
-// STORAGE CONFIG
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+let events = [
+  {
+    name: "Tech Conference 2026",
+    location: "Dubai",
+    date: "May 20",
+    description: "AI & Innovation",
+    video: "videos/tech.mp4"
+  },
+  {
+    name: "Business Summit",
+    location: "London",
+    date: "June 10",
+    description: "Entrepreneurship",
+    video: ""
   }
+];
+
+app.get("/events", (req,res)=> res.json(events));
+
+app.post("/book", (req,res)=>{
+  console.log(req.body);
+  res.json({message:"Booked"});
 });
 
-const upload = multer({ storage });
-
-// STORE VIDEOS
-let videos = [];
-
-// UPLOAD ROUTE
-app.post("/upload", upload.single("video"), (req, res) => {
-  const videoData = {
-    title: req.body.title,
-    path: req.file.filename
-  };
-
-  videos.push(videoData);
-  res.json({ message: "Uploaded successfully" });
-});
-
-// GET VIDEOS
-app.get("/videos", (req, res) => {
-  res.json(videos);
-});
-
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5000, ()=> console.log("Running on 5000"));

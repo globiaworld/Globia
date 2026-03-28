@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+require("dotenv").config(); // ✅ Load env variables
 
 const app = express();
 
@@ -13,7 +14,45 @@ app.use(express.static(path.join(__dirname)));
 /* ✅ Serve videos properly */
 app.use("/videos", express.static(path.join(__dirname, "videos")));
 
-/* EVENTS DATA */
+/* =========================
+   🔥 OPENROUTER AI SETUP
+========================= */
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+
+/* AI ROUTE */
+app.post("/ai", async (req, res) => {
+  try {
+    const userMessage = req.body.message;
+
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "openai/gpt-4o-mini",
+        messages: [
+          { role: "user", content: userMessage }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    res.json({
+      reply: data.choices?.[0]?.message?.content || "No response"
+    });
+
+  } catch (error) {
+    console.error("AI Error:", error);
+    res.status(500).json({ error: "AI request failed" });
+  }
+});
+
+/* =========================
+   📅 EVENTS DATA
+========================= */
 let events = [
   {
     name: "Tech Conference 2026",
@@ -31,23 +70,54 @@ let events = [
   }
 ];
 
-/* ✅ GET EVENTS */
+/* GET EVENTS */
 app.get("/events", (req, res) => {
   res.json(events);
 });
 
-/* ✅ KEEP BOOKING ROUTE (for logs / future database) */
+/* =========================
+   📩 BOOKING SYSTEM
+========================= */
 app.post("/book", (req, res) => {
-  console.log("📩 Booking received:", req.body);
-  res.json({ message: "Booked successfully" });
+  try {
+    const booking = req.body;
+
+    console.log("📩 Booking received:", booking);
+
+    // Optional: store booking in memory
+    // You can later connect database or email
+
+    res.json({
+      success: true,
+      message: "Booking received successfully"
+    });
+
+  } catch (error) {
+    console.error("Booking Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Booking failed"
+    });
+  }
 });
 
-/* ✅ HEALTH CHECK (VERY IMPORTANT for Render) */
+/* =========================
+   🧪 TEST ROUTE
+========================= */
+app.get("/health", (req, res) => {
+  res.json({ status: "Server running OK" });
+});
+
+/* =========================
+   🏠 FRONTEND ENTRY
+========================= */
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-/* START SERVER */
+/* =========================
+   🚀 START SERVER
+========================= */
 const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {

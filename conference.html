@@ -70,12 +70,12 @@ input, select {
   cursor:pointer;
 }
 
-/* SMALL AI CHAT (FIXED) */
+/* CHAT */
 .chatbox {
   position:fixed;
   bottom:10px;
   right:10px;
-  width:220px;   /* smaller */
+  width:220px;
   font-size:12px;
   background:white;
   border-radius:8px;
@@ -86,11 +86,10 @@ input, select {
   background:#0a1f44;
   color:white;
   padding:6px;
-  font-size:12px;
 }
 
 .chat-body {
-  height:120px;   /* smaller */
+  height:120px;
   overflow:auto;
   padding:5px;
 }
@@ -102,7 +101,6 @@ input, select {
 .chat-input input {
   flex:1;
   padding:5px;
-  font-size:12px;
 }
 
 .chat-input button {
@@ -161,7 +159,7 @@ footer {
 <p id="confirmation" style="color:green;"></p>
 </section>
 
-<!-- SMALL AI -->
+<!-- CHAT -->
 <div class="chatbox">
 <div class="chat-header">Assistant</div>
 <div class="chat-body" id="chat"></div>
@@ -174,11 +172,11 @@ footer {
 <footer>© 2026 Global Conferences</footer>
 
 <script>
-let eventsData=[];
+let eventsData = [];
 
-/* LOAD EVENTS FROM BACKEND */
+/* LOAD EVENTS */
 async function loadEvents(){
- try{
+ try {
   const res = await fetch("http://localhost:5000/events");
   const events = await res.json();
 
@@ -197,13 +195,13 @@ async function loadEvents(){
       <p>${e.location} | ${e.date}</p>
       <div class="ad-box">${e.description}</div>
 
-      ${e.video ? `<video controls src="${e.video}"></video>` : ""}
+      ${e.video ? `<video controls src="videos/${e.video}"></video>` : ""}
     </div>`;
 
     select.innerHTML += `<option value="${i}">${e.name}</option>`;
   });
 
- }catch(err){
+ } catch(err){
   console.log("Error loading events", err);
  }
 }
@@ -230,7 +228,7 @@ document.getElementById("bookingForm").addEventListener("submit", async e=>{
  document.getElementById("bookingForm").reset();
 });
 
-/* SIMPLE WORKING AI */
+/* SIMPLE AI */
 function sendMsg(){
  let input = document.getElementById("msg");
  let chat = document.getElementById("chat");
@@ -238,10 +236,7 @@ function sendMsg(){
  if(!input.value) return;
 
  chat.innerHTML += `<p><b>You:</b> ${input.value}</p>`;
-
- let reply = "We will assist you with conference bookings.";
-
- chat.innerHTML += `<p><b>AI:</b> ${reply}</p>`;
+ chat.innerHTML += `<p><b>AI:</b> We will assist you with conference bookings.</p>`;
 
  input.value="";
  chat.scrollTop = chat.scrollHeight;
@@ -250,4 +245,3 @@ function sendMsg(){
 
 </body>
 </html>
-

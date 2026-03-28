@@ -1,53 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin</title>
+<title>Admin Dashboard</title>
+
+<style>
+body { font-family: Arial; padding:20px; background:#f4f4f4; }
+
+input {
+  display:block;
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+button {
+  padding:10px;
+  background:#0a1f44;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.card {
+  background:white;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Add Conference</h2>
+<h2>Admin Dashboard</h2>
+
+<h3>Add Conference</h3>
 
 <input id="name" placeholder="Name">
 <input id="date" placeholder="Date">
 <input id="location" placeholder="Location">
 <input id="desc" placeholder="Description">
 
-<button onclick="add()">Add</button>
+<button onclick="add()">Add Conference</button>
 
+<h3>All Conferences</h3>
 <div id="list"></div>
 
+<!-- ✅ AI + CHAT -->
+<script src="js/ai.js"></script>
+<script src="js/chat.js"></script>
+
 <script>
+initChat();
+
+/* LOAD EVENTS */
 async function load(){
-const res = await fetch("http://localhost:5000/events");
+const res = await fetch("/events");
 const data = await res.json();
 
 let html="";
 data.forEach((e,i)=>{
-html+=`<p>${e.name} <button onclick="del(${i})">Delete</button></p>`;
+html+=`
+<div class="card">
+<b>${e.name}</b><br>
+${e.location} | ${e.date}<br>
+${e.description}<br>
+<button onclick="del(${i})">Delete</button>
+</div>
+`;
 });
+
 document.getElementById("list").innerHTML=html;
 }
 
+/* ADD EVENT */
 async function add(){
-await fetch("http://localhost:5000/add-event",{
+const name = document.getElementById("name").value;
+const date = document.getElementById("date").value;
+const location = document.getElementById("location").value;
+const description = document.getElementById("desc").value;
+
+await fetch("/add-event",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-name:document.getElementById("name").value,
-date:document.getElementById("date").value,
-location:document.getElementById("location").value,
-description:document.getElementById("desc").value
-})
+body:JSON.stringify({name,date,location,description})
 });
+
+alert("✅ Event added!");
 load();
 }
 
+/* DELETE EVENT */
 async function del(i){
-await fetch("http://localhost:5000/delete-event",{
+await fetch("/delete-event",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({index:i})
 });
+
+alert("❌ Event deleted!");
 load();
 }
 

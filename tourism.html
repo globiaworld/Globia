@@ -9,65 +9,56 @@
 body { margin:0; font-family:Arial; background:#f4f4f4; }
 
 nav { background:#0a1f44; padding:15px; text-align:center; }
-nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
+nav a { color:white; margin:0 15px; text-decoration:none; }
 
 .hero {
-    height:60vh;
-    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-               url('images/tourism-hero.jpg') center/cover;
-    display:flex; flex-direction:column;
-    justify-content:center; align-items:center;
-    color:white;
-}
-
-.btn {
-    background:#ff6600;
-    color:white;
-    padding:10px 20px;
-    margin:5px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+  height:60vh;
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  url('images/tourism-hero.jpg') center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
 }
 
 .section { padding:40px; text-align:center; }
 
 .grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
 .card {
-    background:white;
-    padding:20px;
-    border-radius:10px;
-}
-
-.ad-box {
-    background:#0a1f44;
-    color:white;
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
 }
 
 .chatbox {
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    width:300px;
-    background:white;
-    border-radius:10px;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:280px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
 .chat-header { background:#0a1f44; color:white; padding:10px; }
-.chat-body { height:200px; overflow:auto; padding:10px; }
+.chat-body { height:180px; overflow:auto; padding:10px; }
 .chat-input { display:flex; }
 .chat-input input { flex:1; padding:10px; }
 .chat-input button { background:#ff6600; color:white; border:none; }
 
-footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
+.btn {
+  background:#ff6600;
+  color:white;
+  padding:10px;
+  border:none;
+  border-radius:5px;
+}
 </style>
 </head>
 
@@ -81,16 +72,7 @@ footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
 
 <div class="hero">
 <h1>Explore Tourism</h1>
-<button class="btn" onclick="showLogin()">Login</button>
 </div>
-
-<section class="section" id="loginBox" style="display:none;">
-<h2>Login</h2>
-<input id="user" placeholder="Username"><br><br>
-<input id="pass" type="password" placeholder="Password"><br><br>
-<button class="btn" onclick="login()">Login</button>
-<p id="msg"></p>
-</section>
 
 <section class="section">
 <h2>Tours</h2>
@@ -111,6 +93,7 @@ footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
 <button class="btn" onclick="pay()">Pay & Book</button>
 </section>
 
+<!-- CHAT -->
 <div class="chatbox">
 <div class="chat-header">AI Assistant</div>
 <div class="chat-body" id="chat"></div>
@@ -120,80 +103,75 @@ footer { background:#0a1f44; color:white; padding:20px; text-align:center; }
 </div>
 </div>
 
-<footer>© 2026 Tourism</footer>
-
 <script src="https://js.stripe.com/v3/"></script>
-<script>
+<script src="js/ai.js"></script>
 
+<script>
 let logged=false;
 
-function showLogin(){
- document.getElementById("loginBox").style.display="block";
-}
-
+/* LOGIN SIMPLE */
 function login(){
- let u=document.getElementById("user").value;
- if(!u){ document.getElementById("msg").innerText="Enter username"; return; }
  logged=true;
- document.getElementById("msg").innerText="Welcome "+u;
  document.getElementById("booking").style.display="block";
 }
 
-/* LOAD TOURS */
+/* LOAD TOURS (FIXED — NO LOCALHOST) */
 async function loadTours(){
- const res=await fetch("http://localhost:5000/events");
- const tours=await res.json();
+ const res = await fetch("/events"); // ✅ FIXED
+ const tours = await res.json();
 
- let container=document.getElementById("tourContainer");
- let select=document.getElementById("tourSelect");
+ let container = document.getElementById("tourContainer");
+ let select = document.getElementById("tourSelect");
 
  container.innerHTML="";
  select.innerHTML="";
 
  tours.forEach((t,i)=>{
-  container.innerHTML+=`
-  <div class="card">
+  container.innerHTML += `
+   <div class="card">
     <h3>${t.name}</h3>
     <p>${t.location}</p>
-    <div class="ad-box">${t.description || "Amazing experience"}</div>
-  </div>`;
-  select.innerHTML+=`<option value="${i}">${t.name}</option>`;
+    <p>${t.description || "Amazing experience"}</p>
+   </div>`;
+
+  select.innerHTML += `<option value="${i}">${t.name}</option>`;
  });
 }
 loadTours();
 
 /* STRIPE */
-const stripe=Stripe("YOUR_PUBLIC_KEY");
+const stripe = Stripe("YOUR_PUBLIC_KEY");
 
 async function pay(){
  if(!logged){ alert("Login first"); return; }
- const price=document.getElementById("ticket").value;
 
- const res=await fetch("http://localhost:5000/create-checkout-session",{
+ const price = document.getElementById("ticket").value;
+
+ const res = await fetch("/create-checkout-session",{
   method:"POST",
   headers:{"Content-Type":"application/json"},
   body:JSON.stringify({price})
  });
 
- const data=await res.json();
+ const data = await res.json();
  stripe.redirectToCheckout({sessionId:data.id});
 }
 
-/* AI */
+/* AI CHAT */
 async function chatAI(){
- let msg=document.getElementById("input").value;
- let chat=document.getElementById("chat");
+ let msg = document.getElementById("input").value;
+ let chat = document.getElementById("chat");
 
- chat.innerHTML+="<p><b>You:</b>"+msg+"</p>";
+ if(!msg) return;
 
- const res=await fetch("http://localhost:5000/chat",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({message:msg})
- });
+ chat.innerHTML += `<p><b>You:</b> ${msg}</p>`;
 
- const data=await res.json();
- chat.innerHTML+="<p><b>AI:</b>"+data.reply+"</p>";
+ const reply = await askAI(msg);
+
+ chat.innerHTML += `<p><b>AI:</b> ${reply}</p>`;
+
+ document.getElementById("input").value="";
+ chat.scrollTop = chat.scrollHeight;
 }
 </script>
 

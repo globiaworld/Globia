@@ -97,13 +97,21 @@ input, select {
 <p id="confirmation" style="color:green;"></p>
 </section>
 
+<!-- ✅ EMAILJS SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <script>
+/* ✅ INIT EMAILJS */
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY");
+})();
+
 let eventsData = [];
 
 /* LOAD EVENTS */
 async function loadEvents(){
  try {
-  const res = await fetch("/events"); // ✅ FIXED
+  const res = await fetch("/events");
   const events = await res.json();
 
   eventsData = events;
@@ -140,8 +148,8 @@ async function loadEvents(){
 
 loadEvents();
 
-/* BOOKING */
-document.getElementById("bookingForm").addEventListener("submit", async e=>{
+/* 🔥 BOOKING WITH EMAIL */
+document.getElementById("bookingForm").addEventListener("submit", function(e){
  e.preventDefault();
 
  const name = document.getElementById("name").value;
@@ -149,14 +157,19 @@ document.getElementById("bookingForm").addEventListener("submit", async e=>{
  const event = eventsData[document.getElementById("eventSelect").value];
  const ticket = document.getElementById("ticket").value;
 
- await fetch("/book", {   // ✅ FIXED
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({name,email,event:event.name,ticket})
+ emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+  name: name,
+  email: email,
+  event: event.name,
+  ticket: ticket
+ })
+ .then(function(response){
+  document.getElementById("confirmation").innerText =
+   `✅ Booking sent successfully!`;
+ })
+ .catch(function(error){
+  alert("❌ Failed to send booking");
  });
-
- document.getElementById("confirmation").innerText =
-  `✅ Booked: ${event.name} (${ticket})`;
 
  document.getElementById("bookingForm").reset();
 });

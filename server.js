@@ -7,10 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ✅ Serve all static files */
+/* ✅ Serve static frontend files */
 app.use(express.static(path.join(__dirname)));
 
-/* ✅ Serve videos folder correctly */
+/* ✅ Serve videos properly */
 app.use("/videos", express.static(path.join(__dirname, "videos")));
 
 /* EVENTS DATA */
@@ -31,20 +31,25 @@ let events = [
   }
 ];
 
-/* GET EVENTS */
+/* ✅ GET EVENTS */
 app.get("/events", (req, res) => {
   res.json(events);
 });
 
-/* BOOKING */
+/* ✅ KEEP BOOKING ROUTE (for logs / future database) */
 app.post("/book", (req, res) => {
-  console.log("Booking received:", req.body);
+  console.log("📩 Booking received:", req.body);
   res.json({ message: "Booked successfully" });
+});
+
+/* ✅ HEALTH CHECK (VERY IMPORTANT for Render) */
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 /* START SERVER */
 const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });

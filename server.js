@@ -8,19 +8,21 @@ const app = express();
 /* =========================
    MIDDLEWARE
 ========================= */
-app.use(cors());
+app.use(cors({
+  origin: "*", // allow all (you can restrict later)
+}));
 app.use(express.json());
 
 /* =========================
-   STATIC FILES (FOR LOCAL TEST)
+   STATIC FILES (LOCAL ONLY)
 ========================= */
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(__dirname));
 app.use("/videos", express.static(path.join(__dirname, "videos")));
 
 /* =========================
    EVENTS DATA
 ========================= */
-let events = [
+const events = [
   {
     name: "Tech Conference 2026",
     location: "Dubai",
@@ -33,7 +35,7 @@ let events = [
     location: "London",
     date: "June 10",
     description: "Entrepreneurship",
-    video: "/videos/business.mp4"
+    video: "/videos/business.mp4" // make sure file exists
   }
 ];
 
@@ -49,9 +51,17 @@ app.get("/events", (req, res) => {
 ========================= */
 app.post("/book", (req, res) => {
   try {
-    const booking = req.body;
+    const { name, email, event, ticket } = req.body;
 
-    console.log("📩 Booking:", booking);
+    // Basic validation
+    if (!name || !email || !event || !ticket) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required"
+      });
+    }
+
+    console.log("📩 Booking received:", { name, email, event, ticket });
 
     res.json({
       success: true,
@@ -59,6 +69,7 @@ app.post("/book", (req, res) => {
     });
 
   } catch (err) {
+    console.error("Booking error:", err);
     res.status(500).json({ error: "Booking failed" });
   }
 });
@@ -69,6 +80,10 @@ app.post("/book", (req, res) => {
 app.post("/ai", async (req, res) => {
   try {
     const userMessage = req.body.message;
+
+    if (!userMessage) {
+      return res.status(400).json({ error: "Message is required" });
+    }
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -85,11 +100,12 @@ app.post("/ai", async (req, res) => {
     const data = await response.json();
 
     res.json({
-      reply: data.choices?.[0]?.message?.content || "No response"
+      reply: data?.choices?.[0]?.message?.content || "No response"
     });
 
   } catch (err) {
-    res.status(500).json({ error: "AI failed" });
+    console.error("AI error:", err);
+    res.status(500).json({ error: "AI request failed" });
   }
 });
 
@@ -101,7 +117,14 @@ app.get("/health", (req, res) => {
 });
 
 /* =========================
-   SERVER START
+   DEFAULT ROUTE
+========================= */
+app.get("/", (req, res) => {
+  res.send("🚀 Globia backend is running");
+});
+
+/* =========================
+   START SERVER
 ========================= */
 const PORT = process.env.PORT || 10000;
 

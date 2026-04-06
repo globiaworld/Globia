@@ -6,98 +6,50 @@
 <title>Tourism</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-}
+body { margin:0; font-family:Arial; background:#f4f4f4; }
 
-/* NAV */
-nav {
-  background: #0a1f44;
-  padding: 15px;
-  text-align: center;
-}
+nav { background:#0a1f44; padding:15px; text-align:center; }
+nav a { color:white; margin:0 10px; text-decoration:none; }
 
-nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* HERO */
 .hero {
-  height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('/images/tourism.jpg') center/cover;
-  color: white;
-  text-align: center;
+  height:60vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#333;
+  color:white;
 }
 
-.hero h1 {
-  font-size: 2.5em;
-}
-
-/* GRID */
-.section {
-  padding: 40px;
-  text-align: center;
-}
+.section { padding:40px; text-align:center; }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
 }
 
-/* CARD (CAPTIVATING FRAME) */
 .card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-8px);
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
 .card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  width:100%;
+  height:180px;
+  object-fit:cover;
 }
 
-/* CONTENT */
-.card-content {
-  padding: 15px;
-}
+.card-content { padding:15px; }
 
-.card h3 {
-  margin: 10px 0;
-}
-
-/* BUTTON */
 .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 10px;
-  background: #ff6600;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-/* MOBILE FIX */
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 1.8em;
-  }
+  display:inline-block;
+  padding:10px 20px;
+  background:#ff6600;
+  color:white;
+  border:none;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -105,13 +57,13 @@ nav a {
 <body>
 
 <nav>
-  <a href="/">Home</a>
-  <a href="/conference">Conferences</a>
-  <a href="/tourism">Tourism</a>
+<a href="index.html">Home</a>
+<a href="conference.html">Conferences</a>
+<a href="tourism.html">Tourism</a>
 </nav>
 
 <div class="hero">
-  <h1>Explore Tourism</h1>
+<h1>Explore Tourism</h1>
 </div>
 
 <section class="section">
@@ -119,48 +71,42 @@ nav a {
 
 <div class="grid">
 
-<!-- CARD 1 -->
 <div class="card">
 <img src="/images/maasai.jpg">
 <div class="card-content">
 <h3>Maasai Mara</h3>
-<p>Experience the wild African safari with breathtaking wildlife and nature.</p>
-<a href="#" class="btn">Book Now</a>
+<button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
 </div>
 </div>
 
-<!-- CARD 2 -->
-<div class="card">
-<img src="/images/capetown.jpg">
-<div class="card-content">
-<h3>Cape Town</h3>
-<p>Enjoy mountains, beaches, and vibrant city life in one destination.</p>
-<a href="#" class="btn">Book Now</a>
-</div>
-</div>
-
-<!-- CARD 3 -->
-<div class="card">
-<img src="/images/zanzibar.jpg">
-<div class="card-content">
-<h3>Zanzibar</h3>
-<p>Relax on white sandy beaches with crystal clear waters and rich culture.</p>
-<a href="#" class="btn">Book Now</a>
-</div>
-</div>
-
-<!-- CARD 4 -->
 <div class="card">
 <img src="/images/dubai.jpg">
 <div class="card-content">
 <h3>Dubai</h3>
-<p>Experience luxury, modern architecture, and world-class attractions.</p>
-<a href="#" class="btn">Book Now</a>
+<button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
 </div>
 </div>
 
 </div>
 </section>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+function payTour(amount){
+  let handler = PaystackPop.setup({
+    key: "YOUR_PUBLIC_KEY_HERE",
+    email: "customer@email.com",
+    amount: amount * 100,
+    currency: "KES",
+    callback: function(response){
+      alert("Payment successful!");
+    }
+  });
+
+  handler.openIframe();
+}
+</script>
 
 </body>
 </html>

@@ -8,8 +8,16 @@
 <style>
 body { margin:0; font-family:Arial; background:#f4f4f4; }
 
-nav { background:#0a1f44; padding:15px; text-align:center; }
-nav a { color:white; margin:0 15px; text-decoration:none; }
+nav {
+  background:#0a1f44;
+  padding:15px;
+  text-align:center;
+}
+nav a {
+  color:white;
+  margin:0 15px;
+  text-decoration:none;
+}
 
 .hero {
   height:50vh;
@@ -19,54 +27,55 @@ nav a { color:white; margin:0 15px; text-decoration:none; }
   align-items:center;
   flex-direction:column;
   color:white;
+  text-align:center;
 }
 
 .section { padding:40px 20px; text-align:center; }
 
 .grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:25px;
 }
 
+/* CARD */
 .card {
   background:white;
-  padding:15px;
+  padding:20px;
   border-radius:10px;
-  box-shadow:0 0 8px rgba(0,0,0,0.1);
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
   text-align:left;
 }
 
-video {
-  width:100%;
-  margin-top:10px;
-  border-radius:8px;
-}
+.card h3 { margin-top:0; }
 
-/* DESCRIPTION */
-.desc {
-  font-size:14px;
-  color:#555;
-  margin:10px 0;
-}
+.card p { font-size:14px; color:#555; }
 
 /* BENEFITS */
 .benefits {
   margin:10px 0;
   padding-left:18px;
 }
-
 .benefits li {
   font-size:14px;
   margin-bottom:5px;
 }
 
+/* VIDEO */
+video {
+  width:100%;
+  margin-top:10px;
+  border-radius:8px;
+}
+
+/* BUTTON */
 .btn {
   background:#ff6600;
   color:white;
   padding:10px;
   border:none;
   cursor:pointer;
+  border-radius:5px;
   margin-top:10px;
 }
 </style>
@@ -81,91 +90,100 @@ video {
 </nav>
 
 <section class="hero">
-<h1>International Conferences</h1>
+<h1>Global Conferences</h1>
+<p>Connecting Ideas, People & Opportunities</p>
 </section>
 
 <section class="section">
-<h2>Available Conferences</h2>
+<h2>Conference Packages</h2>
 
 <div class="grid">
 
-<!-- CONFERENCE 1 -->
+<!-- PACKAGE 1 -->
 <div class="card">
-<h3>Global Investment & Innovation Summit</h3>
-<p>Nairobi | 2026</p>
-
-<p class="desc">
-A high-impact conference designed to connect investors with producers, startups, and innovators seeking technological or financial partnerships. This platform enables collaboration, funding opportunities, and global market expansion.
-</p>
+<h3>💼 Investor–Producer Partnership Conference</h3>
 
 <video controls>
-<source src="/videos/investment.mp4" type="video/mp4">
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
 </video>
 
-<ul class="benefits">
-<li>✔ Direct networking with global investors</li>
-<li>✔ Access to funding and venture capital opportunities</li>
-<li>✔ Partnership development with tech innovators</li>
-<li>✔ Business growth and expansion strategies</li>
-<li>✔ Exposure to international markets</li>
-</ul>
-
-</div>
-
-<!-- CONFERENCE 2 -->
-<div class="card">
-<h3>Youth Leadership & Political Empowerment Forum</h3>
-<p>Global | 2026</p>
-
-<p class="desc">
-A transformative gathering aimed at empowering young people to take leadership roles in government and society. The conference supports the formation of a strong, united youth movement focused on governance, policy influence, and national development.
+<p>
+This conference is designed to connect investors with producers, innovators, and entrepreneurs.
+It focuses on building strong partnerships in technology, finance, and business growth.
+Participants get the opportunity to pitch ideas, meet investors, and secure funding.
 </p>
 
-<video controls>
-<source src="/videos/youth.mp4" type="video/mp4">
-</video>
-
 <ul class="benefits">
-<li>✔ Leadership training and mentorship programs</li>
-<li>✔ Guidance on forming and managing a youth political movement</li>
-<li>✔ Networking with policymakers and global leaders</li>
-<li>✔ Public speaking and governance skills development</li>
-<li>✔ Opportunities to influence national policies</li>
+<li>✔ Direct access to investors and funding opportunities</li>
+<li>✔ Networking with entrepreneurs and business leaders</li>
+<li>✔ Pitching sessions for projects and ideas</li>
+<li>✔ Partnership and collaboration opportunities</li>
+<li>✔ Business growth and scaling insights</li>
 </ul>
 
+<h4>Select Ticket</h4>
+<select id="ticket1">
+  <option value="1000">Regular - KES 1000</option>
+  <option value="2000">VIP - KES 2000</option>
+  <option value="3000">VVIP - KES 3000</option>
+</select>
+
+<input id="email1" placeholder="Enter Email" style="display:block; margin-top:10px; padding:8px; width:100%;">
+
+<button class="btn" onclick="payNow(1)">Pay & Book</button>
+</div>
+
+<!-- PACKAGE 2 -->
+<div class="card">
+<h3>🧑‍🤝‍🧑 Youth Leadership & Political Empowerment Conference</h3>
+
+<video controls>
+<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+</video>
+
+<p>
+This conference empowers young people to take up leadership roles and influence governance.
+It promotes the formation of a strong youth-driven movement aimed at political participation and leadership development.
+</p>
+
+<ul class="benefits">
+<li>✔ Leadership training and mentorship</li>
+<li>✔ Political awareness and civic education</li>
+<li>✔ Networking with leaders and policymakers</li>
+<li>✔ Youth empowerment and skill development</li>
+<li>✔ Opportunities to join or build youth movements</li>
+</ul>
+
+<h4>Select Ticket</h4>
+<select id="ticket2">
+  <option value="1000">Regular - KES 1000</option>
+  <option value="2000">VIP - KES 2000</option>
+  <option value="3000">VVIP - KES 3000</option>
+</select>
+
+<input id="email2" placeholder="Enter Email" style="display:block; margin-top:10px; padding:8px; width:100%;">
+
+<button class="btn" onclick="payNow(2)">Pay & Book</button>
 </div>
 
 </div>
-</section>
-
-<section class="section">
-<h2>Book & Pay</h2>
-
-<input id="nameInput" placeholder="Full Name" required>
-<input id="emailInput" placeholder="Email" required>
-
-<select id="eventSelect">
-<option value="Investment Summit">Global Investment & Innovation Summit</option>
-<option value="Youth Leadership Forum">Youth Leadership & Political Empowerment Forum</option>
-</select>
-
-<select id="ticketSelect">
-<option value="1000">Regular - KES 1000</option>
-<option value="2000">VIP - KES 2000</option>
-<option value="3000">VVIP - KES 3000</option>
-</select>
-
-<button class="btn" onclick="payNow()">Pay & Book</button>
-
-<p id="confirmation"></p>
 </section>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
-function payNow(){
-  const email = document.getElementById("emailInput").value;
-  const amount = document.getElementById("ticketSelect").value;
+const BASE_URL = "https://globia-production.up.railway.app";
+
+/* PAYMENT FUNCTION */
+function payNow(type){
+
+  let email = document.getElementById(type === 1 ? "email1" : "email2").value;
+  let amount = document.getElementById(type === 1 ? "ticket1" : "ticket2").value;
+
+  if(!email){
+    alert("Please enter your email");
+    return;
+  }
 
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
@@ -173,7 +191,7 @@ function payNow(){
     amount: amount * 100,
     currency: "KES",
     callback: function(response){
-      document.getElementById("confirmation").innerText = "✅ Payment successful!";
+      alert("✅ Payment successful!");
     }
   });
 

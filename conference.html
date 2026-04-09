@@ -8,6 +8,7 @@
 <style>
 body { margin:0; font-family:Arial; background:#f4f4f4; }
 
+/* NAV */
 nav {
   background:#0a1f44;
   padding:15px;
@@ -22,14 +23,22 @@ nav {
   gap:10px;
 }
 
-.logo { height:40px; }
+/* ✅ LOGO SIZE CONTROL (EDIT THIS) */
+.logo {
+  height:30px;   /* 👈 CHANGE THIS VALUE to resize logo */
+  width:auto;
+  object-fit:contain;
+}
 
+/* NAV LINKS */
 nav a {
   color:white;
   margin:0 10px;
   text-decoration:none;
+  font-weight:bold;
 }
 
+/* HERO */
 .hero {
   height:50vh;
   background:#222;
@@ -40,22 +49,27 @@ nav a {
   color:white;
 }
 
+/* SECTION */
 .section { padding:40px 20px; text-align:center; }
 
+/* GRID */
 .grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
   gap:25px;
 }
 
+/* CARD */
 .card {
   background:white;
   padding:20px;
   border-radius:10px;
 }
 
+/* VIDEO */
 video { width:100%; border-radius:8px; }
 
+/* BUTTON */
 .btn {
   background:#ff6600;
   color:white;
@@ -69,22 +83,26 @@ video { width:100%; border-radius:8px; }
 
 <body>
 
+<!-- NAVBAR -->
 <nav>
-<div class="nav-left">
-  <img src="logo.png" class="logo">
-</div>
-<div>
-<a href="index.html">Home</a>
-<a href="conference.html">Conferences</a>
-<a href="tourism.html">Tourism</a>
-</div>
+  <div class="nav-left">
+    <img src="logo.png" class="logo">
+  </div>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="conference.html">Conferences</a>
+    <a href="tourism.html">Tourism</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-<h1>Global Conferences</h1>
-<p>Connecting Ideas, People & Opportunities</p>
+  <h1>Global Conferences</h1>
+  <p>Connecting Ideas, People & Opportunities</p>
 </section>
 
+<!-- CONTENT -->
 <section class="section">
 <h2>Conference Packages</h2>
 
@@ -127,15 +145,18 @@ video { width:100%; border-radius:8px; }
 
 <script>
 function payNow(type){
+
 let email = document.getElementById(type===1?"email1":"email2").value;
 let amount = document.getElementById(type===1?"ticket1":"ticket2").value;
 
 let handler = PaystackPop.setup({
-key:"pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
-email:email,
-amount:amount*100,
-currency:"KES",
-callback:function(){ alert("Payment successful"); }
+  key:"pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
+  email:email,
+  amount:amount * 100, // ✅ FIXED
+  currency:"KES",
+  callback:function(){
+    alert("Payment successful");
+  }
 });
 
 handler.openIframe();

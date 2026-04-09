@@ -6,6 +6,17 @@
 <style>
 body { font-family: Arial; padding:20px; background:#f4f4f4; }
 
+.header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.logo {
+  height:40px;
+}
+
 input {
   display:block;
   width:100%;
@@ -32,7 +43,10 @@ button {
 
 <body>
 
-<h2>Admin Dashboard</h2>
+<div class="header">
+  <img src="logo.png" class="logo">
+  <h2>Admin Dashboard</h2>
+</div>
 
 <h3>Add Conference</h3>
 
@@ -46,14 +60,12 @@ button {
 <h3>All Conferences</h3>
 <div id="list"></div>
 
-<!-- ✅ AI + CHAT -->
 <script src="js/ai.js"></script>
 <script src="js/chat.js"></script>
 
 <script>
 initChat();
 
-/* LOAD EVENTS */
 async function load(){
 const res = await fetch("/events");
 const data = await res.json();
@@ -66,19 +78,17 @@ html+=`
 ${e.location} | ${e.date}<br>
 ${e.description}<br>
 <button onclick="del(${i})">Delete</button>
-</div>
-`;
+</div>`;
 });
 
 document.getElementById("list").innerHTML=html;
 }
 
-/* ADD EVENT */
 async function add(){
-const name = document.getElementById("name").value;
-const date = document.getElementById("date").value;
-const location = document.getElementById("location").value;
-const description = document.getElementById("desc").value;
+const name = name.value;
+const date = date.value;
+const location = location.value;
+const description = desc.value;
 
 await fetch("/add-event",{
 method:"POST",
@@ -90,7 +100,6 @@ alert("✅ Event added!");
 load();
 }
 
-/* DELETE EVENT */
 async function del(i){
 await fetch("/delete-event",{
 method:"POST",

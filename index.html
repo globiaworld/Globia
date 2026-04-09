@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +31,6 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  // SIGN UP
   window.signup = function(){
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -40,7 +40,6 @@
       .catch(err => alert(err.message));
   }
 
-  // LOGIN
   window.login = function(){
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -50,12 +49,10 @@
       .catch(err => alert(err.message));
   }
 
-  // LOGOUT
   window.logout = function(){
     signOut(auth);
   }
 
-  // TRACK USER
   onAuthStateChanged(auth, (user) => {
     const status = document.getElementById("userStatus");
 
@@ -73,9 +70,20 @@ body { margin:0; font-family:Arial; }
 /* NAV */
 nav {
   background:#0a1f44;
-  padding:15px;
-  text-align:center;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
+
+/* LOGO CONTROL (THIS IS WHAT YOU NEED) */
+.logo {
+  height:30px;   /* 👈 CHANGE THIS VALUE to resize logo */
+  width:auto;
+  object-fit:contain;
+}
+
+/* NAV LINKS */
 nav a {
   color:white;
   margin:0 15px;
@@ -127,14 +135,15 @@ nav a {
 <body>
 
 <nav>
-<div class="nav-left">
-  <img src="images/logo.png" class="logo">
-</div>
-<div>
-<a href="index.html">Home</a>
-<a href="conference.html">Conferences</a>
-<a href="tourism.html">Tourism</a>
-</div>
+  <div class="nav-left">
+    <img src="images/logo.png" class="logo" alt="Logo">
+  </div>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="conference.html">Conferences</a>
+    <a href="tourism.html">Tourism</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -144,7 +153,6 @@ nav a {
 <a href="conference.html"><button class="btn">Explore Conferences</button></a>
 <a href="tourism.html"><button class="btn">Explore Tourism</button></a>
 
-<!-- LOGIN SYSTEM -->
 <div class="auth-box">
   <h3>Account Access</h3>
 

@@ -8,10 +8,13 @@ body {
 /* NAVBAR */
 nav {
   background: #0a1f44;
-  padding: 12px 20px;
   display: flex;
-  align-items: center;
+  align-items: center;   /* keeps items centered vertically */
   justify-content: space-between;
+  padding: 5px 20px;     /* 👈 reduce height here */
+  height: 60px;          /* optional fixed height */
+  overflow: hidden;      /* prevents logo stretching bar */
+
 }
 
 .nav-left {

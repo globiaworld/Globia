@@ -68,31 +68,39 @@
 </script>
 
 <style>
-body { margin:0; font-family:Arial; }
+body {
+  margin:0;
+  font-family:Arial;
+}
 
 /* NAV */
 nav {
   background:#0a1f44;
-  padding:12px 20px;
+  padding:8px 20px; /* reduced height */
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-/* LEFT SIDE (LOGO AREA) */
+/* LOGO FIX */
 .nav-left {
   display:flex;
   align-items:center;
 }
 
+.logo {
+  max-height:45px;   /* FIX: prevents oversized logo */
+  width:auto;
+  display:block;
+}
 
 /* NAV LINKS */
 nav a {
   color:white;
-  margin:0 15px;
+  margin:0 12px;
   text-decoration:none;
   font-weight:bold;
-  font-size:16px;
+  font-size:15px;
 }
 
 /* HERO */
@@ -126,12 +134,13 @@ nav a {
 }
 
 .btn {
-  padding:15px 30px;
+  padding:12px 25px;
   margin:10px;
   background:#ff6600;
   color:white;
   border:none;
   cursor:pointer;
+  border-radius:5px;
 }
 </style>
 </head>
@@ -151,25 +160,24 @@ nav a {
 </nav>
 
 <section class="hero">
-<h1>Global Services Platform</h1>
-<p>Connecting Tourism & Conferences</p>
+  <h1>Global Services Platform</h1>
+  <p>Connecting Tourism & Conferences</p>
 
-<a href="conference.html"><button class="btn">Explore Conferences</button></a>
-<a href="tourism.html"><button class="btn">Explore Tourism</button></a>
+  <a href="conference.html"><button class="btn">Explore Conferences</button></a>
+  <a href="tourism.html"><button class="btn">Explore Tourism</button></a>
 
-<div class="auth-box">
-  <h3>Account Access</h3>
+  <div class="auth-box">
+    <h3>Account Access</h3>
 
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
 
-  <button onclick="signup()">Sign Up</button>
-  <button onclick="login()">Login</button>
-  <button onclick="logout()">Logout</button>
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="login()">Login</button>
+    <button onclick="logout()">Logout</button>
 
-  <p id="userStatus">Not logged in</p>
-</div>
-
+    <p id="userStatus">Not logged in</p>
+  </div>
 </section>
 
 </body>

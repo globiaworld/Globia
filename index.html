@@ -2,144 +2,154 @@
 <html lang="en">
 <head>
 
-<link rel="icon" type="image/png" sizes="50x50" href="./images/logo.png">
+<link rel="icon" type="image/png" href="images/logo.png">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GlobiaWorld | Global Platform</title>
+<title>Global Platform</title>
+
+<!-- GOOGLE AUTH PROVIDER SUPPORT -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDhedQazeXeJzJgyaE44oAenGHXvILMqqc",
-  authDomain: "globia-7038f.firebaseapp.com",
-  projectId: "globia-7038f",
-  storageBucket: "globia-7038f.firebasestorage.app",
-  messagingSenderId: "323603007481",
-  appId: "1:323603007481:web:ed058146cae31922dd9f28"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyDhedQazeXeJzJgyaE44oAenGHXvILMqqc",
+    authDomain: "globia-7038f.firebaseapp.com",
+    projectId: "globia-7038f",
+    storageBucket: "globia-7038f.appspot.com",
+    messagingSenderId: "323603007481",
+    appId: "1:323603007481:web:ed058146cae31922dd9f28"
+  };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
-// SIGNUP
-window.signup = () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  // OPEN MODAL
+  window.openAuth = () => {
+    document.getElementById("authModal").style.display = "flex";
+  };
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => showStatus("✅ Account created"))
-    .catch(err => showStatus(err.message));
-};
+  // CLOSE MODAL
+  window.closeAuth = () => {
+    document.getElementById("authModal").style.display = "none";
+  };
 
-// LOGIN
-window.login = () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  // SIGN UP
+  window.signup = () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      showStatus("✅ Login successful");
-      closeModal();
-    })
-    .catch(err => showStatus(err.message));
-};
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => closeAuth())
+      .catch(e => statusBar.innerText = e.message);
+  };
 
-// LOGOUT
-window.logout = () => {
-  signOut(auth);
-};
+  // LOGIN
+  window.login = () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
-// AUTH STATE
-onAuthStateChanged(auth, (user) => {
-  const bar = document.getElementById("userBar");
-  const loginBtn = document.getElementById("loginTab");
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => closeAuth())
+      .catch(e => statusBar.innerText = e.message);
+  };
 
-  if(user){
-    bar.style.display = "flex";
-    bar.innerHTML = `👤 ${user.email} <button onclick="logout()">Logout</button>`;
-    loginBtn.style.display = "none";
-  } else {
-    bar.style.display = "none";
-    loginBtn.style.display = "block";
-  }
-});
+  // GOOGLE LOGIN
+  window.googleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then(() => closeAuth())
+      .catch(e => statusBar.innerText = e.message);
+  };
 
-// UI HELPERS
-window.openModal = () => document.getElementById("authModal").style.display = "flex";
-window.closeModal = () => document.getElementById("authModal").style.display = "none";
-window.showStatus = (msg) => document.getElementById("status").innerText = msg;
+  // LOGOUT (CLEAR EVERYTHING)
+  window.logout = () => {
+    signOut(auth).then(() => {
+      statusBar.innerText = "";
+      document.getElementById("authTab").style.display = "flex";
+      document.getElementById("userBar").style.display = "none";
+    });
+  };
 
+  // AUTH STATE
+  onAuthStateChanged(auth, (user) => {
+    const authTab = document.getElementById("authTab");
+    const userBar = document.getElementById("userBar");
+    const userText = document.getElementById("userText");
+
+    if (user) {
+      authTab.style.display = "none";
+      userBar.style.display = "flex";
+      userText.innerText = "Logged in: " + user.email;
+    } else {
+      authTab.style.display = "flex";
+      userBar.style.display = "none";
+      userText.innerText = "";
+    }
+  });
+
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const statusBar = document.getElementById("statusBar");
 </script>
 
 <style>
-body { margin:0; font-family:Arial; }
-
-/* TOP USER BAR */
-.user-bar {
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:#0a1f44;
-  color:white;
-  padding:5px;
-  font-size:14px;
+body {
+  margin:0;
+  font-family:Arial;
 }
 
-.user-bar button {
-  margin-left:15px;
-  padding:5px 10px;
-  border:none;
-  background:#ff6600;
-  color:white;
-  cursor:pointer;
-  border-radius:4px;
-}
-
-/* NAV */
-nav {
+/* TOP BAR */
+.topbar {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:55px;
   background:#0a1f44;
-  padding:5px 20px;
-  height:60px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:0 15px;
+  z-index:1000;
 }
 
+/* LOGO */
 .logo {
-  max-height:45px;
+  height:40px;
 }
 
-/* NAV RIGHT */
-.nav-right {
-  display:flex;
-  align-items:center;
-}
-
-nav a {
-  color:white;
-  margin:0 12px;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* LOGIN TAB */
-.login-tab {
+/* AUTH TAB */
+.auth-tab {
   background:#ff6600;
-  padding:8px 15px;
-  border-radius:5px;
-  cursor:pointer;
   color:white;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
   font-weight:bold;
+}
+
+/* USER BAR */
+.user-bar {
+  display:none;
+  background:#1f8f3a;
+  color:white;
+  padding:8px 14px;
+  border-radius:20px;
+  align-items:center;
+  gap:10px;
 }
 
 /* HERO */
@@ -149,20 +159,22 @@ nav a {
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  color:white;
   text-align:center;
-  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-             url('./images/joe.jpg') center/cover;
+  color:white;
+  padding-top:60px;
+
+  background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url('images/joe.jpg') center/cover;
 }
 
 .btn {
-  padding:12px 25px;
-  margin:10px;
+  padding:12px 20px;
+  margin:8px;
   background:#ff6600;
-  color:white;
   border:none;
+  color:white;
+  border-radius:6px;
   cursor:pointer;
-  border-radius:5px;
 }
 
 /* MODAL */
@@ -180,51 +192,46 @@ nav a {
 
 .modal-content {
   background:white;
-  padding:30px;
+  padding:20px;
   border-radius:10px;
-  width:300px;
+  width:90%;
+  max-width:350px;
   text-align:center;
-  animation:fadeIn 0.3s ease;
 }
 
 .modal-content input {
   width:90%;
   padding:10px;
-  margin:10px 0;
+  margin:8px 0;
 }
 
-.close {
-  float:right;
-  cursor:pointer;
-  font-size:18px;
-}
-
-@keyframes fadeIn {
-  from {opacity:0; transform:scale(0.9);}
-  to {opacity:1; transform:scale(1);}
+.google-btn {
+  background:#db4437;
+  margin-top:10px;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- USER BAR -->
-<div id="userBar" class="user-bar"></div>
+<!-- TOP BAR -->
+<div class="topbar">
 
-<!-- NAV -->
-<nav>
-  <img src="./images/logo.png" class="logo">
+  <img src="images/logo.png" class="logo">
 
-  <div class="nav-right">
-    <a href="index.html">Home</a>
-    <a href="conference.html">Conferences</a>
-    <a href="tourism.html">Tourism</a>
-
-    <div id="loginTab" class="login-tab" onclick="openModal()">
-      Login / Sign Up
-    </div>
+  <div id="authTab" class="auth-tab" onclick="openAuth()">
+    Login / Create Account
   </div>
-</nav>
+
+  <div id="userBar" class="user-bar">
+    <span id="userText"></span>
+    <button onclick="logout()" style="border:none;padding:6px 10px;border-radius:10px;cursor:pointer;">
+      Logout
+    </button>
+  </div>
+
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -235,20 +242,25 @@ nav a {
   <a href="tourism.html"><button class="btn">Explore Tourism</button></a>
 </section>
 
-<!-- MODAL LOGIN -->
+<!-- AUTH MODAL -->
 <div id="authModal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
 
     <h3>Account Access</h3>
 
     <input id="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
 
-    <button onclick="login()">Login</button>
     <button onclick="signup()">Create Account</button>
+    <button onclick="login()">Login</button>
 
-    <p id="status"></p>
+    <button class="google-btn" onclick="googleLogin()">
+      🔵 Continue with Google
+    </button>
+
+    <br><br>
+    <button onclick="closeAuth()">Close</button>
+
   </div>
 </div>
 

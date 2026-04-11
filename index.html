@@ -17,7 +17,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -31,6 +35,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+// ✅ IMPORTANT FIX: session only (no auto login across devices)
+setPersistence(auth, browserSessionPersistence);
 
 // SIGNUP
 window.signup = () => {
@@ -55,19 +62,36 @@ window.login = () => {
     .catch(err => showStatus(err.message));
 };
 
-// LOGOUT
-window.logout = () => {
-  signOut(auth);
+// GOOGLE LOGIN
+window.googleLogin = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then(() => {
+      showStatus("✅ Google login successful");
+      closeModal();
+    })
+    .catch(err => showStatus(err.message));
 };
 
-// AUTH STATE
+// LOGOUT (FIXED)
+window.logout = () => {
+  signOut(auth).then(() => {
+    document.getElementById("userBar").style.display = "none";
+    document.getElementById("loginTab").style.display = "block";
+  });
+};
+
+// AUTH STATE (FIXED PROPERLY)
 onAuthStateChanged(auth, (user) => {
   const bar = document.getElementById("userBar");
   const loginBtn = document.getElementById("loginTab");
 
   if(user){
     bar.style.display = "flex";
-    bar.innerHTML = `👤 ${user.email} <button onclick="logout()">Logout</button>`;
+    bar.innerHTML = `
+      👤 ${user.email}
+      <button onclick="logout()">Logout</button>
+    `;
     loginBtn.style.display = "none";
   } else {
     bar.style.display = "none";
@@ -75,7 +99,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// UI HELPERS
+// UI
 window.openModal = () => document.getElementById("authModal").style.display = "flex";
 window.closeModal = () => document.getElementById("authModal").style.display = "none";
 window.showStatus = (msg) => document.getElementById("status").innerText = msg;
@@ -85,50 +109,53 @@ window.showStatus = (msg) => document.getElementById("status").innerText = msg;
 <style>
 body { margin:0; font-family:Arial; }
 
-/* TOP USER BAR */
+/* USER BAR */
 .user-bar {
   display:none;
   justify-content:center;
   align-items:center;
   background:#0a1f44;
   color:white;
-  padding:5px;
+  padding:6px;
   font-size:14px;
+  flex-wrap:wrap;
+  text-align:center;
 }
 
 .user-bar button {
-  margin-left:15px;
+  margin-left:10px;
   padding:5px 10px;
   border:none;
   background:#ff6600;
   color:white;
-  cursor:pointer;
   border-radius:4px;
+  cursor:pointer;
 }
 
 /* NAV */
 nav {
   background:#0a1f44;
-  padding:5px 20px;
-  height:60px;
+  padding:10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
 
 .logo {
-  max-height:45px;
+  max-height:40px;
 }
 
 /* NAV RIGHT */
 .nav-right {
   display:flex;
   align-items:center;
+  flex-wrap:wrap;
 }
 
 nav a {
   color:white;
-  margin:0 12px;
+  margin:5px 10px;
   text-decoration:none;
   font-weight:bold;
 }
@@ -140,7 +167,7 @@ nav a {
   border-radius:5px;
   cursor:pointer;
   color:white;
-  font-weight:bold;
+  margin-left:10px;
 }
 
 /* HERO */
@@ -152,17 +179,17 @@ nav a {
   align-items:center;
   color:white;
   text-align:center;
+  padding:20px;
   background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
              url('./images/joe.jpg') center/cover;
 }
 
 .btn {
-  padding:12px 25px;
+  padding:12px 20px;
   margin:10px;
   background:#ff6600;
   color:white;
   border:none;
-  cursor:pointer;
   border-radius:5px;
 }
 
@@ -177,15 +204,16 @@ nav a {
   background:rgba(0,0,0,0.6);
   justify-content:center;
   align-items:center;
+  padding:10px;
 }
 
 .modal-content {
   background:white;
-  padding:30px;
+  padding:25px;
   border-radius:10px;
-  width:300px;
+  width:100%;
+  max-width:350px;
   text-align:center;
-  animation:fadeIn 0.3s ease;
 }
 
 .modal-content input {
@@ -194,15 +222,41 @@ nav a {
   margin:10px 0;
 }
 
+.modal-content button {
+  margin:5px;
+  padding:10px;
+  width:90%;
+  border:none;
+  background:#0a1f44;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.google-btn {
+  background:#db4437 !important;
+}
+
 .close {
   float:right;
   cursor:pointer;
-  font-size:18px;
 }
 
-@keyframes fadeIn {
-  from {opacity:0; transform:scale(0.9);}
-  to {opacity:1; transform:scale(1);}
+/* MOBILE */
+@media (max-width:600px){
+  nav {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-right {
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .hero h1 {
+    font-size:28px;
+  }
 }
 </style>
 </head>
@@ -236,7 +290,7 @@ nav a {
   <a href="tourism.html"><button class="btn">Explore Tourism</button></a>
 </section>
 
-<!-- MODAL LOGIN -->
+<!-- MODAL -->
 <div id="authModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -248,6 +302,10 @@ nav a {
 
     <button onclick="login()">Login</button>
     <button onclick="signup()">Create Account</button>
+
+    <button class="google-btn" onclick="googleLogin()">
+      Continue with Google
+    </button>
 
     <p id="status"></p>
   </div>

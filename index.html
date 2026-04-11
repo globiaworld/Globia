@@ -34,17 +34,29 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ CRITICAL FIX: enforce session persistence BEFORE anything
-await setPersistence(auth, browserSessionPersistence);
+// ✅ FIX: apply persistence safely
+setPersistence(auth, browserSessionPersistence).catch(console.error);
 
-// ================= AUTH FUNCTIONS =================
+// ================= FUNCTIONS =================
+
+window.openModal = function(){
+  document.getElementById("authModal").style.display = "flex";
+};
+
+window.closeModal = function(){
+  document.getElementById("authModal").style.display = "none";
+};
+
+function showStatus(msg){
+  document.getElementById("status").innerText = msg;
+}
 
 // SIGNUP
-window.signup = async () => {
-  try {
-    const email = emailInput.value;
-    const password = passwordInput.value;
+window.signup = async function(){
+  const email = document.getElementById("emailInput").value;
+  const password = document.getElementById("passwordInput").value;
 
+  try {
     await createUserWithEmailAndPassword(auth, email, password);
     showStatus("✅ Account created");
     closeModal();
@@ -54,11 +66,11 @@ window.signup = async () => {
 };
 
 // LOGIN
-window.login = async () => {
-  try {
-    const email = emailInput.value;
-    const password = passwordInput.value;
+window.login = async function(){
+  const email = document.getElementById("emailInput").value;
+  const password = document.getElementById("passwordInput").value;
 
+  try {
     await signInWithEmailAndPassword(auth, email, password);
     showStatus("✅ Logged in");
     closeModal();
@@ -67,8 +79,8 @@ window.login = async () => {
   }
 };
 
-// GOOGLE LOGIN (FIXED)
-window.googleLogin = async () => {
+// GOOGLE LOGIN
+window.googleLogin = async function(){
   try {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
@@ -79,23 +91,21 @@ window.googleLogin = async () => {
   }
 };
 
-// LOGOUT (FULL RESET)
-window.logout = async () => {
+// LOGOUT
+window.logout = async function(){
   await signOut(auth);
 
-  // 🔥 FORCE UI RESET
-  userBar.style.display = "none";
-  loginTab.style.display = "block";
-  userBar.innerHTML = "";
-
-  // 🔥 CLEAR INPUTS
-  emailInput.value = "";
-  passwordInput.value = "";
+  // UI reset
+  document.getElementById("userBar").style.display = "none";
+  document.getElementById("loginTab").style.display = "block";
+  document.getElementById("userBar").innerHTML = "";
 };
 
-// ================= AUTH STATE =================
-
+// AUTH STATE
 onAuthStateChanged(auth, (user) => {
+  const userBar = document.getElementById("userBar");
+  const loginTab = document.getElementById("loginTab");
+
   if(user){
     userBar.style.display = "flex";
     loginTab.style.display = "none";
@@ -110,12 +120,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// ================= UI =================
-
-window.openModal = () => authModal.style.display = "flex";
-window.closeModal = () => authModal.style.display = "none";
-window.showStatus = (msg) => status.innerText = msg;
-
 </script>
 
 <style>
@@ -129,7 +133,6 @@ body { margin:0; font-family:Arial; }
   background:#0a1f44;
   color:white;
   padding:6px;
-  font-size:14px;
 }
 
 .user-bar button {
@@ -157,7 +160,6 @@ nav {
   align-items:center;
 }
 
-/* LINKS */
 nav a {
   color:white;
   margin:0 10px;
@@ -165,7 +167,6 @@ nav a {
   font-weight:bold;
 }
 
-/* LOGIN BUTTON */
 .login-tab {
   background:#ff6600;
   padding:8px 15px;

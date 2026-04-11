@@ -6,7 +6,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GlobiaWorld</title>
+<title>GlobiaWorld | Global Platform</title>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -34,18 +34,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// FORCE SESSION MODE ON LOAD (FIX)
+// ✅ CRITICAL FIX: enforce session persistence BEFORE anything
 await setPersistence(auth, browserSessionPersistence);
+
+// ================= AUTH FUNCTIONS =================
 
 // SIGNUP
 window.signup = async () => {
-  const email = emailInput.value;
-  const password = passwordInput.value;
-
   try {
-    await setPersistence(auth, browserSessionPersistence);
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
     await createUserWithEmailAndPassword(auth, email, password);
     showStatus("✅ Account created");
+    closeModal();
   } catch (err) {
     showStatus(err.message);
   }
@@ -53,59 +55,67 @@ window.signup = async () => {
 
 // LOGIN
 window.login = async () => {
-  const email = emailInput.value;
-  const password = passwordInput.value;
-
   try {
-    await setPersistence(auth, browserSessionPersistence);
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
     await signInWithEmailAndPassword(auth, email, password);
+    showStatus("✅ Logged in");
     closeModal();
   } catch (err) {
     showStatus(err.message);
   }
 };
 
-// GOOGLE LOGIN
+// GOOGLE LOGIN (FIXED)
 window.googleLogin = async () => {
-  const provider = new GoogleAuthProvider();
-
   try {
-    await setPersistence(auth, browserSessionPersistence);
+    const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
+    showStatus("✅ Google login successful");
     closeModal();
   } catch (err) {
     showStatus(err.message);
   }
 };
 
-// LOGOUT (FULL RESET FIX)
+// LOGOUT (FULL RESET)
 window.logout = async () => {
   await signOut(auth);
 
-  // FORCE UI RESET
+  // 🔥 FORCE UI RESET
   userBar.style.display = "none";
   loginTab.style.display = "block";
+  userBar.innerHTML = "";
+
+  // 🔥 CLEAR INPUTS
+  emailInput.value = "";
+  passwordInput.value = "";
 };
 
-// AUTH STATE LISTENER (ONLY SOURCE OF TRUTH)
+// ================= AUTH STATE =================
+
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+  if(user){
     userBar.style.display = "flex";
+    loginTab.style.display = "none";
+
     userBar.innerHTML = `
       👤 ${user.email}
       <button onclick="logout()">Logout</button>
     `;
-    loginTab.style.display = "none";
   } else {
     userBar.style.display = "none";
     loginTab.style.display = "block";
   }
 });
 
-// UI
+// ================= UI =================
+
 window.openModal = () => authModal.style.display = "flex";
 window.closeModal = () => authModal.style.display = "none";
 window.showStatus = (msg) => status.innerText = msg;
+
 </script>
 
 <style>
@@ -124,11 +134,11 @@ body { margin:0; font-family:Arial; }
 
 .user-bar button {
   margin-left:10px;
-  padding:5px 10px;
   background:#ff6600;
-  color:white;
   border:none;
-  border-radius:4px;
+  color:white;
+  padding:5px 10px;
+  cursor:pointer;
 }
 
 /* NAV */
@@ -138,7 +148,6 @@ nav {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
 }
 
 .logo { max-height:40px; }
@@ -146,15 +155,17 @@ nav {
 .nav-right {
   display:flex;
   align-items:center;
-  flex-wrap:wrap;
 }
 
+/* LINKS */
 nav a {
   color:white;
-  margin:5px 10px;
+  margin:0 10px;
   text-decoration:none;
+  font-weight:bold;
 }
 
+/* LOGIN BUTTON */
 .login-tab {
   background:#ff6600;
   padding:8px 15px;
@@ -174,6 +185,14 @@ nav a {
   text-align:center;
   background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
              url('./images/joe.jpg') center/cover;
+}
+
+.btn {
+  padding:12px 20px;
+  margin:10px;
+  background:#ff6600;
+  color:white;
+  border:none;
 }
 
 /* MODAL */
@@ -206,19 +225,18 @@ nav a {
   width:90%;
   padding:10px;
   margin:5px;
-  border:none;
   background:#0a1f44;
   color:white;
+  border:none;
 }
 
 .google-btn { background:#db4437; }
 
 /* MOBILE */
 @media(max-width:600px){
-  .hero h1 { font-size:26px; }
+  nav { flex-direction:column; }
 }
 </style>
-
 </head>
 
 <body>
@@ -242,6 +260,9 @@ nav a {
 <section class="hero">
   <h1>Global Services Platform</h1>
   <p>Connecting Tourism & Conferences</p>
+
+  <a href="conference.html"><button class="btn">Explore Conferences</button></a>
+  <a href="tourism.html"><button class="btn">Explore Tourism</button></a>
 </section>
 
 <div id="authModal" class="modal">
@@ -255,6 +276,7 @@ nav a {
 
     <button onclick="login()">Login</button>
     <button onclick="signup()">Create Account</button>
+
     <button class="google-btn" onclick="googleLogin()">Google Login</button>
 
     <p id="status"></p>

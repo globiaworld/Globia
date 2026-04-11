@@ -34,29 +34,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ FIX: apply persistence safely
-setPersistence(auth, browserSessionPersistence).catch(console.error);
-
-// ================= FUNCTIONS =================
-
-window.openModal = function(){
-  document.getElementById("authModal").style.display = "flex";
-};
-
-window.closeModal = function(){
-  document.getElementById("authModal").style.display = "none";
-};
-
-function showStatus(msg){
-  document.getElementById("status").innerText = msg;
+// ✅ FIX: wrap persistence in async init
+async function initAuth(){
+  await setPersistence(auth, browserSessionPersistence);
 }
+initAuth();
 
-// SIGNUP
-window.signup = async function(){
-  const email = document.getElementById("emailInput").value;
-  const password = document.getElementById("passwordInput").value;
+// ================= AUTH FUNCTIONS =================
 
+window.signup = async () => {
   try {
+    const email = document.getElementById("emailInput").value;
+    const password = document.getElementById("passwordInput").value;
+
     await createUserWithEmailAndPassword(auth, email, password);
     showStatus("✅ Account created");
     closeModal();
@@ -65,12 +55,11 @@ window.signup = async function(){
   }
 };
 
-// LOGIN
-window.login = async function(){
-  const email = document.getElementById("emailInput").value;
-  const password = document.getElementById("passwordInput").value;
-
+window.login = async () => {
   try {
+    const email = document.getElementById("emailInput").value;
+    const password = document.getElementById("passwordInput").value;
+
     await signInWithEmailAndPassword(auth, email, password);
     showStatus("✅ Logged in");
     closeModal();
@@ -79,8 +68,7 @@ window.login = async function(){
   }
 };
 
-// GOOGLE LOGIN
-window.googleLogin = async function(){
+window.googleLogin = async () => {
   try {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
@@ -91,17 +79,16 @@ window.googleLogin = async function(){
   }
 };
 
-// LOGOUT
-window.logout = async function(){
+window.logout = async () => {
   await signOut(auth);
 
-  // UI reset
   document.getElementById("userBar").style.display = "none";
   document.getElementById("loginTab").style.display = "block";
   document.getElementById("userBar").innerHTML = "";
 };
 
-// AUTH STATE
+// ================= AUTH STATE =================
+
 onAuthStateChanged(auth, (user) => {
   const userBar = document.getElementById("userBar");
   const loginTab = document.getElementById("loginTab");
@@ -119,6 +106,20 @@ onAuthStateChanged(auth, (user) => {
     loginTab.style.display = "block";
   }
 });
+
+// ================= UI =================
+
+window.openModal = () => {
+  document.getElementById("authModal").style.display = "flex";
+};
+
+window.closeModal = () => {
+  document.getElementById("authModal").style.display = "none";
+};
+
+window.showStatus = (msg) => {
+  document.getElementById("status").innerText = msg;
+};
 
 </script>
 
@@ -167,6 +168,7 @@ nav a {
   font-weight:bold;
 }
 
+/* LOGIN BUTTON */
 .login-tab {
   background:#ff6600;
   padding:8px 15px;

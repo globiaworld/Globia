@@ -24,6 +24,8 @@ nav {
   align-items:center;
 }
 
+.nav-left { display:flex; align-items:center; }
+
 .logo { height:60px; }
 
 nav a {
@@ -31,6 +33,7 @@ nav a {
   margin:0 12px;
   text-decoration:none;
   font-weight:600;
+  transition:0.3s;
 }
 
 nav a:hover { color:#ff6600; }
@@ -42,14 +45,24 @@ nav a:hover { color:#ff6600; }
   justify-content:center;
   align-items:center;
   color:white;
-  background:linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)),
+  text-align:center;
+  background:linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
              url("/images/hero.jpg") center/cover no-repeat;
 }
 
-.hero h1 { font-size:46px; }
+.hero h1 {
+  font-size:46px;
+  animation:fadeIn 1.2s ease;
+}
 
 /* SECTION */
 .section { padding:50px 40px; text-align:center; }
+
+.section h2{
+  font-size:32px;
+  margin-bottom:30px;
+  color:#0a1f44;
+}
 
 /* GRID */
 .grid {
@@ -64,77 +77,108 @@ nav a:hover { color:#ff6600; }
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  transition:0.4s;
+  transition:all 0.4s ease;
+  cursor:pointer;
   position:relative;
 }
 
-.card:hover { transform:translateY(-10px) scale(1.02); }
+.card:hover,
+.card:active {
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
 
 /* IMAGE */
 .card img {
   width:100%;
   height:200px;
   object-fit:cover;
+  transition:transform 0.5s ease;
 }
 
-/* 🔥 SLOT BADGE */
-.slot {
-  position:absolute;
-  top:15px;
-  left:15px;
-  background:#ff3b3b;
-  color:white;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-}
+.card:hover img { transform:scale(1.1); }
 
 /* CONTENT */
 .card-content { padding:25px; }
 
+.card h3 { color:#0a1f44; }
+
 /* ⭐ STARS */
-.rating {
-  color:#ffaa00;
-  margin:5px 0;
+.stars { color:#ffaa00; margin:5px 0; }
+
+/* 💬 REVIEW */
+.review {
+  font-size:13px;
+  color:#666;
+  font-style:italic;
+  margin-bottom:10px;
 }
 
-/* 💬 SCROLL REVIEWS */
-.ticker {
-  overflow:hidden;
-  white-space:nowrap;
-  background:#fff;
-  padding:10px;
-  margin-top:20px;
-  border-radius:10px;
+/* 🔥 SLOTS */
+.slots {
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff3b3b;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
 }
 
-.ticker span {
-  display:inline-block;
-  padding-right:50px;
-  animation:scroll 25s linear infinite;
+/* BENEFITS */
+.benefits { list-style:none; padding:0; }
+
+.benefits li {
   font-size:14px;
-  color:#555;
+  margin-bottom:6px;
+  padding-left:20px;
+  position:relative;
 }
 
-/* SCROLL ANIMATION */
-@keyframes scroll {
-  0% { transform:translateX(100%); }
-  100% { transform:translateX(-100%); }
+.benefits li::before {
+  content:"✔";
+  position:absolute;
+  left:0;
+  color:#ff6600;
 }
 
 /* BUTTON */
 .btn {
   padding:12px 22px;
-  background:#ff6600;
+  background:linear-gradient(135deg,#ff7a18,#ff6600);
   color:white;
   border:none;
   border-radius:30px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover { transform:scale(1.08); }
+.btn:active { transform:scale(0.95); }
+
+/* 🧾 SCROLL REVIEWS */
+.review-scroll {
+  overflow:hidden;
+  background:#fff;
+  padding:15px 0;
+}
+
+.review-track {
+  display:flex;
+  gap:40px;
+  white-space:nowrap;
+  animation:scrollReviews 25s linear infinite;
+}
+
+@keyframes scrollReviews {
+  from { transform:translateX(100%); }
+  to { transform:translateX(-100%); }
 }
 
 /* FADE */
 @keyframes fadeIn {
-  from {opacity:0;}
+  from {opacity:0; transform:translateY(20px);}
   to {opacity:1;}
 }
 </style>
@@ -143,7 +187,10 @@ nav a:hover { color:#ff6600; }
 <body>
 
 <nav>
-  <img src="images/logo.png" class="logo">
+  <div class="nav-left">
+    <img src="images/logo.png" class="logo">
+  </div>
+
   <div>
     <a href="index.html">Home</a>
     <a href="conference.html">Conferences</a>
@@ -162,14 +209,23 @@ nav a:hover { color:#ff6600; }
 
 <!-- MAASAI -->
 <div class="card">
-<div class="slot" id="slot1">🔥 fewslots left</div>
+<div class="slots" id="slots1">🔥 Only 6 slots left</div>
 <img src="/images/maasai.jpg">
 <div class="card-content">
 
 <h3>Maasai Mara</h3>
-<div class="rating" id="rating1">★★★★★</div>
+<div class="stars">★★★★★</div>
+<div class="review" id="review1">Amazing experience!</div>
 
 <p>Experience one of Africa’s most iconic reserves.</p>
+
+<ul class="benefits">
+<li>Guided game drives</li>
+<li>Luxury accommodation</li>
+<li>Maasai cultural visits</li>
+<li>Meals included</li>
+<li>Transport provided</li>
+</ul>
 
 <button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
 </div>
@@ -177,27 +233,35 @@ nav a:hover { color:#ff6600; }
 
 <!-- DUBAI -->
 <div class="card">
-<div class="slot" id="slot2">🔥 limited offer</div>
+<div class="slots" id="slots2">🔥 Only 8 slots left</div>
 <img src="/images/dubai.jpg">
 <div class="card-content">
 
 <h3>Dubai</h3>
-<div class="rating" id="rating2">★★★★☆</div>
+<div class="stars">★★★★☆</div>
+<div class="review" id="review2">Luxury at its best!</div>
 
 <p>Luxury and adventure combined.</p>
+
+<ul class="benefits">
+<li>5-star hotel</li>
+<li>Desert safari</li>
+<li>City tour</li>
+<li>Shopping</li>
+<li>Transfers</li>
+</ul>
 
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
 </div>
 </div>
 
 </div>
-
-<!-- 💬 LIVE SCROLL REVIEWS -->
-<div class="ticker">
-<span id="reviews"></span>
-</div>
-
 </section>
+
+<!-- SCROLLING REVIEWS -->
+<div class="review-scroll">
+  <div class="review-track" id="reviewTrack"></div>
+</div>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
@@ -216,52 +280,45 @@ function payTour(amount){
   handler.openIframe();
 }
 
-// ⭐ RANDOM RATINGS (4–5 stars)
-function randomStars(){
-  return Math.random() > 0.5 ? "★★★★★" : "★★★★☆";
-}
-document.getElementById("rating1").innerText = randomStars();
-document.getElementById("rating2").innerText = randomStars();
-
-// 🔥 SLOT REDUCTION
-function reduceSlots(id){
-  let el = document.getElementById(id);
-  let num = parseInt(el.innerText);
-  if(num > 2){
-    num--;
-    el.innerText = "🔥 " + num + " slots left";
-  }
-}
-setInterval(()=>reduceSlots("slot1"),12000);
-setInterval(()=>reduceSlots("slot2"),15000);
-
-// 💬 20+ REVIEWS
-const reviewsList = [
-"John (UK): Amazing trip!",
-"Mary (USA): Loved every moment!",
-"Ali (UAE): Worth it!",
-"Sophia (Italy): Incredible!",
-"James (Canada): Highly recommend!",
-"Lina (Germany): Beautiful experience!",
-"David (Australia): Perfect!",
-"Grace (Kenya): Fantastic!",
-"Lucas (France): 10/10!",
-"Ahmed (Qatar): Luxury trip!",
-"Eva (Spain): Stunning!",
-"Daniel (SA): Best holiday!",
-"Anna (Sweden): Loved it!",
-"Tom (Ireland): Amazing safari!",
-"Sarah (NZ): Great service!",
-"Mike (USA): Perfect booking!",
-"Fatima (UAE): Top experience!",
-"Leo (Brazil): So fun!",
-"Emma (UK): Will return!",
-"Noah (USA): Incredible!"
+// REVIEWS DATA
+const allReviews = [
+"John (UK): Amazing trip!","Mary (USA): Loved it!",
+"Ali (UAE): Worth it!","James (Canada): Beautiful!",
+"Lina (Germany): Highly recommend!","David (Australia): Fantastic!",
+"Sophia (Italy): Stunning!","Ahmed (Qatar): Perfect!",
+"Lucas (France): Excellent!","Grace (Kenya): Loved it!",
+"Daniel (SA): Incredible!","Eva (Spain): Great!",
+"Mike (USA): 10/10!","Anna (Sweden): Relaxing!",
+"Chris (UK): Will come again!","Fatima (UAE): Superb!",
+"Peter (Germany): Organized!","Rose (Canada): Amazing!",
+"Tom (Australia): Great value!","Zara (Kenya): Loved safari!"
 ];
 
-// SCROLL TEXT
-document.getElementById("reviews").innerText =
-reviewsList.join("   •   ");
+// ROTATE REVIEWS
+setInterval(()=>{
+  review1.innerText = allReviews[Math.floor(Math.random()*allReviews.length)];
+  review2.innerText = allReviews[Math.floor(Math.random()*allReviews.length)];
+},7000);
+
+// SLOTS REDUCTION
+function reduceSlots(id){
+  let el = document.getElementById(id);
+  let num = parseInt(el.innerText.match(/\d+/));
+  if(num > 1){
+    el.innerText = "🔥 Only " + (num-1) + " slots left";
+  }
+}
+setInterval(()=>reduceSlots("slots1"),15000);
+setInterval(()=>reduceSlots("slots2"),18000);
+
+// SCROLL REVIEWS
+const track = document.getElementById("reviewTrack");
+allReviews.forEach(r=>{
+  let span = document.createElement("span");
+  span.innerText = r;
+  span.style.marginRight="40px";
+  track.appendChild(span);
+});
 </script>
 
 </body>

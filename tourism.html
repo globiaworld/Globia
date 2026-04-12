@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,177 +7,148 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tourism</title>        
+<title>Tourism</title>
 
 <style>
-body { 
-  margin:0; 
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-  background:#f4f7fb; 
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:#f4f7fb;
 }
 
-/* NAVBAR */
-nav {
+/* NAV */
+nav{
   background:#0a1f44;
   padding:12px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
-.nav-left { display:flex; align-items:center; }
-
-.logo { height:60px; }
-
-nav a {
-  color:white;
-  margin:0 12px;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.3s;
-}
-
-nav a:hover { color:#ff6600; }
+.logo{height:60px;}
+nav a{color:white;margin:0 12px;text-decoration:none;}
 
 /* HERO */
-.hero {
+.hero{
   height:60vh;
   display:flex;
   justify-content:center;
   align-items:center;
   color:white;
-  text-align:center;
-  background:linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-             url("/images/hero.jpg") center/cover no-repeat;
-  transition:0.5s;
+  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+  url("/images/hero.jpg") center/cover no-repeat;
 }
+.hero h1{font-size:46px;animation:fadeIn 1s ease;}
 
-.hero:hover {
-  filter:brightness(1.1);
-}
-
-.hero h1 {
-  font-size:46px;
-}
-
-/* SECTION GLOW ON SCROLL */
-.section {
+/* SECTION */
+.section{
   padding:50px 40px;
   text-align:center;
-  transition:0.5s;
 }
-
-.section:hover {
-  box-shadow:0 0 40px rgba(255,102,0,0.15);
-  transform:scale(1.01);
-}
+.section h2{color:#0a1f44;}
 
 /* GRID */
-.grid {
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:30px;
 }
 
 /* CARD */
-.card {
+.card{
   background:white;
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  transition:0.4s;
   position:relative;
+  transition:0.4s;
+  opacity:0;
+  transform:translateY(40px);
 }
 
-.card:hover {
+/* scroll animation */
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.card:hover{
   transform:translateY(-10px) scale(1.02);
-  box-shadow:0 25px 50px rgba(0,0,0,0.2);
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
 }
 
-/* IMAGE */
-.card img {
+.card img{
   width:100%;
   height:200px;
   object-fit:cover;
   transition:0.5s;
 }
 
-.card:hover img {
-  transform:scale(1.1);
+.card:hover img{transform:scale(1.1);}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff3b3b;
+  color:white;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  animation:pulse 1.5s infinite;
 }
 
 /* CONTENT */
-.card-content { padding:25px; }
+.card-content{padding:20px;}
 
-.card h3 {
-  color:#0a1f44;
-}
+.stars{color:#ffaa00;margin:5px 0;}
 
-/* ⭐ STARS */
-.stars {
-  color:#ffaa00;
-  margin:6px 0;
-}
-
-/* 💬 REVIEWS */
-.review {
+.review{
   font-size:13px;
   font-style:italic;
   color:#666;
   margin-bottom:10px;
 }
 
-/* 🔥 LIMITED SLOT BADGE */
-.badge {
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:#ff3b3b;
-  color:white;
-  padding:6px 12px;
-  font-size:12px;
-  border-radius:20px;
-  animation:pulse 1.8s infinite;
+/* BENEFITS */
+.benefits{
+  list-style:none;
+  padding:0;
 }
-
-@keyframes pulse {
-  0%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-  100%{transform:scale(1);}
+.benefits li{
+  font-size:14px;
+  margin-bottom:6px;
+  padding-left:20px;
+  position:relative;
+}
+.benefits li::before{
+  content:"✔";
+  position:absolute;
+  left:0;
+  color:#ff6600;
 }
 
 /* BUTTON */
-.btn {
+.btn{
   padding:12px 22px;
   background:linear-gradient(135deg,#ff7a18,#ff6600);
-  color:white;
   border:none;
+  color:white;
   border-radius:30px;
   cursor:pointer;
   transition:0.3s;
 }
+.btn:hover{transform:scale(1.08);}
 
-.btn:hover {
-  transform:scale(1.08);
-}
-
-/* POPUP */
-.popup {
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  background:white;
-  padding:12px 18px;
-  border-radius:10px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.2);
-  display:none;
-  z-index:999;
-}
-
-/* FADE */
-@keyframes fadeIn {
+/* ANIMATIONS */
+@keyframes fadeIn{
   from{opacity:0;transform:translateY(20px);}
   to{opacity:1;}
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
 }
 </style>
 </head>
@@ -184,14 +156,10 @@ nav a:hover { color:#ff6600; }
 <body>
 
 <nav>
-  <div class="nav-left">
-    <img src="images/logo.png" class="logo">
-  </div>
-
+  <img src="images/logo.png" class="logo">
   <div>
-    <a href="index.html">Home</a>
-    <a href="conference.html">Conferences</a>
-    <a href="tourism.html">Tourism</a>
+    <a href="#">Home</a>
+    <a href="#">Tours</a>
   </div>
 </nav>
 
@@ -204,55 +172,65 @@ nav a:hover { color:#ff6600; }
 
 <div class="grid">
 
-<!-- ================= MAASAI MARA ================= -->
-<div class="card">
-<div class="badge" id="slot1">🔥 Limited Offer: 6 left</div>
+<!-- ===================== MAASAI MARA ===================== -->
+<div class="card" id="maasaiCard">
+<div class="badge" id="slots1">🔥 6 slots left</div>
 <img src="/images/maasai.jpg">
-
 <div class="card-content">
-<h3>Maasai Mara</h3>
 
+<h3>Maasai Mara</h3>
 <div class="stars">★★★★★</div>
 
-<div class="review" id="review-mara">
-"Safari of a lifetime - James (UK)"
-</div>
+<div class="review" id="maasaiReview"></div>
 
-<p>Experience Africa’s greatest wildlife reserve.</p>
+<p>Experience Africa’s most iconic safari destination.</p>
+
+<ul class="benefits">
+<li>Game drives with expert guides</li>
+<li>Luxury safari tents</li>
+<li>Maasai cultural experience</li>
+<li>All meals included</li>
+<li>Airport transfers</li>
+</ul>
 
 <button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
+
 </div>
 </div>
 
-<!-- ================= DUBAI ================= -->
-<div class="card">
-<div class="badge" id="slot2">🔥 Limited Offer: 8 left</div>
+<!-- ===================== DUBAI ===================== -->
+<div class="card" id="dubaiCard">
+<div class="badge" id="slots2">🔥 8 slots left</div>
 <img src="/images/dubai.jpg">
-
 <div class="card-content">
-<h3>Dubai</h3>
 
+<h3>Dubai</h3>
 <div class="stars">★★★★☆</div>
 
-<div class="review" id="review-dubai">
-"Luxury beyond imagination - Sarah (USA)"
-</div>
+<div class="review" id="dubaiReview"></div>
 
-<p>Luxury, shopping and desert adventure.</p>
+<p>Luxury, adventure and futuristic experiences.</p>
+
+<ul class="benefits">
+<li>5-star hotel stay</li>
+<li>Desert safari & dune bashing</li>
+<li>Burj Khalifa visit</li>
+<li>Luxury shopping malls</li>
+<li>Airport transfers</li>
+</ul>
 
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
+
 </div>
 </div>
 
 </div>
 </section>
 
-<!-- LIVE BOOKINGS -->
-<div class="popup" id="popup"></div>
-
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
+
 // ================= PAYSTACK =================
 function payTour(amount){
   let handler = PaystackPop.setup({
@@ -267,82 +245,68 @@ function payTour(amount){
   handler.openIframe();
 }
 
-// ================= PERSISTENT REVIEWS =================
-const maraReviews = [
-"James (UK): Safari of a lifetime!",
-"Linda (Germany): Incredible wildlife!",
-"David (USA): Best experience ever!",
-"Anna (Italy): Truly magical!",
-"Peter (Canada): Worth every penny!"
+// ================= FIXED UNIQUE REVIEWS =================
+const maasaiReviews = [
+"John (UK): Best safari of my life!",
+"Amina (Kenya): Truly magical experience!",
+"Peter (USA): Saw all Big Five!",
+"Grace (SA): Beautiful wildlife!",
+"David (Germany): Worth every cent!"
 ];
 
 const dubaiReviews = [
-"Sarah (USA): Pure luxury experience!",
-"Ahmed (UAE): Outstanding service!",
-"Maria (Spain): Stunning city!",
-"John (UK): Unforgettable trip!",
-"Fatima (Qatar): Amazing adventure!"
+"Sophia (Italy): Luxury beyond imagination!",
+"Ali (UAE): Amazing desert safari!",
+"Mark (UK): Burj Khalifa view was insane!",
+"Lina (France): Perfect vacation!",
+"Chris (Canada): 10/10 experience!"
 ];
 
-// save first time only
-if(!localStorage.getItem("maraReview")){
-  localStorage.setItem("maraReview", maraReviews[0]);
-}
-if(!localStorage.getItem("dubaiReview")){
-  localStorage.setItem("dubaiReview", dubaiReviews[0]);
+// ================= PERSISTED REVIEWS =================
+function getRandom(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
 }
 
-// update without reset
 function updateReviews(){
-  let r1 = maraReviews[Math.floor(Math.random()*maraReviews.length)];
-  let r2 = dubaiReviews[Math.floor(Math.random()*dubaiReviews.length)];
+  let m = localStorage.getItem("maasaiReview") || getRandom(maasaiReviews);
+  let d = localStorage.getItem("dubaiReview") || getRandom(dubaiReviews);
 
-  localStorage.setItem("maraReview", r1);
-  localStorage.setItem("dubaiReview", r2);
+  document.getElementById("maasaiReview").innerText = m;
+  document.getElementById("dubaiReview").innerText = d;
 
-  document.getElementById("review-mara").innerText = r1;
-  document.getElementById("review-dubai").innerText = r2;
+  localStorage.setItem("maasaiReview", m);
+  localStorage.setItem("dubaiReview", d);
 }
+
+updateReviews();
 setInterval(updateReviews, 8000);
 
-// load saved on refresh
-document.getElementById("review-mara").innerText =
-  localStorage.getItem("maraReview");
-
-document.getElementById("review-dubai").innerText =
-  localStorage.getItem("dubaiReview");
-
-// ================= LIMITED SLOTS =================
+// ================= SLOTS (REALISTIC) =================
 function reduceSlots(id){
   let el = document.getElementById(id);
   let num = parseInt(el.innerText.match(/\d+/));
   if(num > 1){
     num--;
-    el.innerText = "🔥 Limited Offer: " + num + " left";
+    el.innerText = "🔥 " + num + " slots left";
   }
 }
-setInterval(()=>reduceSlots("slot1"),15000);
-setInterval(()=>reduceSlots("slot2"),18000);
 
-// ================= FAKE LIVE BOOKINGS =================
-const names = [
-"John (UK)","Mary (USA)","Ali (UAE)","James (Canada)",
-"Lina (Germany)","Sophia (Italy)","David (Australia)",
-"Ahmed (Qatar)","Grace (Kenya)"
-];
+setInterval(()=>reduceSlots("slots1"),15000);
+setInterval(()=>reduceSlots("slots2"),18000);
 
-function showPopup(){
-  let popup = document.getElementById("popup");
-  let name = names[Math.floor(Math.random()*names.length)];
+// ================= SCROLL ANIMATION =================
+const cards = document.querySelectorAll(".card");
 
-  popup.innerText = name + " just booked a trip!";
-  popup.style.display = "block";
-
-  setTimeout(()=>popup.style.display="none",4000);
-
-  setTimeout(showPopup, Math.random()*12000 + 8000);
+function reveal(){
+  cards.forEach(c=>{
+    let top = c.getBoundingClientRect().top;
+    if(top < window.innerHeight - 50){
+      c.classList.add("show");
+    }
+  });
 }
-setTimeout(showPopup,5000);
+window.addEventListener("scroll",reveal);
+window.addEventListener("load",reveal);
 
 </script>
 

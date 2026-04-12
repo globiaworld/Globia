@@ -24,8 +24,6 @@ nav {
   align-items:center;
 }
 
-.nav-left { display:flex; align-items:center; }
-
 .logo { height:60px; }
 
 nav a {
@@ -37,7 +35,7 @@ nav a {
 
 /* HERO */
 .hero {
-  height:60vh;
+  height:55vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -49,29 +47,8 @@ nav a {
 
 .hero h1 { font-size:46px; }
 
-/* MAIN SECTION LAYOUT (LEFT CARDS + RIGHT LIVE REVIEWS) */
-.section-wrapper{
-  display:flex;
-  gap:20px;
-  padding:50px 40px;
-}
-
-/* LEFT SIDE */
-.section-left{
-  flex:2;
-}
-
-/* RIGHT SIDE LIVE REVIEWS */
-.section-right{
-  flex:1;
-  background:white;
-  border-radius:15px;
-  padding:15px;
-  height:fit-content;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
-  position:sticky;
-  top:20px;
-}
+/* SECTION */
+.section { padding:40px; text-align:center; }
 
 /* GRID */
 .grid {
@@ -86,11 +63,13 @@ nav a {
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  transition:0.4s;
   position:relative;
+  transition:0.4s;
 }
 
-.card:hover { transform:translateY(-10px) scale(1.02); }
+.card:hover {
+  transform:translateY(-8px) scale(1.02);
+}
 
 /* IMAGE */
 .card img {
@@ -99,72 +78,72 @@ nav a {
   object-fit:cover;
 }
 
-/* CONTENT */
-.card-content { padding:25px; }
-
-/* ⭐ STARS */
-.stars {
-  color:#ffaa00;
-  margin:6px 0;
-}
-
-/* 💬 LEFT REVIEWS */
-.review {
-  font-size:13px;
-  color:#666;
-  font-style:italic;
-  margin-bottom:10px;
-}
-
-/* 🔥 SLOT BADGE */
+/* SLOT (SMALLER + CLEAN) */
 .slots {
   position:absolute;
   top:10px;
   left:10px;
   background:#ff3b3b;
   color:white;
-  padding:5px 10px;
+  padding:4px 8px;
+  font-size:11px;
   border-radius:20px;
+}
+
+/* CONTENT */
+.card-content { padding:20px; }
+
+/* ⭐ STARS */
+.stars { color:#ffaa00; font-size:15px; margin:6px 0; }
+
+/* 💬 LEFT REVIEW */
+.review-left {
+  font-size:13px;
+  font-style:italic;
+  color:#666;
+  margin-bottom:8px;
+}
+
+/* 🧾 RIGHT LIVE FEED (SMALL SIDE BAR) */
+.live-feed {
+  position:fixed;
+  right:10px;
+  top:120px;
+  width:220px;
+  background:white;
+  padding:10px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
   font-size:12px;
+  max-height:300px;
+  overflow:hidden;
+}
+
+.live-feed h4 {
+  margin:0 0 8px 0;
+  font-size:13px;
+  color:#0a1f44;
+}
+
+.feed-item {
+  margin-bottom:6px;
+  color:#333;
+  animation:fadeIn 0.5s ease;
 }
 
 /* BUTTON */
 .btn {
-  padding:12px 22px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
+  padding:10px 18px;
+  background:#ff6600;
   color:white;
   border:none;
   border-radius:30px;
   cursor:pointer;
 }
 
-/* RIGHT SCROLL AREA */
-.review-box-title{
-  font-weight:bold;
-  margin-bottom:10px;
-  color:#0a1f44;
-}
-
-.review-stream{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  max-height:500px;
-  overflow:hidden;
-}
-
-/* EACH LIVE MESSAGE */
-.live-msg{
-  font-size:13px;
-  padding:10px;
-  background:#f5f7ff;
-  border-radius:10px;
-  animation:fadeIn 0.6s ease;
-}
-
 /* FADE */
 @keyframes fadeIn {
-  from {opacity:0; transform:translateY(10px);}
+  from {opacity:0;}
   to {opacity:1;}
 }
 </style>
@@ -173,10 +152,7 @@ nav a {
 <body>
 
 <nav>
-  <div class="nav-left">
-    <img src="images/logo.png" class="logo">
-  </div>
-
+  <img src="images/logo.png" class="logo">
   <div>
     <a href="index.html">Home</a>
     <a href="conference.html">Conferences</a>
@@ -188,65 +164,51 @@ nav a {
   <h1>Explore Tourism</h1>
 </div>
 
-<!-- MAIN WRAPPER -->
-<div class="section-wrapper">
-
-<!-- ================= LEFT SIDE DESTINATIONS ================= -->
-<div class="section-left">
-
 <section class="section">
 <h2>Destinations</h2>
 
 <div class="grid">
 
-<!-- CARD 1 -->
+<!-- ================= MAASAI ================= -->
 <div class="card">
-<div class="slots" id="slots1">🔥 Only 6 slots left</div>
+<div class="slots" id="slots1">🔥 6 slots left</div>
 <img src="/images/maasai.jpg">
+
 <div class="card-content">
 
 <h3>Maasai Mara</h3>
 
-<!-- ⭐ MAIN REVIEW (LEFT SIDE ONLY) -->
+<!-- ⭐ STAR RATING -->
 <div class="stars">★★★★★</div>
-<div class="review" id="review1">"Best safari experience ever!"</div>
 
-<p class="desc">Experience Africa’s most iconic wildlife reserve.</p>
+<!-- 💬 LEFT REVIEWS (STATIC PER USER SYSTEM) -->
+<div class="review-left" id="reviewLeft1">
+"Perfect safari experience - Daniel (UK)"
+</div>
 
-<ul>
-<li>Game drives</li>
-<li>Luxury stay</li>
-<li>Cultural visits</li>
-<li>Meals included</li>
-<li>Transport</li>
-</ul>
+<p>Experience Africa’s iconic wildlife reserve.</p>
 
 <button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
 
 </div>
 </div>
 
-<!-- CARD 2 -->
+<!-- ================= DUBAI ================= -->
 <div class="card">
-<div class="slots" id="slots2">🔥 Only 8 slots left</div>
+<div class="slots" id="slots2">🔥 8 slots left</div>
 <img src="/images/dubai.jpg">
+
 <div class="card-content">
 
 <h3>Dubai</h3>
 
-<!-- ⭐ MAIN REVIEW -->
 <div class="stars">★★★★☆</div>
-<div class="review" id="review2">"Luxury beyond imagination!"</div>
 
-<p class="desc">Luxury and adventure combined.</p>
+<div class="review-left" id="reviewLeft2">
+"Luxury beyond expectations - Sarah (USA)"
+</div>
 
-<ul>
-<li>5-star hotel</li>
-<li>Desert safari</li>
-<li>City tour</li>
-<li>Shopping</li>
-<li>Transfers</li>
-</ul>
+<p>Luxury, shopping & desert adventure.</p>
 
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
 
@@ -256,24 +218,17 @@ nav a {
 </div>
 </section>
 
-</div>
-
-<!-- ================= RIGHT SIDE LIVE REVIEWS ================= -->
-<div class="section-right">
-
-<!-- COMMENT: LIVE REAL-TIME USER FEEDBACK PANEL -->
-<div class="review-box-title">🌍 Live Traveller Reviews</div>
-<div class="review-stream" id="liveReviews"></div>
-
-</div>
-
+<!-- 🧾 RIGHT SIDE LIVE FEED -->
+<div class="live-feed">
+<h4>🔥 Live Bookings</h4>
+<div id="feed"></div>
 </div>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
 
-/* ================= PAYMENT ================= */
+/* ================= PAYSTACK ================= */
 function payTour(amount){
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
@@ -287,67 +242,101 @@ function payTour(amount){
   handler.openIframe();
 }
 
-/* ================= SLOT REDUCTION ================= */
+/* ================= SLOT SYSTEM ================= */
 function reduceSlots(id){
   let el = document.getElementById(id);
   let num = parseInt(el.innerText.match(/\d+/));
   if(num > 1){
     num--;
-    el.innerText = "🔥 Only " + num + " slots left";
+    el.innerText = "🔥 " + num + " slots left";
+    localStorage.setItem(id, num);
   }
 }
-setInterval(()=>reduceSlots("slots1"),16000);
-setInterval(()=>reduceSlots("slots2"),20000);
 
-/* ================= LEFT REVIEWS ================= */
-const leftReviews = [
-"Absolutely magical safari!",
-"Perfect wildlife experience!",
-"Best trip of my life!",
-"Unforgettable journey!",
-"Amazing guides and service!"
-];
+/* restore slots (NO RESET ON REFRESH) */
+["slots1","slots2"].forEach(id=>{
+  let saved = localStorage.getItem(id);
+  if(saved){
+    document.getElementById(id).innerText = "🔥 " + saved + " slots left";
+  }
+});
+
+setInterval(()=>reduceSlots("slots1"),20000);
+setInterval(()=>reduceSlots("slots2"),25000);
+
+/* ================= LEFT REVIEWS (FIXED USERS - NOT RANDOM RESET) ================= */
+
+/* Each card has fixed rotating structured reviews (not random chaos) */
+const reviewData = {
+  reviewLeft1: [
+    "Daniel (UK): Best safari ever!",
+    "Emma (Germany): Unreal experience!",
+    "Chris (USA): 10/10 wildlife tour!"
+  ],
+  reviewLeft2: [
+    "Sarah (USA): Pure luxury!",
+    "Ahmed (UAE): Outstanding service!",
+    "Lina (France): Absolutely stunning!"
+  ]
+};
+
+let index1 = 0;
+let index2 = 0;
 
 setInterval(()=>{
-  document.getElementById("review1").innerText =
-    leftReviews[Math.floor(Math.random()*leftReviews.length)];
+  index1 = (index1 + 1) % reviewData.reviewLeft1.length;
+  document.getElementById("reviewLeft1").innerText = reviewData.reviewLeft1[index1];
+  localStorage.setItem("reviewLeft1", reviewData.reviewLeft1[index1]);
+},8000);
 
-  document.getElementById("review2").innerText =
-    leftReviews[Math.floor(Math.random()*leftReviews.length)];
-},7000);
+setInterval(()=>{
+  index2 = (index2 + 1) % reviewData.reviewLeft2.length;
+  document.getElementById("reviewLeft2").innerText = reviewData.reviewLeft2[index2];
+  localStorage.setItem("reviewLeft2", reviewData.reviewLeft2[index2]);
+},9000);
 
-/* ================= RIGHT SIDE LIVE FEED (DIFFERENT USERS) ================= */
+/* restore reviews on refresh (NO RESET) */
+if(localStorage.getItem("reviewLeft1")){
+  document.getElementById("reviewLeft1").innerText = localStorage.getItem("reviewLeft1");
+}
+if(localStorage.getItem("reviewLeft2")){
+  document.getElementById("reviewLeft2").innerText = localStorage.getItem("reviewLeft2");
+}
+
+/* ================= RIGHT LIVE FEED (COMPLETELY DIFFERENT USERS) ================= */
+
 const liveUsers = [
-"Emily (UK): Just returned from Maasai Mara — unbelievable!",
-"Michael (USA): Dubai tour was beyond expectations!",
-"Sophia (Italy): Best organized travel experience ever!",
-"Daniel (Germany): Highly professional service!",
-"Aisha (UAE): Loved every moment of the safari!",
-"James (Canada): Worth every cent!",
-"Fatima (Qatar): Excellent hospitality!",
-"Liam (Australia): Incredible desert experience!",
-"Grace (Kenya): Proud of this tourism company!",
-"Lucas (France): 10/10 experience!",
-"Zara (Spain): Perfect honeymoon package!",
-"Noah (USA): Would book again instantly!"
+"John (UK) just booked Maasai Mara",
+"Maria (Italy) booked Dubai package",
+"Ali (UAE) confirmed safari trip",
+"James (Canada) reserved tour",
+"Lina (Germany) booked holiday",
+"David (Australia) joined trip",
+"Fatima (Qatar) secured booking",
+"Lucas (France) confirmed reservation",
+"Grace (Kenya) booked safari",
+"Tom (USA) just purchased tour"
 ];
 
-function pushLiveReview(){
-  const box = document.getElementById("liveReviews");
+function pushFeed(){
+  let feed = document.getElementById("feed");
 
-  let msg = document.createElement("div");
-  msg.className = "live-msg";
-  msg.innerText = liveUsers[Math.floor(Math.random()*liveUsers.length)];
+  let msg = liveUsers[Math.floor(Math.random()*liveUsers.length)];
 
-  box.prepend(msg);
+  let div = document.createElement("div");
+  div.className = "feed-item";
+  div.innerText = msg;
 
-  // limit messages
-  if(box.children.length > 12){
-    box.removeChild(box.lastChild);
+  feed.prepend(div);
+
+  if(feed.children.length > 8){
+    feed.removeChild(feed.lastChild);
   }
 }
 
-setInterval(pushLiveReview, 5000);
+/* slower, realistic timing */
+setInterval(pushFeed, 12000);
+setTimeout(pushFeed, 3000);
 
 </script>
 

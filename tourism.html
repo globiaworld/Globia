@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+<link rel="icon" type="image/png" href="images/logo.png">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tourism</title>        
+<title>Tourism</title>
 
 <style>
 body { 
   margin:0; 
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-family:'Segoe UI', sans-serif; 
   background:#f4f7fb; 
 }
 
-/* NAVBAR */
+/* NAV */
 nav {
   background:#0a1f44;
   padding:12px 20px;
@@ -24,19 +23,9 @@ nav {
   align-items:center;
 }
 
-.nav-left { display:flex; align-items:center; }
-
 .logo { height:60px; }
 
-nav a {
-  color:white;
-  margin:0 12px;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.3s;
-}
-
-nav a:hover { color:#ff6600; }
+nav a { color:white; margin:0 12px; text-decoration:none; }
 
 /* HERO */
 .hero {
@@ -45,26 +34,12 @@ nav a:hover { color:#ff6600; }
   justify-content:center;
   align-items:center;
   color:white;
-  text-align:center;
-  background:linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)),
-             url("/images/hero.jpg") center/cover no-repeat;
+  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+  url("/images/hero.jpg") center/cover no-repeat;
 }
 
-.hero h1 {
-  font-size:46px;
-  animation:fadeIn 1.2s ease;
-}
-
-/* SECTION */
 .section { padding:50px 40px; text-align:center; }
 
-.section h2{
-  font-size:32px;
-  margin-bottom:30px;
-  color:#0a1f44;
-}
-
-/* GRID */
 .grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -77,109 +52,68 @@ nav a:hover { color:#ff6600; }
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  transition:all 0.4s ease;
-  cursor:pointer;
   position:relative;
 }
 
-.card:hover,
-.card:active {
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 20px 40px rgba(0,0,0,0.2);
-}
-
-/* IMAGE */
-.card img {
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  transition:transform 0.5s ease;
-}
-
-.card:hover img { transform:scale(1.1); }
-
-/* CONTENT */
-.card-content { padding:25px; }
-
-.card h3 { color:#0a1f44; }
-
-/* ⭐ STARS */
-.stars { color:#ffaa00; margin:5px 0; }
-
-/* 💬 REVIEW */
-.review {
-  font-size:13px;
-  color:#666;
-  font-style:italic;
-  margin-bottom:10px;
-}
-
-/* 🔥 SLOTS */
+/* SLOT */
 .slots {
   position:absolute;
   top:10px;
   left:10px;
-  background:#ff3b3b;
+  background:red;
   color:white;
   padding:5px 10px;
   border-radius:20px;
   font-size:12px;
 }
 
-/* BENEFITS */
-.benefits { list-style:none; padding:0; }
+/* IMAGE */
+.card img { width:100%; height:200px; object-fit:cover; }
 
-.benefits li {
-  font-size:14px;
-  margin-bottom:6px;
-  padding-left:20px;
-  position:relative;
-}
+/* CONTENT */
+.card-content { padding:25px; }
 
-.benefits li::before {
-  content:"✔";
-  position:absolute;
-  left:0;
-  color:#ff6600;
+.stars { color:#ffaa00; }
+
+/* ⭐ REVIEW BOXES */
+.review-box {
+  background:#f9fbff;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:13px;
+  font-style:italic;
+  color:#444;
+  min-height:40px;
 }
 
 /* BUTTON */
 .btn {
   padding:12px 22px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
+  background:#ff6600;
   color:white;
   border:none;
   border-radius:30px;
   cursor:pointer;
-  transition:0.3s;
 }
 
-.btn:hover { transform:scale(1.08); }
-.btn:active { transform:scale(0.95); }
-
-/* 🧾 SCROLL REVIEWS */
+/* SCROLL REVIEWS */
 .review-scroll {
   overflow:hidden;
   background:#fff;
-  padding:15px 0;
+  padding:12px 0;
 }
 
 .review-track {
   display:flex;
   gap:40px;
   white-space:nowrap;
-  animation:scrollReviews 25s linear infinite;
+  animation:move 25s linear infinite;
 }
 
-@keyframes scrollReviews {
+@keyframes move {
   from { transform:translateX(100%); }
   to { transform:translateX(-100%); }
-}
-
-/* FADE */
-@keyframes fadeIn {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1;}
 }
 </style>
 </head>
@@ -187,14 +121,10 @@ nav a:hover { color:#ff6600; }
 <body>
 
 <nav>
-  <div class="nav-left">
-    <img src="images/logo.png" class="logo">
-  </div>
-
+  <img src="images/logo.png" class="logo">
   <div>
-    <a href="index.html">Home</a>
-    <a href="conference.html">Conferences</a>
-    <a href="tourism.html">Tourism</a>
+    <a href="#">Home</a>
+    <a href="#">Tours</a>
   </div>
 </nav>
 
@@ -207,49 +137,35 @@ nav a:hover { color:#ff6600; }
 
 <div class="grid">
 
-<!-- MAASAI -->
+<!-- ================= MAASAI MARA ================= -->
 <div class="card">
-<div class="slots" id="slots1">🔥 Only few slots left</div>
+<div class="slots" id="slots1">🔥 6 slots left</div>
 <img src="/images/maasai.jpg">
-<div class="card-content">
 
+<div class="card-content">
 <h3>Maasai Mara</h3>
 <div class="stars">★★★★★</div>
-<div class="review" id="review1">Amazing experience!</div>
 
-<p>Experience one of Africa’s most iconic reserves.</p>
+<p>Big Five safari experience.</p>
 
-<ul class="benefits">
-<li>Guided game drives</li>
-<li>Luxury accommodation</li>
-<li>Maasai cultural visits</li>
-<li>Meals included</li>
-<li>Transport provided</li>
-</ul>
+<div class="review-box" id="leftReview"></div>
 
 <button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
 </div>
 </div>
 
-<!-- DUBAI -->
+<!-- ================= DUBAI ================= -->
 <div class="card">
-<div class="slots" id="slots2">🔥  offer ends soon </div>
+<div class="slots" id="slots2">🔥 8 slots left</div>
 <img src="/images/dubai.jpg">
-<div class="card-content">
 
+<div class="card-content">
 <h3>Dubai</h3>
 <div class="stars">★★★★☆</div>
-<div class="review" id="review2">Luxury at its best!</div>
 
-<p>Luxury and adventure combined.</p>
+<p>Luxury desert & city experience.</p>
 
-<ul class="benefits">
-<li>5-star hotel</li>
-<li>Desert safari</li>
-<li>City tour</li>
-<li>Shopping</li>
-<li>Transfers</li>
-</ul>
+<div class="review-box" id="rightReview"></div>
 
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
 </div>
@@ -258,9 +174,9 @@ nav a:hover { color:#ff6600; }
 </div>
 </section>
 
-<!-- SCROLLING REVIEWS -->
+<!-- SCROLL REVIEWS -->
 <div class="review-scroll">
-  <div class="review-track" id="reviewTrack"></div>
+  <div class="review-track" id="track"></div>
 </div>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -273,52 +189,64 @@ function payTour(amount){
     email: "customer@email.com",
     amount: amount * 100,
     currency: "KES",
-    callback: function(response){
-      alert("✅ Payment successful!");
-    }
+    callback: ()=> alert("Payment successful!")
   });
   handler.openIframe();
 }
 
-// REVIEWS DATA
-const allReviews = [
-"John (UK): Amazing trip!","Mary (USA): Loved it!",
-"Ali (UAE): Worth it!","James (Canada): Beautiful!",
-"Lina (Germany): Highly recommend!","David (Australia): Fantastic!",
-"Sophia (Italy): Stunning!","Ahmed (Qatar): Perfect!",
-"Lucas (France): Excellent!","Grace (Kenya): Loved it!",
-"Daniel (SA): Incredible!","Eva (Spain): Great!",
-"Mike (USA): 10/10!","Anna (Sweden): Relaxing!",
-"Chris (UK): Will come again!","Fatima (UAE): Superb!",
-"Peter (Germany): Organized!","Rose (Canada): Amazing!",
-"Tom (Australia): Great value!","Zara (Kenya): Loved safari!"
+/* ================= LEFT REVIEWS (MAASAI MARA - DIFFERENT USERS) ================= */
+const leftReviews = [
+"Peter (UK): Best safari ever!",
+"Susan (USA): Unreal experience!",
+"David (Canada): Saw all Big Five!",
+"Grace (Kenya): Magical journey!",
+"Ahmed (UAE): Worth every dollar!",
+"Linda (Germany): Stunning views!",
+"Paul (Australia): Incredible guides!"
 ];
 
-// ROTATE REVIEWS
-setInterval(()=>{
-  review1.innerText = allReviews[Math.floor(Math.random()*allReviews.length)];
-  review2.innerText = allReviews[Math.floor(Math.random()*allReviews.length)];
-},7000);
+/* ================= RIGHT REVIEWS (DUBAI - COMPLETELY DIFFERENT USERS) ================= */
+const rightReviews = [
+"Ali (Dubai): Luxury at its peak!",
+"Sophia (Italy): Amazing city tour!",
+"John (USA): Burj Khalifa view wow!",
+"Fatima (Qatar): Perfect holiday!",
+"Lucas (France): Super clean city!",
+"Emma (UK): Desert safari amazing!",
+"Zain (India): Best experience ever!"
+];
 
-// SLOTS REDUCTION
-function reduceSlots(id){
+/* ROTATE SEPARATELY */
+setInterval(()=>{
+  document.getElementById("leftReview").innerText =
+  leftReviews[Math.floor(Math.random()*leftReviews.length)];
+},5000);
+
+setInterval(()=>{
+  document.getElementById("rightReview").innerText =
+  rightReviews[Math.floor(Math.random()*rightReviews.length)];
+},6000);
+
+/* ================= SCROLL REVIEWS ================= */
+const all = [...leftReviews, ...rightReviews];
+const track = document.getElementById("track");
+
+all.forEach(r=>{
+  let span = document.createElement("span");
+  span.innerText = r;
+  track.appendChild(span);
+});
+
+/* ================= SLOT DECREASE ================= */
+function reduce(id){
   let el = document.getElementById(id);
   let num = parseInt(el.innerText.match(/\d+/));
   if(num > 1){
-    el.innerText = "🔥 Only " + (num-1) + " slots left";
+    el.innerText = "🔥 " + (num-1) + " slots left";
   }
 }
-setInterval(()=>reduceSlots("slots1"),15000);
-setInterval(()=>reduceSlots("slots2"),18000);
-
-// SCROLL REVIEWS
-const track = document.getElementById("reviewTrack");
-allReviews.forEach(r=>{
-  let span = document.createElement("span");
-  span.innerText = r;
-  span.style.marginRight="40px";
-  track.appendChild(span);
-});
+setInterval(()=>reduce("slots1"),14000);
+setInterval(()=>reduce("slots2"),17000);
 </script>
 
 </body>

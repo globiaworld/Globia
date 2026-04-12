@@ -24,15 +24,9 @@ nav {
   align-items:center;
 }
 
-.nav-left {
-  display:flex;
-  align-items:center;
-}
+.nav-left { display:flex; align-items:center; }
 
-.logo {
-  height:60px;
-  width:auto;
-}
+.logo { height:60px; }
 
 nav a {
   color:white;
@@ -42,9 +36,7 @@ nav a {
   transition:0.3s;
 }
 
-nav a:hover {
-  color:#ff6600;
-}
+nav a:hover { color:#ff6600; }
 
 /* HERO */
 .hero {
@@ -60,15 +52,11 @@ nav a:hover {
 
 .hero h1 {
   font-size:46px;
-  letter-spacing:1px;
   animation:fadeIn 1.2s ease;
 }
 
 /* SECTION */
-.section { 
-  padding:50px 40px; 
-  text-align:center; 
-}
+.section { padding:50px 40px; text-align:center; }
 
 .section h2{
   font-size:32px;
@@ -89,120 +77,108 @@ nav a:hover {
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  text-align:left;
-  transition:all 0.4s ease;
-  cursor:pointer;
+  transition:0.4s;
   position:relative;
 }
 
-/* HOVER + MOBILE TAP EFFECT */
 .card:hover,
 .card:active {
   transform:translateY(-10px) scale(1.02);
-  box-shadow:0 20px 40px rgba(0,0,0,0.2);
 }
 
-/* IMAGE ZOOM */
+/* IMAGE */
 .card img {
   width:100%;
   height:200px;
   object-fit:cover;
-  transition:transform 0.5s ease;
+  transition:0.5s;
 }
 
-.card:hover img,
-.card:active img {
-  transform:scale(1.1);
+.card:hover img { transform:scale(1.1); }
+
+/* CONTENT */
+.card-content { padding:25px; }
+
+.card h3 { color:#0a1f44; }
+
+/* ⭐ RATING */
+.stars {
+  display:flex;
+  gap:5px;
+  cursor:pointer;
+  margin:8px 0;
 }
 
-/* CARD CONTENT */
-.card-content { 
-  padding:25px; 
-  background:linear-gradient(to bottom, #ffffff, #f9fbff);
-  transition:0.3s;
+.star {
+  font-size:18px;
+  color:#ccc;
+  transition:0.2s;
 }
 
-.card h3 { 
-  margin-top:0; 
-  font-size:22px;
-  color:#0a1f44;
-  transition:0.3s;
-}
+.star.active { color:#ffaa00; }
 
-/* TITLE HOVER EFFECT */
-.card:hover h3,
-.card:active h3 {
-  color:#ff6600;
+/* REVIEW TEXT */
+.review {
+  font-size:13px;
+  color:#666;
+  margin-bottom:10px;
+  font-style:italic;
 }
 
 /* DESCRIPTION */
 .desc {
   font-size:15px;
   color:#444;
-  line-height:1.6;
-  margin-bottom:18px;
 }
 
 /* BENEFITS */
 .benefits {
-  margin:15px 0 20px 0;
-  padding-left:0;
   list-style:none;
+  padding:0;
 }
 
 .benefits li {
   font-size:14px;
-  margin-bottom:8px;
-  color:#333;
-  padding-left:24px;
+  margin-bottom:6px;
+  padding-left:20px;
   position:relative;
-  transition:0.3s;
 }
 
-/* ICON */
 .benefits li::before {
   content:"✔";
   position:absolute;
   left:0;
   color:#ff6600;
-  font-weight:bold;
-}
-
-/* BENEFIT HOVER */
-.card:hover .benefits li,
-.card:active .benefits li {
-  transform:translateX(5px);
 }
 
 /* BUTTON */
 .btn {
-  display:inline-block;
   padding:12px 22px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
+  background:#ff6600;
   color:white;
   border:none;
-  cursor:pointer;
   border-radius:30px;
-  font-weight:bold;
-  transition:all 0.3s ease;
-  box-shadow:0 5px 15px rgba(255,102,0,0.3);
+  cursor:pointer;
 }
 
-/* BUTTON HOVER */
-.btn:hover {
-  transform:scale(1.08);
-  box-shadow:0 8px 20px rgba(255,102,0,0.5);
+/* 🌍 POPUP */
+.popup {
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:white;
+  padding:12px 18px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  display:none;
+  font-size:14px;
+  z-index:999;
 }
 
-/* BUTTON TAP (MOBILE) */
-.btn:active {
-  transform:scale(0.95);
-}
-
-/* FADE IN */
+/* FADE */
 @keyframes fadeIn {
   from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
+  to {opacity:1;}
 }
 </style>
 </head>
@@ -211,7 +187,7 @@ nav a:hover {
 
 <nav>
   <div class="nav-left">
-    <img src="images/logo.png" class="logo" alt="Logo">
+    <img src="images/logo.png" class="logo">
   </div>
 
   <div>
@@ -230,14 +206,24 @@ nav a:hover {
 
 <div class="grid">
 
+<!-- MAASAI -->
 <div class="card">
 <img src="/images/maasai.jpg">
 <div class="card-content">
+
 <h3>Maasai Mara</h3>
 
-<p class="desc">
-Experience one of Africa’s most iconic wildlife reserves, home to the Great Migration and the Big Five.
-</p>
+<div class="stars" data-card="1">
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+</div>
+
+<div class="review" id="review1">"Amazing safari experience!"</div>
+
+<p class="desc">Experience one of Africa’s most iconic wildlife reserves.</p>
 
 <ul class="benefits">
 <li>Guided game drives</li>
@@ -251,21 +237,31 @@ Experience one of Africa’s most iconic wildlife reserves, home to the Great Mi
 </div>
 </div>
 
+<!-- DUBAI -->
 <div class="card">
 <img src="/images/dubai.jpg">
 <div class="card-content">
+
 <h3>Dubai</h3>
 
-<p class="desc">
-Luxury, innovation, and desert adventure combined into one unforgettable experience.
-</p>
+<div class="stars" data-card="2">
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+</div>
+
+<div class="review" id="review2">"Luxury at its best!"</div>
+
+<p class="desc">Luxury and adventure combined.</p>
 
 <ul class="benefits">
 <li>5-star hotel</li>
 <li>Desert safari</li>
 <li>City tour</li>
-<li>Shopping experience</li>
-<li>Airport transfers</li>
+<li>Shopping</li>
+<li>Transfers</li>
 </ul>
 
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
@@ -275,9 +271,13 @@ Luxury, innovation, and desert adventure combined into one unforgettable experie
 </div>
 </section>
 
+<!-- 🌍 LIVE BOOKINGS -->
+<div class="popup" id="popup"></div>
+
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
+// PAYSTACK
 function payTour(amount){
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
@@ -288,9 +288,48 @@ function payTour(amount){
       alert("✅ Payment successful!");
     }
   });
-
   handler.openIframe();
 }
+
+// ⭐ INTERACTIVE STARS
+document.querySelectorAll(".stars").forEach(starBox=>{
+  const stars = starBox.querySelectorAll(".star");
+  stars.forEach((star, index)=>{
+    star.addEventListener("click", ()=>{
+      stars.forEach((s,i)=>{
+        s.classList.toggle("active", i <= index);
+      });
+    });
+  });
+});
+
+// 💬 ROTATING REVIEWS
+const reviews1 = ["Amazing safari!", "Best trip ever!", "Loved the wildlife!"];
+const reviews2 = ["Luxury experience!", "Dubai is incredible!", "Highly recommend!"];
+
+setInterval(()=>{
+  document.getElementById("review1").innerText =
+    reviews1[Math.floor(Math.random()*reviews1.length)];
+},4000);
+
+setInterval(()=>{
+  document.getElementById("review2").innerText =
+    reviews2[Math.floor(Math.random()*reviews2.length)];
+},5000);
+
+// 🌍 LIVE BOOKINGS
+const names = ["John (UK)","Mary (USA)","Ali (UAE)","James (Canada)"];
+
+function showPopup(){
+  let popup = document.getElementById("popup");
+  let name = names[Math.floor(Math.random()*names.length)];
+  popup.innerText = name + " just booked a trip!";
+  popup.style.display="block";
+
+  setTimeout(()=>popup.style.display="none",4000);
+}
+
+setInterval(showPopup,7000);
 </script>
 
 </body>

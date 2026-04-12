@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+<link rel="icon" type="image/png" href="images/logo.png">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +10,11 @@
 <style>
 body { 
   margin:0; 
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-family:'Segoe UI', sans-serif; 
   background:#f4f7fb; 
 }
 
-/* NAVBAR */
+/* NAV */
 nav {
   background:#0a1f44;
   padding:12px 20px;
@@ -30,7 +29,6 @@ nav a {
   color:white;
   margin:0 12px;
   text-decoration:none;
-  font-weight:600;
 }
 
 /* HERO */
@@ -40,21 +38,12 @@ nav a {
   justify-content:center;
   align-items:center;
   color:white;
-  text-align:center;
-  background:linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+  background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
              url("/images/hero.jpg") center/cover no-repeat;
 }
 
-.hero h1 { font-size:46px; }
-
 /* SECTION */
 .section { padding:50px 40px; text-align:center; }
-
-.section h2{
-  font-size:32px;
-  margin-bottom:30px;
-  color:#0a1f44;
-}
 
 /* GRID */
 .grid {
@@ -71,14 +60,32 @@ nav a {
   box-shadow:0 10px 25px rgba(0,0,0,0.12);
   transition:0.4s;
   position:relative;
+  opacity:0;
+  transform:translateY(40px);
 }
 
+/* ✨ SCROLL SHOW */
+.card.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ✨ GLOW EFFECT */
 .card:hover,
-.card:active {
-  transform:translateY(-10px) scale(1.02);
+.card:active,
+.card.show {
+  box-shadow:0 0 25px rgba(255,102,0,0.5);
+  transform:translateY(-8px) scale(1.02);
 }
 
-/* 🔥 BADGE */
+/* IMAGE */
+.card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+/* BADGE */
 .badge {
   position:absolute;
   top:15px;
@@ -88,93 +95,39 @@ nav a {
   padding:6px 12px;
   font-size:12px;
   border-radius:20px;
-  font-weight:bold;
-  animation:pulse 1.5s infinite;
-}
-
-/* IMAGE */
-.card img {
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  transition:0.5s;
-}
-
-.card:hover img,
-.card:active img {
-  transform:scale(1.1);
 }
 
 /* CONTENT */
 .card-content { padding:25px; }
 
-.card h3 { 
-  margin:0;
-  font-size:22px;
-  color:#0a1f44;
-}
-
-/* ⭐ RATINGS */
+/* RATING */
 .rating {
-  margin:8px 0 12px 0;
   color:#ffaa00;
-  font-size:14px;
-}
-
-.rating span {
-  color:#777;
-  margin-left:6px;
-  font-size:13px;
-}
-
-/* DESCRIPTION */
-.desc {
-  font-size:15px;
-  color:#444;
-  margin-bottom:15px;
-}
-
-/* BENEFITS */
-.benefits {
-  list-style:none;
-  padding:0;
-}
-
-.benefits li {
-  font-size:14px;
-  margin-bottom:6px;
-  padding-left:22px;
-  position:relative;
-}
-
-.benefits li::before {
-  content:"✔";
-  position:absolute;
-  left:0;
-  color:#ff6600;
+  margin:5px 0;
 }
 
 /* BUTTON */
 .btn {
-  margin-top:10px;
   padding:12px 22px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
+  background:#ff6600;
   color:white;
   border:none;
   border-radius:30px;
   cursor:pointer;
-  font-weight:bold;
-  transition:0.3s;
 }
 
-.btn:hover { transform:scale(1.08); }
-.btn:active { transform:scale(0.95); }
-
-/* BADGE ANIMATION */
-@keyframes pulse {
-  0% { transform:scale(1); }
-  50% { transform:scale(1.1); }
-  100% { transform:scale(1); }
+/* 🌍 LIVE POPUP */
+.popup {
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:white;
+  padding:12px 18px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  font-size:14px;
+  display:none;
+  z-index:999;
 }
 </style>
 </head>
@@ -199,70 +152,38 @@ nav a {
 
 <div class="grid">
 
-<!-- MAASAI -->
 <div class="card">
-<div class="badge">🔥 Only 3 slots left</div>
+<div class="badge" id="slots1">🔥 Only 5 slots left</div>
 <img src="/images/maasai.jpg">
 <div class="card-content">
-
 <h3>Maasai Mara</h3>
-
-<div class="rating">
-★★★★★ <span>(124 reviews)</span>
-</div>
-
-<p class="desc">
-Experience one of Africa’s most iconic wildlife reserves.
-</p>
-
-<ul class="benefits">
-<li>Guided game drives</li>
-<li>Luxury accommodation</li>
-<li>Cultural visits</li>
-<li>Meals included</li>
-<li>Transport</li>
-</ul>
-
+<div class="rating">★★★★★ (124 reviews)</div>
+<p>Experience one of Africa’s most iconic reserves.</p>
 <button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
-
 </div>
 </div>
 
-<!-- DUBAI -->
 <div class="card">
-<div class="badge">🔥 Only 5 slots left</div>
+<div class="badge" id="slots2">🔥 Only 7 slots left</div>
 <img src="/images/dubai.jpg">
 <div class="card-content">
-
 <h3>Dubai</h3>
-
-<div class="rating">
-★★★★☆ <span>(89 reviews)</span>
-</div>
-
-<p class="desc">
-Luxury, innovation, and adventure in one package.
-</p>
-
-<ul class="benefits">
-<li>5-star hotel</li>
-<li>Desert safari</li>
-<li>City tour</li>
-<li>Shopping</li>
-<li>Transfers</li>
-</ul>
-
+<div class="rating">★★★★☆ (89 reviews)</div>
+<p>Luxury and adventure combined.</p>
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
-
 </div>
 </div>
 
 </div>
 </section>
 
+<!-- 🌍 LIVE BOOKINGS -->
+<div class="popup" id="popup"></div>
+
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
+// PAYSTACK
 function payTour(amount){
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
@@ -273,9 +194,47 @@ function payTour(amount){
       alert("✅ Payment successful!");
     }
   });
-
   handler.openIframe();
 }
+
+// 🔥 AUTO SLOT REDUCTION
+function reduceSlots(id){
+  let el = document.getElementById(id);
+  let num = parseInt(el.innerText.match(/\d+/));
+  if(num > 1){
+    num--;
+    el.innerText = "🔥 Only " + num + " slots left";
+  }
+}
+setInterval(()=>reduceSlots("slots1"),10000);
+setInterval(()=>reduceSlots("slots2"),12000);
+
+// 🌍 LIVE BOOKINGS POPUP
+const names = ["John (UK)","Mary (USA)","Ali (UAE)","James (Canada)","Lina (Germany)"];
+
+function showPopup(){
+  let popup = document.getElementById("popup");
+  let name = names[Math.floor(Math.random()*names.length)];
+  popup.innerText = name + " just booked a trip!";
+  popup.style.display="block";
+
+  setTimeout(()=>popup.style.display="none",4000);
+}
+setInterval(showPopup,8000);
+
+// ✨ SCROLL ANIMATION
+const cards = document.querySelectorAll(".card");
+
+function reveal(){
+  cards.forEach(card=>{
+    let top = card.getBoundingClientRect().top;
+    if(top < window.innerHeight - 50){
+      card.classList.add("show");
+    }
+  });
+}
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
 </script>
 
 </body>

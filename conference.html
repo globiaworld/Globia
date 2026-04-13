@@ -11,113 +11,160 @@
 
 <style>
 body {
-  margin: 0;
-  font-family: Arial;
-  background: #f4f4f4;
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:#f4f7fb;
 }
 
 /* NAV */
 nav {
-  background: #0a1f44;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px; /* FIXED HEIGHT */
-  box-sizing: border-box;
+  background:#0a1f44;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-/* LEFT SIDE */
-.nav-left {
-  display: flex;
-  align-items: center;
-}
+.logo { height:50px; }
 
-/* LOGO FIX */
-.logo {
-  height: 45px;      /* FIXED SIZE */
-  width: auto;       /* keeps ratio */
-  object-fit: contain;
-}
-
-/* NAV LINKS */
 nav a {
-  color: white;
-  margin: 0 12px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* NAV RIGHT */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color:white;
+  margin:0 12px;
+  text-decoration:none;
+  font-weight:600;
 }
 
 /* HERO */
 .hero {
-  height: 50vh;
-  background: #222;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  text-align: center;
-  padding: 20px;
+  height:50vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  text-align:center;
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+             url("/images/hero.jpg") center/cover no-repeat;
 }
 
 /* SECTION */
 .section {
-  padding: 40px 20px;
-  text-align: center;
+  padding:50px 30px;
+  text-align:center;
 }
 
 /* GRID */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
 }
 
 /* CARD */
 .card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+  transition:0.4s;
+  position:relative;
 }
 
-/* VIDEO */
-video {
-  width: 100%;
-  border-radius: 8px;
+.card:hover {
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 0 25px rgba(255,102,0,0.4);
+}
+
+/* MEDIA (VIDEO OR IMAGE) */
+.media {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+/* BADGE */
+.badge {
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff3b3b;
+  color:white;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* CONTENT */
+.card-content {
+  padding:20px;
+  text-align:left;
+}
+
+.card h3 {
+  margin-top:0;
+  color:#0a1f44;
+}
+
+/* SUMMARY */
+.summary {
+  font-size:14px;
+  color:#555;
+  margin-bottom:10px;
+}
+
+/* BENEFITS */
+.benefits {
+  list-style:none;
+  padding:0;
+  margin-bottom:15px;
+}
+
+.benefits li {
+  padding-left:20px;
+  position:relative;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+.benefits li::before {
+  content:"✔";
+  position:absolute;
+  left:0;
+  color:#ff6600;
+}
+
+/* INPUTS */
+select, input {
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
 
 /* BUTTON */
 .btn {
-  background: #ff6600;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-  width: 100%;
+  width:100%;
+  padding:12px;
+  background:linear-gradient(135deg,#ff7a18,#ff6600);
+  color:white;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
 }
+
+.btn:hover { transform:scale(1.05); }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
-  <div class="nav-left">
-    <img src="images/logo.png" class="logo" alt="Logo">
-  </div>
-
-  <div class="nav-right">
+  <img src="images/logo.png" class="logo">
+  <div>
     <a href="index.html">Home</a>
     <a href="conference.html">Conferences</a>
     <a href="tourism.html">Tourism</a>
@@ -130,45 +177,84 @@ video {
   <p>Connecting Ideas, People & Opportunities</p>
 </section>
 
-<!-- CONTENT -->
+<!-- SECTION -->
 <section class="section">
 <h2>Conference Packages</h2>
 
 <div class="grid">
 
-  <div class="card">
-    <h3>Investor–Producer Conference</h3>
+<!-- CARD 1 -->
+<div class="card">
+<div class="badge">🔥 Limited Offer</div>
 
-    <video controls>
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4">
-    </video>
+<!-- ✅ YOU CAN SWITCH VIDEO TO IMAGE HERE -->
+<video class="media" controls>
+  <source src="https://www.w3schools.com/html/mov_bbb.mp4">
+</video>
 
-    <select id="ticket1">
-      <option value="1000">Regular - KES 1000</option>
-      <option value="2000">VIP - KES 2000</option>
-    </select>
+<!-- 👉 TO USE IMAGE INSTEAD, REPLACE ABOVE WITH:
+<img src="images/conference1.jpg" class="media">
+-->
 
-    <input id="email1" placeholder="Email">
+<div class="card-content">
+<h3>Investor–Producer Conference</h3>
 
-    <button class="btn" onclick="payNow(1)">Pay</button>
-  </div>
+<p class="summary">
+Connect investors with producers and unlock global business opportunities through networking and strategic partnerships.
+</p>
 
-  <div class="card">
-    <h3>Youth Leadership Conference</h3>
+<ul class="benefits">
+<li>Access to top investors</li>
+<li>Business networking sessions</li>
+<li>Expert keynote speakers</li>
+<li>Exclusive VIP lounges</li>
+</ul>
 
-    <video controls>
-      <source src="https://www.w3schools.com/html/movie.mp4">
-    </video>
+<select id="ticket1">
+<option value="1000">Regular - KES 1000</option>
+<option value="2000">VIP - KES 2000</option>
+</select>
 
-    <select id="ticket2">
-      <option value="1000">Regular - KES 1000</option>
-      <option value="2000">VIP - KES 2000</option>
-    </select>
+<input id="email1" placeholder="Enter your email">
 
-    <input id="email2" placeholder="Email">
+<button class="btn" onclick="payNow(1)">Pay Now</button>
+</div>
+</div>
 
-    <button class="btn" onclick="payNow(2)">Pay</button>
-  </div>
+<!-- CARD 2 -->
+<div class="card">
+<div class="badge">🔥 Limited Offer</div>
+
+<video class="media" controls>
+  <source src="https://www.w3schools.com/html/movie.mp4">
+</video>
+
+<!-- 👉 Replace with image if needed -->
+
+<div class="card-content">
+<h3>Youth Leadership Conference</h3>
+
+<p class="summary">
+Empowering the next generation of leaders through mentorship, innovation, and global collaboration.
+</p>
+
+<ul class="benefits">
+<li>Leadership workshops</li>
+<li>Mentorship programs</li>
+<li>Networking opportunities</li>
+<li>Career development sessions</li>
+</ul>
+
+<select id="ticket2">
+<option value="1000">Regular - KES 1000</option>
+<option value="2000">VIP - KES 2000</option>
+</select>
+
+<input id="email2" placeholder="Enter your email">
+
+<button class="btn" onclick="payNow(2)">Pay Now</button>
+</div>
+</div>
 
 </div>
 </section>

@@ -37,7 +37,7 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   color:white;
   text-align:center;
   background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-             url("/images/hero.jpg") center/cover no-repeat;
+             url("images/hero.jpg") center/cover no-repeat;
 }
 
 /* SECTION */
@@ -68,22 +68,41 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   box-shadow:0 0 35px rgba(255,102,0,0.5);
 }
 
-/* 🔥 CINEMATIC IMAGE EFFECT */
+/* 🔥 CINEMATIC ANIMATED IMAGE */
 .media-wrapper {
-  overflow:hidden;
+  position:relative;
   height:220px;
+  overflow:hidden;
 }
 
+/* MAIN IMAGE */
 .media {
   width:100%;
   height:100%;
   object-fit:cover;
-  animation:zoomMove 12s ease-in-out infinite alternate;
+  animation:cinematicMove 10s ease-in-out infinite alternate;
+  transition:0.5s;
 }
 
-@keyframes zoomMove {
+/* CINEMATIC ZOOM + PAN */
+@keyframes cinematicMove {
   0% { transform:scale(1) translate(0,0); }
-  100% { transform:scale(1.15) translate(-10px,-10px); }
+  50% { transform:scale(1.12) translate(-10px, -5px); }
+  100% { transform:scale(1.2) translate(10px, 10px); }
+}
+
+/* SOUND BUTTON */
+.sound-btn {
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border:none;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  cursor:pointer;
 }
 
 /* BADGE */
@@ -104,7 +123,10 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   text-align:left;
 }
 
-.card h3 { color:#0a1f44; }
+.card h3 {
+  margin-top:0;
+  color:#0a1f44;
+}
 
 /* SUMMARY */
 .summary {
@@ -129,7 +151,7 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   color:#ff6600;
 }
 
-/* INPUT */
+/* INPUTS */
 select, input {
   width:100%;
   padding:10px;
@@ -155,13 +177,10 @@ select, input {
   box-shadow:0 0 20px rgba(255,102,0,0.6);
 }
 
-/* ✨ FLOAT ANIMATION */
-.card {
-  animation:fadeUp 1s ease forwards;
-}
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(30px);}
-  to {opacity:1; transform:translateY(0);}
+/* IMAGE → STATIC MODE */
+.static .media {
+  animation:none !important;
+  transform:none !important;
 }
 </style>
 </head>
@@ -187,26 +206,34 @@ select, input {
 
 <div class="grid">
 
-<!-- CARD 1 -->
-<div class="card">
+<!-- ================= CARD 1 ================= -->
+<div class="card" id="card1">
+
 <div class="badge">🔥 Limited Offer</div>
 
 <div class="media-wrapper">
-<img src="images/conference1.jpg" class="media">
+  <img src="images/conference1.jpg" class="media">
+  
+  <!-- SOUND (OPTIONAL) -->
+  <audio id="sound1" loop>
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3">
+  </audio>
+
+  <button class="sound-btn" onclick="toggleSound(1)">🔊 Sound</button>
 </div>
 
 <div class="card-content">
 <h3>Investor–Producer Conference</h3>
 
 <p class="summary">
-Meet global investors and producers in a high-impact networking environment designed to unlock real business opportunities.
+Global investors meet producers to unlock high-value business opportunities.
 </p>
 
 <ul class="benefits">
-<li>Global investor access</li>
-<li>Live networking sessions</li>
-<li>Expert keynote speakers</li>
-<li>VIP lounge access</li>
+<li>Investor networking</li>
+<li>Business matchmaking</li>
+<li>Global exposure</li>
+<li>VIP sessions</li>
 </ul>
 
 <select id="ticket1">
@@ -214,32 +241,44 @@ Meet global investors and producers in a high-impact networking environment desi
 <option value="2000">VIP - KES 2000</option>
 </select>
 
-<input id="email1" placeholder="Enter your email">
+<input id="email1" placeholder="Enter email">
 
 <button class="btn" onclick="payNow(1)">Pay Now</button>
+
+<!-- SWITCH BUTTON -->
+<button class="btn" style="margin-top:10px;background:#333" onclick="toggleMode('card1')">
+Switch Static / Animated
+</button>
 </div>
 </div>
 
-<!-- CARD 2 -->
-<div class="card">
+<!-- ================= CARD 2 ================= -->
+<div class="card" id="card2">
+
 <div class="badge">🔥 Limited Offer</div>
 
 <div class="media-wrapper">
-<img src="images/conference2.jpg" class="media">
+  <img src="images/conference2.jpg" class="media">
+
+  <audio id="sound2" loop>
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3">
+  </audio>
+
+  <button class="sound-btn" onclick="toggleSound(2)">🔊 Sound</button>
 </div>
 
 <div class="card-content">
 <h3>Youth Leadership Conference</h3>
 
 <p class="summary">
-Empowering youth through leadership, mentorship, and global collaboration experiences.
+Empowering youth through leadership, mentorship, and innovation.
 </p>
 
 <ul class="benefits">
 <li>Leadership training</li>
 <li>Mentorship programs</li>
-<li>Networking opportunities</li>
-<li>Career growth sessions</li>
+<li>Networking events</li>
+<li>Career growth</li>
 </ul>
 
 <select id="ticket2">
@@ -247,9 +286,13 @@ Empowering youth through leadership, mentorship, and global collaboration experi
 <option value="2000">VIP - KES 2000</option>
 </select>
 
-<input id="email2" placeholder="Enter your email">
+<input id="email2" placeholder="Enter email">
 
 <button class="btn" onclick="payNow(2)">Pay Now</button>
+
+<button class="btn" style="margin-top:10px;background:#333" onclick="toggleMode('card2')">
+Switch Static / Animated
+</button>
 </div>
 </div>
 
@@ -259,23 +302,39 @@ Empowering youth through leadership, mentorship, and global collaboration experi
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
-function payNow(type){
 
-  let email = document.getElementById(type===1 ? "email1" : "email2").value;
-  let amount = document.getElementById(type===1 ? "ticket1" : "ticket2").value;
+/* PAYMENT */
+function payNow(type){
+  let email = document.getElementById(type===1?"email1":"email2").value;
+  let amount = document.getElementById(type===1?"ticket1":"ticket2").value;
 
   let handler = PaystackPop.setup({
-    key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
-    email: email,
-    amount: amount * 100,
-    currency: "KES",
-    callback: function(){
-      alert("Payment successful");
-    }
+    key:"pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
+    email:email,
+    amount:amount*100,
+    currency:"KES",
+    callback:()=>alert("Payment successful")
   });
 
   handler.openIframe();
 }
+
+/* SOUND TOGGLE */
+function toggleSound(id){
+  let audio = document.getElementById("sound"+id);
+  if(audio.paused){
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+
+/* SWITCH STATIC / ANIMATION MODE */
+function toggleMode(cardId){
+  let card = document.getElementById(cardId);
+  card.classList.toggle("static");
+}
+
 </script>
 
 </body>

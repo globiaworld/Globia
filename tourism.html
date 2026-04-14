@@ -7,62 +7,45 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GlobiaWorld Tourism</title>
+<title>Globiaworld Tourism</title>
 
 <style>
 body {
   margin:0;
   font-family:'Segoe UI', sans-serif;
   background:#f4f7fb;
-  color:#1b1b1b;
 }
 
 /* NAV */
 nav {
-  background:#081a3a;
-  padding:14px 25px;
+  background:#0a1f44;
+  padding:12px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
-.logo { height:55px; }
-nav a {
-  color:white;
-  margin:0 14px;
-  text-decoration:none;
-  font-weight:500;
-  opacity:0.9;
-}
-nav a:hover { opacity:1; }
+.logo { height:60px; }
+nav a { color:white; margin:0 12px; text-decoration:none; }
 
 /* HERO */
 .hero {
   height:65vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
   color:white;
-  background:
-    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)),
-    url("/images/hero.jpg") center/cover no-repeat;
+  text-align:center;
+  background:url("/images/hero.jpg") center/cover no-repeat;
 }
-.hero h1 { font-size:52px; letter-spacing:1px; }
+.hero h1 { font-size:48px; }
 .hero p { font-size:18px; opacity:0.9; }
 
 /* SECTION */
-.section {
-  padding:60px 40px;
-  text-align:center;
-}
-.section h2 {
-  font-size:32px;
-  margin-bottom:10px;
-}
-.section p.sub {
-  color:#666;
-  margin-bottom:40px;
-}
+.section { padding:50px 40px; text-align:center; }
 
 /* GRID */
 .grid {
@@ -74,106 +57,62 @@ nav a:hover { opacity:1; }
 /* CARD */
 .card {
   background:white;
-  border-radius:20px;
+  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  position:relative;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
   transition:0.4s;
   opacity:0;
   transform:translateY(40px);
+  position:relative;
 }
 .card.show { opacity:1; transform:translateY(0); }
 
 .card:hover {
   transform:translateY(-10px) scale(1.02);
-  box-shadow:0 0 35px rgba(255,102,0,0.25);
-}
-
-.card img {
-  width:100%;
-  height:220px;
-  object-fit:cover;
 }
 
 /* BADGES */
 .badge {
   position:absolute;
-  top:12px;
-  left:12px;
+  top:10px;
+  left:10px;
   background:#ff3b3b;
   color:white;
-  padding:6px 12px;
+  padding:6px 10px;
   border-radius:20px;
   font-size:12px;
-  font-weight:bold;
 }
-.offer {
-  top:42px;
-  background:#ff7a00;
-}
+.offer { top:40px; background:#ff6600; }
 
 /* CONTENT */
-.card-content {
-  padding:22px;
-  text-align:left;
-}
-h3 {
-  color:#0a1f44;
-  margin-bottom:5px;
+.card-content { padding:20px; }
+h3 { color:#0a1f44; }
+
+/* BENEFITS */
+ul { list-style:none; padding:0; }
+li::before { content:"✔ "; color:#ff6600; }
+
+/* BUTTONS */
+.btn {
+  padding:10px 18px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+  margin:5px;
 }
 
-/* STARS */
-.stars { color:#ffb400; margin:6px 0; }
+.primary { background:linear-gradient(135deg,#ff7a18,#ff6600); color:white; }
+.whatsapp { background:#25D366; color:white; }
 
 /* REVIEW */
-.review-box {
+.review {
   background:#f1f6ff;
   padding:10px;
   border-radius:10px;
   font-size:13px;
   margin:10px 0;
-  color:#444;
 }
-
-/* PACKAGE BOX (PSYCHOLOGY BOOST) */
-.packages {
-  background:#fafafa;
-  border-radius:12px;
-  padding:10px;
-  margin:12px 0;
-  font-size:13px;
-}
-.packages b { color:#0a1f44; }
-.packages span { display:block; margin:4px 0; }
-
-/* BUTTON */
-.btn {
-  width:100%;
-  padding:14px;
-  background:linear-gradient(135deg,#ff7a18,#ff5a00);
-  color:white;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-top:10px;
-  transition:0.3s;
-}
-.btn:hover {
-  transform:scale(1.04);
-  box-shadow:0 10px 20px rgba(255,90,0,0.3);
-}
-
-/* CONTACT */
-.contact {
-  background:#081a3a;
-  color:white;
-  padding:50px 20px;
-  text-align:center;
-  margin-top:60px;
-}
-.contact h2 { margin-bottom:10px; }
-.contact p { opacity:0.9; }
 
 /* POPUP */
 .popup {
@@ -183,9 +122,26 @@ h3 {
   background:white;
   padding:12px;
   border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
   display:none;
-  font-size:13px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* CONTACT */
+.contact {
+  background:#0a1f44;
+  color:white;
+  padding:40px;
+  text-align:center;
+  margin-top:40px;
+}
+
+/* CURRENCY */
+.currency {
+  margin:20px;
+}
+select {
+  padding:8px;
+  border-radius:8px;
 }
 </style>
 </head>
@@ -195,76 +151,88 @@ h3 {
 <nav>
   <img src="images/logo.png" class="logo">
   <div>
-    <a href="index.html">Home</a>
-    <a href="conference.html">Conferences</a>
-    <a href="tourism.html">Tourism</a>
+    <a href="#">Home</a>
+    <a href="#tour">Tourism</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <div class="hero">
-  <div>
-    <h1>Explore the World with GlobiaWorld</h1>
-    <p>Luxury. Experience. Transformation. Travel beyond limits.</p>
-  </div>
+  <h1>Premium Travel Experiences</h1>
+  <p>Book exclusive global tours with Globiaworld</p>
 </div>
 
-<section class="section">
-<h2>Curated Travel Experiences</h2>
-<p class="sub">Choose your experience level — from essential trips to luxury journeys</p>
+<!-- CURRENCY SWITCH -->
+<div class="currency">
+  🌍 Currency:
+  <select id="currency" onchange="convertPrices()">
+    <option value="KES">KES</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+  </select>
+</div>
+
+<section class="section" id="tour">
+<h2>Top Destinations</h2>
 
 <div class="grid">
 
 <!-- ================= MAASAI MARA ================= -->
-<div class="card" id="card1">
-
-<div class="badge">🔥 High Demand</div>
-<div class="badge offer" id="slot1">6 Slots Left</div>
-
-<img src="/images/maasai.jpg">
-
+<div class="card">
+<div class="badge">🔥 6 Slots Left</div>
+<img src="/images/maasai.jpg" width="100%">
 <div class="card-content">
+
 <h3>Maasai Mara Safari</h3>
-<div class="stars">★★★★★</div>
 
-<div class="review-box" id="review1">
-"Sarah (UK): Life-changing safari experience!"
-</div>
+<div class="review" id="review1">“Sarah (UK): Life changing safari!”</div>
 
-<div class="packages">
-<b>Choose Your Package:</b>
-<span>🟢 Basic – Game drive only</span>
-<span>🔵 Standard – Game drive + meals + guide</span>
-<span>🟣 VIP – Luxury camp + private safari + Maasai village tour</span>
-</div>
+<ul>
+<li>Luxury safari camp</li>
+<li>Game drives</li>
+<li>Meals included</li>
+</ul>
 
-<button class="btn" onclick="payTour(5000)">Book From KES 5,000</button>
+<!-- PACKAGES -->
+<button class="btn primary" onclick="book('Maasai Basic',500)">Basic</button>
+<button class="btn primary" onclick="book('Maasai Premium',1200)">Premium</button>
+<button class="btn primary" onclick="book('Maasai VIP',2500)">VIP</button>
+
+<br>
+
+<button class="btn whatsapp" onclick="whatsapp('Maasai Mara')">
+💬 WhatsApp Book
+</button>
+
 </div>
 </div>
 
 <!-- ================= DUBAI ================= -->
-<div class="card" id="card2">
-
-<div class="badge">🔥 Luxury Hotspot</div>
-<div class="badge offer" id="slot2">8 Slots Left</div>
-
-<img src="/images/dubai.jpg">
-
+<div class="card">
+<div class="badge">🔥 Trending</div>
+<img src="/images/dubai.jpg" width="100%">
 <div class="card-content">
-<h3>Dubai Experience</h3>
-<div class="stars">★★★★☆</div>
 
-<div class="review-box" id="review2">
-"Ahmed (UAE): Pure luxury from start to finish!"
-</div>
+<h3>Dubai Luxury Tour</h3>
 
-<div class="packages">
-<b>Choose Your Package:</b>
-<span>🟢 Basic – City tour only</span>
-<span>🔵 Standard – Hotel + desert safari + meals</span>
-<span>🟣 VIP – 5-star hotel + private chauffeur + luxury experiences</span>
-</div>
+<div class="review" id="review2">“Ahmed: Pure luxury experience!”</div>
 
-<button class="btn" onclick="payTour(10000)">Book From KES 10,000</button>
+<ul>
+<li>5-star hotel</li>
+<li>City tour</li>
+<li>Desert safari</li>
+</ul>
+
+<button class="btn primary" onclick="book('Dubai Basic',800)">Basic</button>
+<button class="btn primary" onclick="book('Dubai Premium',2000)">Premium</button>
+<button class="btn primary" onclick="book('Dubai VIP',4500)">VIP</button>
+
+<br>
+
+<button class="btn whatsapp" onclick="whatsapp('Dubai')">
+💬 WhatsApp Book
+</button>
+
 </div>
 </div>
 
@@ -272,103 +240,87 @@ h3 {
 </section>
 
 <!-- CONTACT -->
-<div class="contact">
+<div class="contact" id="contact">
 <h2>Contact Us</h2>
-<p>We respond within 24 hours</p>
-<p><b>globiaworld@gmail.com</b></p>
+<p>Email: <b>globiaworld@gmail.com</b></p>
+<p>We respond within 24 hours for bookings & partnerships</p>
 </div>
 
 <!-- POPUP -->
 <div class="popup" id="popup"></div>
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
-
 <script>
 
-/* PAYSTACK */
-function payTour(amount){
+/* ================= WHATSAPP ================= */
+function whatsapp(destination){
+  window.open(
+    `https://wa.me/254700000000?text=I want to book ${destination} tour`,
+    "_blank"
+  );
+}
+
+/* ================= BOOKING + INVOICE ================= */
+function book(name,price){
+  alert("Booking confirmed for " + name);
+
+  // fake invoice generation
+  let invoice = `
+  GLOBIAWORLD INVOICE
+  -------------------
+  Package: ${name}
+  Amount: $${price}
+  Status: PENDING PAYMENT
+  `;
+  console.log(invoice);
+
+  pay(price);
+}
+
+/* ================= PAYMENT ================= */
+function pay(amount){
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
     email: "customer@email.com",
     amount: amount * 100,
-    currency: "KES",
-    callback: ()=> alert("✅ Booking Successful! Welcome to GlobiaWorld")
+    currency: "USD",
+    callback: ()=> alert("Payment Successful 🎉 Invoice Sent")
   });
   handler.openIframe();
 }
 
-/* REVIEWS */
-const maasaiReviews = [
-"Sarah (UK): Life-changing safari!",
-"David (USA): Unreal wildlife experience!",
-"Linda (Germany): Absolutely magical!",
-"James (Canada): Worth every cent!",
-"Anna (Italy): Nature at its best!"
-];
-
-const dubaiReviews = [
-"Ahmed (UAE): Ultimate luxury experience!",
-"John (UK): Dubai is breathtaking!",
-"Maria (Spain): First-class service!",
-"Lucas (France): Exceptional travel!",
-"Emily (USA): I will return!"
-];
-
-let m=0,d=0;
-
-setInterval(()=>{
-  m=(m+1)%maasaiReviews.length;
-  d=(d+1)%dubaiReviews.length;
-
-  document.getElementById("review1").innerText = maasaiReviews[m];
-  document.getElementById("review2").innerText = dubaiReviews[d];
-},6000);
-
-/* SLOT PSYCHOLOGY */
-function reduce(id, key){
-  let el=document.getElementById(id);
-  let num=parseInt(el.innerText);
-
-  if(num>1){
-    num--;
-    let text=num+" Slots Left";
-    el.innerText=text;
-    localStorage.setItem(key,text);
-  }
-}
-
-if(localStorage.getItem("slot1")) document.getElementById("slot1").innerText=localStorage.getItem("slot1");
-if(localStorage.getItem("slot2")) document.getElementById("slot2").innerText=localStorage.getItem("slot2");
-
-setInterval(()=>reduce("slot1","slot1"),20000);
-setInterval(()=>reduce("slot2","slot2"),25000);
-
-/* LIVE BOOKINGS */
-const names=["John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)","David (Canada)","Sophia (Germany)"];
+/* ================= LIVE SOCIAL FEED ================= */
+const names = ["John","Sarah","Ali","Maria","David","Sophia"];
 
 function popup(){
-  let p=document.getElementById("popup");
-  let name=names[Math.floor(Math.random()*names.length)];
-  p.innerText=name+" just booked a trip!";
+  let p = document.getElementById("popup");
+  let name = names[Math.floor(Math.random()*names.length)];
+  p.innerText = name + " just booked a trip!";
   p.style.display="block";
   setTimeout(()=>p.style.display="none",4000);
-  setTimeout(popup,Math.random()*12000+8000);
+
+  setTimeout(popup, Math.random()*10000 + 5000);
 }
-setTimeout(popup,4000);
+setTimeout(popup,3000);
 
-/* SCROLL ANIMATION */
-const cards=document.querySelectorAll(".card");
-
-function reveal(){
-  cards.forEach(c=>{
-    if(c.getBoundingClientRect().top<window.innerHeight-80){
-      c.classList.add("show");
-    }
-  });
+/* ================= AI RECOMMENDATION ================= */
+function aiSuggest(){
+  let hour = new Date().getHours();
+  if(hour < 12){
+    console.log("AI Suggest: Safari tours (morning energy)");
+  } else {
+    console.log("AI Suggest: Luxury city tours (evening vibe)");
+  }
 }
+aiSuggest();
 
-window.addEventListener("scroll",reveal);
-window.addEventListener("load",reveal);
+/* ================= REVIEWS ROTATION ================= */
+setInterval(()=>{
+  document.getElementById("review1").innerText =
+  "Sarah (UK): Unforgettable safari experience!";
+
+  document.getElementById("review2").innerText =
+  "Ahmed (UAE): Dubai was beyond expectations!";
+},6000);
 
 </script>
 

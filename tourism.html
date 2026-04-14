@@ -7,209 +7,195 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Globiaworld Tourism</title>
+<title>GlobiaWorld | Tourism Experiences</title>
 
 <style>
+
+/* ================= GLOBAL ================= */
 body {
   margin:0;
   font-family:'Segoe UI', sans-serif;
   background:#f4f7fb;
-  color:#222;
+  color:#1c1c1c;
 }
 
-/* NAV */
+/* ================= NAV ================= */
 nav {
-  background:#0a1f44;
-  padding:14px 25px;
+  background:#071a3a;
+  padding:14px 22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  box-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
-.logo { height:60px; }
-nav a { color:white; margin:0 12px; text-decoration:none; font-weight:500; opacity:0.9; }
+.logo { height:55px; }
+nav a {
+  color:white;
+  margin:0 12px;
+  text-decoration:none;
+  font-weight:500;
+  opacity:0.9;
+}
 nav a:hover { opacity:1; }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero {
-  height:70vh;
+  height:65vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
   color:white;
+  text-align:center;
   background:
-  linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.35)),
-  url("/images/hero.jpg") center/cover no-repeat;
+    linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0)),
+    url("/images/hero.jpg") center/cover no-repeat;
   padding:20px;
 }
 
 .hero h1 {
   font-size:52px;
   margin:0;
+  letter-spacing:1px;
 }
 
 .hero p {
   font-size:18px;
   max-width:600px;
-  margin-top:10px;
   opacity:0.9;
+  margin-top:10px;
 }
 
-.hero button {
-  margin-top:20px;
-  padding:14px 28px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* SECTION */
+/* ================= SECTION ================= */
 .section {
   padding:60px 40px;
   text-align:center;
 }
 
 .section h2 {
-  font-size:32px;
+  font-size:30px;
+  margin-bottom:30px;
   color:#0a1f44;
 }
 
-/* GRID */
+/* ================= GRID ================= */
 .grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:30px;
-  margin-top:30px;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 .card {
   background:white;
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+  box-shadow:0 10px 25px rgba(0,0,0,0.10);
   position:relative;
   transition:0.4s;
   opacity:0;
   transform:translateY(40px);
 }
 
-.card.show { opacity:1; transform:translateY(0); }
+.card.show {
+  opacity:1;
+  transform:translateY(0);
+}
 
 .card:hover {
   transform:translateY(-10px) scale(1.02);
-  box-shadow:0 0 30px rgba(255,102,0,0.25);
+  box-shadow:0 15px 35px rgba(0,0,0,0.18);
 }
 
 .card img {
   width:100%;
-  height:200px;
+  height:210px;
   object-fit:cover;
 }
 
-/* BADGES */
+/* ================= BADGES ================= */
 .badge {
   position:absolute;
-  top:10px;
-  left:10px;
+  top:12px;
+  left:12px;
   background:#ff3b3b;
   color:white;
   padding:6px 10px;
   border-radius:20px;
   font-size:12px;
-  font-weight:bold;
 }
 
 .offer {
-  top:40px;
-  background:#ff6600;
+  top:42px;
+  background:#ff7a18;
 }
 
-/* CONTENT */
-.card-content { padding:25px; }
+/* ================= CONTENT ================= */
+.card-content {
+  padding:22px;
+  text-align:left;
+}
 
-h3 { color:#0a1f44; margin-bottom:5px; }
+h3 {
+  color:#0a1f44;
+  margin-bottom:6px;
+}
 
-/* STARS */
-.stars { color:#ffaa00; margin:5px 0; }
+.stars {
+  color:#ffaa00;
+  margin:5px 0;
+}
 
-/* REVIEW */
+/* ================= SOCIAL PROOF ================= */
 .review-box {
-  background:#f7f9ff;
+  background:#f0f6ff;
   padding:10px;
   border-radius:10px;
   font-size:13px;
   color:#444;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  border-left:4px solid #ff7a18;
 }
 
-/* BENEFITS */
+/* ================= BENEFITS ================= */
 .benefits {
   list-style:none;
   padding:0;
-  text-align:left;
+  margin:10px 0;
 }
 
 .benefits li {
   padding-left:20px;
-  margin-bottom:6px;
   position:relative;
+  margin-bottom:6px;
 }
 
 .benefits li::before {
   content:"✔";
   position:absolute;
   left:0;
-  color:#ff6600;
+  color:#ff7a18;
 }
 
-/* BUTTON */
+/* ================= BUTTON ================= */
 .btn {
   width:100%;
-  padding:14px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
+  padding:12px;
+  background:linear-gradient(135deg,#ff7a18,#ff3b3b);
   color:white;
   border:none;
   border-radius:30px;
   cursor:pointer;
   font-weight:bold;
   margin-top:10px;
+  transition:0.3s;
 }
 
-.btn:hover { transform:scale(1.03); }
-
-/* TRUST BAR */
-.trust {
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-  margin-top:20px;
-  font-size:14px;
-  opacity:0.8;
+.btn:hover {
+  transform:scale(1.05);
 }
 
-/* CONTACT */
-.contact {
-  background:#0a1f44;
-  color:white;
-  text-align:center;
-  padding:50px 20px;
-}
-
-.contact h2 {
-  margin-bottom:10px;
-}
-
-.contact p {
-  opacity:0.9;
-}
-
-/* POPUP */
+/* ================= LIVE POPUP ================= */
 .popup {
   position:fixed;
   bottom:20px;
@@ -221,11 +207,68 @@ h3 { color:#0a1f44; margin-bottom:5px; }
   display:none;
   font-size:14px;
 }
+
+/* ================= CONTACT SECTION (NEW HIGH-CONVERSION AREA) ================= */
+.contact {
+  background:#0a1f44;
+  color:white;
+  padding:70px 30px;
+  text-align:center;
+}
+
+.contact h2 {
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.contact p {
+  opacity:0.9;
+  margin-bottom:25px;
+}
+
+.contact-box {
+  max-width:500px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  color:#1c1c1c;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+.contact-box input,
+.contact-box textarea {
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+  outline:none;
+}
+
+.contact-box button {
+  width:100%;
+  padding:12px;
+  border:none;
+  background:linear-gradient(135deg,#ff7a18,#ff3b3b);
+  color:white;
+  font-weight:bold;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.contact-email {
+  margin-top:15px;
+  font-weight:bold;
+  color:#ff7a18;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <nav>
   <img src="images/logo.png" class="logo">
   <div>
@@ -235,18 +278,13 @@ h3 { color:#0a1f44; margin-bottom:5px; }
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <h1>Travel Beyond Limits</h1>
-  <p>Premium curated experiences across the world — crafted for comfort, adventure, and unforgettable memories.</p>
-  <button>Explore Packages</button>
-
-  <div class="trust">
-    <span>✔ Trusted Global Tours</span>
-    <span>✔ Secure Payments</span>
-    <span>✔ 24/7 Support</span>
-  </div>
+  <h1>Experience the World Differently</h1>
+  <p>Premium tourism experiences designed for comfort, adventure, and unforgettable memories.</p>
 </div>
 
+<!-- DESTINATIONS -->
 <section class="section">
 <h2>Top Destinations</h2>
 
@@ -254,7 +292,7 @@ h3 { color:#0a1f44; margin-bottom:5px; }
 
 <!-- MAASAI MARA -->
 <div class="card" id="card1">
-<div class="badge">🔥 Hot Deal</div>
+<div class="badge">🔥 Trending</div>
 <div class="badge offer" id="slot1">6 Slots Left</div>
 
 <img src="/images/maasai.jpg">
@@ -264,29 +302,29 @@ h3 { color:#0a1f44; margin-bottom:5px; }
 <div class="stars">★★★★★</div>
 
 <div class="review-box" id="review1">
-"Sarah (UK): Best safari experience ever!"
+"Sarah (UK): Life-changing safari experience!"
 </div>
 
 <ul class="benefits">
+<li>Game drives with guides</li>
 <li>Luxury safari camps</li>
-<li>Wildlife game drives</li>
 <li>Maasai cultural tour</li>
 <li>Full meals included</li>
 </ul>
 
-<button class="btn" onclick="payTour(5000)">Book Experience - KES 5000</button>
+<button class="btn" onclick="payTour(5000)">Book Now - KES 5000</button>
 </div>
 </div>
 
 <!-- DUBAI -->
 <div class="card" id="card2">
-<div class="badge">🔥 Premium Deal</div>
+<div class="badge">💎 Premium</div>
 <div class="badge offer" id="slot2">8 Slots Left</div>
 
 <img src="/images/dubai.jpg">
 
 <div class="card-content">
-<h3>Dubai Luxury Tour</h3>
+<h3>Dubai Experience</h3>
 <div class="stars">★★★★☆</div>
 
 <div class="review-box" id="review2">
@@ -296,23 +334,33 @@ h3 { color:#0a1f44; margin-bottom:5px; }
 <ul class="benefits">
 <li>5-star hotel stay</li>
 <li>Desert safari adventure</li>
-<li>City skyline tour</li>
-<li>Shopping experience</li>
+<li>City sightseeing tour</li>
+<li>Shopping & entertainment</li>
 </ul>
 
-<button class="btn" onclick="payTour(10000)">Book Premium Trip - KES 10000</button>
+<button class="btn" onclick="payTour(10000)">Book Now - KES 10000</button>
 </div>
 </div>
 
 </div>
 </section>
 
-<!-- CONTACT -->
-<div class="contact">
-  <h2>Contact Us</h2>
-  <p>We’re here to help you plan your perfect journey</p>
-  <p><strong>globiaworld@gmail.com</strong></p>
-</div>
+<!-- CONTACT SECTION (NEW) -->
+<section class="contact">
+  <h2>Contact GlobiaWorld</h2>
+  <p>We respond within 24 hours. Let’s plan your next journey.</p>
+
+  <div class="contact-box">
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea rows="4" placeholder="Your Message"></textarea>
+    <button>Send Message</button>
+
+    <div class="contact-email">
+      📩 globiaworld@gmail.com
+    </div>
+  </div>
+</section>
 
 <!-- POPUP -->
 <div class="popup" id="popup"></div>
@@ -321,13 +369,14 @@ h3 { color:#0a1f44; margin-bottom:5px; }
 
 <script>
 
+/* PAYMENT */
 function payTour(amount){
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
     email: "customer@email.com",
     amount: amount * 100,
     currency: "KES",
-    callback: ()=> alert("✅ Payment successful!")
+    callback: ()=> alert("✅ Booking successful!")
   });
   handler.openIframe();
 }
@@ -341,8 +390,8 @@ const maasaiReviews = [
 
 const dubaiReviews = [
 "Ahmed (UAE): Pure luxury!",
-"John (UK): Amazing city tour!",
-"Maria (Spain): Stunning experience!"
+"John (UK): Amazing experience!",
+"Maria (Spain): Stunning city!"
 ];
 
 let mIndex = 0;
@@ -356,30 +405,21 @@ setInterval(()=>{
   document.getElementById("review2").innerText = dubaiReviews[dIndex];
 },6000);
 
-/* SLOTS */
-if(localStorage.getItem("slot1")){
-  document.getElementById("slot1").innerText = localStorage.getItem("slot1");
-}
-if(localStorage.getItem("slot2")){
-  document.getElementById("slot2").innerText = localStorage.getItem("slot2");
-}
-
-function reduceSlots(id, key){
+/* SCARCITY */
+function reduceSlots(id){
   let el = document.getElementById(id);
   let num = parseInt(el.innerText);
 
   if(num > 1){
     num--;
-    let text = num + " Slots Left";
-    el.innerText = text;
-    localStorage.setItem(key, text);
+    el.innerText = num + " Slots Left";
   }
 }
 
-setInterval(()=>reduceSlots("slot1","slot1"),20000);
-setInterval(()=>reduceSlots("slot2","slot2"),25000);
+setInterval(()=>reduceSlots("slot1"),20000);
+setInterval(()=>reduceSlots("slot2"),25000);
 
-/* POPUP BOOKINGS */
+/* LIVE FEED */
 const names = ["John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)"];
 
 function popup(){
@@ -387,13 +427,14 @@ function popup(){
   let name = names[Math.floor(Math.random()*names.length)];
   p.innerText = name + " just booked a trip!";
   p.style.display="block";
-  setTimeout(()=>p.style.display="none",4000);
 
+  setTimeout(()=>p.style.display="none",4000);
   setTimeout(popup, Math.random()*12000 + 8000);
 }
+
 setTimeout(popup,5000);
 
-/* SCROLL ANIMATION */
+/* ANIMATION */
 const cards = document.querySelectorAll(".card");
 
 function reveal(){

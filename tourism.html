@@ -1,6 +1,6 @@
 
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
@@ -107,22 +107,20 @@ h3 { color:#0a1f44; }
   margin-bottom:10px;
 }
 
-/* BENEFITS LEVELS */
-.level {
-  background:#f7f9ff;
-  padding:12px;
-  border-radius:12px;
-  margin-bottom:10px;
-  text-align:left;
-  border-left:4px solid #ff6600;
+/* BENEFITS */
+.benefits {
+  list-style:none;
+  padding:0;
 }
-.level h4 {
-  margin:0;
-  color:#0a1f44;
+.benefits li {
+  padding-left:20px;
+  position:relative;
+  margin-bottom:6px;
 }
-.level p {
-  margin:5px 0 0;
-  font-weight:bold;
+.benefits li::before {
+  content:"✔";
+  position:absolute;
+  left:0;
   color:#ff6600;
 }
 
@@ -139,7 +137,7 @@ h3 { color:#0a1f44; }
 }
 .btn:hover { transform:scale(1.05); }
 
-/* POPUP */
+/* LIVE POPUP */
 .popup {
   position:fixed;
   bottom:20px;
@@ -150,19 +148,6 @@ h3 { color:#0a1f44; }
   box-shadow:0 5px 15px rgba(0,0,0,0.2);
   display:none;
   font-size:14px;
-}
-
-/* CONTACT */
-.contact {
-  background:#0a1f44;
-  color:white;
-  padding:40px;
-  margin-top:40px;
-}
-.contact a {
-  color:#ffcc70;
-  text-decoration:none;
-  font-weight:bold;
 }
 </style>
 </head>
@@ -199,23 +184,15 @@ h3 { color:#0a1f44; }
 <div class="stars">★★★★★</div>
 
 <div class="review-box" id="review1">
-"Best safari experience ever!"
+"Sarah (UK): Best safari experience ever!"
 </div>
 
-<div class="level">
-<h4>Basic Package</h4>
-<p>KES 5000</p>
-</div>
-
-<div class="level">
-<h4>Standard Package</h4>
-<p>KES 6500</p>
-</div>
-
-<div class="level">
-<h4>Premium Package</h4>
-<p>KES 8000</p>
-</div>
+<ul class="benefits">
+<li>Game drives</li>
+<li>Luxury camps</li>
+<li>Maasai culture</li>
+<li>Meals included</li>
+</ul>
 
 <button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
 </div>
@@ -235,23 +212,15 @@ h3 { color:#0a1f44; }
 <div class="stars">★★★★☆</div>
 
 <div class="review-box" id="review2">
-"Luxury beyond expectations!"
+"Ahmed (UAE): Luxury beyond expectations!"
 </div>
 
-<div class="level">
-<h4>Basic Package</h4>
-<p>KES 10000</p>
-</div>
-
-<div class="level">
-<h4>Standard Package</h4>
-<p>KES 13000</p>
-</div>
-
-<div class="level">
-<h4>Premium Package</h4>
-<p>KES 16000</p>
-</div>
+<ul class="benefits">
+<li>5-star hotel</li>
+<li>Desert safari</li>
+<li>City tour</li>
+<li>Shopping malls</li>
+</ul>
 
 <button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
 </div>
@@ -260,11 +229,10 @@ h3 { color:#0a1f44; }
 </div>
 </section>
 
-<!-- ================= CONTACT SECTION ================= -->
-<section class="contact section">
+<!-- ================= CONTACT US (ADDED ONLY) ================= -->
+<section class="section" id="contact">
   <h2>Contact Us</h2>
-  <p>For bookings, support or inquiries:</p>
-  <p>Email: <a href="mailto:globiaworld@gmail.com">globiaworld@gmail.com</a></p>
+  <p>globiaworld@gmail.com</p>
 </section>
 
 <!-- POPUP -->
@@ -274,7 +242,7 @@ h3 { color:#0a1f44; }
 
 <script>
 
-/* PAYSTACK (UNCHANGED) */
+/* PAYSTACK */
 function payTour(amount){
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
@@ -286,26 +254,28 @@ function payTour(amount){
   handler.openIframe();
 }
 
-/* REVIEWS */
+/* ================= SEPARATE REVIEW SYSTEMS (NO MIXING) ================= */
+
 const maasaiReviews = [
-"Best safari ever!",
-"Incredible wildlife!",
-"Pure magic!",
-"Life changing!",
-"So beautiful!"
+"Sarah (UK): Best safari ever!",
+"David (USA): Incredible wildlife!",
+"Linda (Germany): Pure magic!",
+"James (Canada): Life changing!",
+"Anna (Italy): So beautiful!"
 ];
 
 const dubaiReviews = [
-"Pure luxury!",
-"Amazing city tour!",
-"Stunning experience!",
-"Top class service!",
-"Loved Dubai!"
+"Ahmed (UAE): Pure luxury!",
+"John (UK): Amazing city tour!",
+"Maria (Spain): Stunning experience!",
+"Lucas (France): Top class service!",
+"Emily (USA): Loved Dubai!"
 ];
 
 let mIndex = 0;
 let dIndex = 0;
 
+/* LIVE REVIEWS (NON-RANDOM, CONTROLLED ROTATION) */
 setInterval(()=>{
   mIndex = (mIndex + 1) % maasaiReviews.length;
   document.getElementById("review1").innerText = maasaiReviews[mIndex];
@@ -314,9 +284,35 @@ setInterval(()=>{
   document.getElementById("review2").innerText = dubaiReviews[dIndex];
 },6000);
 
-/* POPUP */
+/* ================= LOCAL STORAGE (NO RESET ON REFRESH) ================= */
+
+if(localStorage.getItem("slot1")){
+  document.getElementById("slot1").innerText = localStorage.getItem("slot1");
+}
+if(localStorage.getItem("slot2")){
+  document.getElementById("slot2").innerText = localStorage.getItem("slot2");
+}
+
+function reduceSlots(id, key){
+  let el = document.getElementById(id);
+  let num = parseInt(el.innerText);
+
+  if(num > 1){
+    num--;
+    let text = num + " Slots Left";
+    el.innerText = text;
+    localStorage.setItem(key, text);
+  }
+}
+
+setInterval(()=>reduceSlots("slot1","slot1"),20000);
+setInterval(()=>reduceSlots("slot2","slot2"),25000);
+
+/* ================= LIVE BOOKING FEED ================= */
+
 const names = [
-"John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)"
+"John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)",
+"David (Canada)","Sophia (Germany)","James (Australia)"
 ];
 
 function popup(){
@@ -325,11 +321,13 @@ function popup(){
   p.innerText = name + " just booked a trip!";
   p.style.display="block";
   setTimeout(()=>p.style.display="none",4000);
+
   setTimeout(popup, Math.random()*12000 + 8000);
 }
 setTimeout(popup,5000);
 
-/* SCROLL */
+/* ================= SCROLL ANIMATION ================= */
+
 const cards = document.querySelectorAll(".card");
 
 function reveal(){

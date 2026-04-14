@@ -7,7 +7,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Globiaworld Tourism</title>
+<title>Tourism - Globiaworld</title>
 
 <style>
 body {
@@ -23,9 +23,16 @@ nav {
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
 .logo { height:60px; }
 nav a { color:white; margin:0 12px; text-decoration:none; }
+
+.currency {
+  background:white;
+  padding:6px;
+  border-radius:6px;
+}
 
 /* HERO */
 .hero {
@@ -34,14 +41,23 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   justify-content:center;
   align-items:center;
   color:white;
-  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
-  url("/images/hero.jpg") center/cover no-repeat;
+  background:url("/images/hero.jpg") center/cover no-repeat;
+  position:relative;
 }
-.hero h1 { font-size:46px; }
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+}
+.hero h1 { 
+  font-size:46px;
+  position:relative;
+  z-index:2;
+}
 
-/* SECTION */
+/* GRID */
 .section { padding:50px 40px; text-align:center; }
-
 .grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -83,11 +99,28 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   border-radius:20px;
   font-size:12px;
 }
-.offer { top:40px; background:#ff6600; }
+.offer {
+  top:40px;
+  background:#ff6600;
+}
 
 /* CONTENT */
 .card-content { padding:25px; }
 h3 { color:#0a1f44; }
+
+/* STARS */
+.stars { color:#ffaa00; margin:5px 0; }
+
+/* BENEFITS */
+.benefits {
+  list-style:none;
+  padding:0;
+}
+.benefits li::before {
+  content:"✔";
+  color:#ff6600;
+  margin-right:6px;
+}
 
 /* BUTTON */
 .btn {
@@ -100,20 +133,18 @@ h3 { color:#0a1f44; }
   font-weight:bold;
   margin:5px;
 }
-.btn:hover { transform:scale(1.05); }
 
 /* WHATSAPP */
 .whatsapp {
+  position:fixed;
+  bottom:20px;
+  right:20px;
   background:#25D366;
-}
-
-/* REVIEW */
-.review-box {
-  background:#f9fbff;
-  padding:10px;
-  border-radius:10px;
-  font-size:13px;
-  margin-bottom:10px;
+  color:white;
+  padding:15px;
+  border-radius:50%;
+  font-size:20px;
+  text-decoration:none;
 }
 
 /* POPUP */
@@ -122,64 +153,60 @@ h3 { color:#0a1f44; }
   bottom:20px;
   left:20px;
   background:white;
-  padding:12px;
+  padding:10px;
   border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
   display:none;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* AI BOX */
+.ai-box {
+  background:#0a1f44;
+  color:white;
+  padding:20px;
+  margin:20px;
+  border-radius:12px;
 }
 
 /* CONTACT */
 .contact {
   background:#0a1f44;
   color:white;
+  text-align:center;
   padding:40px;
-  margin-top:50px;
-}
-
-/* CURRENCY */
-.currency {
-  position:fixed;
-  top:10px;
-  right:10px;
-  background:white;
-  padding:8px;
-  border-radius:8px;
+  margin-top:40px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- CURRENCY SWITCH -->
-<div class="currency">
-<select id="currency" onchange="changeCurrency()">
-<option value="KES">KES</option>
-<option value="USD">USD</option>
-<option value="EUR">EUR</option>
-</select>
-</div>
-
 <!-- NAV -->
 <nav>
-<img src="images/logo.png" class="logo">
-<div>
-<a href="#">Home</a>
-<a href="#">Tourism</a>
-<a href="#">Contact</a>
-</div>
+  <img src="images/logo.png" class="logo">
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="conference.html">Conferences</a>
+    <a href="tourism.html">Tourism</a>
+  </div>
+
+  <select class="currency" onchange="setCurrency(this.value)">
+    <option value="KES">KES</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+  </select>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-<h1>Explore Luxury Travel Experiences</h1>
+  <h1>Explore Premium Global Tourism</h1>
 </div>
 
 <!-- AI RECOMMENDER -->
-<section class="section">
-<h2>🎯 AI Travel Match</h2>
-<button class="btn" onclick="recommend()">Find My Perfect Trip</button>
-<p id="ai"></p>
-</section>
+<div class="ai-box">
+  🧠 AI Recommendation: <span id="aiText">Loading best trip for you...</span>
+</div>
 
 <!-- DESTINATIONS -->
 <section class="section">
@@ -187,156 +214,151 @@ h3 { color:#0a1f44; }
 
 <div class="grid">
 
-<!-- ================= MAASAI MARA ================= -->
+<!-- MAASAI MARA -->
 <div class="card">
+<div class="badge">🔥 Trending</div>
+<div class="badge offer" id="slot1">6 Slots Left</div>
 
-<div class="badge">🔥 Hot Deal</div>
 <img src="/images/maasai.jpg">
 
 <div class="card-content">
+<h3>Maasai Mara Safari</h3>
+<div class="stars">★★★★★</div>
 
-<h3>Maasai Mara</h3>
-
-<div class="review-box" id="review1">
-"Sarah (UK): Best safari ever!"
-</div>
-
-<p><b>Select Package</b></p>
+<ul class="benefits">
+<li>Game drives</li>
+<li>Luxury camp stay</li>
+<li>Cultural experience</li>
+<li>All meals included</li>
+</ul>
 
 <button class="btn" onclick="book('Maasai Basic',500)">Basic</button>
-<button class="btn" onclick="book('Maasai Standard',1200)">Standard</button>
+<button class="btn" onclick="book('Maasai Pro',1200)">Pro</button>
 <button class="btn" onclick="book('Maasai VIP',2500)">VIP</button>
-
-<button class="btn whatsapp" onclick="whatsapp('Maasai Mara')">WhatsApp Book</button>
-
 </div>
 </div>
 
-<!-- ================= DUBAI ================= -->
+<!-- DUBAI -->
 <div class="card">
-
 <div class="badge">🔥 Luxury</div>
+<div class="badge offer" id="slot2">8 Slots Left</div>
+
 <img src="/images/dubai.jpg">
 
 <div class="card-content">
+<h3>Dubai Experience</h3>
+<div class="stars">★★★★☆</div>
 
-<h3>Dubai</h3>
-
-<div class="review-box" id="review2">
-"Ahmed (UAE): Pure luxury!"
-</div>
-
-<p><b>Select Package</b></p>
+<ul class="benefits">
+<li>5-star hotel</li>
+<li>Desert safari</li>
+<li>City tour</li>
+<li>Luxury shopping</li>
+</ul>
 
 <button class="btn" onclick="book('Dubai Basic',800)">Basic</button>
-<button class="btn" onclick="book('Dubai Standard',2000)">Standard</button>
-<button class="btn" onclick="book('Dubai VIP',5000)">VIP</button>
-
-<button class="btn whatsapp" onclick="whatsapp('Dubai')">WhatsApp Book</button>
-
+<button class="btn" onclick="book('Dubai Pro',1500)">Pro</button>
+<button class="btn" onclick="book('Dubai VIP',3500)">VIP</button>
 </div>
 </div>
 
 </div>
 </section>
 
+<!-- LIVE POPUP -->
+<div class="popup" id="popup"></div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/254700000000" target="_blank">💬</a>
+
 <!-- CONTACT -->
 <div class="contact">
-<h2>Contact Us</h2>
-<p>Email: globiaworld@gmail.com</p>
-<p>We respond within 24 hours 🚀</p>
+  <h2>Contact Us</h2>
+  <p>Email: globiaworld@gmail.com</p>
+  <p>We respond within 1 hour</p>
 </div>
-
-<!-- POPUP -->
-<div class="popup" id="popup"></div>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
 
 /* CURRENCY */
-let rate = 1;
-function changeCurrency(){
-  let c = document.getElementById("currency").value;
-  if(c==="USD") rate = 0.007;
-  else if(c==="EUR") rate = 0.0065;
-  else rate = 1;
+let currency = "KES";
+let rates = { KES:1, USD:0.0078, EUR:0.0072 };
+
+function setCurrency(val){
+  currency = val;
 }
 
-/* BOOKING (PAYSTACK) */
-function book(name,price){
-  let amount = price * rate;
+/* BOOKING + INVOICE */
+function book(name, price){
+  let converted = Math.round(price * rates[currency]);
 
   let handler = PaystackPop.setup({
     key:"pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
     email:"customer@email.com",
-    amount: amount*100,
-    currency:"KES",
-    callback: function(){
-      generateInvoice(name,price);
-      alert("Payment Successful!");
+    amount:converted*100,
+    currency:currency,
+    callback:()=>{
+      generateInvoice(name, converted);
+      alert("✅ Booking Successful!");
     }
   });
+
   handler.openIframe();
 }
 
-/* WHATSAPP */
-function whatsapp(dest){
-  let url = "https://wa.me/254700000000?text=I want to book " + dest + " with Globiaworld";
-  window.open(url,"_blank");
-}
-
-/* AI RECOMMENDER */
-function recommend(){
-  let picks = [
-    "Luxury Dubai VIP package 🔥",
-    "Maasai Mara Safari Adventure 🌍",
-    "Beach Holiday Maldives 🏝️"
-  ];
-  document.getElementById("ai").innerText =
-  "We recommend: " + picks[Math.floor(Math.random()*picks.length)];
-}
-
-/* INVOICE GENERATOR */
-function generateInvoice(name,price){
-  let win = window.open("");
+/* INVOICE */
+function generateInvoice(name, amount){
+  let win = window.open();
   win.document.write(`
     <h1>Globiaworld Invoice</h1>
     <p>Package: ${name}</p>
-    <p>Price: ${price}</p>
+    <p>Total: ${amount} ${currency}</p>
     <p>Status: PAID</p>
   `);
 }
 
-/* LIVE BOOKING FEED */
-const names=["John UK","Sarah USA","Ali UAE","Maria Italy"];
+/* LIVE BOOKINGS */
+const names=["John","Sarah","Ali","Maria","David","Sophia"];
+
 function popup(){
   let p=document.getElementById("popup");
-  let n=names[Math.floor(Math.random()*names.length)];
-  p.innerText=n+" just booked a trip!";
+  p.innerText=names[Math.floor(Math.random()*names.length)]+" just booked!";
   p.style.display="block";
   setTimeout(()=>p.style.display="none",4000);
   setTimeout(popup,8000+Math.random()*5000);
 }
 setTimeout(popup,3000);
 
-/* REVIEWS */
+/* SLOT SCARCITY */
 setInterval(()=>{
-  document.getElementById("review1").innerText="Traveler: Amazing safari experience!";
-  document.getElementById("review2").innerText="Traveler: Luxury beyond imagination!";
-},7000);
+  let el=document.getElementById("slot1");
+  let num=parseInt(el.innerText);
+  if(num>1) el.innerText=(num-1)+" Slots Left";
+},20000);
+
+/* AI SYSTEM */
+function aiRecommend(){
+  let choices=[
+    "Maasai Mara Safari is trending for adventure lovers 🔥",
+    "Dubai VIP is best for luxury travelers ✨",
+    "Early bookings save up to 40% today 💰"
+  ];
+  document.getElementById("aiText").innerText=
+  choices[Math.floor(Math.random()*choices.length)];
+}
+aiRecommend();
 
 /* SCROLL ANIMATION */
 const cards=document.querySelectorAll(".card");
-function reveal(){
+window.addEventListener("scroll",()=>{
   cards.forEach(c=>{
-    if(c.getBoundingClientRect().top<window.innerHeight-80){
+    if(c.getBoundingClientRect().top<window.innerHeight-100){
       c.classList.add("show");
     }
   });
-}
-window.addEventListener("scroll",reveal);
-window.addEventListener("load",reveal);
+});
 
 </script>
 

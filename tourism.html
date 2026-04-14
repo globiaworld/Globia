@@ -1,6 +1,7 @@
 
 
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
@@ -84,10 +85,7 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   border-radius:20px;
   font-size:12px;
 }
-.offer {
-  top:40px;
-  background:#ff6600;
-}
+.offer { top:40px; background:#ff6600; }
 
 /* CONTENT */
 .card-content { padding:25px; }
@@ -96,7 +94,7 @@ h3 { color:#0a1f44; }
 /* STARS */
 .stars { color:#ffaa00; margin:5px 0; }
 
-/* REVIEW BOX */
+/* REVIEW */
 .review-box {
   background:#f9fbff;
   padding:10px;
@@ -107,10 +105,7 @@ h3 { color:#0a1f44; }
 }
 
 /* BENEFITS */
-.benefits {
-  list-style:none;
-  padding:0;
-}
+.benefits { list-style:none; padding:0; }
 .benefits li {
   padding-left:20px;
   position:relative;
@@ -136,7 +131,7 @@ h3 { color:#0a1f44; }
 }
 .btn:hover { transform:scale(1.05); }
 
-/* LIVE POPUP */
+/* POPUP */
 .popup {
   position:fixed;
   bottom:20px;
@@ -147,6 +142,41 @@ h3 { color:#0a1f44; }
   box-shadow:0 5px 15px rgba(0,0,0,0.2);
   display:none;
   font-size:14px;
+}
+
+/* BOOKING MODAL */
+.modal {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.modal-content {
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  width:320px;
+}
+.modal-content input, .modal-content select {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+.close {
+  float:right;
+  cursor:pointer;
+}
+
+/* CONTACT */
+.contact {
+  background:#0a1f44;
+  color:white;
+  padding:40px;
+  text-align:center;
+  margin-top:50px;
 }
 </style>
 </head>
@@ -169,22 +199,18 @@ h3 { color:#0a1f44; }
 
 <div class="grid">
 
-<!-- ================= MAASAI MARA ================= -->
+<!-- MAASAI MARA -->
 <div class="card" id="card1">
-
 <div class="badge">🔥 Limited Offer</div>
-<div class="badge offer" id="slot1">6 Slots Left</div>
+<div class="badge offer">6 Slots Left</div>
 
 <img src="/images/maasai.jpg">
 
 <div class="card-content">
 <h3>Maasai Mara</h3>
-
 <div class="stars">★★★★★</div>
 
-<div class="review-box" id="review1">
-"Sarah (UK): Best safari experience ever!"
-</div>
+<div class="review-box">Best safari experience ever!</div>
 
 <ul class="benefits">
 <li>Game drives</li>
@@ -193,26 +219,22 @@ h3 { color:#0a1f44; }
 <li>Meals included</li>
 </ul>
 
-<button class="btn" onclick="payTour(5000)">Book - KES 5000</button>
+<button class="btn" onclick="openBooking('Maasai Mara',5000)">Book Now</button>
 </div>
 </div>
 
-<!-- ================= DUBAI ================= -->
+<!-- DUBAI -->
 <div class="card" id="card2">
-
 <div class="badge">🔥 Limited Offer</div>
-<div class="badge offer" id="slot2">8 Slots Left</div>
+<div class="badge offer">8 Slots Left</div>
 
 <img src="/images/dubai.jpg">
 
 <div class="card-content">
 <h3>Dubai</h3>
-
 <div class="stars">★★★★☆</div>
 
-<div class="review-box" id="review2">
-"Ahmed (UAE): Luxury beyond expectations!"
-</div>
+<div class="review-box">Luxury beyond expectations!</div>
 
 <ul class="benefits">
 <li>5-star hotel</li>
@@ -221,12 +243,41 @@ h3 { color:#0a1f44; }
 <li>Shopping malls</li>
 </ul>
 
-<button class="btn" onclick="payTour(10000)">Book - KES 10000</button>
+<button class="btn" onclick="openBooking('Dubai',10000)">Book Now</button>
 </div>
 </div>
 
 </div>
 </section>
+
+<!-- BOOKING MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+
+    <h3 id="tourName">Book Tour</h3>
+
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <select id="level" onchange="updatePrice()">
+      <option value="regular">Regular (1x price)</option>
+      <option value="vip">VIP (1.5x price + Luxury perks)</option>
+      <option value="economy">Economy (0.8x price)</option>
+    </select>
+
+    <div id="benefitsBox"></div>
+
+    <p><b>Total: KES <span id="price"></span></b></p>
+
+    <button class="btn" onclick="confirmPay()">Proceed to Pay</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+  <h2>Contact Us</h2>
+  <p>Email: globiaworld@gmail.com</p>
+</div>
 
 <!-- POPUP -->
 <div class="popup" id="popup"></div>
@@ -235,78 +286,70 @@ h3 { color:#0a1f44; }
 
 <script>
 
-/* PAYSTACK */
-function payTour(amount){
+let baseAmount = 0;
+let tour = "";
+let finalAmount = 0;
+
+function openBooking(name, amount){
+  tour = name;
+  baseAmount = amount;
+
+  document.getElementById("tourName").innerText = "Book " + name;
+  document.getElementById("modal").style.display = "flex";
+
+  document.getElementById("level").value = "regular";
+  updatePrice();
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
+
+function updatePrice(){
+  let level = document.getElementById("level").value;
+  let benefits = "";
+
+  if(level === "vip"){
+    finalAmount = baseAmount * 1.5;
+    benefits = "✔ VIP lounge access<br>✔ Priority booking<br>✔ Luxury hotel upgrade";
+  }
+  else if(level === "economy"){
+    finalAmount = baseAmount * 0.8;
+    benefits = "✔ Budget friendly<br>✔ Basic accommodation<br>✔ Group travel";
+  }
+  else{
+    finalAmount = baseAmount;
+    benefits = "✔ Standard hotel<br>✔ Guided tours<br>✔ Meals included";
+  }
+
+  document.getElementById("price").innerText = finalAmount;
+  document.getElementById("benefitsBox").innerHTML = benefits;
+}
+
+function confirmPay(){
+  let email = document.getElementById("email").value;
+
+  if(!email){
+    alert("Please enter email");
+    return;
+  }
+
   let handler = PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
-    email: "customer@email.com",
-    amount: amount * 100,
+    email: email,
+    amount: finalAmount * 100,
     currency: "KES",
-    callback: ()=> alert("✅ Payment successful!")
+    callback: function(){
+      alert("✅ Payment successful for " + tour);
+      closeModal();
+    }
   });
+
   handler.openIframe();
 }
 
-/* ================= SEPARATE REVIEW SYSTEMS (NO MIXING) ================= */
-
-const maasaiReviews = [
-"Sarah (UK): Best safari ever!",
-"David (USA): Incredible wildlife!",
-"Linda (Germany): Pure magic!",
-"James (Canada): Life changing!",
-"Anna (Italy): So beautiful!"
-];
-
-const dubaiReviews = [
-"Ahmed (UAE): Pure luxury!",
-"John (UK): Amazing city tour!",
-"Maria (Spain): Stunning experience!",
-"Lucas (France): Top class service!",
-"Emily (USA): Loved Dubai!"
-];
-
-let mIndex = 0;
-let dIndex = 0;
-
-/* LIVE REVIEWS (NON-RANDOM, CONTROLLED ROTATION) */
-setInterval(()=>{
-  mIndex = (mIndex + 1) % maasaiReviews.length;
-  document.getElementById("review1").innerText = maasaiReviews[mIndex];
-
-  dIndex = (dIndex + 1) % dubaiReviews.length;
-  document.getElementById("review2").innerText = dubaiReviews[dIndex];
-},6000);
-
-/* ================= LOCAL STORAGE (NO RESET ON REFRESH) ================= */
-
-if(localStorage.getItem("slot1")){
-  document.getElementById("slot1").innerText = localStorage.getItem("slot1");
-}
-if(localStorage.getItem("slot2")){
-  document.getElementById("slot2").innerText = localStorage.getItem("slot2");
-}
-
-function reduceSlots(id, key){
-  let el = document.getElementById(id);
-  let num = parseInt(el.innerText);
-
-  if(num > 1){
-    num--;
-    let text = num + " Slots Left";
-    el.innerText = text;
-    localStorage.setItem(key, text);
-  }
-}
-
-setInterval(()=>reduceSlots("slot1","slot1"),20000);
-setInterval(()=>reduceSlots("slot2","slot2"),25000);
-
-/* ================= LIVE BOOKING FEED ================= */
-
-const names = [
-"John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)",
-"David (Canada)","Sophia (Germany)","James (Australia)"
-];
+/* POPUP SYSTEM */
+const names = ["John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)"];
 
 function popup(){
   let p = document.getElementById("popup");
@@ -314,15 +357,12 @@ function popup(){
   p.innerText = name + " just booked a trip!";
   p.style.display="block";
   setTimeout(()=>p.style.display="none",4000);
-
   setTimeout(popup, Math.random()*12000 + 8000);
 }
 setTimeout(popup,5000);
 
-/* ================= SCROLL ANIMATION ================= */
-
+/* SCROLL ANIMATION */
 const cards = document.querySelectorAll(".card");
-
 function reveal(){
   cards.forEach(c=>{
     if(c.getBoundingClientRect().top < window.innerHeight - 80){
@@ -330,7 +370,6 @@ function reveal(){
     }
   });
 }
-
 window.addEventListener("scroll",reveal);
 window.addEventListener("load",reveal);
 

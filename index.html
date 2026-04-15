@@ -13,15 +13,13 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-/* ================= FIREBASE ================= */
+/* FIREBASE */
 const firebaseConfig = {
   apiKey: "AIzaSyDhedQazeXeJzJgyaE44oAenGHXvILMqqc",
   authDomain: "globia-7038f.firebaseapp.com",
@@ -35,61 +33,59 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-/* ================= LOGIN ================= */
-window.googleLogin = () => {
-  signInWithPopup(auth, provider)
-  .catch(e => alert(e.message));
+/* LOGIN */
+window.googleLogin = async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (e) {
+    alert(e.message);
+  }
 };
 
-window.logout = () => {
-  signOut(auth).then(() => {
-    resetUI();
-  });
+/* LOGOUT */
+window.logout = async () => {
+  await signOut(auth);
+
+  // FULL CLEAR
+  document.body.classList.remove("logged");
+  document.getElementById("userBox").style.display="none";
+  document.getElementById("authBtn").style.display="block";
 };
 
-/* ================= STATE ================= */
+/* AUTH STATE */
 onAuthStateChanged(auth, (user) => {
 
-  const bar = document.getElementById("topbar");
-  const authBtn = document.getElementById("authBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-
   if(user){
+    document.body.classList.add("logged");
 
-    document.body.style.background = "#f4f7fb";
-    bar.style.background = "#1f8f3a";
-
-    authBtn.style.display = "none";
-    logoutBtn.style.display = "block";
+    document.getElementById("authBtn").style.display="none";
+    document.getElementById("userBox").style.display="flex";
+    document.getElementById("userEmail").innerText = user.email;
 
   } else {
-
-    resetUI();
+    document.body.classList.remove("logged");
+    document.getElementById("authBtn").style.display="block";
+    document.getElementById("userBox").style.display="none";
   }
+
 });
-
-function resetUI(){
-  document.body.style.background = "#0b0f1a";
-
-  const bar = document.getElementById("topbar");
-  const authBtn = document.getElementById("authBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-
-  bar.style.background = "rgba(10,31,68,0.95)";
-  authBtn.style.display = "block";
-  logoutBtn.style.display = "none";
-}
 
 </script>
 
 <style>
 
+/* DEFAULT WHITE BACKGROUND */
 body{
   margin:0;
   font-family:Segoe UI;
-  background:#0b0f1a;
+  background:white;
+  color:#111;
+}
+
+/* LOGGED IN MODE (GREEN BAR EFFECT) */
+body.logged .topbar{
+  background:linear-gradient(135deg,#0f9d58,#1db954);
   color:white;
-  transition:0.4s;
 }
 
 /* TOP BAR */
@@ -99,12 +95,13 @@ body{
   left:0;
   right:0;
   height:65px;
+  background:#0a1f44;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:0 20px;
-  backdrop-filter:blur(10px);
   z-index:1000;
+  transition:0.3s;
 }
 
 .logo{height:42px}
@@ -116,16 +113,24 @@ body{
   border-radius:25px;
   cursor:pointer;
   font-weight:bold;
+  color:white;
 }
 
-/* LOGOUT */
-.logout{
-  background:#ff3b3b;
-  padding:10px 18px;
-  border-radius:25px;
-  cursor:pointer;
-  font-weight:bold;
+/* USER BOX */
+.userBox{
   display:none;
+  gap:10px;
+  align-items:center;
+  color:white;
+}
+
+.logoutBtn{
+  background:#111;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:20px;
+  cursor:pointer;
 }
 
 /* HERO */
@@ -137,11 +142,10 @@ body{
   align-items:center;
   text-align:center;
   padding:20px;
-  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)),
+  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.5)),
   url('images/joe.jpg') center/cover;
+  color:white;
 }
-
-.hero h1{font-size:42px}
 
 /* GRID */
 .grid{
@@ -155,11 +159,16 @@ body{
 .card{
   border-radius:18px;
   padding:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
+  background:#f8f8f8;
+  border:1px solid #eee;
+  transition:0.3s;
 }
 
+.card:hover{
+  transform:translateY(-8px);
+}
+
+/* BUTTON COLORS */
 .btn{
   width:100%;
   padding:14px;
@@ -167,34 +176,39 @@ body{
   border-radius:30px;
   cursor:pointer;
   font-weight:bold;
-  margin-top:10px;
 }
 
-/* COLORS */
-.legal{background:linear-gradient(135deg,#0a1f44,#1f4b99);color:white}
-.dating{background:linear-gradient(135deg,#ff2d55,#ff0066);color:white}
-.conference{background:linear-gradient(135deg,#ff7a18,#ff6600);color:white}
-.tourism{background:linear-gradient(135deg,#00c6ff,#0072ff);color:white}
+/* LEGAL */
+.legal{background:#1f4b99;color:white}
+
+/* DATING */
+.dating{background:#ff2d55;color:white}
+
+/* CONFERENCE */
+.conference{background:#ff6600;color:white}
+
+/* TOURISM */
+.tourism{background:#0072ff;color:white}
 
 /* CONTACT */
 .contact{
   text-align:center;
-  padding:50px;
-  background:#070a12;
+  padding:40px;
+  background:#111;
+  color:white;
 }
 
-/* GOOGLE BUTTON */
-.google-btn{
+.googleBtn{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
   background:white;
-  color:black;
-  border:none;
-  padding:10px 15px;
-  border-radius:8px;
+  border:1px solid #ddd;
+  padding:10px;
+  border-radius:10px;
   cursor:pointer;
+  font-weight:bold;
 }
 
 </style>
@@ -204,16 +218,27 @@ body{
 <body>
 
 <!-- TOP BAR -->
-<div class="topbar" id="topbar">
+<div class="topbar">
 
   <img src="images/logo.png" class="logo">
 
+  <!-- NOT LOGGED IN -->
   <div id="authBtn" class="auth" onclick="googleLogin()">
-    Login / Register
+    <span style="display:flex;align-items:center;gap:8px;">
+      <svg width="18" height="18" viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.5 0 6.7 1.2 9.2 3.6l6.8-6.8C35.9 2.3 30.3 0 24 0 14.6 0 6.5 5.4 2.7 13.2l8 6.2C12.4 13.1 17.7 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.9 24.5H24v9.1h12.9c-.6 3-2.2 5.6-4.8 7.3l7.4 5.7c4.5-4.4 7.5-10.1 7.5-17.1z"/>
+        <path fill="#FBBC05" d="M10.7 28.4l-8-6.2C.9 16.5 0 20.1 0 24s.9 7.5 2.7 10.6l8-6.2z"/>
+        <path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.6l-7.4-5.7C30 38.9 27.3 39.7 24 39.7c-6.3 0-11.6-3.6-13.3-8.9l-8 6.2C6.5 42.6 14.6 48 24 48z"/>
+      </svg>
+      Sign in with Google
+    </span>
   </div>
 
-  <div id="logoutBtn" class="logout" onclick="logout()">
-    Logout
+  <!-- LOGGED IN -->
+  <div id="userBox" class="userBox">
+    <span id="userEmail"></span>
+    <button class="logoutBtn" onclick="logout()">Logout</button>
   </div>
 
 </div>
@@ -221,15 +246,15 @@ body{
 <!-- HERO -->
 <section class="hero">
   <h1>GlobiaWorld Ecosystem 🌍</h1>
-  <p>Legal • Dating • Conferences • Tourism</p>
+  <p>Legal • Dating • Tourism • Conferences</p>
 </section>
 
-<!-- GRID -->
+<!-- PLATFORM -->
 <div class="grid">
 
   <div class="card">
     <h2>⚖️ Globia Legal</h2>
-    <button class="btn legal" onclick="location.href='justice.html'">Find Lawyer</button>
+    <button class="btn legal" onclick="location.href='justice.html'">Find Lawyers</button>
   </div>
 
   <div class="card">

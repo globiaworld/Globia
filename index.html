@@ -3,47 +3,161 @@
 <head>
 
 <link rel="icon" href="images/logo.png">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GlobiaWorld Ecosystem</title>
+<title>GlobiaWorld</title>
 
-<!-- FIREBASE COMPAT (IMPORTANT FIX) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+/* FIREBASE */
+const firebaseConfig = {
+  apiKey: "AIzaSyDhedQazeXeJzJgyaE44oAenGHXvILMqqc",
+  authDomain: "globia-7038f.firebaseapp.com",
+  projectId: "globia-7038f",
+  storageBucket: "globia-7038f.appspot.com",
+  messagingSenderId: "323603007481",
+  appId: "1:323603007481:web:ed058146cae31922dd9f28"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+/* OPEN / CLOSE MODAL */
+window.openAuth = () => {
+  document.getElementById("modal").style.display="flex";
+};
+
+window.closeAuth = () => {
+  document.getElementById("modal").style.display="none";
+  clearInputs();
+};
+
+/* CLEAR INPUTS */
+function clearInputs(){
+  document.getElementById("email").value="";
+  document.getElementById("password").value="";
+}
+
+/* SIGNUP */
+window.signup = () => {
+  createUserWithEmailAndPassword(
+    auth,
+    email.value,
+    password.value
+  ).then(()=>{
+    closeAuth();
+  }).catch(e=>alert(e.message));
+};
+
+/* LOGIN */
+window.login = () => {
+  signInWithEmailAndPassword(
+    auth,
+    email.value,
+    password.value
+  ).then(()=>{
+    closeAuth();
+  }).catch(e=>alert(e.message));
+};
+
+/* GOOGLE LOGIN */
+window.googleLogin = () => {
+  signInWithPopup(auth, provider)
+  .then(()=>closeAuth())
+  .catch(e=>alert(e.message));
+};
+
+/* LOGOUT */
+window.logout = () => {
+  signOut(auth).then(()=>{
+    clearInputs();
+  });
+};
+
+/* AUTH STATE */
+onAuthStateChanged(auth,(user)=>{
+
+  const bar = document.getElementById("topbar");
+  const authBtn = document.getElementById("authBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const userText = document.getElementById("userText");
+
+  if(user){
+
+    bar.style.background="#1f8f3a"; // GREEN BAR
+
+    authBtn.style.display="none";
+    logoutBtn.style.display="block";
+
+    userText.innerText="Logged in: "+user.email;
+
+  }else{
+
+    bar.style.background="rgba(10,31,68,0.95)";
+
+    authBtn.style.display="block";
+    logoutBtn.style.display="none";
+
+    userText.innerText="";
+  }
+});
+
+</script>
 
 <style>
 
-/* LIGHT PREMIUM BACKGROUND FIX */
 body{
   margin:0;
   font-family:Segoe UI;
-  background:#f4f7fb;
-  color:#111;
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
 }
 
 /* TOP BAR */
-.topbar{
+#topbar{
   position:fixed;
   top:0;
-  left:0;
-  right:0;
-  height:65px;
-  background:#0a1f44;
+  width:100%;
+  height:60px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:0 20px;
-  z-index:1000;
+  background:rgba(10,31,68,0.95);
+  transition:0.4s;
+  backdrop-filter:blur(10px);
 }
 
-.logo{height:42px}
+/* LOGO */
+.logo{height:40px}
 
-/* LOGIN BUTTON */
-.auth{
+/* BUTTONS */
+#authBtn{
   background:linear-gradient(135deg,#ff6600,#ff2d55);
-  color:white;
-  padding:10px 18px;
+  padding:10px 16px;
   border-radius:25px;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#logoutBtn{
+  display:none;
+  background:#ff3b3b;
+  padding:10px 16px;
+  border-radius:25px;
+  color:white;
   cursor:pointer;
   font-weight:bold;
 }
@@ -56,62 +170,32 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-
-  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
-  url("images/joe.jpg") center/cover;
-  color:white;
-}
-
-.hero h1{font-size:42px}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  padding:50px;
-}
-
-/* CARDS */
-.card{
-  background:white;
-  border-radius:18px;
   padding:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* BUTTONS */
-.btn{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-top:10px;
+.hero h1{
+  font-size:42px;
+  color:#0a1f44;
 }
-
-.legal{background:#0a1f44;color:white}
-.dating{background:#ff2d55;color:white}
-.conference{background:#ff7a18;color:white}
-.tourism{background:#0072ff;color:white}
 
 /* MODAL */
 .modal{
   display:none;
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0;
+  width:100%;
+  height:100%;
   background:rgba(0,0,0,0.5);
   justify-content:center;
   align-items:center;
 }
 
-.modal-content{
+.box{
   background:white;
   padding:20px;
   border-radius:12px;
   width:300px;
+  text-align:center;
 }
 
 input{
@@ -120,138 +204,81 @@ input{
   margin:8px 0;
 }
 
+/* GOOGLE BUTTON */
+.google{
+  background:white;
+  border:1px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<!-- FIREBASE INIT (FIXED LOGIN WORKING) -->
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDhedQazeXeJzJgyaE44oAenGHXvILMqqc",
-  authDomain: "globia-7038f.firebaseapp.com",
-  projectId: "globia-7038f",
-  appId: "1:323603007481:web:ed058146cae31922dd9f28"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-
-/* OPEN MODAL */
-function openAuth(){
-  document.getElementById("modal").style.display="flex";
-}
-
-/* CLOSE MODAL */
-function closeAuth(){
-  document.getElementById("modal").style.display="none";
-}
-
-/* EMAIL LOGIN */
-function login(){
-  const email=document.getElementById("email").value;
-  const pass=document.getElementById("password").value;
-
-  auth.signInWithEmailAndPassword(email,pass)
-  .then(()=>closeAuth())
-  .catch(e=>alert(e.message));
-}
-
-/* SIGNUP */
-function signup(){
-  const email=document.getElementById("email").value;
-  const pass=document.getElementById("password").value;
-
-  auth.createUserWithEmailAndPassword(email,pass)
-  .then(()=>closeAuth())
-  .catch(e=>alert(e.message));
-}
-
-/* GOOGLE LOGIN */
-function googleLogin(){
-  auth.signInWithPopup(provider)
-  .then(()=>closeAuth())
-  .catch(e=>alert(e.message));
-}
-
-/* AUTH STATE */
-auth.onAuthStateChanged(user=>{
-  const btn=document.getElementById("authBtn");
-  if(user){
-    btn.innerText="Logged in: "+user.email;
-  }else{
-    btn.innerText="Login / Register";
-  }
-});
-</script>
-
 <!-- TOP BAR -->
-<div class="topbar">
+<div id="topbar">
 
   <img src="images/logo.png" class="logo">
 
-  <div class="auth" id="authBtn" onclick="openAuth()">
-    Login / Register
+  <div id="userText" style="color:white;font-size:14px"></div>
+
+  <div style="display:flex;gap:10px;align-items:center;">
+
+    <div id="authBtn" onclick="openAuth()">Login</div>
+
+    <div id="logoutBtn" onclick="logout()">Logout</div>
+
   </div>
 
 </div>
 
 <!-- HERO -->
-<section class="hero">
+<div class="hero">
   <h1>GlobiaWorld Ecosystem 🌍</h1>
-  <p>One platform. Four global services.</p>
-</section>
-
-<!-- PLATFORM -->
-<div class="grid">
-
-  <div class="card">
-    <h2>⚖️ Globia Legal</h2>
-    <button class="btn legal" onclick="location.href='justice.html'">Find Lawyers</button>
-  </div>
-
-  <div class="card">
-    <h2>💘 Globia Dating</h2>
-    <button class="btn dating" onclick="location.href='dating.html'">Start Dating</button>
-  </div>
-
-  <div class="card">
-    <h2>🎤 Conferences</h2>
-    <button class="btn conference" onclick="location.href='conference.html'">Explore Events</button>
-  </div>
-
-  <div class="card">
-    <h2>✈️ Tourism</h2>
-    <button class="btn tourism" onclick="location.href='tourism.html'">Travel Now</button>
-  </div>
-
+  <p>Legal • Dating • Conferences • Tourism</p>
 </div>
 
-<!-- CONTACT -->
-<div style="text-align:center;padding:40px;">
-  <h2>Contact Us</h2>
-  <p>globiaworld@gmail.com</p>
-</div>
-
-<!-- MODAL -->
+<!-- AUTH MODAL -->
 <div class="modal" id="modal">
-  <div class="modal-content">
 
-    <h3>Login</h3>
+  <div class="box">
+
+    <h3>Account Login</h3>
 
     <input id="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
 
+    <button onclick="signup()">Create</button>
     <button onclick="login()">Login</button>
-    <button onclick="signup()">Sign Up</button>
-    <button onclick="googleLogin()">Google Login</button>
 
     <br><br>
+
+    <!-- GOOGLE BUTTON (REAL ICON) -->
+    <div class="google" onclick="googleLogin()">
+
+      <svg width="18" height="18" viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.5 0 6.7 1.2 9.2 3.6l6.8-6.8C35.9 2.3 30.3 0 24 0 14.6 0 6.5 5.4 2.7 13.2l8 6.2C12.4 13.1 17.7 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.9 24.5c0-1.6-.1-3.1-.4-4.5H24v9.1h13c-.6 3-2.3 5.6-4.8 7.3l7.4 5.7c4.3-4 7.3-9.7 7.3-17.6z"/>
+        <path fill="#FBBC05" d="M10.7 28.4c-.5-1.4-.8-3-.8-4.4s.3-3 .8-4.4l-8-6.2C.9 16.5 0 20.1 0 24s.9 7.5 2.7 10.6l8-6.2z"/>
+        <path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.6l-7.4-5.7c-2.1 1.4-4.7 2.2-8.1 2.2-6.3 0-11.6-3.6-13.3-8.9l-8 6.2C6.5 42.6 14.6 48 24 48z"/>
+      </svg>
+
+      Continue with Google
+    </div>
+
+    <br>
     <button onclick="closeAuth()">Close</button>
 
   </div>
+
 </div>
 
 </body>

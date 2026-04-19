@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +18,13 @@ body {
 /* NAV */
 nav {
   background:#0a1f44;
-  padding:14px 25px;
+  padding:12px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
 }
 .logo { height:60px; }
-nav a { color:white; margin:0 12px; text-decoration:none; font-weight:500; }
+nav a { color:white; margin:0 12px; text-decoration:none; }
 
 /* HERO */
 .hero {
@@ -35,20 +33,10 @@ nav a { color:white; margin:0 12px; text-decoration:none; font-weight:500; }
   justify-content:center;
   align-items:center;
   color:white;
-  background:url("/images/hero.jpg") center/cover no-repeat;
-  position:relative;
+  background:linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0)),
+  url("/images/hero.jpg") center/cover no-repeat;
 }
-.hero::after{
-  content:"";
-  position:absolute;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.3);
-}
-.hero h1 {
-  font-size:50px;
-  z-index:1;
-}
+.hero h1 { font-size:46px; }
 
 /* GRID */
 .section { padding:50px 40px; text-align:center; }
@@ -73,14 +61,16 @@ nav a { color:white; margin:0 12px; text-decoration:none; font-weight:500; }
 
 .card:hover {
   transform:translateY(-10px) scale(1.02);
-  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  box-shadow:0 0 25px rgba(255,102,0,0.4);
 }
 
 .card img {
   width:100%;
   height:200px;
   object-fit:cover;
+  transition:0.5s;
 }
+.card:hover img { transform:scale(1.1); }
 
 /* BADGES */
 .badge {
@@ -136,7 +126,6 @@ h3 { color:#0a1f44; }
   cursor:pointer;
   font-weight:bold;
   transition:0.3s;
-  width:100%;
 }
 .btn:hover { transform:scale(1.05); }
 
@@ -153,7 +142,7 @@ h3 { color:#0a1f44; }
   font-size:14px;
 }
 
-/* MODAL (IMPROVED PROFESSIONAL LOOK) */
+/* 🔥 PREMIUM BOOKING MODAL (IMPROVED) */
 .modal {
   position:fixed;
   top:0; left:0;
@@ -162,7 +151,7 @@ h3 { color:#0a1f44; }
   display:none;
   justify-content:center;
   align-items:center;
-  backdrop-filter:blur(5px);
+  backdrop-filter: blur(6px);
 }
 
 .modal-content {
@@ -170,7 +159,7 @@ h3 { color:#0a1f44; }
   padding:30px;
   border-radius:18px;
   width:340px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
   animation:pop 0.3s ease;
 }
 
@@ -184,13 +173,14 @@ h3 { color:#0a1f44; }
   width:100%;
   padding:12px;
   margin:10px 0;
-  border:1px solid #ddd;
   border-radius:10px;
+  border:1px solid #ddd;
+  outline:none;
 }
 
 .modal-content h3 {
-  margin-top:0;
   color:#0a1f44;
+  margin-bottom:10px;
 }
 
 .close {
@@ -229,7 +219,7 @@ h3 { color:#0a1f44; }
 <div class="grid">
 
 <!-- MAASAI MARA -->
-<div class="card" id="card1">
+<div class="card">
 <div class="badge">🔥 Limited Offer</div>
 <div class="badge offer">6 Slots Left</div>
 
@@ -253,7 +243,7 @@ h3 { color:#0a1f44; }
 </div>
 
 <!-- DUBAI -->
-<div class="card" id="card2">
+<div class="card">
 <div class="badge">🔥 Limited Offer</div>
 <div class="badge offer">8 Slots Left</div>
 
@@ -290,11 +280,11 @@ h3 { color:#0a1f44; }
 
     <select id="level" onchange="updatePrice()">
       <option value="regular">Regular (1x price)</option>
-      <option value="vip">VIP (1.5x + Luxury perks)</option>
+      <option value="vip">VIP (1.5x price + Luxury perks)</option>
       <option value="economy">Economy (0.8x price)</option>
     </select>
 
-    <p id="benefitsBox"></p>
+    <div id="benefitsBox"></div>
 
     <p><b>Total: KES <span id="price"></span></b></p>
 
@@ -305,7 +295,7 @@ h3 { color:#0a1f44; }
 <!-- CONTACT -->
 <div class="contact">
   <h2>Contact Us</h2>
-  <p>Email:info@globiaworld.com</p>
+  <p>Email: globiaworld@gmail.com</p>
 </div>
 
 <!-- POPUP -->
@@ -340,17 +330,19 @@ function updatePrice(){
 
   if(level === "vip"){
     finalAmount = baseAmount * 1.5;
-    benefits = "VIP lounge, priority booking, luxury upgrades";
-  } else if(level === "economy"){
+    benefits = "✔ VIP lounge access<br>✔ Priority booking<br>✔ Luxury hotel upgrade";
+  }
+  else if(level === "economy"){
     finalAmount = baseAmount * 0.8;
-    benefits = "Budget travel, group tours";
-  } else {
+    benefits = "✔ Budget friendly<br>✔ Basic accommodation<br>✔ Group travel";
+  }
+  else{
     finalAmount = baseAmount;
-    benefits = "Standard hotel, guided tours";
+    benefits = "✔ Standard hotel<br>✔ Guided tours<br>✔ Meals included";
   }
 
   document.getElementById("price").innerText = finalAmount;
-  document.getElementById("benefitsBox").innerText = benefits;
+  document.getElementById("benefitsBox").innerHTML = benefits;
 }
 
 function confirmPay(){
@@ -371,7 +363,7 @@ function confirmPay(){
     channels: ['card', 'bank_transfer'],
 
     callback: function(){
-      alert("Payment successful for " + tour);
+      alert("✅ Payment successful for " + tour);
       closeModal();
     }
   });
@@ -379,12 +371,33 @@ function confirmPay(){
   handler.openIframe();
 }
 
+/* POPUP SYSTEM */
+const names = ["John (UK)","Sarah (USA)","Ali (UAE)","Maria (Italy)"];
+
+function popup(){
+  let p = document.getElementById("popup");
+  let name = names[Math.floor(Math.random()*names.length)];
+  p.innerText = name + " just booked a trip!";
+  p.style.display="block";
+  setTimeout(()=>p.style.display="none",4000);
+  setTimeout(popup, Math.random()*12000 + 8000);
+}
+setTimeout(popup,5000);
+
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll(".card");
+function reveal(){
+  cards.forEach(c=>{
+    if(c.getBoundingClientRect().top < window.innerHeight - 80){
+      c.classList.add("show");
+    }
+  });
+}
+window.addEventListener("scroll",reveal);
+window.addEventListener("load",reveal);
+
 </script>
 
 </body>
 </html>
-
-
-
- 
 

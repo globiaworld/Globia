@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,6 +130,19 @@ h3 { color:#0a1f44; }
 }
 .btn:hover { transform:scale(1.05); }
 
+/* POPUP */
+.popup {
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:white;
+  padding:12px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  display:none;
+  font-size:14px;
+}
+
 /* MODAL */
 .modal {
   position:fixed;
@@ -163,6 +177,13 @@ h3 { color:#0a1f44; }
   cursor:pointer;
 }
 
+/* TRUST NOTE */
+.note {
+  font-size:12px;
+  color:#777;
+  margin-top:8px;
+}
+
 /* CONTACT */
 .contact {
   background:#0a1f44;
@@ -170,13 +191,6 @@ h3 { color:#0a1f44; }
   padding:40px;
   text-align:center;
   margin-top:50px;
-}
-
-/* TRUST NOTE */
-.note {
-  font-size:12px;
-  color:#777;
-  margin-top:8px;
 }
 </style>
 </head>
@@ -200,18 +214,48 @@ h3 { color:#0a1f44; }
 <div class="grid">
 
 <div class="card">
+<div class="badge">🔥 Limited Offer</div>
+<div class="badge offer">6 Slots Left</div>
+
 <img src="/images/maasai.jpg">
+
 <div class="card-content">
 <h3>Maasai Mara</h3>
-<button class="btn" onclick="openBooking('Maasai Mara',75)">Book Now</button>
+<div class="stars">★★★★★</div>
+
+<div class="review-box">Best safari experience ever!</div>
+
+<ul class="benefits">
+<li>Game drives</li>
+<li>Luxury camps</li>
+<li>Maasai culture</li>
+<li>Meals included</li>
+</ul>
+
+<button class="btn" onclick="openBooking('Maasai Mara',40)">Book Now</button>
 </div>
 </div>
 
 <div class="card">
+<div class="badge">🔥 Limited Offer</div>
+<div class="badge offer">8 Slots Left</div>
+
 <img src="/images/dubai.jpg">
+
 <div class="card-content">
 <h3>Dubai</h3>
-<button class="btn" onclick="openBooking('Dubai',150)">Book Now</button>
+<div class="stars">★★★★☆</div>
+
+<div class="review-box">Luxury beyond expectations!</div>
+
+<ul class="benefits">
+<li>5-star hotel</li>
+<li>Desert safari</li>
+<li>City tour</li>
+<li>Shopping malls</li>
+</ul>
+
+<button class="btn" onclick="openBooking('Dubai',80)">Book Now</button>
 </div>
 </div>
 
@@ -233,15 +277,21 @@ h3 { color:#0a1f44; }
       <option value="economy">Economy</option>
     </select>
 
-    <p><b>Total: $<span id="price"></span></b></p>
+    <div id="benefitsBox"></div>
 
-    <div class="note">
-      You will be charged in Kenyan Shillings (KES) at current exchange rate.
-    </div>
+    <p><b>Total: $<span id="price"></span></b></p>
+    <div class="note">Charged in KES at current exchange rate</div>
 
     <button class="btn" onclick="confirmPay()">Pay Securely</button>
   </div>
 </div>
+
+<div class="contact">
+  <h2>Contact Us</h2>
+  <p>Email: info@globiaworld.com</p>
+</div>
+
+<div class="popup" id="popup"></div>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
@@ -249,12 +299,18 @@ h3 { color:#0a1f44; }
 
 let baseAmount = 0;
 let finalAmount = 0;
-let exchangeRate = 130; // USD → KES
+let tour = "";
 
-function openBooking(name, amount){
-  baseAmount = amount;
+// 🔥 USD → KES conversion
+let exchangeRate = 130;
+
+function openBooking(name, usd){
+  tour = name;
+  baseAmount = usd;
+
   document.getElementById("tourName").innerText = "Book " + name;
   document.getElementById("modal").style.display = "flex";
+
   updatePrice();
 }
 
@@ -265,41 +321,30 @@ function closeModal(){
 function updatePrice(){
   let level = document.getElementById("level").value;
 
-  if(level === "vip"){
-    finalAmount = baseAmount * 1.5;
-  } else if(level === "economy"){
-    finalAmount = baseAmount * 0.8;
-  } else {
-    finalAmount = baseAmount;
-  }
+  if(level === "vip") finalAmount = baseAmount * 1.5;
+  else if(level === "economy") finalAmount = baseAmount * 0.8;
+  else finalAmount = baseAmount;
 
-  document.getElementById("price").innerText = finalAmount.toFixed(2);
+  document.getElementById("price").innerText = finalAmount;
 }
 
 function confirmPay(){
   let email = document.getElementById("email").value;
-
-  if(!email){
-    alert("Enter email");
-    return;
-  }
+  if(!email){ alert("Enter email"); return; }
 
   let amountKES = finalAmount * exchangeRate;
 
-  let handler = PaystackPop.setup({
+  PaystackPop.setup({
     key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
     email: email,
     amount: amountKES * 100,
     currency: "KES",
     channels: ['card','bank_transfer'],
-
     callback: function(){
-      alert("Payment successful!");
+      alert("Payment successful for " + tour);
       closeModal();
     }
-  });
-
-  handler.openIframe();
+  }).openIframe();
 }
 
 </script>

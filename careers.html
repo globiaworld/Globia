@@ -28,10 +28,6 @@ h1{
   margin-bottom:10px;
 }
 
-p{
-  color:#666;
-}
-
 input, textarea{
   width:100%;
   padding:12px;
@@ -51,6 +47,13 @@ button{
   font-size:16px;
 }
 
+.success{
+  display:none;
+  margin-top:20px;
+  color:green;
+  font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -61,51 +64,30 @@ button{
 
   <h1>💼 Careers at Globia</h1>
 
-  <p>
-    Apply for opportunities at GlobiaWorld.
-  </p>
+  <p>Apply for opportunities at GlobiaWorld.</p>
 
-  <form action="https://formsubmit.co/info@globiaworld.com"
-        method="POST"
-        enctype="multipart/form-data">
+  <form id="careerForm">
 
     <input type="text"
-           name="Full Name"
+           name="name"
            placeholder="Full Name"
            required>
 
     <input type="email"
-           name="Email"
+           name="email"
            placeholder="Email Address"
            required>
 
     <input type="text"
-           name="Position"
+           name="position"
            placeholder="Position Applying For">
 
-    <textarea name="About"
+    <textarea name="about"
               placeholder="Tell us about yourself"></textarea>
 
     <input type="file"
-           name="CV"
+           name="cv"
            required>
-
-    <!-- SETTINGS -->
-    <input type="hidden"
-           name="_captcha"
-           value="false">
-
-    <input type="hidden"
-           name="_subject"
-           value="New Globia Job Application">
-
-    <input type="hidden"
-           name="_template"
-           value="table">
-
-    <input type="hidden"
-           name="_next"
-           value="https://globia-eight.vercel.app/">
 
     <button type="submit">
       Submit Application
@@ -113,7 +95,57 @@ button{
 
   </form>
 
+  <div id="success" class="success">
+    ✅ Application submitted successfully.
+  </div>
+
 </div>
+
+<script>
+
+const form = document.getElementById("careerForm");
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  try{
+
+    const response = await fetch(
+      "https://formsubmit.co/ajax/info@globiaworld.com",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await response.json();
+
+    if(data.success === "true" || data.success === true){
+
+      document.getElementById("success").style.display = "block";
+
+      form.reset();
+
+    } else {
+
+      alert("Submission failed.");
+
+    }
+
+  }catch(err){
+
+    console.error(err);
+
+    alert("Error submitting application.");
+
+  }
+
+});
+
+</script>
 
 </body>
 </html>

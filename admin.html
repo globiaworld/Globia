@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Globia Admin Dashboard</title>
+
+<title>Globia Careers</title>
 
 <script type="module">
 
@@ -15,6 +15,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -33,35 +34,42 @@ const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-/* ADMIN EMAIL */
-const ADMIN_EMAIL = "info@globiaworld.com";
-
 /* LOGIN */
-window.login = async () => {
-  await signInWithPopup(auth, provider);
+window.googleLogin = async () => {
+  try{
+    await signInWithPopup(auth, provider);
+  }catch(e){
+    alert(e.message);
+  }
 };
 
-/* AUTH CHECK */
-onAuthStateChanged(auth, async (user) => {
+/* LOGOUT */
+window.logout = async () => {
+  await signOut(auth);
+};
 
-  if(!user){
-    document.getElementById("loginBox").style.display = "flex";
-    return;
+/* AUTH STATE */
+onAuthStateChanged(auth, (user)=>{
+
+  if(user){
+    document.getElementById("authBtn").style.display="none";
+    document.getElementById("userBox").style.display="flex";
+    document.getElementById("userEmail").innerText=user.email;
+  }else{
+    document.getElementById("authBtn").style.display="block";
+    document.getElementById("userBox").style.display="none";
   }
-
-  if(user.email !== ADMIN_EMAIL){
-    document.body.innerHTML = `
-      <h2 style='text-align:center;margin-top:100px;'>
-        Access Denied
-      </h2>
-    `;
-    return;
-  }
-
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("dashboard").style.display = "block";
 
 });
+
+/* MODAL */
+window.openCareer = () => {
+  document.getElementById("careerModal").style.display="flex";
+};
+
+window.closeCareer = () => {
+  document.getElementById("careerModal").style.display="none";
+};
 
 </script>
 
@@ -73,48 +81,140 @@ body{
   background:#f4f6f9;
 }
 
-/* LOGIN BOX */
-.loginBox{
+/* TOPBAR */
+.topbar{
+  height:70px;
+  background:#0a1f44;
   display:flex;
-  height:100vh;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
+  padding:0 20px;
+  color:white;
 }
 
-.loginBtn{
-  padding:15px 25px;
+.authBtn{
   background:#0f9d58;
+  padding:10px 18px;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.userBox{
+  display:none;
+  align-items:center;
+  gap:10px;
+}
+
+.logoutBtn{
+  background:#111;
   color:white;
   border:none;
-  border-radius:10px;
-  font-size:16px;
+  padding:8px 12px;
+  border-radius:20px;
   cursor:pointer;
 }
 
-/* DASHBOARD */
-.dashboard{
-  display:none;
-  padding:30px;
+/* HERO */
+.hero{
+  padding:80px 20px;
+  text-align:center;
+  background:white;
 }
 
-.header{
-  font-size:24px;
-  margin-bottom:20px;
+.hero h1{
+  font-size:42px;
+  margin-bottom:10px;
 }
 
-/* CARD */
+.hero p{
+  color:#666;
+  font-size:18px;
+}
+
+/* CAREER CARD */
+.section{
+  padding:40px 20px;
+  display:flex;
+  justify-content:center;
+}
+
 .card{
   background:white;
-  padding:25px;
-  border-radius:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-  max-width:700px;
+  width:100%;
+  max-width:600px;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* STATUS */
-.status{
-  color:#0f9d58;
+.applyBtn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#0f9d58;
+  color:white;
   font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modalContent{
+  background:white;
+  width:90%;
+  max-width:500px;
+  padding:25px;
+  border-radius:15px;
+}
+
+.modalContent h2{
+  margin-top:0;
+}
+
+.modalContent input,
+.modalContent textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+
+.submitBtn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  background:#0f9d58;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.closeBtn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#999;
+  color:white;
+  cursor:pointer;
   margin-top:10px;
 }
 
@@ -124,44 +224,121 @@ body{
 
 <body>
 
-<!-- LOGIN -->
-<div id="loginBox" class="loginBox">
-  <button class="loginBtn" onclick="login()">
-    Admin Login with Google
-  </button>
+<!-- TOPBAR -->
+<div class="topbar">
+
+  <h2>Globia Careers</h2>
+
+  <!-- LOGIN -->
+  <div id="authBtn" class="authBtn" onclick="googleLogin()">
+    Sign in with Google
+  </div>
+
+  <!-- USER -->
+  <div id="userBox" class="userBox">
+    <span id="userEmail"></span>
+    <button class="logoutBtn" onclick="logout()">
+      Logout
+    </button>
+  </div>
+
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="dashboard">
+<!-- HERO -->
+<div class="hero">
+  <h1>Careers at Globia 🌍</h1>
+  <p>
+    Join our global ecosystem in tourism, conferences and innovation.
+  </p>
+</div>
 
-  <div class="header">📊 Globia Careers Dashboard</div>
+<!-- CAREER SECTION -->
+<div class="section">
 
   <div class="card">
-    <h2>Applications System Active</h2>
+
+    <h2>Open Applications</h2>
 
     <p>
-      All career applications are now being sent directly to:
-    </p>
-
-    <p class="status">
-      info@globiaworld.com
-    </p>
-
-    <p>
-      Applicants can submit:
+      We are accepting applications from talented individuals worldwide.
     </p>
 
     <ul>
-      <li>Full Name</li>
-      <li>Email Address</li>
-      <li>Position Applied For</li>
-      <li>About Information</li>
-      <li>CV Upload</li>
+      <li>Remote Opportunities</li>
+      <li>Tourism & Events</li>
+      <li>Marketing</li>
+      <li>Administration</li>
     </ul>
 
-    <p>
-      Check your email inbox to view and download applications.
-    </p>
+    <button class="applyBtn" onclick="openCareer()">
+      Apply for a Job
+    </button>
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div id="careerModal" class="modal">
+
+  <div class="modalContent">
+
+    <h2>Apply for a Job</h2>
+
+    <!-- THIS IS THE IMPORTANT FIX -->
+    <form
+      action="https://formsubmit.co/info@globiaworld.com"
+      method="POST"
+      enctype="multipart/form-data">
+
+      <input
+        type="text"
+        name="Full Name"
+        placeholder="Full Name"
+        required>
+
+      <input
+        type="email"
+        name="Email"
+        placeholder="Email Address"
+        required>
+
+      <input
+        type="text"
+        name="Position"
+        placeholder="Position Applying For">
+
+      <textarea
+        name="About"
+        placeholder="Tell us about yourself"></textarea>
+
+      <input
+        type="file"
+        name="CV"
+        required>
+
+      <!-- HIDDEN SETTINGS -->
+      <input type="hidden" name="_captcha" value="false">
+
+      <input
+        type="hidden"
+        name="_subject"
+        value="New Globia Job Application">
+
+      <input
+        type="hidden"
+        name="_template"
+        value="table">
+
+      <button type="submit" class="submitBtn">
+        Submit Application
+      </button>
+
+    </form>
+
+    <button onclick="closeCareer()" class="closeBtn">
+      Close
+    </button>
 
   </div>
 
@@ -169,3 +346,4 @@ body{
 
 </body>
 </html>
+

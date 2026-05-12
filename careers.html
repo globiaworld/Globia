@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Globia Careers</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#f4f6f9;
+}
+
+.container{
+  max-width:700px;
+  margin:50px auto;
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+p{
+  color:#666;
+}
+
+input, textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  background:#0f9d58;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>💼 Careers at Globia</h1>
+
+  <p>
+    Apply for opportunities at GlobiaWorld.
+  </p>
+
+  <form action="https://formsubmit.co/info@globiaworld.com"
+        method="POST"
+        enctype="multipart/form-data">
+
+    <input type="text"
+           name="Full Name"
+           placeholder="Full Name"
+           required>
+
+    <input type="email"
+           name="Email"
+           placeholder="Email Address"
+           required>
+
+    <input type="text"
+           name="Position"
+           placeholder="Position Applying For">
+
+    <textarea name="About"
+              placeholder="Tell us about yourself"></textarea>
+
+    <input type="file"
+           name="CV"
+           required>
+
+    <!-- SETTINGS -->
+    <input type="hidden"
+           name="_captcha"
+           value="false">
+
+    <input type="hidden"
+           name="_subject"
+           value="New Globia Job Application">
+
+    <input type="hidden"
+           name="_template"
+           value="table">
+
+    <input type="hidden"
+           name="_next"
+           value="https://globia-eight.vercel.app/">
+
+    <button type="submit">
+      Submit Application
+    </button>
+
+  </form>
+
+</div>
+
+</body>
+</html>

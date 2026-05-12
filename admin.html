@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +18,6 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 /* FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyDhedQazeXeJzJgyaE44oAenGHXvILMqqc",
@@ -37,11 +30,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
 
-/* 🔐 CHANGE THIS */
+/* ADMIN EMAIL */
 const ADMIN_EMAIL = "info@globiaworld.com";
 
 /* LOGIN */
@@ -53,50 +45,23 @@ window.login = async () => {
 onAuthStateChanged(auth, async (user) => {
 
   if(!user){
-    document.getElementById("loginBox").style.display = "block";
+    document.getElementById("loginBox").style.display = "flex";
     return;
   }
 
   if(user.email !== ADMIN_EMAIL){
-    document.body.innerHTML = "<h2 style='text-align:center;margin-top:100px;'>Access Denied</h2>";
+    document.body.innerHTML = `
+      <h2 style='text-align:center;margin-top:100px;'>
+        Access Denied
+      </h2>
+    `;
     return;
   }
 
   document.getElementById("loginBox").style.display = "none";
   document.getElementById("dashboard").style.display = "block";
 
-  loadApplicants();
-
 });
-
-/* LOAD DATA */
-async function loadApplicants(){
-
-  const container = document.getElementById("data");
-
-  const q = query(collection(db, "applications"), orderBy("createdAt","desc"));
-  const snapshot = await getDocs(q);
-
-  container.innerHTML = "";
-
-  snapshot.forEach(doc => {
-    const d = doc.data();
-
-    const div = document.createElement("div");
-    div.className = "card";
-
-    div.innerHTML = `
-      <h3>${d.name}</h3>
-      <p><b>Email:</b> ${d.email}</p>
-      <p><b>Position:</b> ${d.position || "N/A"}</p>
-      <p><b>About:</b> ${d.about || ""}</p>
-      <a href="${d.cv}" target="_blank" class="btn">Download CV</a>
-    `;
-
-    container.appendChild(div);
-  });
-
-}
 
 </script>
 
@@ -137,30 +102,20 @@ body{
   margin-bottom:20px;
 }
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
-}
-
 /* CARD */
 .card{
   background:white;
-  padding:20px;
+  padding:25px;
   border-radius:12px;
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  max-width:700px;
 }
 
-/* BUTTON */
-.btn{
-  display:inline-block;
+/* STATUS */
+.status{
+  color:#0f9d58;
+  font-weight:bold;
   margin-top:10px;
-  padding:10px 15px;
-  background:#0072ff;
-  color:white;
-  border-radius:8px;
-  text-decoration:none;
 }
 
 </style>
@@ -171,15 +126,44 @@ body{
 
 <!-- LOGIN -->
 <div id="loginBox" class="loginBox">
-  <button class="loginBtn" onclick="login()">Admin Login with Google</button>
+  <button class="loginBtn" onclick="login()">
+    Admin Login with Google
+  </button>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard" class="dashboard">
 
-  <div class="header">📊 Job Applications</div>
+  <div class="header">📊 Globia Careers Dashboard</div>
 
-  <div id="data" class="grid"></div>
+  <div class="card">
+    <h2>Applications System Active</h2>
+
+    <p>
+      All career applications are now being sent directly to:
+    </p>
+
+    <p class="status">
+      info@globiaworld.com
+    </p>
+
+    <p>
+      Applicants can submit:
+    </p>
+
+    <ul>
+      <li>Full Name</li>
+      <li>Email Address</li>
+      <li>Position Applied For</li>
+      <li>About Information</li>
+      <li>CV Upload</li>
+    </ul>
+
+    <p>
+      Check your email inbox to view and download applications.
+    </p>
+
+  </div>
 
 </div>
 

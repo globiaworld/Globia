@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <link rel="icon" href="images/logo.png">
@@ -39,11 +41,11 @@ const provider = new GoogleAuthProvider();
 /* LOGIN */
 window.googleLogin = async () => {
 
-  try{
+  try {
 
     await signInWithPopup(auth, provider);
 
-  }catch(e){
+  } catch (e) {
 
     alert(e.message);
 
@@ -58,32 +60,32 @@ window.logout = async () => {
 
   document.body.classList.remove("logged");
 
-  document.getElementById("userBox").style.display="none";
+  document.getElementById("userBox").style.display = "none";
 
-  document.getElementById("authBtn").style.display="block";
+  document.getElementById("authBtn").style.display = "block";
 
 };
 
 /* AUTH STATE */
 onAuthStateChanged(auth, (user) => {
 
-  if(user){
+  if (user) {
 
     document.body.classList.add("logged");
 
-    document.getElementById("authBtn").style.display="none";
+    document.getElementById("authBtn").style.display = "none";
 
-    document.getElementById("userBox").style.display="flex";
+    document.getElementById("userBox").style.display = "flex";
 
     document.getElementById("userEmail").innerText = user.email;
 
-  }else{
+  } else {
 
     document.body.classList.remove("logged");
 
-    document.getElementById("authBtn").style.display="block";
+    document.getElementById("authBtn").style.display = "block";
 
-    document.getElementById("userBox").style.display="none";
+    document.getElementById("userBox").style.display = "none";
 
   }
 
@@ -101,6 +103,19 @@ window.closeCareer = () => {
   document.getElementById("careerModal").style.display = "none";
 
 };
+
+/* SUCCESS MESSAGE */
+window.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("careerForm");
+
+  form.addEventListener("submit", () => {
+
+    document.getElementById("submitBtn").innerText = "Submitting...";
+
+  });
+
+});
 
 </script>
 
@@ -178,6 +193,15 @@ body.logged .topbar{
   color:white;
 }
 
+.hero h1{
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:22px;
+}
+
 /* GRID */
 .grid{
   display:grid;
@@ -207,6 +231,7 @@ body.logged .topbar{
   border-radius:30px;
   cursor:pointer;
   font-weight:bold;
+  font-size:15px;
 }
 
 .conference{
@@ -244,10 +269,13 @@ body.logged .topbar{
   border-radius:15px;
   width:90%;
   max-width:500px;
+  max-height:90vh;
+  overflow-y:auto;
 }
 
 .modalContent h2{
   margin-top:0;
+  text-align:center;
 }
 
 .modalContent input,
@@ -261,6 +289,11 @@ body.logged .topbar{
   box-sizing:border-box;
 }
 
+.modalContent textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
 .modalContent button{
   background:#0f9d58;
   color:white;
@@ -270,6 +303,7 @@ body.logged .topbar{
   width:100%;
   cursor:pointer;
   font-size:15px;
+  font-weight:bold;
 }
 
 .closeBtn{
@@ -282,6 +316,31 @@ body.logged .topbar{
   padding:40px;
   background:#111;
   color:white;
+}
+
+.contact h2{
+  margin-bottom:10px;
+}
+
+.contact p{
+  margin:0;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .hero p{
+    font-size:18px;
+  }
+
+  .grid{
+    padding:20px;
+  }
+
 }
 
 </style>
@@ -378,48 +437,58 @@ body.logged .topbar{
 
     <h2>Apply for a Job</h2>
 
-    <!-- WORKING FORM -->
-    <form action="https://formsubmit.co/josedrash22@gmail.com"
+    <!-- FORMSPREE FORM -->
+    <form id="careerForm"
+          action="https://formspree.io/f/xbdblrbw"
           method="POST"
           enctype="multipart/form-data">
 
+      <!-- SPAM PROTECTION -->
+      <input type="text"
+             name="_gotcha"
+             style="display:none">
+
+      <!-- SUBJECT -->
+      <input type="hidden"
+             name="_subject"
+             value="New Globia Job Application">
+
+      <!-- NAME -->
       <input type="text"
              name="name"
              placeholder="Full Name"
              required>
 
+      <!-- EMAIL -->
       <input type="email"
              name="email"
              placeholder="Email Address"
              required>
 
+      <!-- POSITION -->
       <input type="text"
              name="position"
              placeholder="Position Applying For">
 
+      <!-- PHONE -->
+      <input type="tel"
+             name="phone"
+             placeholder="Phone Number">
+
+      <!-- MESSAGE -->
       <textarea name="message"
                 placeholder="Tell us about yourself"></textarea>
 
+      <!-- FILE -->
       <input type="file"
              name="attachment"
              required>
 
-      <!-- SETTINGS -->
-      <input type="hidden"
-             name="_captcha"
-             value="false">
-
-      <input type="hidden"
-             name="_subject"
-             value="New Globia Job Application">
-
-      <input type="hidden"
-             name="_template"
-             value="table">
-
       <!-- SUBMIT -->
-      <button type="submit">
+      <button id="submitBtn" type="submit">
+
         Submit Application
+
       </button>
 
     </form>
@@ -450,4 +519,5 @@ body.logged .topbar{
 </div>
 
 </body>
+
 </html>

@@ -33,12 +33,30 @@ body{
   height:42px;
 }
 
-/* HERO */
+/* HERO WITH IMAGE */
 .hero{
-  background:linear-gradient(135deg,#0f9d58,#1db954);
+  position:relative;
+  background:url('images/careers-bg.jpg') center/cover no-repeat;
   color:white;
   text-align:center;
-  padding:90px 20px;
+  padding:120px 20px;
+  overflow:hidden;
+}
+
+/* DARK OVERLAY */
+.hero::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+}
+
+.heroContent{
+  position:relative;
+  z-index:2;
 }
 
 .hero h1{
@@ -48,6 +66,13 @@ body{
 
 .hero p{
   font-size:20px;
+}
+
+/* IMAGE NOTE */
+.uploadNote{
+  margin-top:20px;
+  font-size:14px;
+  opacity:0.9;
 }
 
 /* JOBS */
@@ -211,11 +236,20 @@ body{
 <!-- HERO -->
 <section class="hero">
 
-  <h1>Build Your Future With GlobiaWorld 🌍</h1>
+  <div class="heroContent">
 
-  <p>
-    Explore global opportunities in tourism, conferences and careers.
-  </p>
+    <h1>Build Your Future With GlobiaWorld 🌍</h1>
+
+    <p>
+      Explore global opportunities in tourism, conferences and careers.
+    </p>
+
+    <div class="uploadNote">
+      Replace image by uploading your own picture into:
+      <b>images/careers-bg.jpg</b>
+    </div>
+
+  </div>
 
 </section>
 

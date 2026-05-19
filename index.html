@@ -91,18 +91,7 @@ onAuthStateChanged(auth, (user) => {
 
 });
 
-/* MODAL */
-window.openCareer = () => {
 
-  document.getElementById("careerModal").style.display = "flex";
-
-};
-
-window.closeCareer = () => {
-
-  document.getElementById("careerModal").style.display = "none";
-
-};
 
 /* SUCCESS MESSAGE */
 window.addEventListener("DOMContentLoaded", () => {
@@ -419,21 +408,18 @@ body.logged .topbar{
 
     <h2>💼 Careers at Globia</h2>
 
-    <button class="btn career"
-            onclick="openCareer()">
+  <button class="btn career"
+        onclick="location.href='career.html'">
 
-      Apply Now
+  Apply Now
 
-    </button>
+</button> 
 
   </div>
 
 </div>
 
 <!-- CAREER MODAL -->
-<div id="careerModal" class="modal">
-
-  <div class="modalContent">
 
     <h2>Apply for a Job</h2>
 

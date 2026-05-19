@@ -69,6 +69,11 @@ body{
   margin-top:0;
 }
 
+.jobCard p{
+  color:#555;
+  margin-bottom:20px;
+}
+
 .applyBtn{
   background:#0f9d58;
   color:white;
@@ -77,6 +82,11 @@ body{
   border-radius:30px;
   cursor:pointer;
   font-weight:bold;
+  transition:0.3s;
+}
+
+.applyBtn:hover{
+  opacity:0.9;
 }
 
 /* MODAL */
@@ -99,6 +109,13 @@ body{
   max-width:500px;
   padding:30px;
   border-radius:18px;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.modalContent h2{
+  margin-top:0;
+  text-align:center;
 }
 
 .modalContent input,
@@ -109,6 +126,12 @@ body{
   border-radius:8px;
   border:1px solid #ccc;
   box-sizing:border-box;
+  font-size:15px;
+}
+
+.modalContent textarea{
+  min-height:120px;
+  resize:vertical;
 }
 
 .modalContent button{
@@ -118,6 +141,7 @@ body{
   border-radius:8px;
   font-weight:bold;
   cursor:pointer;
+  font-size:15px;
 }
 
 .submitBtn{
@@ -131,11 +155,42 @@ body{
   margin-top:10px;
 }
 
+.helperText{
+  font-size:13px;
+  color:#666;
+  margin-top:-5px;
+  margin-bottom:15px;
+}
+
+.successMessage{
+  display:none;
+  background:#d4edda;
+  color:#155724;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+  text-align:center;
+  font-weight:bold;
+}
+
 .footer{
   text-align:center;
   padding:30px;
   background:#111;
   color:white;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .hero p{
+    font-size:18px;
+  }
+
 }
 
 </style>
@@ -230,41 +285,71 @@ body{
 
     <h2>Apply for Position</h2>
 
-    <form action="https://formspree.io/f/xbdblrbw"
+    <!-- SUCCESS -->
+    <div class="successMessage" id="successMessage">
+      Application submitted successfully!
+    </div>
+
+    <!-- FORMSPREE FORM -->
+    <form id="careerForm"
+          action="https://formspree.io/f/xbdblrbw"
           method="POST">
 
+      <!-- SPAM PROTECTION -->
+      <input type="text"
+             name="_gotcha"
+             style="display:none">
+
+      <!-- SUBJECT -->
       <input type="hidden"
              name="_subject"
-             value="New Career Application">
+             value="New Globia Career Application">
 
+      <!-- REDIRECT -->
+      <input type="hidden"
+             name="_next"
+             value="https://formspree.io/thanks">
+
+      <!-- POSITION -->
       <input type="text"
              id="jobTitle"
              name="position"
              readonly>
 
+      <!-- NAME -->
       <input type="text"
              name="name"
              placeholder="Full Name"
              required>
 
+      <!-- EMAIL -->
       <input type="email"
              name="email"
              placeholder="Email Address"
              required>
 
+      <!-- PHONE -->
       <input type="tel"
              name="phone"
              placeholder="Phone Number">
 
+      <!-- MESSAGE -->
       <textarea name="message"
                 placeholder="Tell us about yourself"></textarea>
 
+      <!-- LINK -->
       <input type="url"
              name="profile_link"
              placeholder="Paste CV / LinkedIn / Portfolio Link"
              required>
 
+      <div class="helperText">
+        Accepted: LinkedIn, Google Drive CV, Portfolio, Indeed, GitHub
+      </div>
+
+      <!-- SUBMIT -->
       <button class="submitBtn"
+              id="submitBtn"
               type="submit">
 
         Submit Application
@@ -273,6 +358,7 @@ body{
 
     </form>
 
+    <!-- CLOSE -->
     <button class="closeBtn"
             onclick="closeApply()">
 
@@ -295,7 +381,7 @@ body{
 
 function openApply(job){
 
-  document.getElementById("applyModal").style.display="flex";
+  document.getElementById("applyModal").style.display = "flex";
 
   document.getElementById("jobTitle").value = job;
 
@@ -303,9 +389,16 @@ function openApply(job){
 
 function closeApply(){
 
-  document.getElementById("applyModal").style.display="none";
+  document.getElementById("applyModal").style.display = "none";
 
 }
+
+/* FORM SUBMIT UI */
+document.getElementById("careerForm").addEventListener("submit", function(){
+
+  document.getElementById("submitBtn").innerText = "Submitting...";
+
+});
 
 </script>
 

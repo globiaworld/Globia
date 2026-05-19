@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,21 +87,6 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById("userBox").style.display = "none";
 
   }
-
-});
-
-
-
-/* SUCCESS MESSAGE */
-window.addEventListener("DOMContentLoaded", () => {
-
-  const form = document.getElementById("careerForm");
-
-  form.addEventListener("submit", () => {
-
-    document.getElementById("submitBtn").innerText = "Submitting...";
-
-  });
 
 });
 
@@ -238,67 +222,6 @@ body.logged .topbar{
   color:white;
 }
 
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.6);
-  justify-content:center;
-  align-items:center;
-  z-index:2000;
-}
-
-.modalContent{
-  background:white;
-  padding:30px;
-  border-radius:15px;
-  width:90%;
-  max-width:500px;
-  max-height:90vh;
-  overflow-y:auto;
-}
-
-.modalContent h2{
-  margin-top:0;
-  text-align:center;
-}
-
-.modalContent input,
-.modalContent textarea{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
-  font-size:15px;
-  box-sizing:border-box;
-}
-
-.modalContent textarea{
-  min-height:120px;
-  resize:vertical;
-}
-
-.modalContent button{
-  background:#0f9d58;
-  color:white;
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  width:100%;
-  cursor:pointer;
-  font-size:15px;
-  font-weight:bold;
-}
-
-.closeBtn{
-  background:#999 !important;
-}
-
 /* CONTACT */
 .contact{
   text-align:center;
@@ -408,88 +331,10 @@ body.logged .topbar{
 
     <h2>💼 Careers at Globia</h2>
 
-  <button class="btn career"
-        onclick="location.href='career.html'">
+    <button class="btn career"
+            onclick="location.href='career.html'">
 
-  Apply Now
-
-</button> 
-
-  </div>
-
-</div>
-
-<!-- CAREER MODAL -->
-
-    <h2>Apply for a Job</h2>
-
-    <!-- FORMSPREE FORM -->
-    <form id="careerForm"
-          action="https://formspree.io/f/xbdblrbw"
-          method="POST"
-          enctype="multipart/form-data">
-
-      <!-- SPAM PROTECTION -->
-      <input type="text"
-             name="_gotcha"
-             style="display:none">
-
-      <!-- SUBJECT -->
-      <input type="hidden"
-             name="_subject"
-             value="New Globia Job Application">
-
-      <!-- NAME -->
-      <input type="text"
-             name="name"
-             placeholder="Full Name"
-             required>
-
-      <!-- EMAIL -->
-      <input type="email"
-             name="email"
-             placeholder="Email Address"
-             required>
-
-      <!-- POSITION -->
-      <input type="text"
-             name="position"
-             placeholder="Position Applying For">
-
-      <!-- PHONE -->
-      <input type="tel"
-             name="phone"
-             placeholder="Phone Number">
-
-      <!-- MESSAGE -->
-      <textarea name="message"
-                placeholder="Tell us about yourself"></textarea>
-
-      <!-- FILE -->
-      <input type="url"
-       name="profile_link"
-       placeholder="Paste your CV, LinkedIn, or Portfolio Link"
-       required>
-      <p style="font-size:13px;color:#666;">
-  Accepted: LinkedIn, Google Drive CV, Dropbox, Portfolio, Indeed, GitHub
-</p>
-
-      <!-- SUBMIT -->
-      <button id="submitBtn" type="submit">
-
-        Submit Application
-
-      </button>
-
-    </form>
-
-    <br>
-
-    <!-- CLOSE -->
-    <button class="closeBtn"
-            onclick="closeCareer()">
-
-      Close
+      Apply Now
 
     </button>
 

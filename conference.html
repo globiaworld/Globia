@@ -101,17 +101,6 @@ nav a { color:white; margin:0 12px; text-decoration:none; }
   100% { transform:scale(1.15) translate(10px,10px); }
 }
 
-/* SOUND BUTTON */
-.sound-btn {
-  position:absolute;
-  bottom:10px;
-  right:10px;
-  background:rgba(0,0,0,0.7);
-  color:white;
-  border:none;
-  padding:8px 12px;
-  border-radius:20px;
-  cursor:pointer;
 }
 
 /* CONTENT */
@@ -234,12 +223,7 @@ select:focus, input:focus {
 <div class="media-wrapper">
   <img src="images/conference1.jpg" class="media">
 
-  <audio id="sound1" loop>
-    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3">
-  </audio>
 
-  <button class="sound-btn" onclick="toggleSound(1)">🔊 Sound</button>
-</div>
 
 <div class="card-content">
 
@@ -279,12 +263,7 @@ Global investors meet producers to unlock high-value opportunities.
 <div class="media-wrapper">
   <img src="images/conference2.jpg" class="media">
 
-  <audio id="sound2" loop>
-    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3">
-  </audio>
 
-  <button class="sound-btn" onclick="toggleSound(2)">🔊 Sound</button>
-</div>
 
 <div class="card-content">
 
@@ -325,7 +304,7 @@ Empowering youth through leadership and innovation.
 
 /* PAYMENT - CARD + BANK ONLY */
 function payNow(type){
-  let email = document.getElementById(type===1?"email1":"email2").value;
+  
   let amount = document.getElementById(type===1?"ticket1":"ticket2").value;
 
   let handler = PaystackPop.setup({
@@ -345,10 +324,7 @@ function payNow(type){
   handler.openIframe();
 }
 
-/* SOUND */
-function toggleSound(id){
-  let audio = document.getElementById("sound"+id);
-  audio.paused ? audio.play() : audio.pause();
+
 }
 
 </script>

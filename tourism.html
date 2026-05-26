@@ -1,292 +1,477 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tourism</title>
+
+<title>Global Tourism</title>
 
 <style>
-body {
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background:#f4f7fb;
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f7fb;
 }
 
-/* NAV */
-nav {
-  background:#0a1f44;
-  padding:12px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+/* NAVBAR */
+nav{
+    background:#0a1f44;
+    padding:12px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.logo { height:60px; }
-nav a { color:white; margin:0 12px; text-decoration:none; }
+
+.logo{
+    height:50px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 12px;
+}
 
 /* HERO */
-.hero {
-  height:60vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  background:url("/images/hero.jpg") center/cover no-repeat;
+.hero{
+    height:55vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
+    text-align:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+    url("images/hero.jpg") center/cover no-repeat;
 }
-.hero h1 { font-size:46px; }
+
+.hero h1{
+    font-size:50px;
+    margin:0;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+/* SECTION */
+.section{
+    padding:50px 30px;
+    text-align:center;
+}
 
 /* GRID */
-.section { padding:50px 40px; text-align:center; }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
 }
 
 /* CARD */
-.card {
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  position:relative;
-  transition:0.4s;
-  opacity:0;
-  transform:translateY(40px);
-}
-.card.show { opacity:1; transform:translateY(0); }
-
-.card:hover {
-  transform:translateY(-10px) scale(1.02);
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    transition:0.4s;
+    position:relative;
 }
 
-.card img {
-  width:100%;
-  height:200px;
-  object-fit:cover;
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
 /* BADGES */
-.badge {
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:#ff3b3b;
-  color:white;
-  padding:6px 10px;
-  border-radius:20px;
-  font-size:12px;
-}
-.offer { top:40px; background:#ff6600; }
-
-.card-content { padding:25px; }
-.stars { color:#ffaa00; }
-.review-box {
-  background:#f9fbff;
-  padding:10px;
-  border-radius:10px;
-  font-size:13px;
+.badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#ff3b3b;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    z-index:10;
 }
 
-/* BUTTON */
-.btn {
-  padding:12px 22px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
-  color:white;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
+.offer{
+    top:45px;
+    background:#ff6600;
 }
 
-/* MODAL */
-.modal {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.65);
-  display:none;
-  justify-content:center;
-  align-items:center;
+/* MEDIA */
+.media-wrapper{
+    height:220px;
+    overflow:hidden;
 }
 
-.modal-content {
-  background:white;
-  padding:30px;
-  border-radius:18px;
-  width:340px;
+.media{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    animation:cinematicMove 10s ease-in-out infinite alternate;
 }
 
-.modal-content input,
-.modal-content select {
-  width:100%;
-  padding:12px;
-  margin:10px 0;
+@keyframes cinematicMove{
+
+    0%{
+        transform:scale(1) translate(0,0);
+    }
+
+    50%{
+        transform:scale(1.1) translate(-10px,-5px);
+    }
+
+    100%{
+        transform:scale(1.15) translate(10px,10px);
+    }
+
 }
 
-.close {
-  float:right;
-  cursor:pointer;
+/* CONTENT */
+.card-content{
+    padding:20px;
+    text-align:left;
+}
+
+.card h3{
+    margin-top:0;
+    color:#0a1f44;
+}
+
+.summary{
+    font-size:14px;
+    color:#555;
+}
+
+.stars{
+    color:#ffaa00;
+    margin:10px 0;
+}
+
+.review-box{
+    background:#f9fbff;
+    padding:12px;
+    border-radius:10px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+/* BENEFITS */
+.benefits{
+    list-style:none;
+    padding:0;
+}
+
+.benefits li{
+    padding-left:20px;
+    position:relative;
+    margin-bottom:6px;
+}
+
+.benefits li::before{
+    content:"✔";
+    position:absolute;
+    left:0;
+    color:#ff6600;
+}
+
+/* SELECT */
+select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+/* BUTTONS */
+.btn{
+    width:100%;
+    padding:12px;
+    background:linear-gradient(135deg,#ff7a18,#ff6600);
+    color:white;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
+}
+
+.btn-secondary{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#333;
+    color:white;
+    border:none;
+    border-radius:20px;
+}
+
+/* SECURE */
+.secure{
+    font-size:12px;
+    color:green;
+    margin-top:8px;
 }
 
 /* CONTACT */
-.contact {
-  background:#0a1f44;
-  color:white;
-  padding:40px;
-  text-align:center;
+.contact{
+    background:#0a1f44;
+    color:white;
+    padding:40px;
+    text-align:center;
 }
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:35px;
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+<!-- SOUND -->
+<audio id="bgSound" autoplay loop>
+    <source src="sounds/tourism.mp3" type="audio/mpeg">
+</audio>
+
+<!-- NAV -->
 <nav>
-  <img src="images/logo.png" class="logo">
-  <div>
-    <a href="index.html">Home</a>
-    <a href="conference.html">Conferences</a>
-    <a href="tourism.html">Tourism</a>
-  </div>
+
+<img src="images/logo.png" class="logo">
+
+<div>
+<a href="index.html">Home</a>
+<a href="conference.html">Conferences</a>
+<a href="tourism.html">Tourism</a>
+</div>
+
 </nav>
 
-<div class="hero"><h1>Explore Tourism</h1></div>
+<!-- HERO -->
+<section class="hero">
 
+<h1>Explore Tourism</h1>
+
+<p>
+Discover luxury destinations and unforgettable experiences
+</p>
+
+</section>
+
+<!-- SECTION -->
 <section class="section">
-<h2> Sample of Destinations</h2>
+
+<h2>Tourism Packages</h2>
 
 <div class="grid">
 
-<!-- MAASAI -->
+<!-- CARD 1 -->
 <div class="card">
+
 <div class="badge">🔥 Limited Offer</div>
 <div class="badge offer">6 Slots Left</div>
 
-<img src="/images/maasai.jpg">
+<div class="media-wrapper">
+<img src="images/maasai.jpg" class="media">
+</div>
 
 <div class="card-content">
-<h3>Maasai Mara</h3>
- ❤️ RDFGHJGHJGHJHJ
+
+<h3>Maasai Mara Safari</h3>
+
+<p class="summary">
+Experience wildlife adventures, luxury safari camps,
+and unforgettable African landscapes.
+</p>
+
 <div class="stars">★★★★★</div>
-<div class="review-box">Best safari experience ever!</div>
-  SDFGDFGHDFG
 
-<button class="btn" onclick="openBooking('Maasai Mara',5000)">Book Now</button>
+<div class="review-box">
+“Best safari experience ever!”
+</div>
+
+<ul class="benefits">
+<li>Luxury safari accommodation</li>
+<li>Professional guides</li>
+<li>Airport pickup</li>
+<li>Photography sessions</li>
+</ul>
+
+<select id="tour1">
+<option value="500">Regular - USD 500</option>
+<option value="1000">VIP - USD 1000</option>
+</select>
+
+<button class="btn" onclick="payNow(1)">
+Book Securely
+</button>
+
+<div class="secure">
+🔒 Secure payment powered by Paystack
+</div>
+
+<button class="btn-secondary">
+Contact: info@globiaworld.com
+</button>
+
 </div>
 </div>
 
-<!-- DUBAI -->
+<!-- CARD 2 -->
 <div class="card">
+
 <div class="badge">🔥 Limited Offer</div>
 <div class="badge offer">8 Slots Left</div>
 
-<img src="/images/dubai.jpg">
+<div class="media-wrapper">
+<img src="images/dubai.jpg" class="media">
+</div>
 
 <div class="card-content">
-<h3>Dubai</h3>
+
+<h3>Dubai Luxury Tour</h3>
+
+<p class="summary">
+Explore luxury shopping, desert adventures,
+skyline experiences and premium hotels.
+</p>
+
 <div class="stars">★★★★☆</div>
-  GHGJHHGHJ
-<div class="review-box">Luxury beyond expectations!</div>
-  
 
-<button class="btn" onclick="openBooking('Dubai',10000)">Book Now</button>
-</div>
+<div class="review-box">
+“Luxury beyond expectations!”
 </div>
 
+<ul class="benefits">
+<li>5-star hotel stay</li>
+<li>City tours</li>
+<li>Desert safari</li>
+<li>VIP transport</li>
+</ul>
+
+<select id="tour2">
+<option value="1000">Regular - USD 1000</option>
+<option value="2000">VIP - USD 2000</option>
+</select>
+
+<button class="btn" onclick="payNow(2)">
+Book Securely
+</button>
+
+<div class="secure">
+🔒 Secure payment powered by Paystack
 </div>
+
+<button class="btn-secondary">
+Contact: info@globiaworld.com
+</button>
+
+</div>
+</div>
+
+</div>
+
 </section>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
+<!-- CONTACT -->
+<section class="contact">
 
-    <h3 id="tourName"></h3>
-    <input type="email" id="email" placeholder="Enter Email">
+<h2>Contact Us</h2>
 
-    <select id="level" onchange="updatePrice()">
-      <option value="regular">Regular</option>
-      <option value="vip">VIP</option>
-      <option value="economy">Economy</option>
-    </select>
+<p>Email: info@globiaworld.com</p>
 
-    <p><b>Total: $<span id="price"></span></b></p>
-    <small>You will be charged in KES</small>
+<p>Global tourism experiences with trusted service</p>
 
-    <button class="btn" onclick="confirmPay()">Pay Securely</button>
-  </div>
-</div>
+</section>
 
-<div class="contact">
-  <h2>Contact Us</h2>
-  <p>Email: info@globiaworld.com</p>
-</div>
-
+<!-- PAYSTACK -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
 
-let rate = 130;
-let baseUSD = 0;
-let finalUSD = 0;
-let tour = "";
+/* SOUND FIX */
+window.addEventListener("click", function(){
 
-function openBooking(name, kes){
-  tour = name;
-  baseUSD = kes / rate;
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("tourName").innerText = "Book " + name;
-  updatePrice();
-}
+    const audio = document.getElementById("bgSound");
 
-function closeModal(){
-  document.getElementById("modal").style.display = "none";
-}
+    audio.play().catch(function(error){
+        console.log("Autoplay blocked");
+    });
 
-function updatePrice(){
-  let level = document.getElementById("level").value;
+}, { once:true });
 
-  if(level==="vip") finalUSD = baseUSD*1.5;
-  else if(level==="economy") finalUSD = baseUSD*0.8;
-  else finalUSD = baseUSD;
+/* PAYMENT */
+function payNow(type){
 
-  document.getElementById("price").innerText = finalUSD.toFixed(2);
-}
+    let amount;
 
-function confirmPay(){
-  let email = document.getElementById("email").value;
-  let kesAmount = finalUSD * rate;
+    if(type === 1){
 
-  let handler = PaystackPop.setup({
-    key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
-    email: email,
-    amount: kesAmount * 100,
-    currency: "KES",
-    channels: ['card','bank_transfer'],
-    callback: function(){
-      alert("Payment successful for " + tour);
-      closeModal();
+        amount = document.getElementById("tour1").value;
+
+    }else{
+
+        amount = document.getElementById("tour2").value;
+
     }
-  });
 
-  handler.openIframe();
-}
+    const handler = PaystackPop.setup({
 
-/* SCROLL FIX */
-const cards = document.querySelectorAll(".card");
-function reveal(){
-  cards.forEach(c=>{
-    if(c.getBoundingClientRect().top < window.innerHeight){
-      c.classList.add("show");
-    }
-  });
+        key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
+
+        email: "guest@globiaworld.com",
+
+        amount: amount * 100,
+
+        currency: "USD",
+
+        channels: ['card','bank'],
+
+        callback: function(response){
+
+            alert(
+                "Payment successful! Ref: " +
+                response.reference
+            );
+
+        },
+
+        onClose: function(){
+
+            alert("Payment cancelled");
+
+        }
+
+    });
+
+    handler.openIframe();
+
 }
-window.addEventListener("scroll",reveal);
-window.addEventListener("load",reveal);
 
 </script>
 
 </body>
 </html>
+

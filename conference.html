@@ -327,54 +327,45 @@ Contact: info@globiaworld.com
 </section>
 
 <!-- PAYSTACK -->
+<!-- PAYSTACK -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
 
-/* AUTOPLAY SOUND FIX */
-window.addEventListener("click", function () {
+function payNow(type) {
 
-    const audio = document.getElementById("bgSound");
+    let amount;
 
-    audio.play().catch(function(error){
-        console.log("Autoplay blocked");
-    });
+    if(type === 1){
+        amount = document.getElementById("ticket1").value;
+    } else {
+        amount = document.getElementById("ticket2").value;
+    }
 
-}, { once:true });
-
-/* PAYMENT */
-<script>
-
-function payNow(type){
-
-    let amount = document.getElementById(
-        type === 1 ? "ticket1" : "ticket2"
-    ).value;
-
-    let handler = PaystackPop.setup({
+    const handler = PaystackPop.setup({
 
         key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
 
-        /* REQUIRED */
         email: "guest@globiaworld.com",
 
         amount: amount * 100,
 
         currency: "USD",
 
-        channels: ['card','bank'],
+        channels: ['card', 'bank'],
 
         callback: function(response){
 
             alert(
-                "Payment successful! Reference: " + response.reference
+                "Payment successful! Ref: " +
+                response.reference
             );
 
         },
 
         onClose: function(){
 
-            alert("Payment cancelled");
+            alert("Payment window closed");
 
         }
 
@@ -385,6 +376,5 @@ function payNow(type){
 }
 
 </script>
-
 </body>
 </html>

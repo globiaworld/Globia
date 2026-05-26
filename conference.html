@@ -343,6 +343,8 @@ window.addEventListener("click", function () {
 }, { once:true });
 
 /* PAYMENT */
+<script>
+
 function payNow(type){
 
     let amount = document.getElementById(
@@ -352,6 +354,9 @@ function payNow(type){
     let handler = PaystackPop.setup({
 
         key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
+
+        /* REQUIRED */
+        email: "guest@globiaworld.com",
 
         amount: amount * 100,
 

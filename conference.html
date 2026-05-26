@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
@@ -7,223 +8,240 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Global Conferences</title>
 
 <style>
 
-body {
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background:#f4f7fb;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f7fb;
 }
 
-/* NAV */
-nav {
-  background:#0a1f44;
-  padding:12px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+/* NAVBAR */
+nav{
+    background:#0a1f44;
+    padding:12px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.logo { height:50px; }
-nav a { color:white; margin:0 12px; text-decoration:none; }
+
+.logo{
+    height:50px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 12px;
+}
 
 /* HERO */
-.hero {
-  height:50vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  color:white;
-  text-align:center;
-  background:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
-             url("images/conference.jpg") center/cover no-repeat;
+.hero{
+    height:50vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
+    text-align:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+    url("images/conference.jpg") center/cover no-repeat;
 }
 
 /* SECTION */
-.section {
-  padding:50px 30px;
-  text-align:center;
+.section{
+    padding:50px 30px;
+    text-align:center;
 }
 
 /* GRID */
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
 }
 
 /* CARD */
-.card {
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.12);
-  transition:0.4s;
-  position:relative;
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    transition:0.4s;
+    position:relative;
 }
 
-.card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
 /* BADGE */
-.badge {
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:#ff3b3b;
-  color:white;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
+.badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#ff3b3b;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    z-index:10;
 }
 
 /* MEDIA */
-.media-wrapper {
-  position:relative;
-  height:220px;
-  overflow:hidden;
+.media-wrapper{
+    height:220px;
+    overflow:hidden;
 }
 
-.media {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  animation:cinematicMove 10s ease-in-out infinite alternate;
+.media{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    animation:cinematicMove 10s ease-in-out infinite alternate;
 }
 
-@keyframes cinematicMove {
-  0% { transform:scale(1) translate(0,0); }
-  50% { transform:scale(1.1) translate(-10px,-5px); }
-  100% { transform:scale(1.15) translate(10px,10px); }
-}
-
+@keyframes cinematicMove{
+    0%{
+        transform:scale(1) translate(0,0);
+    }
+    50%{
+        transform:scale(1.1) translate(-10px,-5px);
+    }
+    100%{
+        transform:scale(1.15) translate(10px,10px);
+    }
 }
 
 /* CONTENT */
-.card-content {
-  padding:20px;
-  text-align:left;
+.card-content{
+    padding:20px;
+    text-align:left;
 }
 
-.card h3 {
-  margin:0;
-  color:#0a1f44;
+.card h3{
+    color:#0a1f44;
+    margin-top:0;
 }
 
-.summary {
-  font-size:14px;
-  color:#555;
+.summary{
+    color:#555;
+    font-size:14px;
 }
 
 /* BENEFITS */
-.benefits {
-  list-style:none;
-  padding:0;
+.benefits{
+    list-style:none;
+    padding:0;
 }
 
-.benefits li {
-  padding-left:20px;
-  position:relative;
-  margin-bottom:6px;
+.benefits li{
+    margin-bottom:6px;
+    padding-left:20px;
+    position:relative;
 }
 
-.benefits li::before {
-  content:"✔";
-  position:absolute;
-  left:0;
-  color:#ff6600;
+.benefits li::before{
+    content:"✔";
+    position:absolute;
+    left:0;
+    color:#ff6600;
 }
 
 /* INPUTS */
-select, input {
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:8px;
-  border:1px solid #ddd;
-  outline:none;
-  transition:0.3s;
+select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ddd;
 }
 
-select:focus, input:focus {
-  border-color:#ff6600;
-  box-shadow:0 0 8px rgba(255,102,0,0.2);
+/* BUTTONS */
+.btn{
+    width:100%;
+    padding:12px;
+    background:linear-gradient(135deg,#ff7a18,#ff6600);
+    color:white;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
 }
 
-/* BUTTON */
-.btn {
-  width:100%;
-  padding:12px;
-  background:linear-gradient(135deg,#ff7a18,#ff6600);
-  color:white;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.3s;
+.btn:hover{
+    transform:scale(1.03);
 }
 
-.btn:hover {
-  transform:scale(1.03);
-  box-shadow:0 0 18px rgba(255,102,0,0.4);
+.btn-secondary{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#333;
+    color:white;
+    border:none;
+    border-radius:20px;
 }
 
-/* SECONDARY BUTTON */
-.btn-secondary {
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  background:#333;
-  color:white;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-}
-
-/* TRUST BADGE */
-.secure {
-  font-size:12px;
-  color:green;
-  margin-top:8px;
+/* SECURE */
+.secure{
+    font-size:12px;
+    color:green;
+    margin-top:8px;
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- SOUND -->
+<audio id="bgSound" autoplay loop>
+    <source src="sounds/conference.mp3" type="audio/mpeg">
+</audio>
+
+<!-- NAV -->
 <nav>
-  <img src="images/logo.png" class="logo">
-  <div>
-    <a href="index.html">Home</a>
-    <a href="conference.html">Conferences</a>
-    <a href="tourism.html">Tourism</a>
-  </div>
+
+<img src="images/logo.png" class="logo">
+
+<div>
+<a href="index.html">Home</a>
+<a href="conference.html">Conferences</a>
+<a href="tourism.html">Tourism</a>
+</div>
+
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <h1>Global Conferences</h1>
-  <p>Connecting Ideas, People & Opportunities</p>
+<h1>Global Conferences</h1>
+<p>Connecting Ideas, People & Opportunities</p>
 </section>
 
+<!-- SECTION -->
 <section class="section">
+
 <h2>Conference Packages</h2>
 
 <div class="grid">
 
 <!-- CARD 1 -->
-<div class="card" id="card1">
+<div class="card">
 
 <div class="badge">🔥 Limited Offer</div>
 
 <div class="media-wrapper">
-  <img src="images/conference1.jpg" class="media">
-
-
+<img src="images/conference1.jpg" class="media">
+</div>
 
 <div class="card-content">
 
@@ -241,29 +259,33 @@ Global investors meet producers to unlock high-value opportunities.
 </ul>
 
 <select id="ticket1">
-<option value="1000">Regular - usd 1000</option>
-<option value="2000">VIP - usd 2000</option>
+<option value="1000">Regular - USD 1000</option>
+<option value="2000">VIP - USD 2000</option>
 </select>
 
+<button class="btn" onclick="payNow(1)">
+Pay Securely
+</button>
 
+<div class="secure">
+🔒 Secure payment powered by Paystack
+</div>
 
-<button class="btn" onclick="payNow(1)">Pay Securely</button>
-<div class="secure">🔒 Secure payment powered by Paystack</div>
-
-<button class="btn-secondary">contact: info@globiaworld.com</button>
+<button class="btn-secondary">
+Contact: info@globiaworld.com
+</button>
 
 </div>
 </div>
 
 <!-- CARD 2 -->
-<div class="card" id="card2">
+<div class="card">
 
 <div class="badge">🔥 Limited Offer</div>
 
 <div class="media-wrapper">
-  <img src="images/conference2.jpg" class="media">
-
-
+<img src="images/conference2.jpg" class="media">
+</div>
 
 <div class="card-content">
 
@@ -281,49 +303,79 @@ Empowering youth through leadership and innovation.
 </ul>
 
 <select id="ticket2">
-<option value="1000">Regular - usd 1000</option>
-<option value="2000">VIP - usd 2000</option>
+<option value="1000">Regular - USD 1000</option>
+<option value="2000">VIP - USD 2000</option>
 </select>
 
+<button class="btn" onclick="payNow(2)">
+Pay Securely
+</button>
 
+<div class="secure">
+🔒 Secure payment powered by Paystack
+</div>
 
-<button class="btn" onclick="payNow(2)">Pay Securely</button>
-<div class="secure">🔒 Secure payment powered by Paystack</div>
-
-<button class="btn-secondary">contact: info@globiaworld.com</button>
+<button class="btn-secondary">
+Contact: info@globiaworld.com
+</button>
 
 </div>
 </div>
 
 </div>
+
 </section>
 
+<!-- PAYSTACK -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
 
-/* PAYMENT - CARD + BANK ONLY */
+/* AUTOPLAY SOUND FIX */
+window.addEventListener("click", function () {
+
+    const audio = document.getElementById("bgSound");
+
+    audio.play().catch(function(error){
+        console.log("Autoplay blocked");
+    });
+
+}, { once:true });
+
+/* PAYMENT */
 function payNow(type){
-  
-  let amount = document.getElementById(type===1?"ticket1":"ticket2").value;
 
-  let handler = PaystackPop.setup({
-    key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
-    email: email,
-    amount: amount * 100,
-    currency: "KES",
+    let amount = document.getElementById(
+        type === 1 ? "ticket1" : "ticket2"
+    ).value;
 
-    // ✅ ONLY CARD + BANK TRANSFER
-    channels: ['card', 'bank'],
+    let handler = PaystackPop.setup({
 
-    callback: function(response){
-      alert("Payment successful!");
-    }
-  });
+        key: "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780",
 
-  handler.openIframe();
-}
+        amount: amount * 100,
 
+        currency: "USD",
+
+        channels: ['card','bank'],
+
+        callback: function(response){
+
+            alert(
+                "Payment successful! Reference: " + response.reference
+            );
+
+        },
+
+        onClose: function(){
+
+            alert("Payment cancelled");
+
+        }
+
+    });
+
+    handler.openIframe();
 
 }
 

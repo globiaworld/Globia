@@ -1,1 +1,558 @@
+```html id="yb4l2m"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Partners | GlobiaWorld</title>
+
+<link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f4f7fb;
+  color:#111;
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:75px;
+  background:rgba(10,20,40,0.96);
+  backdrop-filter:blur(12px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 25px;
+  z-index:1000;
+}
+
+.logo{
+  height:50px;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:20px;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.nav a:hover{
+  color:#00c6ff;
+}
+
+/* HERO */
+.hero{
+  min-height:70vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+  url('images/joe.jpg') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 20px 60px;
+  color:white;
+}
+
+.hero h1{
+  font-size:60px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:850px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+/* SECTION */
+.section{
+  padding:90px 40px;
+}
+
+.sectionTitle{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.sectionSub{
+  text-align:center;
+  color:#666;
+  margin-bottom:60px;
+  font-size:17px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  border-radius:25px;
+  padding:35px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card h2{
+  margin-bottom:18px;
+  font-size:25px;
+}
+
+.card p{
+  color:#555;
+  line-height:1.8;
+  margin-bottom:25px;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.btn:hover{
+  opacity:0.9;
+}
+
+.blue{
+  background:#0072ff;
+  color:white;
+}
+
+.orange{
+  background:#ff6600;
+  color:white;
+}
+
+.purple{
+  background:#7b2cff;
+  color:white;
+}
+
+.green{
+  background:#0f9d58;
+  color:white;
+}
+
+/* BENEFITS */
+.benefits{
+  background:white;
+  border-radius:30px;
+  padding:50px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+}
+
+.benefitGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.benefit{
+  text-align:center;
+}
+
+.benefit h3{
+  margin:15px 0;
+  font-size:22px;
+}
+
+.benefit p{
+  color:#555;
+  line-height:1.7;
+}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,#081225,#0a1f44);
+  color:white;
+  text-align:center;
+  padding:90px 20px;
+}
+
+.cta h2{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.cta p{
+  max-width:750px;
+  margin:auto;
+  line-height:1.8;
+  margin-bottom:40px;
+  color:#ddd;
+}
+
+.ctaBtn{
+  padding:16px 35px;
+  border:none;
+  border-radius:40px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.ctaBtn:hover{
+  transform:translateY(-5px);
+}
+
+/* FOOTER */
+.footer{
+  background:#050d1b;
+  color:#999;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#25d366;
+  color:white;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  z-index:999;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .nav{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .sectionTitle{
+    font-size:32px;
+  }
+
+  .benefits{
+    padding:30px 20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+
+  <img src="images/logo.png" class="logo">
+
+  <div class="nav">
+
+    <a href="index.html">Home</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="conference.html">Conferences</a>
+    <a href="careers/">Careers</a>
+    <a href="digital-services.html">Digital Services</a>
+    <a href="opportunities.html">Opportunities</a>
+
+  </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>🤝 Partnerships & Collaborations</h1>
+
+  <p>
+
+    Join GlobiaWorld through strategic partnerships,
+    sponsorships, collaborations and commission-based opportunities
+    designed for global growth and innovation.
+
+  </p>
+
+</section>
+
+<!-- PARTNERS -->
+<section class="section">
+
+  <h2 class="sectionTitle">Partner With GlobiaWorld</h2>
+
+  <p class="sectionSub">
+
+    Build long-term opportunities through our growing ecosystem.
+
+  </p>
+
+  <div class="grid">
+
+    <!-- BUSINESS -->
+    <div class="card">
+
+      <h2>🏢 Business Partnerships</h2>
+
+      <p>
+
+        Collaborate with GlobiaWorld in tourism,
+        careers, digital services and global networking projects.
+
+      </p>
+
+      <button class="btn blue">
+
+        Become a Business Partner
+
+      </button>
+
+    </div>
+
+    <!-- AGENT -->
+    <div class="card">
+
+      <h2>🌍 Become an Agent</h2>
+
+      <p>
+
+        Earn commissions through recruitment,
+        tourism bookings, sponsorships and digital services.
+
+      </p>
+
+      <button class="btn orange">
+
+        Join Agent Program
+
+      </button>
+
+    </div>
+
+    <!-- SPONSORS -->
+    <div class="card">
+
+      <h2>🎤 Event Sponsorships</h2>
+
+      <p>
+
+        Sponsor conferences, networking events,
+        innovation summits and entrepreneurship programs.
+
+      </p>
+
+      <button class="btn purple">
+
+        Sponsor Events
+
+      </button>
+
+    </div>
+
+    <!-- FREELANCERS -->
+    <div class="card">
+
+      <h2>💻 Freelance Collaborations</h2>
+
+      <p>
+
+        Work with GlobiaWorld on digital projects,
+        marketing campaigns and creative services.
+
+      </p>
+
+      <button class="btn green">
+
+        Join Projects
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+
+  <div class="benefits">
+
+    <h2 class="sectionTitle">Why Partner With Us?</h2>
+
+    <p class="sectionSub">
+
+      GlobiaWorld connects opportunities across multiple industries.
+
+    </p>
+
+    <div class="benefitGrid">
+
+      <!-- BENEFIT -->
+      <div class="benefit">
+
+        <h3>🌐 Global Reach</h3>
+
+        <p>
+
+          Connect with audiences, businesses
+          and professionals across multiple regions.
+
+        </p>
+
+      </div>
+
+      <!-- BENEFIT -->
+      <div class="benefit">
+
+        <h3>🚀 Growth Opportunities</h3>
+
+        <p>
+
+          Scale through digital marketing,
+          partnerships and ecosystem collaborations.
+
+        </p>
+
+      </div>
+
+      <!-- BENEFIT -->
+      <div class="benefit">
+
+        <h3>💼 Multiple Industries</h3>
+
+        <p>
+
+          Tourism, careers, conferences,
+          AI services and digital innovation.
+
+        </p>
+
+      </div>
+
+      <!-- BENEFIT -->
+      <div class="benefit">
+
+        <h3>📈 Scalable Ecosystem</h3>
+
+        <p>
+
+          Commission-based systems designed
+          for sustainable long-term expansion.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Let’s Build Global Opportunities Together</h2>
+
+  <p>
+
+    Whether you are a recruiter, freelancer,
+    startup, sponsor or entrepreneur,
+    GlobiaWorld is ready to collaborate.
+
+  </p>
+
+  <button class="ctaBtn">
+
+    Start Partnership
+
+  </button>
+
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  © 2026 GlobiaWorld Partnerships.
+  All Rights Reserved.
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp"
+   href="https://wa.me/971567533605"
+   target="_blank">
+
+  💬
+
+</a>
+
+</body>
+
+</html>
+```
 

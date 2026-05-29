@@ -1,1 +1,516 @@
+```html id="t4wq9m"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Remote Jobs | GlobiaWorld</title>
+
+<link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f4f7fb;
+  color:#111;
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:75px;
+  background:rgba(10,20,40,0.96);
+  backdrop-filter:blur(12px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 25px;
+  z-index:1000;
+}
+
+.logo{
+  height:50px;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:20px;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.nav a:hover{
+  color:#00c6ff;
+}
+
+/* HERO */
+.hero{
+  min-height:60vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+  url('images/joe.jpg') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 20px 60px;
+  color:white;
+}
+
+.hero h1{
+  font-size:60px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:850px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+/* SECTION */
+.section{
+  padding:90px 40px;
+}
+
+.sectionTitle{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.sectionSub{
+  text-align:center;
+  color:#666;
+  margin-bottom:60px;
+  font-size:17px;
+}
+
+/* JOB GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+/* JOB CARD */
+.job{
+  background:white;
+  border-radius:25px;
+  padding:35px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+  transition:0.4s;
+}
+
+.job:hover{
+  transform:translateY(-10px);
+}
+
+.tag{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:18px;
+}
+
+.remote{
+  background:#e3f2fd;
+  color:#0072ff;
+}
+
+.digital{
+  background:#f3e5f5;
+  color:#7b2cff;
+}
+
+.marketing{
+  background:#fff3e0;
+  color:#ff6600;
+}
+
+.ai{
+  background:#e8f5e9;
+  color:#0f9d58;
+}
+
+.job h2{
+  margin-bottom:15px;
+  font-size:25px;
+}
+
+.job p{
+  color:#555;
+  line-height:1.8;
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  background:#0072ff;
+  color:white;
+  transition:0.3s;
+}
+
+.btn:hover{
+  opacity:0.9;
+}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,#081225,#0a1f44);
+  color:white;
+  text-align:center;
+  padding:90px 20px;
+}
+
+.cta h2{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.cta p{
+  max-width:750px;
+  margin:auto;
+  line-height:1.8;
+  margin-bottom:40px;
+  color:#ddd;
+}
+
+.ctaBtn{
+  padding:16px 35px;
+  border:none;
+  border-radius:40px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* FOOTER */
+.footer{
+  background:#050d1b;
+  color:#999;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#25d366;
+  color:white;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  z-index:999;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .nav{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .sectionTitle{
+    font-size:32px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+
+  <img src="images/logo.png" class="logo">
+
+  <div class="nav">
+
+    <a href="index.html">Home</a>
+    <a href="careers/">Careers</a>
+    <a href="digital-services.html">Digital Services</a>
+    <a href="opportunities.html">Opportunities</a>
+    <a href="partners.html">Partners</a>
+
+  </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>💻 Remote Jobs</h1>
+
+  <p>
+
+    Explore flexible online opportunities in marketing,
+    AI, websites, digital services and global remote work.
+
+  </p>
+
+</section>
+
+<!-- JOBS -->
+<section class="section">
+
+  <h2 class="sectionTitle">Available Opportunities</h2>
+
+  <p class="sectionSub">
+
+    Join digital projects, startups and remote work ecosystems globally.
+
+  </p>
+
+  <div class="grid">
+
+    <!-- JOB -->
+    <div class="job">
+
+      <div class="tag remote">
+        REMOTE
+      </div>
+
+      <h2>📱 Social Media Manager</h2>
+
+      <p>
+
+        Manage TikTok, Instagram and digital campaigns
+        for brands, startups and online businesses.
+
+      </p>
+
+      <button class="btn">
+
+        Apply Now
+
+      </button>
+
+    </div>
+
+    <!-- JOB -->
+    <div class="job">
+
+      <div class="tag digital">
+        DIGITAL
+      </div>
+
+      <h2>🌐 Website Developer</h2>
+
+      <p>
+
+        Build modern websites, landing pages
+        and digital platforms for global clients.
+
+      </p>
+
+      <button class="btn">
+
+        Apply Now
+
+      </button>
+
+    </div>
+
+    <!-- JOB -->
+    <div class="job">
+
+      <div class="tag marketing">
+        MARKETING
+      </div>
+
+      <h2>📈 Digital Marketing Agent</h2>
+
+      <p>
+
+        Promote services, generate leads
+        and grow online businesses remotely.
+
+      </p>
+
+      <button class="btn">
+
+        Apply Now
+
+      </button>
+
+    </div>
+
+    <!-- JOB -->
+    <div class="job">
+
+      <div class="tag ai">
+        AI & AUTOMATION
+      </div>
+
+      <h2>🤖 AI Assistant Operator</h2>
+
+      <p>
+
+        Support businesses through AI tools,
+        automation systems and chatbot management.
+
+      </p>
+
+      <button class="btn">
+
+        Apply Now
+
+      </button>
+
+    </div>
+
+    <!-- JOB -->
+    <div class="job">
+
+      <div class="tag remote">
+        FREELANCE
+      </div>
+
+      <h2>🎬 Video Editor</h2>
+
+      <p>
+
+        Create short-form content,
+        reels, ads and promotional videos remotely.
+
+      </p>
+
+      <button class="btn">
+
+        Apply Now
+
+      </button>
+
+    </div>
+
+    <!-- JOB -->
+    <div class="job">
+
+      <div class="tag digital">
+        COMMISSION BASED
+      </div>
+
+      <h2>🌍 Recruitment Agent</h2>
+
+      <p>
+
+        Connect job seekers with employers
+        and earn commissions through successful placements.
+
+      </p>
+
+      <button class="btn">
+
+        Apply Now
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Work Without Borders</h2>
+
+  <p>
+
+    GlobiaWorld helps professionals connect
+    with flexible digital opportunities worldwide.
+
+  </p>
+
+  <button class="ctaBtn"
+          onclick="location.href='upload-cv.html'">
+
+    Upload Your CV
+
+  </button>
+
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  © 2026 GlobiaWorld Remote Jobs.
+  All Rights Reserved.
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp"
+   href="https://wa.me/971567533605"
+   target="_blank">
+
+  💬
+
+</a>
+
+</body>
+
+</html>
+```
 

@@ -1,1 +1,502 @@
+```html id="r7md1k"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Us | GlobiaWorld</title>
+
+<link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f4f7fb;
+  color:#111;
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:75px;
+  background:rgba(10,20,40,0.96);
+  backdrop-filter:blur(12px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 25px;
+  z-index:1000;
+}
+
+.logo{
+  height:50px;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:20px;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.nav a:hover{
+  color:#00c6ff;
+}
+
+/* HERO */
+.hero{
+  min-height:70vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+  url('images/joe.jpg') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 20px 60px;
+  color:white;
+}
+
+.hero h1{
+  font-size:60px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:850px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+/* SECTION */
+.section{
+  padding:90px 40px;
+}
+
+.sectionTitle{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.sectionSub{
+  text-align:center;
+  color:#666;
+  margin-bottom:60px;
+  font-size:17px;
+}
+
+/* STORY */
+.story{
+  background:white;
+  border-radius:30px;
+  padding:50px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+  line-height:1.9;
+  color:#444;
+  font-size:17px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  border-radius:25px;
+  padding:35px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+  transition:0.4s;
+  text-align:center;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card h2{
+  margin:20px 0;
+  font-size:24px;
+}
+
+.card p{
+  color:#555;
+  line-height:1.8;
+}
+
+/* STATS */
+.stats{
+  background:#081225;
+  color:white;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  text-align:center;
+  padding:80px 30px;
+}
+
+.stat h3{
+  font-size:45px;
+  margin-bottom:10px;
+}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,#081225,#0a1f44);
+  color:white;
+  text-align:center;
+  padding:90px 20px;
+}
+
+.cta h2{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.cta p{
+  max-width:750px;
+  margin:auto;
+  line-height:1.8;
+  margin-bottom:40px;
+  color:#ddd;
+}
+
+.ctaBtn{
+  padding:16px 35px;
+  border:none;
+  border-radius:40px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.ctaBtn:hover{
+  transform:translateY(-5px);
+}
+
+/* FOOTER */
+.footer{
+  background:#050d1b;
+  color:#999;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#25d366;
+  color:white;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  z-index:999;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .nav{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .sectionTitle{
+    font-size:32px;
+  }
+
+  .story{
+    padding:30px 20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+
+  <img src="images/logo.png" class="logo">
+
+  <div class="nav">
+
+    <a href="index.html">Home</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="conference.html">Conferences</a>
+    <a href="careers/">Careers</a>
+    <a href="digital-services.html">Digital Services</a>
+    <a href="opportunities.html">Opportunities</a>
+
+  </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>🌍 About GlobiaWorld</h1>
+
+  <p>
+
+    Building a global ecosystem connecting careers,
+    tourism, conferences, partnerships and digital innovation.
+
+  </p>
+
+</section>
+
+<!-- STORY -->
+<section class="section">
+
+  <h2 class="sectionTitle">Who We Are</h2>
+
+  <p class="sectionSub">
+
+    A modern ecosystem built for global opportunities and growth.
+
+  </p>
+
+  <div class="story">
+
+    <p>
+
+      GlobiaWorld is a multi-service digital ecosystem focused on
+      connecting people, businesses and opportunities worldwide.
+      Our platform combines careers, tourism, conferences,
+      digital services and strategic partnerships into one scalable network.
+
+    </p>
+
+    <br>
+
+    <p>
+
+      We believe the future belongs to ecosystems that empower
+      collaboration, innovation and global access.
+      Through technology, networking and digital transformation,
+      GlobiaWorld helps individuals and businesses grow beyond borders.
+
+    </p>
+
+    <br>
+
+    <p>
+
+      From recruitment and tourism to AI automation and digital marketing,
+      we are building a platform designed for modern entrepreneurs,
+      startups, freelancers, recruiters and global professionals.
+
+    </p>
+
+  </div>
+
+</section>
+
+<!-- VALUES -->
+<section class="section">
+
+  <h2 class="sectionTitle">Our Core Values</h2>
+
+  <p class="sectionSub">
+
+    The principles driving our ecosystem forward.
+
+  </p>
+
+  <div class="grid">
+
+    <!-- VALUE -->
+    <div class="card">
+
+      <h2>🚀 Innovation</h2>
+
+      <p>
+
+        Embracing technology, AI and modern digital systems
+        to create scalable global opportunities.
+
+      </p>
+
+    </div>
+
+    <!-- VALUE -->
+    <div class="card">
+
+      <h2>🤝 Collaboration</h2>
+
+      <p>
+
+        Building partnerships that connect businesses,
+        professionals and communities worldwide.
+
+      </p>
+
+    </div>
+
+    <!-- VALUE -->
+    <div class="card">
+
+      <h2>🌐 Global Reach</h2>
+
+      <p>
+
+        Expanding access to careers, tourism,
+        networking and digital growth across borders.
+
+      </p>
+
+    </div>
+
+    <!-- VALUE -->
+    <div class="card">
+
+      <h2>📈 Growth</h2>
+
+      <p>
+
+        Empowering individuals and organizations
+        through sustainable digital ecosystems.
+
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- STATS -->
+<section class="stats">
+
+  <div class="stat">
+
+    <h3>500+</h3>
+
+    <p>Deployments</p>
+
+  </div>
+
+  <div class="stat">
+
+    <h3>Global</h3>
+
+    <p>Opportunities</p>
+
+  </div>
+
+  <div class="stat">
+
+    <h3>Multi-Service</h3>
+
+    <p>Ecosystem Platform</p>
+
+  </div>
+
+  <div class="stat">
+
+    <h3>24/7</h3>
+
+    <p>Digital Access</p>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Join the GlobiaWorld Ecosystem</h2>
+
+  <p>
+
+    Connect with opportunities, partnerships,
+    careers and digital innovation through a growing global platform.
+
+  </p>
+
+  <button class="ctaBtn"
+          onclick="location.href='partners.html'">
+
+    Partner With Us
+
+  </button>
+
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  © 2026 GlobiaWorld Ecosystem.
+  All Rights Reserved.
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp"
+   href="https://wa.me/971567533605"
+   target="_blank">
+
+  💬
+
+</a>
+
+</body>
+
+</html>
+```
 

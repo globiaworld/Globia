@@ -1,1 +1,628 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Digital Services | GlobiaWorld</title>
+
+<link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f4f7fb;
+  color:#111;
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:75px;
+  background:rgba(10,20,40,0.96);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 25px;
+  z-index:1000;
+  backdrop-filter:blur(12px);
+}
+
+.logo{
+  height:50px;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:20px;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.nav a:hover{
+  color:#00c6ff;
+}
+
+/* HERO */
+.hero{
+  min-height:70vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+  url('images/joe.jpg') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 20px 60px;
+  color:white;
+}
+
+.hero h1{
+  font-size:60px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:850px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+/* SECTION */
+.section{
+  padding:90px 40px;
+}
+
+.sectionTitle{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.sectionSub{
+  text-align:center;
+  color:#666;
+  margin-bottom:60px;
+  font-size:17px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  border-radius:25px;
+  padding:30px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card h2{
+  margin-bottom:15px;
+  font-size:25px;
+}
+
+.card p{
+  line-height:1.8;
+  color:#555;
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:15px;
+  transition:0.3s;
+}
+
+.btn:hover{
+  opacity:0.9;
+}
+
+.social{
+  background:#ff2d55;
+  color:white;
+}
+
+.web{
+  background:#0072ff;
+  color:white;
+}
+
+.ai{
+  background:#7b2cff;
+  color:white;
+}
+
+.general{
+  background:#111;
+  color:white;
+}
+
+/* PROCESS */
+.process{
+  background:white;
+  border-radius:30px;
+  padding:50px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  margin-top:40px;
+}
+
+.step{
+  text-align:center;
+}
+
+.stepNumber{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#0072ff;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+  margin-bottom:20px;
+  font-size:26px;
+  font-weight:bold;
+}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,#081225,#0a1f44);
+  color:white;
+  text-align:center;
+  padding:90px 20px;
+}
+
+.cta h2{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.cta p{
+  max-width:750px;
+  margin:auto;
+  line-height:1.8;
+  margin-bottom:40px;
+  color:#ddd;
+}
+
+.ctaBtn{
+  padding:16px 35px;
+  border:none;
+  border-radius:40px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.ctaBtn:hover{
+  transform:translateY(-5px);
+}
+
+/* FOOTER */
+.footer{
+  background:#050d1b;
+  color:#999;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#25d366;
+  color:white;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  z-index:999;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .nav{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .sectionTitle{
+    font-size:32px;
+  }
+
+  .process{
+    padding:30px 20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+
+  <img src="images/logo.png" class="logo">
+
+  <div class="nav">
+
+    <a href="index.html">Home</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="conference.html">Conferences</a>
+    <a href="careers/">Careers</a>
+    <a href="opportunities.html">Opportunities</a>
+    <a href="partners.html">Partners</a>
+
+  </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>🚀 Digital Services</h1>
+
+  <p>
+
+    Helping businesses, startups and entrepreneurs grow through
+    digital innovation, marketing, websites, AI automation and
+    scalable online solutions.
+
+  </p>
+
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+
+  <h2 class="sectionTitle">Our Digital Solutions</h2>
+
+  <p class="sectionSub">
+
+    Modern digital services designed for growth, visibility and automation.
+
+  </p>
+
+  <div class="grid">
+
+    <!-- SOCIAL -->
+    <div class="card">
+
+      <h2>📱 Social Media Marketing</h2>
+
+      <p>
+
+        Grow your brand through TikTok marketing,
+        Instagram Reels, content creation,
+        ads management and audience engagement.
+
+      </p>
+
+      <button class="btn social"
+              onclick="location.href='services/social-media.html'">
+
+        Explore Service
+
+      </button>
+
+    </div>
+
+    <!-- WEB -->
+    <div class="card">
+
+      <h2>🌐 Website Development</h2>
+
+      <p>
+
+        Professional websites, ecommerce stores,
+        landing pages, booking systems and
+        business platforms for modern brands.
+
+      </p>
+
+      <button class="btn web"
+              onclick="location.href='services/web-development.html'">
+
+        Explore Service
+
+      </button>
+
+    </div>
+
+    <!-- AI -->
+    <div class="card">
+
+      <h2>🤖 AI Automation</h2>
+
+      <p>
+
+        AI chatbots, WhatsApp automation,
+        lead generation systems and smart
+        digital workflows for businesses.
+
+      </p>
+
+      <button class="btn ai"
+              onclick="location.href='services/ai-automation.html'">
+
+        Explore Service
+
+      </button>
+
+    </div>
+
+    <!-- BRANDING -->
+    <div class="card">
+
+      <h2>🎨 Branding & Design</h2>
+
+      <p>
+
+        Logo design, social media branding,
+        posters, company kits and modern
+        digital identity solutions.
+
+      </p>
+
+      <button class="btn general">
+
+        Coming Soon
+
+      </button>
+
+    </div>
+
+    <!-- VIDEO -->
+    <div class="card">
+
+      <h2>🎬 Video Editing</h2>
+
+      <p>
+
+        TikTok editing, promotional videos,
+        YouTube content and modern short-form
+        content creation for brands.
+
+      </p>
+
+      <button class="btn general">
+
+        Coming Soon
+
+      </button>
+
+    </div>
+
+    <!-- SEO -->
+    <div class="card">
+
+      <h2>📈 SEO & Growth</h2>
+
+      <p>
+
+        Improve visibility through SEO,
+        Google rankings, digital campaigns
+        and strategic online growth systems.
+
+      </p>
+
+      <button class="btn general">
+
+        Coming Soon
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+
+  <div class="process">
+
+    <h2 class="sectionTitle">How We Work</h2>
+
+    <p class="sectionSub">
+
+      A streamlined process designed for speed, growth and partnerships.
+
+    </p>
+
+    <div class="steps">
+
+      <!-- STEP -->
+      <div class="step">
+
+        <div class="stepNumber">1</div>
+
+        <h3>Consultation</h3>
+
+        <br>
+
+        <p>
+
+          We understand your goals,
+          business needs and digital vision.
+
+        </p>
+
+      </div>
+
+      <!-- STEP -->
+      <div class="step">
+
+        <div class="stepNumber">2</div>
+
+        <h3>Strategy</h3>
+
+        <br>
+
+        <p>
+
+          Our team creates customized
+          growth and digital service strategies.
+
+        </p>
+
+      </div>
+
+      <!-- STEP -->
+      <div class="step">
+
+        <div class="stepNumber">3</div>
+
+        <h3>Execution</h3>
+
+        <br>
+
+        <p>
+
+          We launch marketing, websites,
+          automation and digital systems.
+
+        </p>
+
+      </div>
+
+      <!-- STEP -->
+      <div class="step">
+
+        <div class="stepNumber">4</div>
+
+        <h3>Growth</h3>
+
+        <br>
+
+        <p>
+
+          Scale your business through
+          partnerships, leads and optimization.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Build Your Digital Future</h2>
+
+  <p>
+
+    Join businesses, entrepreneurs and creators
+    using GlobiaWorld Digital Services to scale,
+    automate and grow globally.
+
+  </p>
+
+  <button class="ctaBtn">
+
+    Start Your Project
+
+  </button>
+
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  © 2026 GlobiaWorld Digital Services.
+  All Rights Reserved.
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp"
+   href="https://wa.me/971567533605"
+   target="_blank">
+
+  💬
+
+</a>
+
+</body>
+
+</html>
+```
 

@@ -1,13 +1,12 @@
-```html id="p3nv7q"
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contact Us | GlobiaWorld</title>
+<title>Contact GlobiaWorld | Global Opportunities</title>
 
 <link rel="icon" href="images/logo.png">
 
@@ -15,273 +14,178 @@
 
 <style>
 
-/* GLOBAL */
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-  font-family:'Poppins',sans-serif;
-  background:#f4f7fb;
-  color:#111;
-  overflow-x:hidden;
+font-family:'Poppins',sans-serif;
+background:#f5f7fb;
+color:#111;
 }
 
-/* TOPBAR */
 .topbar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:75px;
-  background:rgba(10,20,40,0.96);
-  backdrop-filter:blur(12px);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 25px;
-  z-index:1000;
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:75px;
+background:#081225;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 25px;
+z-index:1000;
 }
 
 .logo{
-  height:50px;
+height:50px;
 }
 
-/* NAV */
 .nav{
-  display:flex;
-  gap:20px;
+display:flex;
+gap:20px;
 }
 
 .nav a{
-  color:white;
-  text-decoration:none;
-  font-size:14px;
-  transition:0.3s;
+color:white;
+text-decoration:none;
+font-size:14px;
 }
 
 .nav a:hover{
-  color:#00c6ff;
+color:#00c6ff;
 }
 
-/* HERO */
 .hero{
-  min-height:55vh;
-  background:
-  linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
-  url('images/joe.jpg') center/cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:120px 20px 60px;
-  color:white;
+padding:150px 20px 100px;
+text-align:center;
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url('images/joe.jpg') center/cover;
+color:white;
 }
 
 .hero h1{
-  font-size:60px;
-  margin-bottom:20px;
+font-size:60px;
+margin-bottom:20px;
 }
 
 .hero p{
-  max-width:850px;
-  line-height:1.8;
-  font-size:20px;
+max-width:800px;
+margin:auto;
+line-height:1.8;
+font-size:20px;
 }
 
-/* SECTION */
-.section{
-  padding:90px 40px;
+.container{
+max-width:1200px;
+margin:auto;
+padding:80px 20px;
 }
 
-/* CONTACT WRAP */
-.contactWrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
 }
 
-/* FORM */
-.formBox{
-  background:white;
-  border-radius:30px;
-  padding:40px;
-  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+.card{
+background:white;
+padding:35px;
+border-radius:25px;
+box-shadow:0 10px 35px rgba(0,0,0,.08);
 }
 
-.formBox h2{
-  margin-bottom:25px;
-  font-size:35px;
+.card h2{
+margin-bottom:20px;
 }
 
-.input{
-  width:100%;
-  padding:16px;
-  margin-bottom:20px;
-  border:1px solid #ddd;
-  border-radius:15px;
-  font-size:15px;
-  font-family:'Poppins',sans-serif;
+.card p{
+line-height:1.8;
+color:#555;
+margin-bottom:15px;
 }
 
-textarea.input{
-  min-height:160px;
-  resize:none;
-}
-
-/* BUTTON */
 .btn{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:30px;
-  background:#0072ff;
-  color:white;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
+display:block;
+width:100%;
+padding:16px;
+border:none;
+border-radius:30px;
+background:#0072ff;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+text-align:center;
+margin-top:15px;
 }
 
 .btn:hover{
-  opacity:0.9;
+opacity:.9;
 }
 
-/* INFO */
-.infoBox{
-  background:white;
-  border-radius:30px;
-  padding:40px;
-  box-shadow:0 10px 35px rgba(0,0,0,0.08);
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:50px;
 }
 
-.infoBox h2{
-  margin-bottom:30px;
-  font-size:35px;
+.service{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-.infoItem{
-  margin-bottom:30px;
+.service h3{
+margin-bottom:10px;
 }
 
-.infoItem h3{
-  margin-bottom:10px;
-  font-size:22px;
-}
-
-.infoItem p{
-  color:#555;
-  line-height:1.8;
-}
-
-/* SOCIAL */
-.socials{
-  display:flex;
-  gap:15px;
-  margin-top:20px;
-}
-
-.social{
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:#081225;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-decoration:none;
-  font-size:20px;
-  transition:0.3s;
-}
-
-.social:hover{
-  transform:translateY(-5px);
-}
-
-/* CTA */
-.cta{
-  background:linear-gradient(135deg,#081225,#0a1f44);
-  color:white;
-  text-align:center;
-  padding:90px 20px;
-}
-
-.cta h2{
-  font-size:42px;
-  margin-bottom:20px;
-}
-
-.cta p{
-  max-width:750px;
-  margin:auto;
-  line-height:1.8;
-  margin-bottom:40px;
-  color:#ddd;
-}
-
-/* FOOTER */
 .footer{
-  background:#050d1b;
-  color:#999;
-  text-align:center;
-  padding:20px;
-  font-size:14px;
+background:#081225;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:80px;
 }
 
-/* WHATSAPP */
 .whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background:#25d366;
-  color:white;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  z-index:999;
-  box-shadow:0 5px 20px rgba(0,0,0,0.3);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-
-  .contactWrap{
-    grid-template-columns:1fr;
-  }
-
+position:fixed;
+bottom:20px;
+right:20px;
+width:65px;
+height:65px;
+background:#25d366;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:30px;
+text-decoration:none;
+box-shadow:0 5px 20px rgba(0,0,0,.3);
 }
 
 @media(max-width:768px){
 
-  .nav{
-    display:none;
-  }
+.nav{
+display:none;
+}
 
-  .hero h1{
-    font-size:42px;
-  }
+.hero h1{
+font-size:40px;
+}
 
-  .hero p{
-    font-size:17px;
-  }
-
-  .section{
-    padding:70px 20px;
-  }
-
-  .formBox,
-  .infoBox{
-    padding:30px 20px;
-  }
+.hero p{
+font-size:16px;
+}
 
 }
 
@@ -291,199 +195,147 @@ textarea.input{
 
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
 
-  <img src="images/logo.png" class="logo">
+<img src="images/logo.png" class="logo">
 
-  <div class="nav">
+<div class="nav">
 
-    <a href="index.html">Home</a>
-    <a href="tourism.html">Tourism</a>
-    <a href="conference.html">Conferences</a>
-    <a href="careers/">Careers</a>
-    <a href="digital-services.html">Digital Services</a>
-    <a href="opportunities.html">Opportunities</a>
-
-  </div>
+<a href="index.html">Home</a>
+<a href="tourism.html">Tourism</a>
+<a href="conference.html">Conferences</a>
+<a href="careers/">Careers</a>
+<a href="remote-jobs.html">Remote Jobs</a>
+<a href="visa-sponsorship.html">Visa Sponsorship</a>
+<a href="digital-services.html">Digital Services</a>
+<a href="partners.html">Partners</a>
 
 </div>
 
-<!-- HERO -->
+</div>
+
 <section class="hero">
 
-  <h1>📞 Contact GlobiaWorld</h1>
+<h1>📞 Contact GlobiaWorld</h1>
 
-  <p>
+<p>
 
-    Let’s connect through partnerships,
-    careers, tourism, conferences and digital innovation.
+Connect with us for careers, partnerships, tourism,
+visa sponsorship opportunities, conferences and digital services.
 
-  </p>
-
-</section>
-
-<!-- CONTACT -->
-<section class="section">
-
-  <div class="contactWrap">
-
-    <!-- FORM -->
-    <div class="formBox">
-
-      <h2>Send a Message</h2>
-
-      <form>
-
-        <input type="text"
-               class="input"
-               placeholder="Full Name"
-               required>
-
-        <input type="email"
-               class="input"
-               placeholder="Email Address"
-               required>
-
-        <input type="text"
-               class="input"
-               placeholder="Subject"
-               required>
-
-        <textarea class="input"
-                  placeholder="Your Message"
-                  required></textarea>
-
-        <button class="btn" type="submit">
-
-          Send Message
-
-        </button>
-
-      </form>
-
-    </div>
-
-    <!-- INFO -->
-    <div class="infoBox">
-
-      <h2>Get In Touch</h2>
-
-      <div class="infoItem">
-
-        <h3>📧 Email</h3>
-
-        <p>
-
-          info@globiaworld.com
-
-        </p>
-
-      </div>
-
-      <div class="infoItem">
-
-        <h3>📱 WhatsApp</h3>
-
-        <p>
-
-          +971 567533605
-
-        </p>
-
-      </div>
-
-      <div class="infoItem">
-
-        <h3>🌍 Services</h3>
-
-        <p>
-
-          Careers • Tourism • Conferences •
-          Partnerships • Digital Services
-
-        </p>
-
-      </div>
-
-      <div class="infoItem">
-
-        <h3>🤝 Partnerships</h3>
-
-        <p>
-
-          We welcome recruiters, businesses,
-          sponsors, freelancers and collaborators.
-
-        </p>
-
-      </div>
-
-      <!-- SOCIAL -->
-      <div class="socials">
-
-        <a href="#"
-           class="social">
-
-          🌐
-
-        </a>
-
-        <a href="#"
-           class="social">
-
-          📱
-
-        </a>
-
-        <a href="#"
-           class="social">
-
-          ▶️
-
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
+</p>
 
 </section>
 
-<!-- CTA -->
-<section class="cta">
+<div class="container">
 
-  <h2>Let’s Build Opportunities Together</h2>
+<div class="grid">
 
-  <p>
+<div class="card">
 
-    GlobiaWorld is building a scalable ecosystem
-    connecting people, businesses and innovation globally.
+<h2>📧 Email Us</h2>
 
-  </p>
+<p>
+Send us an email and we'll respond as soon as possible.
+</p>
 
-</section>
+<a class="btn"
+href="mailto:info@globiaworld.com?subject=GlobiaWorld Inquiry">
 
-<!-- FOOTER -->
-<div class="footer">
+Send Email
 
-  © 2026 GlobiaWorld Ecosystem.
-  All Rights Reserved.
+</a>
 
 </div>
 
-<!-- WHATSAPP -->
-<a class="whatsapp"
-   href="https://wa.me/971567533605"
-   target="_blank">
+<div class="card">
 
-  💬
+<h2>💬 WhatsApp</h2>
+
+<p>
+Chat directly with the GlobiaWorld team.
+</p>
+
+<a class="btn"
+href="https://wa.me/971567533605"
+target="_blank">
+
+Open WhatsApp
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🌍 Explore Opportunities</h2>
+
+<p>
+Apply for jobs, partnerships, tourism programs and digital services.
+</p>
+
+<a class="btn"
+href="opportunities.html">
+
+View Opportunities
+
+</a>
+
+</div>
+
+</div>
+
+<div class="services">
+
+<div class="service">
+<h3>💼 Careers</h3>
+<p>Job opportunities and recruitment.</p>
+</div>
+
+<div class="service">
+<h3>✈️ Tourism</h3>
+<p>Travel and destination services.</p>
+</div>
+
+<div class="service">
+<h3>🎤 Conferences</h3>
+<p>Business and networking events.</p>
+</div>
+
+<div class="service">
+<h3>🤖 AI Automation</h3>
+<p>Business automation solutions.</p>
+</div>
+
+<div class="service">
+<h3>📱 Social Media</h3>
+<p>Marketing and brand growth.</p>
+</div>
+
+<div class="service">
+<h3>🌐 Web Development</h3>
+<p>Professional websites and portals.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 GlobiaWorld Ecosystem • Global Opportunities • Innovation • Partnerships
+
+</div>
+
+<a class="whatsapp"
+href="https://wa.me/971567533605"
+target="_blank">
+
+💬
 
 </a>
 
 </body>
-
 </html>
 ```
 

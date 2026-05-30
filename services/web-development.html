@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Web Development | GlobiaWorld</title>
+
+<link rel="icon" href="images/logo.png">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Segoe UI,sans-serif;
+background:#f5f7fb;
+color:#111;
+}
+
+.topbar{
+height:70px;
+background:#081225;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+height:45px;
+}
+
+.hero{
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url('images/joe.jpg');
+background-size:cover;
+background-position:center;
+padding:120px 20px;
+text-align:center;
+color:white;
+}
+
+.hero h1{
+font-size:55px;
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:900px;
+margin:auto;
+font-size:20px;
+line-height:1.8;
+}
+
+.section{
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+font-size:42px;
+margin-bottom:15px;
+}
+
+.section-sub{
+text-align:center;
+color:#666;
+margin-bottom:50px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h3{
+margin-bottom:15px;
+font-size:24px;
+}
+
+.card p{
+line-height:1.8;
+color:#555;
+margin-bottom:20px;
+}
+
+.btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#0072ff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+.packages{
+background:#081225;
+color:white;
+padding:80px 20px;
+text-align:center;
+}
+
+.package-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+max-width:1100px;
+margin:auto;
+margin-top:40px;
+}
+
+.package{
+background:white;
+color:#111;
+padding:30px;
+border-radius:20px;
+}
+
+.price{
+font-size:40px;
+font-weight:bold;
+color:#0072ff;
+margin:20px 0;
+}
+
+.founder{
+text-align:center;
+padding:60px 20px;
+}
+
+.founder-pic{
+width:130px;
+height:130px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #0072ff;
+margin-bottom:15px;
+}
+
+.footer{
+background:#081225;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:38px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.section-title{
+font-size:30px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+<img src="images/logo.png" class="logo">
+
+</div>
+
+<section class="hero">
+
+<h1>🌐 Web Development Services</h1>
+
+<p>
+
+Professional websites, business portals, booking systems,
+recruitment platforms and digital solutions for modern businesses.
+
+</p>
+
+</section>
+
+<section class="section">
+
+<h2 class="section-title">What We Build</h2>
+
+<p class="section-sub">
+
+Custom websites designed for growth and business success.
+
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>🏢 Business Websites</h3>
+
+<p>
+
+Professional websites for companies, startups and organizations.
+
+</p>
+
+<button class="btn">
+Request Quote
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>🛒 E-Commerce Stores</h3>
+
+<p>
+
+Online stores with payment integration and inventory management.
+
+</p>
+
+<button class="btn">
+Request Quote
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>📅 Booking Systems</h3>
+
+<p>
+
+Appointment scheduling and reservation platforms.
+
+</p>
+
+<button class="btn">
+Request Quote
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💼 Recruitment Portals</h3>
+
+<p>
+
+Job boards, application systems and recruitment platforms.
+
+</p>
+
+<button class="btn">
+Request Quote
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>🎤 Conference Platforms</h3>
+
+<p>
+
+Event registration, speaker management and attendee portals.
+
+</p>
+
+<button class="btn">
+Request Quote
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>🤖 AI Integrated Websites</h3>
+
+<p>
+
+Websites with AI chatbots, automation and lead capture systems.
+
+</p>
+
+<button class="btn">
+Request Quote
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="packages">
+
+<h2>Popular Packages</h2>
+
+<div class="package-grid">
+
+<div class="package">
+
+<h3>Starter Website</h3>
+
+<div class="price">$199</div>
+
+<p>
+Business website with up to 5 pages.
+</p>
+
+</div>
+
+<div class="package">
+
+<h3>Professional Website</h3>
+
+<div class="price">$499</div>
+
+<p>
+Custom website with advanced features.
+</p>
+
+</div>
+
+<div class="package">
+
+<h3>Enterprise Solution</h3>
+
+<div class="price">$999+</div>
+
+<p>
+Custom portals, automation and integrations.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="founder">
+
+<img src="images/joe.jpg" class="founder-pic">
+
+<h3>Joseph Wachira</h3>
+
+<p>
+Founder, GlobiaWorld Ecosystem
+</p>
+
+</div>
+
+<div class="footer">
+
+© 2026 GlobiaWorld Web Development Services
+
+</div>
+
+</body>
+
+</html>

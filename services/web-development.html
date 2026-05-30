@@ -5,9 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Web Development | GlobiaWorld</title>
+<title>Web Development Services | GlobiaWorld</title>
 
 <link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,34 +20,50 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Segoe UI,sans-serif;
-background:#f5f7fb;
+font-family:'Poppins',sans-serif;
+background:#f4f7fb;
 color:#111;
+line-height:1.7;
 }
 
 .topbar{
-height:70px;
 background:#081225;
+padding:15px 25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:0 20px;
 position:sticky;
 top:0;
 z-index:1000;
 }
 
 .logo{
-height:45px;
+height:50px;
+}
+
+.nav{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.nav a{
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.nav a:hover{
+color:#00c3ff;
 }
 
 .hero{
 background:
-linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
 url('images/joe.jpg');
 background-size:cover;
 background-position:center;
-padding:120px 20px;
+padding:140px 20px;
 text-align:center;
 color:white;
 }
@@ -59,7 +77,34 @@ margin-bottom:20px;
 max-width:900px;
 margin:auto;
 font-size:20px;
-line-height:1.8;
+}
+
+.hero-btns{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 25px;
+border:none;
+border-radius:30px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+}
+
+.primary{
+background:#0072ff;
+color:white;
+}
+
+.secondary{
+background:white;
+color:#111;
 }
 
 .section{
@@ -68,13 +113,13 @@ max-width:1200px;
 margin:auto;
 }
 
-.section-title{
+.title{
 text-align:center;
-font-size:42px;
+font-size:40px;
 margin-bottom:15px;
 }
 
-.section-sub{
+.subtitle{
 text-align:center;
 color:#666;
 margin-bottom:50px;
@@ -82,7 +127,7 @@ margin-bottom:50px;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:25px;
 }
 
@@ -100,35 +145,28 @@ transform:translateY(-8px);
 
 .card h3{
 margin-bottom:15px;
-font-size:24px;
 }
 
 .card p{
-line-height:1.8;
-color:#555;
 margin-bottom:20px;
+color:#555;
 }
 
-.btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:30px;
+.card-btn{
+display:block;
+text-align:center;
 background:#0072ff;
 color:white;
-font-weight:bold;
-cursor:pointer;
-}
-
-.btn:hover{
-opacity:.9;
+padding:12px;
+border-radius:25px;
+text-decoration:none;
+font-weight:600;
 }
 
 .packages{
 background:#081225;
 color:white;
 padding:80px 20px;
-text-align:center;
 }
 
 .package-grid{
@@ -145,34 +183,70 @@ background:white;
 color:#111;
 padding:30px;
 border-radius:20px;
+text-align:center;
 }
 
 .price{
-font-size:40px;
-font-weight:bold;
+font-size:42px;
+font-weight:700;
 color:#0072ff;
-margin:20px 0;
+margin:15px 0;
 }
 
 .founder{
+padding:80px 20px;
 text-align:center;
-padding:60px 20px;
 }
 
-.founder-pic{
-width:130px;
-height:130px;
+.founder img{
+width:140px;
+height:140px;
 border-radius:50%;
 object-fit:cover;
 border:4px solid #0072ff;
 margin-bottom:15px;
 }
 
+.cta{
+background:#0072ff;
+color:white;
+padding:80px 20px;
+text-align:center;
+}
+
+.cta h2{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.cta p{
+max-width:800px;
+margin:auto;
+margin-bottom:25px;
+}
+
 .footer{
 background:#081225;
 color:white;
+padding:25px;
 text-align:center;
-padding:20px;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+width:65px;
+height:65px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+text-decoration:none;
+box-shadow:0 5px 20px rgba(0,0,0,.3);
 }
 
 @media(max-width:768px){
@@ -185,7 +259,11 @@ font-size:38px;
 font-size:16px;
 }
 
-.section-title{
+.nav{
+display:none;
+}
+
+.title{
 font-size:30px;
 }
 
@@ -201,6 +279,17 @@ font-size:30px;
 
 <img src="images/logo.png" class="logo">
 
+<div class="nav">
+
+<a href="index.html">Home</a>
+<a href="tourism.html">Tourism</a>
+<a href="conference.html">Conferences</a>
+<a href="opportunities.html">Opportunities</a>
+<a href="digital-services.html">Digital Services</a>
+<a href="contact.html">Contact</a>
+
+</div>
+
 </div>
 
 <section class="hero">
@@ -209,119 +298,72 @@ font-size:30px;
 
 <p>
 
-Professional websites, business portals, booking systems,
-recruitment platforms and digital solutions for modern businesses.
+Professional websites, recruitment portals, tourism platforms,
+conference systems, landing pages and digital solutions built
+for businesses, startups and organizations.
 
 </p>
+
+<div class="hero-btns">
+
+<a href="contact.html" class="btn primary">
+Request a Website
+</a>
+
+<a href="partners.html" class="btn secondary">
+Become a Partner
+</a>
+
+</div>
 
 </section>
 
 <section class="section">
 
-<h2 class="section-title">What We Build</h2>
+<h2 class="title">What We Build</h2>
 
-<p class="section-sub">
+<p class="subtitle">
 
-Custom websites designed for growth and business success.
+Modern websites that help businesses grow.
 
 </p>
 
 <div class="grid">
 
 <div class="card">
-
 <h3>🏢 Business Websites</h3>
-
-<p>
-
-Professional websites for companies, startups and organizations.
-
-</p>
-
-<button class="btn">
-Request Quote
-</button>
-
+<p>Professional company websites designed for credibility and growth.</p>
+<a href="contact.html" class="card-btn">Request Service</a>
 </div>
 
 <div class="card">
-
 <h3>🛒 E-Commerce Stores</h3>
-
-<p>
-
-Online stores with payment integration and inventory management.
-
-</p>
-
-<button class="btn">
-Request Quote
-</button>
-
+<p>Online stores with product catalogs and secure checkout integration.</p>
+<a href="contact.html" class="card-btn">Request Service</a>
 </div>
 
 <div class="card">
-
-<h3>📅 Booking Systems</h3>
-
-<p>
-
-Appointment scheduling and reservation platforms.
-
-</p>
-
-<button class="btn">
-Request Quote
-</button>
-
+<h3>📅 Booking Platforms</h3>
+<p>Appointment and reservation systems for businesses and tourism.</p>
+<a href="contact.html" class="card-btn">Request Service</a>
 </div>
 
 <div class="card">
-
 <h3>💼 Recruitment Portals</h3>
-
-<p>
-
-Job boards, application systems and recruitment platforms.
-
-</p>
-
-<button class="btn">
-Request Quote
-</button>
-
+<p>Job application systems and talent acquisition platforms.</p>
+<a href="contact.html" class="card-btn">Request Service</a>
 </div>
 
 <div class="card">
-
-<h3>🎤 Conference Platforms</h3>
-
-<p>
-
-Event registration, speaker management and attendee portals.
-
-</p>
-
-<button class="btn">
-Request Quote
-</button>
-
+<h3>🎤 Event Platforms</h3>
+<p>Conference registration and attendee management systems.</p>
+<a href="contact.html" class="card-btn">Request Service</a>
 </div>
 
 <div class="card">
-
-<h3>🤖 AI Integrated Websites</h3>
-
-<p>
-
-Websites with AI chatbots, automation and lead capture systems.
-
-</p>
-
-<button class="btn">
-Request Quote
-</button>
-
+<h3>🤖 AI Powered Websites</h3>
+<p>Integrated AI chatbots, lead capture and automation solutions.</p>
+<a href="contact.html" class="card-btn">Request Service</a>
 </div>
 
 </div>
@@ -330,68 +372,76 @@ Request Quote
 
 <section class="packages">
 
-<h2>Popular Packages</h2>
+<h2 style="text-align:center;">Popular Packages</h2>
 
 <div class="package-grid">
 
 <div class="package">
-
-<h3>Starter Website</h3>
-
+<h3>Starter</h3>
 <div class="price">$199</div>
-
-<p>
-Business website with up to 5 pages.
-</p>
-
+<p>Up to 5 pages</p>
 </div>
 
 <div class="package">
-
-<h3>Professional Website</h3>
-
+<h3>Professional</h3>
 <div class="price">$499</div>
-
-<p>
-Custom website with advanced features.
-</p>
-
+<p>Custom business website</p>
 </div>
 
 <div class="package">
-
-<h3>Enterprise Solution</h3>
-
+<h3>Enterprise</h3>
 <div class="price">$999+</div>
-
-<p>
-Custom portals, automation and integrations.
-</p>
-
+<p>Portals, automation and integrations</p>
 </div>
 
 </div>
 
 </section>
 
-<div class="founder">
+<section class="founder">
 
-<img src="images/joe.jpg" class="founder-pic">
+<img src="images/joe.jpg" alt="Joseph Wachira">
 
-<h3>Joseph Wachira</h3>
+<h2>Joseph Wachira</h2>
 
 <p>
-Founder, GlobiaWorld Ecosystem
+
+Founder of GlobiaWorld Ecosystem —
+connecting tourism, careers, conferences,
+digital services and global opportunities.
+
 </p>
 
-</div>
+</section>
+
+<section class="cta">
+
+<h2>Ready To Build Your Website?</h2>
+
+<p>
+
+Whether you need a company website, recruitment platform,
+tourism portal or digital business solution, GlobiaWorld can help.
+
+</p>
+
+<a href="contact.html" class="btn secondary">
+Contact Us
+</a>
+
+</section>
 
 <div class="footer">
 
-© 2026 GlobiaWorld Web Development Services
+© 2026 GlobiaWorld Ecosystem • Web Development Services
 
 </div>
 
-</body>
+<a href="https://wa.me/971567533605" class="whatsapp" target="_blank">
 
+💬
+
+</a>
+
+</body>
 </html>

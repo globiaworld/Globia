@@ -5,9 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Automation Services | GlobiaWorld</title>
+<title>AI Automation & Business Solutions | GlobiaWorld</title>
 
 <link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,40 +20,55 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Segoe UI,sans-serif;
-background:#f5f7fb;
+font-family:'Poppins',sans-serif;
+background:#f4f7fb;
 color:#111;
+overflow-x:hidden;
 }
 
 .topbar{
-height:70px;
+position:sticky;
+top:0;
 background:#081225;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:0 20px;
-position:sticky;
-top:0;
+padding:15px 30px;
 z-index:1000;
 }
 
 .logo{
-height:45px;
+height:50px;
+}
+
+.nav{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.nav a{
+color:white;
+text-decoration:none;
+font-size:14px;
+font-weight:500;
+}
+
+.nav a:hover{
+color:#00c6ff;
 }
 
 .hero{
 background:
 linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
-url('images/joe.jpg');
-background-size:cover;
-background-position:center;
-padding:120px 20px;
+url('images/joe.jpg') center/cover;
+padding:140px 20px;
 text-align:center;
 color:white;
 }
 
 .hero h1{
-font-size:55px;
+font-size:60px;
 margin-bottom:20px;
 }
 
@@ -62,19 +79,45 @@ font-size:20px;
 line-height:1.8;
 }
 
+.hero-buttons{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.hero-btn{
+padding:15px 28px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+font-weight:600;
+}
+
+.primary{
+background:#0072ff;
+color:white;
+}
+
+.secondary{
+background:white;
+color:#111;
+}
+
 .section{
-padding:80px 20px;
-max-width:1200px;
+padding:90px 20px;
+max-width:1300px;
 margin:auto;
 }
 
-.section h2{
+.section-title{
 text-align:center;
 font-size:42px;
 margin-bottom:15px;
 }
 
-.section p{
+.section-sub{
 text-align:center;
 color:#666;
 margin-bottom:50px;
@@ -95,85 +138,67 @@ transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-8px);
+transform:translateY(-10px);
 }
 
 .card h3{
 margin-bottom:15px;
-font-size:24px;
 }
 
 .card p{
-text-align:left;
 line-height:1.8;
+color:#555;
+}
+
+.cta{
+background:#081225;
+color:white;
+text-align:center;
+padding:100px 20px;
+}
+
+.cta h2{
+font-size:42px;
 margin-bottom:20px;
 }
 
-.btn{
-display:block;
-width:100%;
-padding:15px;
-border:none;
-border-radius:30px;
-background:#0072ff;
-color:white;
-font-weight:bold;
-cursor:pointer;
-}
-
-.btn:hover{
-opacity:.9;
-}
-
-.pricing{
-background:#081225;
-color:white;
-padding:80px 20px;
-text-align:center;
-}
-
-.price-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-max-width:1100px;
+.cta p{
+max-width:900px;
 margin:auto;
-margin-top:40px;
+line-height:1.8;
+margin-bottom:30px;
 }
 
-.price-card{
-background:white;
-color:#111;
-padding:30px;
-border-radius:20px;
-}
-
-.price{
-font-size:40px;
-font-weight:bold;
-margin:20px 0;
-color:#0072ff;
+.cta-btn{
+display:inline-block;
+padding:15px 30px;
+background:#00bfff;
+color:white;
+text-decoration:none;
+border-radius:35px;
+font-weight:600;
 }
 
 .founder{
+padding:70px 20px;
 text-align:center;
-padding:60px 20px;
+background:white;
 }
 
-.founder-pic{
-width:130px;
-height:130px;
+.founder img{
+width:140px;
+height:140px;
 border-radius:50%;
 object-fit:cover;
-border:4px solid #0072ff;
+border:5px solid #0072ff;
 margin-bottom:15px;
 }
 
 .footer{
-background:#081225;
-color:white;
+background:#050d1b;
+color:#aaa;
 text-align:center;
-padding:20px;
+padding:25px;
 }
 
 @media(max-width:768px){
@@ -186,8 +211,12 @@ font-size:38px;
 font-size:16px;
 }
 
-.section h2{
-font-size:30px;
+.nav{
+display:none;
+}
+
+.section-title{
+font-size:32px;
 }
 
 }
@@ -202,6 +231,15 @@ font-size:30px;
 
 <img src="images/logo.png" class="logo">
 
+<div class="nav">
+<a href="index.html">Home</a>
+<a href="digital-services.html">Services</a>
+<a href="web-development.html">Web Development</a>
+<a href="social-media.html">Social Media</a>
+<a href="partners.html">Partners</a>
+<a href="contact.html">Contact</a>
+</div>
+
 </div>
 
 <section class="hero">
@@ -210,179 +248,93 @@ font-size:30px;
 
 <p>
 
-Help businesses save time, generate leads,
-automate customer support and improve operations
-with AI-powered solutions.
+Helping businesses automate customer service,
+lead generation, marketing, bookings and operations
+through intelligent AI-powered systems.
 
 </p>
+
+<div class="hero-buttons">
+
+<button class="hero-btn primary"
+onclick="location.href='contact.html'">
+Request Consultation
+</button>
+
+<button class="hero-btn secondary"
+onclick="location.href='partners.html'">
+Become a Partner
+</button>
+
+</div>
 
 </section>
 
 <section class="section">
 
-<h2>Our AI Services</h2>
+<h2 class="section-title">AI Services We Offer</h2>
 
-<p>
-Modern automation solutions for growing businesses.
+<p class="section-sub">
+Designed for startups, SMEs, agencies and global enterprises.
 </p>
 
 <div class="grid">
 
 <div class="card">
-
 <h3>💬 AI Chatbots</h3>
-
-<p>
-
-Automated website chatbots that answer customer questions
-24/7 and capture leads automatically.
-
-</p>
-
-<button class="btn">
-Request Service
-</button>
-
+<p>24/7 customer support and lead capture directly on your website.</p>
 </div>
 
 <div class="card">
-
 <h3>📱 WhatsApp Automation</h3>
-
-<p>
-
-Automated responses, customer support and booking systems
-through WhatsApp integration.
-
-</p>
-
-<button class="btn">
-Request Service
-</button>
-
+<p>Automate inquiries, bookings and customer communication.</p>
 </div>
 
 <div class="card">
-
-<h3>📅 Appointment Booking Bots</h3>
-
-<p>
-
-Allow customers to schedule appointments automatically
-without manual follow-up.
-
-</p>
-
-<button class="btn">
-Request Service
-</button>
-
+<h3>📅 Smart Booking Systems</h3>
+<p>Automated scheduling and appointment management.</p>
 </div>
 
 <div class="card">
-
-<h3>📈 Lead Generation Systems</h3>
-
-<p>
-
-Capture leads from websites, forms and social media
-into one organized system.
-
-</p>
-
-<button class="btn">
-Request Service
-</button>
-
+<h3>📈 Lead Generation</h3>
+<p>Capture, qualify and organize leads automatically.</p>
 </div>
 
 <div class="card">
-
-<h3>🛒 E-commerce Automation</h3>
-
-<p>
-
-Automate product inquiries, order tracking
-and customer communication.
-
-</p>
-
-<button class="btn">
-Request Service
-</button>
-
+<h3>🛒 E-Commerce Automation</h3>
+<p>Order tracking, customer service and sales automation.</p>
 </div>
 
 <div class="card">
-
-<h3>🏢 Business Workflow Automation</h3>
-
-<p>
-
-Reduce repetitive work and streamline daily operations
-using automation tools.
-
-</p>
-
-<button class="btn">
-Request Service
-</button>
-
+<h3>🏢 Workflow Automation</h3>
+<p>Reduce repetitive tasks and increase team productivity.</p>
 </div>
 
 </div>
 
 </section>
 
-<section class="pricing">
+<section class="cta">
 
-<h2>Popular Packages</h2>
-
-<div class="price-grid">
-
-<div class="price-card">
-
-<h3>Starter</h3>
-
-<div class="price">$99</div>
+<h2>Ready to Automate Your Business?</h2>
 
 <p>
-Basic chatbot setup
+
+Whether you run a startup, tourism company, recruitment agency,
+conference platform or online business, GlobiaWorld can help
+you implement practical AI solutions.
+
 </p>
 
-</div>
-
-<div class="price-card">
-
-<h3>Business</h3>
-
-<div class="price">$299</div>
-
-<p>
-Chatbot + WhatsApp automation
-</p>
-
-</div>
-
-<div class="price-card">
-
-<h3>Enterprise</h3>
-
-<div class="price">$999+</div>
-
-<p>
-Custom AI automation systems
-</p>
-
-</div>
-
-</div>
+<a href="contact.html" class="cta-btn">
+Start Your Project
+</a>
 
 </section>
 
-<div class="founder">
+<section class="founder">
 
-<img src="images/joe.jpg" class="founder-pic">
+<img src="images/joe.jpg" alt="Joseph Wachira">
 
 <h3>Joseph Wachira</h3>
 
@@ -390,14 +342,13 @@ Custom AI automation systems
 Founder, GlobiaWorld Ecosystem
 </p>
 
-</div>
+</section>
 
 <div class="footer">
 
-© 2026 GlobiaWorld AI Automation Services
+© 2026 GlobiaWorld Ecosystem • AI Automation • Web Development • Social Media • Careers • Tourism
 
 </div>
 
 </body>
-
 </html>

@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload CV | GlobiaWorld</title>
 
+<link rel="icon" href="images/logo.png">
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI,sans-serif;
+background:#f5f7fb;
+}
+
+.topbar{
+background:#081225;
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+}
+
+.logo{
+height:45px;
+}
+
+.hero{
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url('images/joe.jpg');
+background-size:cover;
+background-position:center;
+color:white;
+padding:120px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:50px;
+}
+
+.form-container{
+max-width:700px;
+margin:50px auto;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:15px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+background:#0072ff;
+color:white;
+font-size:16px;
+border-radius:30px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.founder{
+text-align:center;
+padding:40px;
+}
+
+.founder-pic{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #0072ff;
+}
+
+.footer{
+background:#081225;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<img src="images/logo.png" class="logo">
+</div>
+
+<section class="hero">
+
+<h1>Upload Your CV</h1>
+
+<p>
+Join our global talent network and discover opportunities.
+</p>
+
+</section>
+
+<div class="form-container">
+
+<form>
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<input type="tel" placeholder="Phone Number">
+
+<select required>
+
+<option value="">Select Position</option>
+
+<option>Remote Jobs</option>
+
+<option>Visa Sponsorship Jobs</option>
+
+<option>Tourism Opportunities</option>
+
+<option>Digital Services</option>
+
+<option>Recruitment Agent</option>
+
+</select>
+
+<input type="file" required>
+
+<textarea placeholder="Tell us about yourself"></textarea>
+
+<button type="submit">
+
+Submit CV
+
+</button>
+
+</form>
+
+</div>
+
+<div class="founder">
+
+<img src="images/joe.jpg" class="founder-pic">
+
+<h3>Joseph Wachira</h3>
+
+<p>
+Founder, GlobiaWorld Ecosystem
+</p>
+
+</div>
+
+<div class="footer">
+
+© 2026 GlobiaWorld
+
+</div>
+
+</body>
+</html>

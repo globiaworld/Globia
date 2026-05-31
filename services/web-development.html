@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +28,7 @@ scroll-behavior:smooth;
 body{
 background:#f5f7fb;
 color:#111;
+line-height:1.6;
 }
 
 .topbar{
@@ -37,16 +39,17 @@ padding:15px 25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-z-index:999;
+z-index:1000;
 }
 
 .logo{
-height:55px;
+height:60px;
 }
 
 .nav{
 display:flex;
 gap:20px;
+flex-wrap:wrap;
 }
 
 .nav a{
@@ -62,7 +65,7 @@ linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
 url('images/joe.jpg');
 background-size:cover;
 background-position:center;
-padding:140px 20px;
+padding:150px 20px;
 text-align:center;
 color:white;
 }
@@ -75,19 +78,29 @@ margin-bottom:20px;
 .hero p{
 max-width:900px;
 margin:auto;
-line-height:1.8;
 font-size:20px;
 }
 
-.hero-btn{
-display:inline-block;
+.hero-buttons{
 margin-top:30px;
-padding:15px 35px;
-background:#00bfff;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+display:inline-block;
+padding:15px 30px;
+background:#0072ff;
 color:white;
 text-decoration:none;
-border-radius:40px;
+border-radius:30px;
 font-weight:600;
+}
+
+.btn-whatsapp{
+background:#25d366;
 }
 
 .section{
@@ -97,9 +110,9 @@ padding:80px 20px;
 }
 
 .title{
-font-size:42px;
 text-align:center;
-margin-bottom:15px;
+font-size:42px;
+margin-bottom:10px;
 }
 
 .subtitle{
@@ -110,7 +123,7 @@ margin-bottom:50px;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:25px;
 }
 
@@ -130,29 +143,23 @@ transform:translateY(-8px);
 margin-bottom:15px;
 }
 
-.card p{
-line-height:1.8;
-color:#555;
-}
-
 .stats{
 background:#081225;
-padding:80px 20px;
 color:white;
+padding:80px 20px;
 }
 
 .stats-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
 max-width:1200px;
 margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 text-align:center;
 }
 
 .stat h2{
 font-size:45px;
-margin-bottom:10px;
 }
 
 .packages{
@@ -169,43 +176,42 @@ box-shadow:0 10px 25px rgba(0,0,0,.08);
 text-align:center;
 }
 
-.package h3{
-margin-bottom:15px;
-}
-
 .price{
-font-size:38px;
+font-size:40px;
 font-weight:700;
 color:#0072ff;
-margin-bottom:20px;
+margin:20px 0;
 }
 
 .package ul{
 list-style:none;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 .package li{
 padding:8px 0;
 }
 
-.btn{
-display:inline-block;
-padding:14px 30px;
-background:#0072ff;
-color:white;
-text-decoration:none;
-border-radius:30px;
-font-weight:600;
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
+
+.testimonial{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .contact-box{
 background:white;
 padding:40px;
 border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 max-width:800px;
 margin:auto;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .contact-box input,
@@ -224,14 +230,9 @@ padding:15px;
 border:none;
 background:#0072ff;
 color:white;
-border-radius:10px;
 font-size:16px;
+border-radius:10px;
 cursor:pointer;
-}
-
-.faq{
-max-width:900px;
-margin:auto;
 }
 
 details{
@@ -243,13 +244,13 @@ box-shadow:0 5px 15px rgba(0,0,0,.05);
 }
 
 .founder{
-padding:80px 20px;
 text-align:center;
+padding:80px 20px;
 }
 
 .founder-pic{
-width:150px;
-height:150px;
+width:160px;
+height:160px;
 border-radius:50%;
 object-fit:cover;
 border:5px solid #0072ff;
@@ -260,7 +261,7 @@ margin-bottom:20px;
 background:#050d1b;
 color:white;
 text-align:center;
-padding:35px 20px;
+padding:30px;
 }
 
 .whatsapp{
@@ -274,9 +275,25 @@ border-radius:50%;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:28px;
-color:white;
+font-size:30px;
 text-decoration:none;
+color:white;
+}
+
+.call-btn{
+position:fixed;
+bottom:95px;
+right:20px;
+width:65px;
+height:65px;
+background:#0072ff;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+text-decoration:none;
+color:white;
 }
 
 @media(max-width:768px){
@@ -294,24 +311,24 @@ font-size:16px;
 }
 
 .title{
-font-size:32px;
+font-size:30px;
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header class="topbar">
 
-<img src="images/logo.png" class="logo" alt="GlobiaWorld">
+<img src="images/logo.png" class="logo">
 
 <nav class="nav">
 <a href="#services">Services</a>
 <a href="#packages">Packages</a>
+<a href="#testimonials">Reviews</a>
 <a href="#contact">Contact</a>
 <a href="#faq">FAQ</a>
 </nav>
@@ -320,17 +337,26 @@ font-size:32px;
 
 <section class="hero">
 
-<h1>📱 Social Media Marketing</h1>
+<h1>Grow Your Business Online</h1>
 
 <p>
-Grow your business through professional content creation,
-social media management, paid advertising,
-video marketing and brand growth strategies.
+Professional Social Media Marketing, Content Creation,
+Advertising Campaigns, Website Promotion, AI Marketing
+and Brand Growth Solutions.
 </p>
 
-<a href="#contact" class="hero-btn">
-Get Started Today
+<div class="hero-buttons">
+
+<a href="#contact" class="btn">
+Get Started
 </a>
+
+<a href="https://wa.me/971567533605?text=Hello%20GlobiaWorld%20I%20need%20marketing%20services"
+class="btn btn-whatsapp">
+WhatsApp Now
+</a>
+
+</div>
 
 </section>
 
@@ -338,40 +364,36 @@ Get Started Today
 
 <h2 class="title">Our Services</h2>
 
-<p class="subtitle">
-Everything you need to grow online.
-</p>
-
 <div class="grid">
 
 <div class="card">
 <h3>📸 Content Creation</h3>
-<p>Professional posts, graphics, reels and videos.</p>
+<p>Professional graphics, reels, videos and posts.</p>
+</div>
+
+<div class="card">
+<h3>📢 Paid Advertising</h3>
+<p>Facebook, Instagram, TikTok and Google Ads.</p>
 </div>
 
 <div class="card">
 <h3>🎯 Social Media Management</h3>
-<p>Daily posting, engagement and audience growth.</p>
+<p>Daily posting and audience engagement.</p>
 </div>
 
 <div class="card">
-<h3>📢 Advertising Campaigns</h3>
-<p>Facebook, Instagram and TikTok advertising.</p>
+<h3>🌍 Website Promotion</h3>
+<p>Drive visitors and generate leads.</p>
 </div>
 
 <div class="card">
-<h3>🚀 Brand Strategy</h3>
-<p>Build a strong online presence and reputation.</p>
+<h3>🤖 AI Marketing</h3>
+<p>Automation and intelligent customer engagement.</p>
 </div>
 
 <div class="card">
-<h3>🎬 Video Marketing</h3>
-<p>Short-form viral videos and reels.</p>
-</div>
-
-<div class="card">
-<h3>🤝 Influencer Marketing</h3>
-<p>Reach new audiences through partnerships.</p>
+<h3>🚀 Brand Development</h3>
+<p>Create a memorable online presence.</p>
 </div>
 
 </div>
@@ -384,22 +406,22 @@ Everything you need to grow online.
 
 <div class="stat">
 <h2>24/7</h2>
-<p>Online Presence</p>
+<p>Support</p>
 </div>
 
 <div class="stat">
-<h2>100%</h2>
-<p>Customized Strategy</p>
+<h2>100+</h2>
+<p>Campaign Ideas</p>
 </div>
 
 <div class="stat">
 <h2>Global</h2>
-<p>Audience Reach</p>
+<p>Reach</p>
 </div>
 
 <div class="stat">
 <h2>ROI</h2>
-<p>Focused Marketing</p>
+<p>Focused</p>
 </div>
 
 </div>
@@ -417,10 +439,15 @@ Everything you need to grow online.
 <div class="price">$99</div>
 <ul>
 <li>12 Posts Monthly</li>
-<li>Basic Branding</li>
-<li>Account Setup</li>
+<li>Brand Setup</li>
+<li>Content Planning</li>
 </ul>
-<a href="#contact" class="btn">Choose Plan</a>
+
+<a href="https://wa.me/971567533605?text=I%20want%20Starter%20Package"
+class="btn">
+Order Now
+</a>
+
 </div>
 
 <div class="package">
@@ -431,7 +458,12 @@ Everything you need to grow online.
 <li>Advertising Support</li>
 <li>Growth Strategy</li>
 </ul>
-<a href="#contact" class="btn">Choose Plan</a>
+
+<a href="https://wa.me/971567533605?text=I%20want%20Business%20Package"
+class="btn">
+Order Now
+</a>
+
 </div>
 
 <div class="package">
@@ -439,10 +471,40 @@ Everything you need to grow online.
 <div class="price">$599</div>
 <ul>
 <li>Full Management</li>
-<li>Paid Ads</li>
+<li>Paid Advertising</li>
 <li>Video Marketing</li>
 </ul>
-<a href="#contact" class="btn">Choose Plan</a>
+
+<a href="https://wa.me/971567533605?text=I%20want%20Premium%20Package"
+class="btn">
+Order Now
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="testimonials" class="section">
+
+<h2 class="title">Client Reviews</h2>
+
+<div class="testimonials">
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<p>Excellent service and great communication.</p>
+</div>
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<p>Our social media engagement increased significantly.</p>
+</div>
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<p>Professional team and fast results.</p>
 </div>
 
 </div>
@@ -457,6 +519,8 @@ Everything you need to grow online.
 
 <form action="https://formsubmit.co/josedrash22@gmail.com" method="POST">
 
+<input type="hidden" name="_subject" value="New Marketing Service Request">
+
 <input type="text" name="Name" placeholder="Full Name" required>
 
 <input type="email" name="Email" placeholder="Email Address" required>
@@ -464,16 +528,14 @@ Everything you need to grow online.
 <input type="text" name="Phone" placeholder="Phone Number">
 
 <select name="Service">
-
 <option>Content Creation</option>
+<option>Advertising</option>
 <option>Social Media Management</option>
-<option>Advertising Campaigns</option>
-<option>Video Marketing</option>
-<option>Brand Strategy</option>
-
+<option>AI Marketing</option>
+<option>Website Promotion</option>
 </select>
 
-<textarea rows="6" name="Message" placeholder="Tell us about your business"></textarea>
+<textarea rows="6" name="Message" placeholder="Describe your business"></textarea>
 
 <button type="submit">
 Submit Request
@@ -489,24 +551,20 @@ Submit Request
 
 <h2 class="title">Frequently Asked Questions</h2>
 
-<div class="faq">
-
 <details>
-<summary>How quickly can you start?</summary>
-<p>Most projects begin within 24-48 hours.</p>
+<summary>How soon can we start?</summary>
+<p>Most projects start within 24-48 hours.</p>
 </details>
 
 <details>
-<summary>Do you work with international clients?</summary>
-<p>Yes, we serve businesses worldwide.</p>
+<summary>Do you work globally?</summary>
+<p>Yes. We serve clients worldwide.</p>
 </details>
 
 <details>
-<summary>Can I request a custom package?</summary>
-<p>Absolutely. Every business has unique needs.</p>
+<summary>Can I get a custom package?</summary>
+<p>Yes. We customize solutions for every business.</p>
 </details>
-
-</div>
 
 </section>
 
@@ -517,14 +575,15 @@ Submit Request
 <h2>Joseph Wachira</h2>
 
 <p>
-Founder of GlobiaWorld Ecosystem. Helping businesses grow through
-digital marketing, AI solutions, websites and global opportunities.
+Founder of GlobiaWorld Ecosystem.
+Helping businesses grow through marketing,
+technology, AI and global opportunities.
 </p>
 
 <br>
 
 <a href="https://wa.me/971567533605" class="btn">
-Chat on WhatsApp
+Chat Directly
 </a>
 
 </section>
@@ -535,7 +594,11 @@ Chat on WhatsApp
 
 </footer>
 
-<a href="https://wa.me/971567533605" class="whatsapp" target="_blank">
+<a href="tel:+971567533605" class="call-btn">
+📞
+</a>
+
+<a href="https://wa.me/971567533605" class="whatsapp">
 💬
 </a>
 

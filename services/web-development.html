@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Web Development Services | GlobiaWorld</title>
+<title>GlobiaWorld Social Media Marketing</title>
 
 <link rel="icon" href="images/logo.png">
 
@@ -17,49 +17,48 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-font-family:'Poppins',sans-serif;
-background:#f4f7fb;
+background:#f5f7fb;
 color:#111;
-line-height:1.7;
 }
 
 .topbar{
+position:sticky;
+top:0;
 background:#081225;
 padding:15px 25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-position:sticky;
-top:0;
-z-index:1000;
+z-index:999;
 }
 
 .logo{
-height:50px;
+height:55px;
 }
 
 .nav{
 display:flex;
 gap:20px;
-flex-wrap:wrap;
 }
 
 .nav a{
 color:white;
 text-decoration:none;
 font-size:14px;
-}
-
-.nav a:hover{
-color:#00c3ff;
+font-weight:500;
 }
 
 .hero{
 background:
-linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
 url('images/joe.jpg');
 background-size:cover;
 background-position:center;
@@ -69,53 +68,37 @@ color:white;
 }
 
 .hero h1{
-font-size:55px;
+font-size:60px;
 margin-bottom:20px;
 }
 
 .hero p{
 max-width:900px;
 margin:auto;
+line-height:1.8;
 font-size:20px;
 }
 
-.hero-btns{
-margin-top:35px;
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:15px 25px;
-border:none;
-border-radius:30px;
-font-weight:600;
-cursor:pointer;
-text-decoration:none;
+.hero-btn{
 display:inline-block;
-}
-
-.primary{
-background:#0072ff;
+margin-top:30px;
+padding:15px 35px;
+background:#00bfff;
 color:white;
-}
-
-.secondary{
-background:white;
-color:#111;
+text-decoration:none;
+border-radius:40px;
+font-weight:600;
 }
 
 .section{
-padding:80px 20px;
 max-width:1200px;
 margin:auto;
+padding:80px 20px;
 }
 
 .title{
+font-size:42px;
 text-align:center;
-font-size:40px;
 margin-bottom:15px;
 }
 
@@ -127,7 +110,7 @@ margin-bottom:50px;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:25px;
 }
 
@@ -135,7 +118,7 @@ gap:25px;
 background:white;
 padding:30px;
 border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,.08);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 transition:.3s;
 }
 
@@ -148,49 +131,115 @@ margin-bottom:15px;
 }
 
 .card p{
-margin-bottom:20px;
+line-height:1.8;
 color:#555;
 }
 
-.card-btn{
-display:block;
-text-align:center;
-background:#0072ff;
+.stats{
+background:#081225;
+padding:80px 20px;
 color:white;
-padding:12px;
-border-radius:25px;
-text-decoration:none;
-font-weight:600;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+max-width:1200px;
+margin:auto;
+text-align:center;
+}
+
+.stat h2{
+font-size:45px;
+margin-bottom:10px;
 }
 
 .packages{
-background:#081225;
-color:white;
-padding:80px 20px;
-}
-
-.package-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:25px;
-max-width:1100px;
-margin:auto;
-margin-top:40px;
 }
 
 .package{
 background:white;
-color:#111;
-padding:30px;
+padding:35px;
 border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 text-align:center;
 }
 
+.package h3{
+margin-bottom:15px;
+}
+
 .price{
-font-size:42px;
+font-size:38px;
 font-weight:700;
 color:#0072ff;
-margin:15px 0;
+margin-bottom:20px;
+}
+
+.package ul{
+list-style:none;
+margin-bottom:25px;
+}
+
+.package li{
+padding:8px 0;
+}
+
+.btn{
+display:inline-block;
+padding:14px 30px;
+background:#0072ff;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:600;
+}
+
+.contact-box{
+background:white;
+padding:40px;
+border-radius:20px;
+max-width:800px;
+margin:auto;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.contact-box input,
+.contact-box select,
+.contact-box textarea{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.contact-box button{
+width:100%;
+padding:15px;
+border:none;
+background:#0072ff;
+color:white;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+.faq{
+max-width:900px;
+margin:auto;
+}
+
+details{
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.05);
 }
 
 .founder{
@@ -198,58 +247,43 @@ padding:80px 20px;
 text-align:center;
 }
 
-.founder img{
-width:140px;
-height:140px;
+.founder-pic{
+width:150px;
+height:150px;
 border-radius:50%;
 object-fit:cover;
-border:4px solid #0072ff;
-margin-bottom:15px;
-}
-
-.cta{
-background:#0072ff;
-color:white;
-padding:80px 20px;
-text-align:center;
-}
-
-.cta h2{
-font-size:40px;
-margin-bottom:15px;
-}
-
-.cta p{
-max-width:800px;
-margin:auto;
-margin-bottom:25px;
+border:5px solid #0072ff;
+margin-bottom:20px;
 }
 
 .footer{
-background:#081225;
+background:#050d1b;
 color:white;
-padding:25px;
 text-align:center;
+padding:35px 20px;
 }
 
 .whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
-background:#25D366;
-color:white;
 width:65px;
 height:65px;
+background:#25d366;
 border-radius:50%;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 font-size:28px;
+color:white;
 text-decoration:none;
-box-shadow:0 5px 20px rgba(0,0,0,.3);
 }
 
 @media(max-width:768px){
+
+.nav{
+display:none;
+}
 
 .hero h1{
 font-size:38px;
@@ -259,12 +293,8 @@ font-size:38px;
 font-size:16px;
 }
 
-.nav{
-display:none;
-}
-
 .title{
-font-size:30px;
+font-size:32px;
 }
 
 }
@@ -275,124 +305,206 @@ font-size:30px;
 
 <body>
 
-<div class="topbar">
+<header class="topbar">
 
-<img src="images/logo.png" class="logo">
+<img src="images/logo.png" class="logo" alt="GlobiaWorld">
 
-<div class="nav">
+<nav class="nav">
+<a href="#services">Services</a>
+<a href="#packages">Packages</a>
+<a href="#contact">Contact</a>
+<a href="#faq">FAQ</a>
+</nav>
 
-<a href="index.html">Home</a>
-<a href="tourism.html">Tourism</a>
-<a href="conference.html">Conferences</a>
-<a href="opportunities.html">Opportunities</a>
-<a href="digital-services.html">Digital Services</a>
-<a href="contact.html">Contact</a>
-
-</div>
-
-</div>
+</header>
 
 <section class="hero">
 
-<h1>🌐 Web Development Services</h1>
+<h1>📱 Social Media Marketing</h1>
 
 <p>
-
-Professional websites, recruitment portals, tourism platforms,
-conference systems, landing pages and digital solutions built
-for businesses, startups and organizations.
-
+Grow your business through professional content creation,
+social media management, paid advertising,
+video marketing and brand growth strategies.
 </p>
 
-<div class="hero-btns">
-
-<a href="contact.html" class="btn primary">
-Request a Website
+<a href="#contact" class="hero-btn">
+Get Started Today
 </a>
-
-<a href="partners.html" class="btn secondary">
-Become a Partner
-</a>
-
-</div>
 
 </section>
 
-<section class="section">
+<section id="services" class="section">
 
-<h2 class="title">What We Build</h2>
+<h2 class="title">Our Services</h2>
 
 <p class="subtitle">
-
-Modern websites that help businesses grow.
-
+Everything you need to grow online.
 </p>
 
 <div class="grid">
 
 <div class="card">
-<h3>🏢 Business Websites</h3>
-<p>Professional company websites designed for credibility and growth.</p>
-<a href="contact.html" class="card-btn">Request Service</a>
+<h3>📸 Content Creation</h3>
+<p>Professional posts, graphics, reels and videos.</p>
 </div>
 
 <div class="card">
-<h3>🛒 E-Commerce Stores</h3>
-<p>Online stores with product catalogs and secure checkout integration.</p>
-<a href="contact.html" class="card-btn">Request Service</a>
+<h3>🎯 Social Media Management</h3>
+<p>Daily posting, engagement and audience growth.</p>
 </div>
 
 <div class="card">
-<h3>📅 Booking Platforms</h3>
-<p>Appointment and reservation systems for businesses and tourism.</p>
-<a href="contact.html" class="card-btn">Request Service</a>
+<h3>📢 Advertising Campaigns</h3>
+<p>Facebook, Instagram and TikTok advertising.</p>
 </div>
 
 <div class="card">
-<h3>💼 Recruitment Portals</h3>
-<p>Job application systems and talent acquisition platforms.</p>
-<a href="contact.html" class="card-btn">Request Service</a>
+<h3>🚀 Brand Strategy</h3>
+<p>Build a strong online presence and reputation.</p>
 </div>
 
 <div class="card">
-<h3>🎤 Event Platforms</h3>
-<p>Conference registration and attendee management systems.</p>
-<a href="contact.html" class="card-btn">Request Service</a>
+<h3>🎬 Video Marketing</h3>
+<p>Short-form viral videos and reels.</p>
 </div>
 
 <div class="card">
-<h3>🤖 AI Powered Websites</h3>
-<p>Integrated AI chatbots, lead capture and automation solutions.</p>
-<a href="contact.html" class="card-btn">Request Service</a>
+<h3>🤝 Influencer Marketing</h3>
+<p>Reach new audiences through partnerships.</p>
 </div>
 
 </div>
 
 </section>
 
-<section class="packages">
+<section class="stats">
 
-<h2 style="text-align:center;">Popular Packages</h2>
+<div class="stats-grid">
 
-<div class="package-grid">
+<div class="stat">
+<h2>24/7</h2>
+<p>Online Presence</p>
+</div>
+
+<div class="stat">
+<h2>100%</h2>
+<p>Customized Strategy</p>
+</div>
+
+<div class="stat">
+<h2>Global</h2>
+<p>Audience Reach</p>
+</div>
+
+<div class="stat">
+<h2>ROI</h2>
+<p>Focused Marketing</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="packages" class="section">
+
+<h2 class="title">Marketing Packages</h2>
+
+<div class="packages">
 
 <div class="package">
 <h3>Starter</h3>
-<div class="price">$199</div>
-<p>Up to 5 pages</p>
+<div class="price">$99</div>
+<ul>
+<li>12 Posts Monthly</li>
+<li>Basic Branding</li>
+<li>Account Setup</li>
+</ul>
+<a href="#contact" class="btn">Choose Plan</a>
 </div>
 
 <div class="package">
-<h3>Professional</h3>
-<div class="price">$499</div>
-<p>Custom business website</p>
+<h3>Business</h3>
+<div class="price">$299</div>
+<ul>
+<li>30 Posts Monthly</li>
+<li>Advertising Support</li>
+<li>Growth Strategy</li>
+</ul>
+<a href="#contact" class="btn">Choose Plan</a>
 </div>
 
 <div class="package">
-<h3>Enterprise</h3>
-<div class="price">$999+</div>
-<p>Portals, automation and integrations</p>
+<h3>Premium</h3>
+<div class="price">$599</div>
+<ul>
+<li>Full Management</li>
+<li>Paid Ads</li>
+<li>Video Marketing</li>
+</ul>
+<a href="#contact" class="btn">Choose Plan</a>
 </div>
+
+</div>
+
+</section>
+
+<section id="contact" class="section">
+
+<h2 class="title">Request Service</h2>
+
+<div class="contact-box">
+
+<form action="https://formsubmit.co/josedrash22@gmail.com" method="POST">
+
+<input type="text" name="Name" placeholder="Full Name" required>
+
+<input type="email" name="Email" placeholder="Email Address" required>
+
+<input type="text" name="Phone" placeholder="Phone Number">
+
+<select name="Service">
+
+<option>Content Creation</option>
+<option>Social Media Management</option>
+<option>Advertising Campaigns</option>
+<option>Video Marketing</option>
+<option>Brand Strategy</option>
+
+</select>
+
+<textarea rows="6" name="Message" placeholder="Tell us about your business"></textarea>
+
+<button type="submit">
+Submit Request
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<section id="faq" class="section">
+
+<h2 class="title">Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<details>
+<summary>How quickly can you start?</summary>
+<p>Most projects begin within 24-48 hours.</p>
+</details>
+
+<details>
+<summary>Do you work with international clients?</summary>
+<p>Yes, we serve businesses worldwide.</p>
+</details>
+
+<details>
+<summary>Can I request a custom package?</summary>
+<p>Absolutely. Every business has unique needs.</p>
+</details>
 
 </div>
 
@@ -400,47 +512,31 @@ Modern websites that help businesses grow.
 
 <section class="founder">
 
-<img src="images/joe.jpg" alt="Joseph Wachira">
+<img src="images/joe.jpg" class="founder-pic">
 
 <h2>Joseph Wachira</h2>
 
 <p>
-
-Founder of GlobiaWorld Ecosystem —
-connecting tourism, careers, conferences,
-digital services and global opportunities.
-
+Founder of GlobiaWorld Ecosystem. Helping businesses grow through
+digital marketing, AI solutions, websites and global opportunities.
 </p>
 
-</section>
+<br>
 
-<section class="cta">
-
-<h2>Ready To Build Your Website?</h2>
-
-<p>
-
-Whether you need a company website, recruitment platform,
-tourism portal or digital business solution, GlobiaWorld can help.
-
-</p>
-
-<a href="contact.html" class="btn secondary">
-Contact Us
+<a href="https://wa.me/971567533605" class="btn">
+Chat on WhatsApp
 </a>
 
 </section>
 
-<div class="footer">
+<footer class="footer">
 
-© 2026 GlobiaWorld Ecosystem • Web Development Services
+© 2026 GlobiaWorld Ecosystem | All Rights Reserved
 
-</div>
+</footer>
 
 <a href="https://wa.me/971567533605" class="whatsapp" target="_blank">
-
 💬
-
 </a>
 
 </body>

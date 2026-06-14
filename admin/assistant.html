@@ -1,0 +1,154 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GlobiaWorld AI Assistant</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<style>
+
+.ai-container{
+
+max-width:900px;
+margin:auto;
+padding:20px;
+
+}
+
+.chat-box{
+
+height:450px;
+overflow-y:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+border:1px solid #ddd;
+margin-bottom:15px;
+
+}
+
+.message{
+
+padding:12px;
+margin-bottom:10px;
+border-radius:8px;
+
+}
+
+.user{
+
+background:#dfefff;
+
+}
+
+.ai{
+
+background:#f4f4f4;
+
+}
+
+.input-row{
+
+display:flex;
+gap:10px;
+
+}
+
+.input-row input{
+
+flex:1;
+padding:12px;
+font-size:16px;
+
+}
+
+.input-row button{
+
+padding:12px 20px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="ai-container">
+
+<h1>🤖 GlobiaWorld AI Assistant</h1>
+
+<div class="chat-box" id="chatBox">
+
+<div class="message ai">
+Hello! Give me a command.<br><br>
+
+Examples:<br>
+
+Find landscaping companies in Canada<br>
+Analyze https://example.com<br>
+Generate proposal for ABC Ltd
+
+</div>
+
+</div>
+
+<div class="input-row">
+
+<input
+id="prompt"
+placeholder="Type your command...">
+
+<button onclick="sendPrompt()">
+
+Run
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function sendPrompt(){
+
+const input=document.getElementById("prompt");
+
+const chat=document.getElementById("chatBox");
+
+const value=input.value.trim();
+
+if(value==="") return;
+
+chat.innerHTML+=`
+<div class="message user">
+${value}
+</div>
+`;
+
+chat.innerHTML+=`
+<div class="message ai">
+AI processing... (this will later connect to Supabase and an AI API)
+</div>
+`;
+
+chat.scrollTop=chat.scrollHeight;
+
+input.value="";
+
+}
+
+</script>
+
+</body>
+
+</html>
+```

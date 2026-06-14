@@ -149,36 +149,104 @@ Run
 </div>
 
 <script>
-
+```javascript
 function runAI(){
 
 const input=document.getElementById("prompt");
 
-const value=input.value.trim();
+const command=input.value.trim();
 
-if(value=="") return;
+if(command=="") return;
 
 const chat=document.getElementById("chat");
 
 chat.innerHTML+=`
 <div class="user-message">
-${value}
+${command}
 </div>
 `;
+
+const lower=command.toLowerCase();
+
+if(lower.includes("find")){
 
 chat.innerHTML+=`
 <div class="ai-message">
-Command received.
+🔍 AI Lead Finder activated...
 
-Future versions will connect to Supabase and AI services to search leads, analyze websites and generate proposals automatically.
+Searching business sources...
+
+(This feature will connect to your lead database/API.)
+
 </div>
 `;
+
+}
+
+else if(lower.includes("analyze")){
+
+chat.innerHTML+=`
+<div class="ai-message">
+🌐 AI Website Analyzer activated...
+
+Preparing analysis...
+
+</div>
+`;
+
+}
+
+else if(lower.includes("proposal")){
+
+chat.innerHTML+=`
+<div class="ai-message">
+📄 AI Proposal Generator activated...
+
+Creating proposal...
+
+</div>
+`;
+
+}
+
+else if(lower.includes("email")){
+
+chat.innerHTML+=`
+<div class="ai-message">
+📧 AI Outreach activated...
+
+Preparing email...
+
+</div>
+`;
+
+}
+
+else{
+
+chat.innerHTML+=`
+<div class="ai-message">
+🤖 Sorry, I don't understand that command yet.
+
+Try:
+
+Find hotels in Dubai
+
+Analyze https://example.com
+
+Generate proposal for ABC Ltd
+
+</div>
+`;
+
+}
 
 chat.scrollTop=chat.scrollHeight;
 
 input.value="";
 
 }
+```
 
 </script>
 

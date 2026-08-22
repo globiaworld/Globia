@@ -1813,30 +1813,110 @@ function closeCheckout(){
         .getElementById("checkoutOverlay")
         .style.display="none";
 
-}
-
-function placeOrder(event){
+}function placeOrder(event){
 
     event.preventDefault();
 
-    const orderNumber=
+    if(!cart.length){
+        alert("Your cart is empty.");
+        return;
+    }
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const phone =
+        document.getElementById("customerPhone").value.trim();
+
+    const emirate =
+        document.getElementById("customerEmirate").value;
+
+    const address =
+        document.getElementById("customerAddress").value.trim();
+
+    const payment =
+        document.getElementById("paymentMethod").value;
+
+    const orderNumber =
         "GLB-" +
-        Date.now()
-            .toString()
-            .slice(-8);
+        Date.now().toString().slice(-8);
+
+    let total = 0;
+
+    let orderItems = "";
+
+    cart.forEach(item => {
+
+        const product =
+            products.find(p => p.id === item.id);
+
+        if(!product) return;
+
+        const itemTotal =
+            product.price * item.qty;
+
+        total += itemTotal;
+
+        orderItems +=
+            "• " +
+            product.name +
+            " × " +
+            item.qty +
+            " = " +
+            money(itemTotal) +
+            "\n";
+    });
+
+    const message =
+`🛍️ *NEW GLOBIA ORDER*
+
+📦 *Order:* ${orderNumber}
+
+👤 *Customer*
+Name: ${name}
+Phone: ${phone}
+
+📍 *Delivery*
+Emirate: ${emirate}
+Address: ${address}
+
+🛒 *Products*
+${orderItems}
+💰 *TOTAL: ${money(total)}*
+
+💳 *Payment:* ${payment}
+
+Please confirm this order.`;
+
+    const whatsappNumber = "971567533605";
+
+    const whatsappURL =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
 
     document.getElementById("orderNumber")
-        .textContent=orderNumber;
+        .textContent = orderNumber;
 
     closeCheckout();
 
+    /*
+     * Open WhatsApp with the complete order.
+     */
+    window.open(whatsappURL, "_blank");
+
+    /*
+     * Clear cart after sending order.
+     */
+    cart = [];
+    saveCart();
+
     document
         .getElementById("successOverlay")
-        .style.display="block";
+        .style.display = "block";
+    }
 
-    cart=[];
-
-    saveCart();
 
 }
 

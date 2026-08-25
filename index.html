@@ -646,7 +646,40 @@ font-size:16px;
 grid-template-columns:1fr;
 }
 
+}.successBox{
+background:white;
+width:min(430px,90%);
+padding:35px;
+border-radius:24px;
+text-align:center;
+box-shadow:0 20px 60px #0003
 }
+
+.successIcon{
+width:70px;
+height:70px;
+margin:auto auto 18px;
+border-radius:50%;
+background:#16a34a;
+color:white;
+font-size:45px;
+line-height:70px
+}
+
+.successBox h2{
+margin:8px 0;
+color:#111827
+}
+
+.successBox button{
+border:0;
+padding:14px 25px;
+border-radius:12px;
+background:#ff6b00;
+color:white;
+font-weight:700;
+cursor:pointer
+   }
 </style>
 </head>
 
@@ -1532,16 +1565,31 @@ details+
 
 if(method=="cod"){
 
-/*
-COD DOES NOT OPEN PAYSTACK.
-It creates the order message directly.
-*/
+let data={
+"_subject":"New Globia Cash on Delivery Order "+orderNo,
+"order_number":orderNo,
+"customer_name":name,
+"customer_phone":phone,
+"customer_email":email,
+"delivery_address":address,
+"payment_method":"Cash on Delivery",
+"order_items":details,
+"order_total":money(total())
+};
 
-let url=
-"https://wa.me/?text="+
-encodeURIComponent(message);
-
-window.open(url,"_blank");
+fetch("https://formspree.io/f/xnpaedab",{
+method:"POST",
+headers:{
+"Accept":"application/json",
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+})
+.then(r=>{
+if(!r.ok)throw new Error("Order failed");
+return r.json();
+})
+.then(()=>{
 
 localStorage.setItem(
 "globiaLastOrder",
@@ -1559,7 +1607,18 @@ cart=[];
 saveCart();
 closeCheckout();
 
-toast("COD order created successfully");
+document.getElementById("successOrder").textContent=orderNo;
+document.getElementById("successModal").classList.add("open");
+
+})
+.catch(()=>{
+
+alert(
+"Sorry, we could not send your order. "+
+"Please check your internet connection and try again."
+);
+
+});
 
 return;
    }
@@ -1714,7 +1773,35 @@ with your own products.
 buildCategories();
 renderProducts();
 updateCart();
+<div id="successModal" class="modal">
+<div class="successBox">
 
+<div class="successIcon">✓</div>
+
+<h2>Order Confirmed!</h2>
+
+<p>
+Thank you for shopping with <b>GLOBIA</b>.
+</p>
+
+<p>
+Your Cash on Delivery order has been received successfully.
+</p>
+
+<p>
+Order Number:
+<br>
+<strong id="successOrder"></strong>
+</p>
+
+<button onclick="
+document.getElementById('successModal').classList.remove('open')
+">
+Continue Shopping
+</button>
+
+</div>
+</div>
 </script>
 
 </body>

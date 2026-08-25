@@ -12,7 +12,7 @@
 --blue2:#0b47c9;
 --orange:#ff7a18;
 --green:#16a34a;
---dark:#172033;
+--dark:#172033; up
 --muted:#667085;
 --bg:#f5f7fb;
 --white:#fff;
@@ -1071,9 +1071,9 @@ Close
 Become a GLOBIA Seller
 </h2>
 
-<form
+<
 class="form"
-onsubmit="submitSeller(event)">
+onsubmformit="submitSeller(event)">
 
 <label>
 Name
@@ -1130,13 +1130,21 @@ Join GLOBIA Sales & Marketing
 
 <form
 class="form"
-onsubmit="submitSales(event)">
+action="https://formspree.io/f/xnpaedab"
+method="POST">
+
+<input
+type="hidden"
+name="_subject"
+value="New GLOBIA Seller Application">
 
 <label>
 Name
 
 <input
-id="salesName"
+id="sellerName"
+name="name"
+type="text"
 required>
 </label>
 
@@ -1144,25 +1152,30 @@ required>
 Phone / WhatsApp
 
 <input
-id="salesPhone"
+id="sellerPhone"
+name="phone"
+type="tel"
 required>
 </label>
 
 <label>
-Experience / Location
+Product
 
 <textarea
-id="salesInfo"
+id="sellerProduct"
+name="product"
 rows="4"
+placeholder="Tell us what you want to sell..."
 required></textarea>
 </label>
 
-<button class="submitBtn">
-Apply Now
+<button
+class="submitBtn"
+type="submit">
+Send Application
 </button>
 
 </form>
-
 </div>
 
 </div>

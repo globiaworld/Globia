@@ -1529,66 +1529,6 @@ let message=
 details+
 "\n\nTOTAL: "+money(total());
 
-if(method=="cod"){
-
-let data={
-"_subject":"New Globia Cash on Delivery Order "+orderNo,
-"order_number":orderNo,
-"customer_name":name,
-"customer_phone":phone,
-"customer_email":email,
-"delivery_address":address,
-"payment_method":"Cash on Delivery",
-"order_items":details,
-"order_total":money(total())
-};
-
-fetch("https://formspree.io/f/xnpaedab",{
-method:"POST",
-headers:{
-"Accept":"application/json",
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-})
-.then(r=>{
-if(!r.ok)throw new Error("Order failed");
-return r.json();
-})
-.then(()=>{
-
-localStorage.setItem(
-"globiaLastOrder",
-JSON.stringify({
-order:orderNo,
-name:name,
-phone:phone,
-address:address,
-payment:"Cash on Delivery",
-total:total()
-})
-);
-
-cart=[];
-saveCart();
-closeCheckout();
-
-document.getElementById("successOrder").textContent=orderNo;
-document.getElementById("successModal").classList.add("open");
-
-})
-.catch(()=>{
-
-alert(
-"Sorry, we could not send your order. "+
-"Please check your internet connection and try again."
-);
-
-});
-
-return;
-   }
-   
 /* PAYSTACK */
 
 localStorage.setItem(

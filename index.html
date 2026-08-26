@@ -674,804 +674,1757 @@ renderCart();
 
 </script>
 <script>
-/* =========================
-   GLOBIA MARKETPLACE
-   SECTION 3 — JAVASCRIPT
-   ========================= */
 
-let cart = JSON.parse(localStorage.getItem("globiaCart") || "[]");
+/* =========================================================
+   GLOBIA — SECTION 3
+   JAVASCRIPT / CART / CHECKOUT / FORMSPREE
+   ========================================================= */
+
+
+/* =========================================================
+   CONFIGURATION
+   ========================================================= */
+
+const FORMSPREE_URL =
+"https://formspree.io/f/xnpaedab";
+
+/*
+  IMPORTANT:
+  Put your REAL Paystack payment-link here.
+
+  Example:
+  const PAYSTACK_LINK =
+  "https://paystack.shop/pay/xxxxxxxx";
+
+  If you have not created the final Paystack link yet,
+  leave it as it is. The customer will still see the
+  GLOBIA order confirmation after Formspree receives
+  the order.
+*/
+
+const PAYSTACK_LINK =
+"YOUR_PAYSTACK_PAYMENT_LINK_HERE";
+
+
+/* =========================================================
+   CART DATA
+   ========================================================= */
+
+let cart =
+JSON.parse(
+localStorage.getItem("globiaCart") || "[]"
+);
+
 let activeCategory = "All";
+
 let visibleProducts = 20;
 
-/* ---------- HELPERS ---------- */
+
+/* =========================================================
+   GENERAL HELPERS
+   ========================================================= */
 
 function money(value){
-  return "AED " + Number(value).toFixed(2);
+
+  return "AED " +
+  Number(value).toFixed(2);
+
 }
+
 
 function saveCart(){
-  localStorage.setItem("globiaCart", JSON.stringify(cart));
+
+  localStorage.setItem(
+    "globiaCart",
+    JSON.stringify(cart)
+  );
+
 }
 
+
 function toast(message){
-  const t = document.getElementById("toast");
+
+  const t =
+  document.getElementById("toast");
+
   if(!t) return;
 
   t.textContent = message;
+
   t.classList.add("show");
 
-  setTimeout(() => {
+  setTimeout(function(){
+
     t.classList.remove("show");
-  }, 2500);
+
+  },3000);
+
 }
+
 
 function scrollToId(id){
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:"smooth"});
+
+  const element =
+  document.getElementById(id);
+
+  if(element){
+
+    element.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
 }
 
-/* ---------- CATEGORIES ---------- */
+
+/* =========================================================
+   CATEGORY SYSTEM
+   ========================================================= */
 
 function renderCategories(){
 
-  const box = document.getElementById("categories");
+  const box =
+  document.getElementById("categories");
+
   if(!box) return;
 
   const categories = [
     "All",
-    ...new Set(PRODUCTS.map(p => p[2]))
+    ...new Set(
+      PRODUCTS.map(function(product){
+        return product[2];
+      })
+    )
   ];
 
-  box.innerHTML = categories.map(category => `
-    <button
-      class="category ${category === activeCategory ? "active" : ""}"
-      onclick="selectCategory('${category.replace(/'/g,"\\'")}')">
-      ${category}
-    </button>
-  `).join("");
+  box.innerHTML =
+  categories.map(function(category){
+
+    return `
+      <button
+        class="category ${category === activeCategory ? "active" : ""}"
+        onclick="selectCategory('${category.replace(/'/g,"\\'")}')">
+        ${category}
+      </button>
+    `;
+
+  }).join("");
+
 }
+
 
 function selectCategory(category){
 
-  activeCategory = category;
-  visibleProducts = 20;
+  activeCategory =
+  category;
+
+  visibleProducts =
+  20;
 
   renderCategories();
+
   renderProducts();
+
 }
 
-/* ---------- PRODUCTS ---------- */
+
+/* =========================================================
+   PRODUCT DISPLAY
+   ========================================================= */
 
 function renderProducts(){
 
-  const grid = document.getElementById("productGrid");
-  const search = document.getElementById("searchInput");
+  const grid =
+  document.getElementById("productGrid");
+
+  const searchInput =
+  document.getElementById("searchInput");
 
   if(!grid) return;
 
-  const term = search
-    ? search.value.toLowerCase().trim()
-    : "";
+  const searchTerm =
+  searchInput
+  ? searchInput.value.toLowerCase().trim()
+  : "";
 
-  let filtered = PRODUCTS.filter(product => {
+  const filtered =
+  PRODUCTS.filter(function(product){
 
-    const matchesCategory =
-      activeCategory === "All" ||
-      product[2] === activeCategory;
+    const id =
+    product[0];
 
-    const matchesSearch =
-      !term ||
-      product[1].toLowerCase().includes(term) ||
-      product[2].toLowerCase().includes(term);
+    const name =
+    product[1];
 
-    return matchesCategory && matchesSearch;
+    const category =
+    product[2];
+
+    const categoryMatch =
+    activeCategory === "All" ||
+    category === activeCategory;
+
+    const searchMatch =
+    !searchTerm ||
+    name.toLowerCase().includes(searchTerm) ||
+    category.toLowerCase().includes(searchTerm);
+
+    return categoryMatch &&
+    searchMatch;
+
   });
 
-  const shown = filtered.slice(0, visibleProducts);
 
-  document.getElementById("resultText").textContent =
-    filtered.length + " products";
+  const shown =
+  filtered.slice(
+    0,
+    visibleProducts
+  );
 
-  grid.innerHTML = shown.map(product => {
 
-    const [id,name,category,price,oldPrice,image] = product;
+  const resultText =
+  document.getElementById("resultText");
 
-    return `
-      <article class="product">
+  if(resultText){
 
-        <div class="productImage">
+    resultText.textContent =
+    filtered.length +
+    " products";
 
-          <img
-            src="${image}"
-            alt="${name}"
-            loading="lazy"
-            onerror="this.src='https://placehold.co/600x600?text=GLOBIA'">
-
-          <span class="productTag">
-            ${category}
-          </span>
-
-        </div>
-
-        <div class="productBody">
-
-          <div class="productName">
-            ${name}
-          </div>
-
-          <div class="rating">
-            ★★★★★
-          </div>
-
-          <div class="price">
-            ${money(price)}
-          </div>
-
-          <div class="oldPrice">
-            ${money(oldPrice)}
-          </div>
-
-          <button
-            class="addBtn"
-            onclick="addToCart(${id})">
-            Add to Cart
-          </button>
-
-        </div>
-
-      </article>
-    `;
-  }).join("");
-
-  const moreButton = document.getElementById("showMoreBtn");
-
-  if(moreButton){
-    moreButton.style.display =
-      visibleProducts < filtered.length
-        ? "block"
-        : "none";
   }
 
+
   if(!shown.length){
+
     grid.innerHTML = `
-      <div class="empty" style="grid-column:1/-1">
+      <div
+        class="empty"
+        style="grid-column:1/-1">
         No products found.
       </div>
     `;
+
+  }else{
+
+    grid.innerHTML =
+    shown.map(function(product){
+
+      const id =
+      product[0];
+
+      const name =
+      product[1];
+
+      const category =
+      product[2];
+
+      const price =
+      product[3];
+
+      const oldPrice =
+      product[4];
+
+      const image =
+      product[5];
+
+
+      return `
+
+        <article class="product">
+
+          <div class="productImage">
+
+            <img
+              src="${image}"
+              alt="${name}"
+              loading="lazy"
+              onerror="
+              this.src='https://placehold.co/600x600?text=GLOBIA'
+              ">
+
+            <span class="productTag">
+              ${category}
+            </span>
+
+          </div>
+
+
+          <div class="productBody">
+
+            <div class="productName">
+              ${name}
+            </div>
+
+            <div class="rating">
+              ★★★★★
+            </div>
+
+            <div class="price">
+              ${money(price)}
+            </div>
+
+            <div class="oldPrice">
+              ${money(oldPrice)}
+            </div>
+
+            <button
+              class="addBtn"
+              onclick="addToCart(${id})">
+              Add to Cart
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
   }
+
+
+  const moreButton =
+  document.getElementById("showMoreBtn");
+
+  if(moreButton){
+
+    moreButton.style.display =
+    visibleProducts < filtered.length
+    ? "block"
+    : "none";
+
+  }
+
 }
+
 
 function showMoreProducts(){
 
   visibleProducts += 20;
+
   renderProducts();
+
 }
 
-/* ---------- CART ---------- */
+
+/* =========================================================
+   ADD TO CART
+   ========================================================= */
 
 function addToCart(id){
 
-  const product = PRODUCTS.find(p => p[0] === id);
+  const product =
+  PRODUCTS.find(function(item){
 
-  if(!product) return;
+    return item[0] === id;
 
-  const existing = cart.find(item => item.id === id);
+  });
 
-  if(existing){
-    existing.qty++;
-  }else{
-    cart.push({
-      id: product[0],
-      name: product[1],
-      category: product[2],
-      price: product[3],
-      image: product[5],
-      qty: 1
-    });
-  }
 
-  saveCart();
-  updateCart();
+  if(!product){
 
-  toast(product[1] + " added to cart");
-}
-
-function updateCart(){
-
-  const count = cart.reduce(
-    (sum,item) => sum + item.qty,
-    0
-  );
-
-  const total = cart.reduce(
-    (sum,item) => sum + item.price * item.qty,
-    0
-  );
-
-  const countEl = document.getElementById("cartCount");
-  const totalEl = document.getElementById("cartTotal");
-  const itemsEl = document.getElementById("cartItems");
-
-  if(countEl) countEl.textContent = count;
-
-  if(totalEl) totalEl.textContent = money(total);
-
-  if(!itemsEl) return;
-
-  if(!cart.length){
-
-    itemsEl.innerHTML = `
-      <div class="empty">
-        Your cart is empty.
-      </div>
-    `;
+    toast("Product not found");
 
     return;
   }
 
-  itemsEl.innerHTML = cart.map(item => `
 
-    <div class="cartItem">
+  const existing =
+  cart.find(function(item){
 
-      <img
-        src="${item.image}"
-        alt="${item.name}"
-        onerror="this.src='https://placehold.co/100x100?text=GLOBIA'">
+    return item.id === id;
 
-      <div class="cartInfo">
+  });
 
-        <strong>
-          ${item.name}
-        </strong>
 
-        <div>
-          ${money(item.price)}
-        </div>
+  if(existing){
 
-        <div class="quantity">
+    existing.qty += 1;
 
-          <button
-            onclick="changeQuantity(${item.id},-1)">
-            −
-          </button>
+  }else{
+
+    cart.push({
+
+      id:product[0],
+
+      name:product[1],
+
+      category:product[2],
+
+      price:Number(product[3]),
+
+      image:product[5],
+
+      qty:1
+
+    });
+
+  }
+
+
+  saveCart();
+
+  updateCart();
+
+  toast(
+    product[1] +
+    " added to cart"
+  );
+
+}
+
+
+/* =========================================================
+   UPDATE CART
+   ========================================================= */
+
+function updateCart(){
+
+  const count =
+  cart.reduce(function(total,item){
+
+    return total + item.qty;
+
+  },0);
+
+
+  const total =
+  cart.reduce(function(sum,item){
+
+    return sum +
+    item.price *
+    item.qty;
+
+  },0);
+
+
+  const countElement =
+  document.getElementById("cartCount");
+
+  const totalElement =
+  document.getElementById("cartTotal");
+
+  const itemsElement =
+  document.getElementById("cartItems");
+
+
+  if(countElement){
+
+    countElement.textContent =
+    count;
+
+  }
+
+
+  if(totalElement){
+
+    totalElement.textContent =
+    money(total);
+
+  }
+
+
+  if(!itemsElement) return;
+
+
+  if(!cart.length){
+
+    itemsElement.innerHTML = `
+
+      <div class="empty">
+
+        Your cart is empty.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  itemsElement.innerHTML =
+  cart.map(function(item){
+
+    return `
+
+      <div class="cartItem">
+
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+          onerror="
+          this.src='https://placehold.co/100x100?text=GLOBIA'
+          ">
+
+
+        <div class="cartInfo">
 
           <strong>
-            ${item.qty}
+            ${item.name}
           </strong>
 
-          <button
-            onclick="changeQuantity(${item.id},1)">
-            +
-          </button>
+          <div>
+            ${money(item.price)}
+          </div>
 
-          <button
-            class="remove"
-            onclick="removeFromCart(${item.id})">
-            Remove
-          </button>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQuantity(${item.id},-1)">
+              −
+            </button>
+
+            <strong>
+              ${item.qty}
+            </strong>
+
+            <button
+              onclick="changeQuantity(${item.id},1)">
+              +
+            </button>
+
+            <button
+              class="remove"
+              onclick="removeFromCart(${item.id})">
+              Remove
+            </button>
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
+    `;
 
-  `).join("");
+  }).join("");
+
 }
+
+
+/* =========================================================
+   CHANGE QUANTITY
+   ========================================================= */
 
 function changeQuantity(id,change){
 
-  const item = cart.find(i => i.id === id);
+  const item =
+  cart.find(function(product){
+
+    return product.id === id;
+
+  });
+
 
   if(!item) return;
 
+
   item.qty += change;
 
+
   if(item.qty <= 0){
-    cart = cart.filter(i => i.id !== id);
+
+    cart =
+    cart.filter(function(product){
+
+      return product.id !== id;
+
+    });
+
   }
 
+
   saveCart();
+
   updateCart();
+
 }
+
+
+/* =========================================================
+   REMOVE ITEM
+   ========================================================= */
 
 function removeFromCart(id){
 
-  cart = cart.filter(item => item.id !== id);
+  cart =
+  cart.filter(function(item){
+
+    return item.id !== id;
+
+  });
+
 
   saveCart();
+
   updateCart();
 
-  toast("Item removed");
+  toast(
+    "Item removed from cart"
+  );
+
 }
+
+
+/* =========================================================
+   OPEN CART
+   ========================================================= */
 
 function openCart(){
 
   updateCart();
 
-  document
-    .getElementById("cartDrawer")
-    .classList.add("open");
+  const drawer =
+  document.getElementById("cartDrawer");
+
+  if(drawer){
+
+    drawer.classList.add("open");
+
+  }
+
 }
+
+
+/* =========================================================
+   CLOSE CART
+   ========================================================= */
 
 function closeCart(){
 
-  document
-    .getElementById("cartDrawer")
-    .classList.remove("open");
-}
+  const drawer =
+  document.getElementById("cartDrawer");
 
-/* ---------- CHECKOUT ---------- */
+  if(drawer){
 
-function openCheckout(){
+    drawer.classList.remove("open");
 
-  if(!cart.length){
-    toast("Your cart is empty");
-    return;
   }
 
-  closeCart();
+}
+
+
+/* =========================================================
+   CHECKOUT SUMMARY
+   ========================================================= */
+
+function buildCheckoutSummary(){
 
   const summary =
-    document.getElementById("checkoutSummary");
-
-  const total = cart.reduce(
-    (sum,item) => sum + item.price * item.qty,
-    0
+  document.getElementById(
+    "checkoutSummary"
   );
+
+  if(!summary) return;
+
+
+  const total =
+  cart.reduce(function(sum,item){
+
+    return sum +
+    item.price *
+    item.qty;
+
+  },0);
+
 
   summary.innerHTML = `
 
-    <div style="
+    <div
+      style="
       background:#f5f7fb;
       padding:15px;
       border-radius:10px;
       margin-bottom:15px;
-    ">
+      ">
 
-      ${cart.map(item => `
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          margin-bottom:7px;
-        ">
-          <span>
-            ${item.name} × ${item.qty}
-          </span>
+      ${cart.map(function(item){
 
-          <strong>
-            ${money(item.price * item.qty)}
-          </strong>
-        </div>
-      `).join("")}
+        return `
+
+          <div
+            style="
+            display:flex;
+            justify-content:space-between;
+            gap:10px;
+            margin-bottom:8px;
+            ">
+
+            <span>
+              ${item.name}
+              × ${item.qty}
+            </span>
+
+            <strong>
+              ${money(
+                item.price *
+                item.qty
+              )}
+            </strong>
+
+          </div>
+
+        `;
+
+      }).join("")}
+
 
       <hr>
 
-      <div style="
+
+      <div
+        style="
         display:flex;
         justify-content:space-between;
-        font-size:18px;
+        font-size:20px;
         font-weight:900;
-      ">
-        <span>Total</span>
-        <span>${money(total)}</span>
+        ">
+
+        <span>
+          Total
+        </span>
+
+        <span>
+          ${money(total)}
+        </span>
+
       </div>
 
     </div>
+
   `;
 
-  document
-    .getElementById("checkoutModal")
-    .classList.add("open");
+}
+
+
+/* =========================================================
+   OPEN CHECKOUT
+   ========================================================= */
+
+function openCheckout(){
+
+  if(!cart.length){
+
+    toast(
+      "Your cart is empty"
+    );
+
+    return;
+  }
+
+
+  closeCart();
+
+  buildCheckoutSummary();
+
+  const modal =
+  document.getElementById(
+    "checkoutModal"
+  );
+
+
+  if(modal){
+
+    modal.classList.add("open");
+
+  }
+
 
   paymentChanged();
+
 }
+
+
+/* =========================================================
+   CLOSE CHECKOUT
+   ========================================================= */
 
 function closeCheckout(){
 
-  document
-    .getElementById("checkoutModal")
-    .classList.remove("open");
+  const modal =
+  document.getElementById(
+    "checkoutModal"
+  );
+
+
+  if(modal){
+
+    modal.classList.remove("open");
+
+  }
+
 }
+
+
+/* =========================================================
+   PAYMENT METHOD
+   ========================================================= */
 
 function paymentChanged(){
 
   const selected =
-    document.querySelector(
-      'input[name="payment"]:checked'
-    );
+  document.querySelector(
+    'input[name="payment"]:checked'
+  );
 
-  const cod =
-    document.getElementById("codMessage");
+
+  const codMessage =
+  document.getElementById(
+    "codMessage"
+  );
+
 
   const button =
-    document.getElementById("submitOrderBtn");
+  document.getElementById(
+    "submitOrderBtn"
+  );
+
 
   if(!selected) return;
 
+
   if(selected.value === "cod"){
 
-    cod.style.display = "block";
+    if(codMessage){
 
-    button.textContent =
+      codMessage.style.display =
+      "block";
+
+    }
+
+
+    if(button){
+
+      button.textContent =
       "Place Cash on Delivery Order";
+
+    }
 
   }else{
 
-    cod.style.display = "none";
+    if(codMessage){
 
-    button.textContent =
+      codMessage.style.display =
+      "none";
+
+    }
+
+
+    if(button){
+
+      button.textContent =
       "Continue to Pay with Paystack";
+
+    }
+
   }
+
 }
 
-/* ---------- ORDER → FORMSPREE ---------- */
 
-/*
- IMPORTANT:
- This sends the order directly to Formspree.
+/* =========================================================
+   SHOW SUCCESS SCREEN
+   ========================================================= */
 
- It does NOT open the customer's email application.
+function showOrderSuccess(orderNumber,payment){
 
- It does NOT expose GLOBIA's receiving email address.
+  const modal =
+  document.getElementById(
+    "checkoutModal"
+  );
 
- Replace only the Formspree endpoint if your
- Formspree form ID is different.
-*/
+  if(!modal) return;
 
-const FORMSPREE_ORDER_URL =
-  "https://formspree.io/f/xnpaedab";
+
+  const box =
+  modal.querySelector(
+    ".modalBox"
+  );
+
+
+  if(!box) return;
+
+
+  const paymentText =
+  payment === "cod"
+  ? "Cash on Delivery"
+  : "Paystack";
+
+
+  box.innerHTML = `
+
+    <div
+      style="
+      text-align:center;
+      padding:25px 10px;
+      ">
+
+      <div
+        style="
+        width:75px;
+        height:75px;
+        margin:0 auto 18px;
+        border-radius:50%;
+        background:#eafaf0;
+        color:#16a34a;
+        display:grid;
+        place-items:center;
+        font-size:42px;
+        font-weight:900;
+        ">
+
+        ✓
+
+      </div>
+
+
+      <h2
+        style="
+        color:#172033;
+        margin-bottom:10px;
+        ">
+
+        Order Received!
+
+      </h2>
+
+
+      <p
+        style="
+        color:#667085;
+        line-height:1.6;
+        ">
+
+        Thank you for shopping with
+        <strong>GLOBIA</strong>.
+
+      </p>
+
+
+      <div
+        style="
+        background:#f5f7fb;
+        border-radius:12px;
+        padding:15px;
+        margin:20px 0;
+        text-align:left;
+        ">
+
+        <p>
+          <strong>
+            Order Number:
+          </strong>
+
+          ${orderNumber}
+        </p>
+
+
+        <p>
+          <strong>
+            Payment:
+          </strong>
+
+          ${paymentText}
+        </p>
+
+
+        <p
+          style="
+          margin-bottom:0;
+          ">
+
+          Your order has been
+          successfully submitted.
+
+        </p>
+
+      </div>
+
+
+      <button
+        class="primary"
+        onclick="finishOrder()">
+
+        Continue Shopping
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ORDER NUMBER
+   ========================================================= */
+
+function createOrderNumber(){
+
+  const time =
+  Date.now()
+  .toString()
+  .slice(-8);
+
+  const random =
+  Math.floor(
+    100 + Math.random() * 900
+  );
+
+  return "GLB-" +
+  time +
+  "-" +
+  random;
+
+}
+
+
+/* =========================================================
+   FINISH ORDER
+   ========================================================= */
+
+function finishOrder(){
+
+  closeCheckout();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   SUBMIT CUSTOMER ORDER
+   ========================================================= */
 
 async function submitOrder(event){
 
   event.preventDefault();
 
+
   if(!cart.length){
-    toast("Your cart is empty");
+
+    toast(
+      "Your cart is empty"
+    );
+
     return;
   }
 
+
   const name =
-    document.getElementById("customerName").value.trim();
+  document
+  .getElementById("customerName")
+  .value
+  .trim();
+
 
   const phone =
-    document.getElementById("customerPhone").value.trim();
+  document
+  .getElementById("customerPhone")
+  .value
+  .trim();
+
 
   const email =
-    document.getElementById("customerEmail").value.trim();
+  document
+  .getElementById("customerEmail")
+  .value
+  .trim();
+
 
   const address =
-    document.getElementById("customerAddress").value.trim();
+  document
+  .getElementById("customerAddress")
+  .value
+  .trim();
 
-  const payment =
-    document.querySelector(
-      'input[name="payment"]:checked'
-    ).value;
 
-  const total = cart.reduce(
-    (sum,item) => sum + item.price * item.qty,
-    0
+  const paymentElement =
+  document.querySelector(
+    'input[name="payment"]:checked'
   );
 
-  const orderItems = cart.map(item =>
-    `${item.name} x ${item.qty} = ${money(item.price * item.qty)}`
-  ).join("\n");
+
+  const payment =
+  paymentElement
+  ? paymentElement.value
+  : "cod";
+
+
+  if(!name){
+
+    toast(
+      "Please enter your name"
+    );
+
+    return;
+  }
+
+
+  if(!phone){
+
+    toast(
+      "Please enter your phone number"
+    );
+
+    return;
+  }
+
+
+  if(!address){
+
+    toast(
+      "Please enter your delivery address"
+    );
+
+    return;
+  }
+
+
+  const total =
+  cart.reduce(function(sum,item){
+
+    return sum +
+    item.price *
+    item.qty;
+
+  },0);
+
+
+  const orderNumber =
+  createOrderNumber();
+
+
+  const orderItems =
+  cart.map(function(item){
+
+    return (
+      item.name +
+      " x " +
+      item.qty +
+      " = " +
+      money(
+        item.price *
+        item.qty
+      )
+    );
+
+  }).join("\n");
+
 
   const button =
-    document.getElementById("submitOrderBtn");
+  document.getElementById(
+    "submitOrderBtn"
+  );
 
-  button.disabled = true;
-  button.textContent = "Sending Order...";
 
-  const formData = new FormData();
+  if(button){
+
+    button.disabled = true;
+
+    button.textContent =
+    "Sending Order...";
+
+  }
+
+
+  /*
+    Formspree receives the order.
+
+    We deliberately DO NOT use:
+    mailto:
+    window.open(mailto)
+    Gmail
+    Outlook
+    customer's email app
+
+    The browser sends the information directly
+    to Formspree using POST/AJAX.
+  */
+
+  const formData =
+  new FormData();
+
 
   formData.append(
     "_subject",
-    "New GLOBIA Customer Order"
+    "New GLOBIA Order — " +
+    orderNumber
   );
 
+
   formData.append(
-    "Name",
+    "Order Number",
+    orderNumber
+  );
+
+
+  formData.append(
+    "Customer Name",
     name
   );
 
+
   formData.append(
-    "Phone",
+    "Customer Phone",
     phone
   );
 
+
   /*
-    Customer email is optional.
-    It is sent only as order information.
-    It is NOT used to open an email application.
+    IMPORTANT:
+    We do NOT make the customer's email
+    the Formspree recipient.
+
+    It is simply order information.
   */
+
   if(email){
+
     formData.append(
       "Customer Email",
       email
     );
+
   }
+
 
   formData.append(
     "Delivery Address",
     address
   );
 
+
   formData.append(
     "Payment Method",
     payment === "cod"
-      ? "Cash on Delivery"
-      : "Paystack"
+    ? "Cash on Delivery"
+    : "Paystack"
   );
+
 
   formData.append(
     "Order Items",
     orderItems
   );
 
+
   formData.append(
     "Order Total",
     money(total)
   );
 
+
   formData.append(
-    "Order Time",
+    "Order Date",
     new Date().toLocaleString()
   );
 
+
   try{
 
-    const response = await fetch(
-      FORMSPREE_ORDER_URL,
+    const response =
+    await fetch(
+      FORMSPREE_URL,
       {
         method:"POST",
+
         body:formData,
+
         headers:{
-          "Accept":"application/json"
+          "Accept":
+          "application/json"
         }
       }
     );
 
-    if(!response.ok){
-      throw new Error("Formspree submission failed");
-    }
 
     /*
-      COD:
-      Send the order to Formspree and finish.
+      IMPORTANT:
+      We check response.ok.
+
+      If Formspree rejects the order,
+      we DO NOT close the checkout.
+      We show the error instead.
+    */
+
+    let result = {};
+
+    try{
+
+      result =
+      await response.json();
+
+    }catch(jsonError){
+
+      result = {};
+
+    }
+
+
+    if(!response.ok){
+
+      let errorMessage =
+      "Formspree could not receive the order.";
+
+      if(
+        result &&
+        result.errors &&
+        result.errors.length
+      ){
+
+        errorMessage =
+        result.errors
+        .map(function(error){
+
+          return error.message ||
+          "Formspree validation error";
+
+        })
+        .join(", ");
+
+      }
+
+      throw new Error(
+        errorMessage
+      );
+
+    }
+
+
+    /*
+      SUCCESS:
+      Formspree accepted the order.
+    */
+
+    cart = [];
+
+    saveCart();
+
+    updateCart();
+
+
+    /*
+      CASH ON DELIVERY
+      ----------------
+      Show confirmation immediately.
     */
 
     if(payment === "cod"){
 
-      cart = [];
-
-      saveCart();
-      updateCart();
-      closeCheckout();
-
-      toast(
-        "Order received successfully!"
+      showOrderSuccess(
+        orderNumber,
+        "cod"
       );
 
       return;
+
     }
 
-    /*
-      PAYSTACK:
-      The order has been submitted to Formspree.
-      Payment can now continue.
 
-      IMPORTANT:
-      Put your Paystack payment-link URL below.
+    /*
+      PAYSTACK
+      --------
+      The order is already recorded in
+      Formspree before payment begins.
     */
 
-    const PAYSTACK_LINK =
-      "YOUR_PAYSTACK_PAYMENT_LINK_HERE";
-
     if(
-      !PAYSTACK_LINK ||
-      PAYSTACK_LINK ===
+      PAYSTACK_LINK &&
+      PAYSTACK_LINK !==
       "YOUR_PAYSTACK_PAYMENT_LINK_HERE"
     ){
 
-      cart = [];
+      /*
+        Keep the order confirmation available
+        before redirecting to payment.
+      */
+            <button
+              onclick="window.location.reload()"
+              style="
+                margin-top:15px;
+                border:0;
+                background:#1463ff;
+                color:#fff;
+                padding:12px 20px;
+                border-radius:9px;
+                font-weight:900;
+              ">
+              Back to GLOBIA
+            </button>
 
-      saveCart();
-      updateCart();
-      closeCheckout();
+          </div>
 
-      toast(
-        "Order received. Paystack payment link is not configured yet."
+        `;
+
+        setTimeout(function(){
+
+          window.location.href = PAYSTACK_LINK;
+
+        },1800);
+
+      }else{
+
+        window.location.href = PAYSTACK_LINK;
+
+      }
+
+    }else{
+
+      const box =
+      document.querySelector(
+        "#checkoutModal .modalBox"
       );
 
-      return;
-    }
+      if(box){
 
-    window.location.href = PAYSTACK_LINK;
+        box.innerHTML = `
+
+          <div
+            style="
+            text-align:center;
+            padding:30px 10px;
+            ">
+
+            <div style="
+              font-size:55px;
+              margin-bottom:10px;
+            ">
+              ✓
+            </div>
+
+            <h2>
+              Order Received Successfully
+            </h2>
+
+            <p style="
+              color:#667085;
+              line-height:1.6;
+            ">
+
+              Your order
+              <strong>${orderNumber}</strong>
+              has been received by GLOBIA.
+
+            </p>
+
+            <p style="
+              color:#667085;
+            ">
+
+              We will contact you using the
+              phone number you provided.
+
+            </p>
+
+            <button
+              onclick="window.location.reload()"
+              style="
+                margin-top:15px;
+                border:0;
+                background:#1463ff;
+                color:#fff;
+                padding:12px 20px;
+                border-radius:9px;
+                font-weight:900;
+              ">
+              Back to GLOBIA
+            </button>
+
+          </div>
+
+        `;
+
+      }
+
+    }
 
   }catch(error){
 
     console.error(error);
 
-    toast(
-      "Unable to send order. Please try again."
+    const box =
+    document.querySelector(
+      "#checkoutModal .modalBox"
     );
 
-    button.disabled = false;
+    if(box){
 
-    paymentChanged();
+      box.innerHTML = `
+
+        <div
+          style="
+          text-align:center;
+          padding:30px 10px;
+          ">
+
+          <div style="
+            font-size:50px;
+          ">
+            ⚠️
+          </div>
+
+          <h2>
+            Order Could Not Be Sent
+          </h2>
+
+          <p style="
+            color:#667085;
+            line-height:1.6;
+          ">
+
+            Please check your internet connection
+            and try again.
+
+          </p>
+
+          <button
+            onclick="closeCheckout()"
+            style="
+              border:0;
+              background:#1463ff;
+              color:#fff;
+              padding:12px 20px;
+              border-radius:9px;
+              font-weight:900;
+            ">
+            Try Again
+          </button>
+
+        </div>
+
+      `;
+
+    }
+
   }
+
 }
 
-/* ---------- SELLER FORM ---------- */
 
-const FORMSPREE_SELLER_URL =
-  "https://formspree.io/f/xnpaedab";
+/* =========================
+   SELLER FORM
+========================= */
 
 async function submitSeller(event){
 
   event.preventDefault();
 
-  const form =
-    event.target;
+  const btn =
+  document.getElementById(
+    "sellerSubmitBtn"
+  );
 
-  const button =
-    document.getElementById("sellerSubmitBtn");
+  if(btn){
 
-  const formData =
-    new FormData(form);
+    btn.disabled = true;
+    btn.textContent = "Sending...";
 
-  formData.set(
+  }
+
+  const data = new FormData();
+
+  data.append(
     "_subject",
     "New GLOBIA Seller Application"
   );
 
-  button.disabled = true;
-  button.textContent = "Sending...";
+  data.append(
+    "name",
+    document.getElementById(
+      "sellerName"
+    ).value
+  );
+
+  data.append(
+    "phone",
+    document.getElementById(
+      "sellerPhone"
+    ).value
+  );
+
+  data.append(
+    "product",
+    document.getElementById(
+      "sellerProduct"
+    ).value
+  );
 
   try{
 
-    const response = await fetch(
-      FORMSPREE_SELLER_URL,
+    const response =
+    await fetch(
+      "https://formspree.io/f/xnpaedab",
       {
         method:"POST",
-        body:formData,
+        body:data,
         headers:{
           "Accept":"application/json"
         }
       }
     );
 
-    if(!response.ok){
-      throw new Error(
-        "Seller application failed"
-      );
-    }
-
-    form.reset();
+    if(!response.ok)
+      throw new Error("Seller form failed");
 
     closeSeller();
 
-    toast(
+    showToast(
       "Seller application sent successfully!"
     );
+
+    document.getElementById(
+      "sellerForm"
+    ).reset();
 
   }catch(error){
 
     console.error(error);
 
-    toast(
-      "Unable to send application."
+    showToast(
+      "Unable to send application. Please try again."
     );
 
   }finally{
 
-    button.disabled = false;
-    button.textContent = "Send Application";
+    if(btn){
+
+      btn.disabled = false;
+      btn.textContent = "Send Application";
+
+    }
+
   }
+
 }
 
-function openSeller(){
 
-  document
-    .getElementById("sellerModal")
-    .classList.add("open");
-}
-
-function closeSeller(){
-
-  document
-    .getElementById("sellerModal")
-    .classList.remove("open");
-}
-
-/* ---------- SALES FORM ---------- */
+/* =========================
+   SALES FORM
+========================= */
 
 async function submitSales(event){
 
   event.preventDefault();
 
-  const form =
-    event.target;
+  const name =
+  document.getElementById(
+    "salesName"
+  ).value;
 
-  const formData =
-    new FormData(form);
+  const phone =
+  document.getElementById(
+    "salesPhone"
+  ).value;
 
-  formData.set(
+  const info =
+  document.getElementById(
+    "salesInfo"
+  ).value;
+
+  const data = new FormData();
+
+  data.append(
     "_subject",
     "New GLOBIA Sales & Marketing Application"
   );
 
+  data.append(
+    "name",
+    name
+  );
+
+  data.append(
+    "phone",
+    phone
+  );
+
+  data.append(
+    "experience_location",
+    info
+  );
+
   try{
 
-    const response = await fetch(
-      FORMSPREE_SELLER_URL,
+    const response =
+    await fetch(
+      "https://formspree.io/f/xnpaedab",
       {
         method:"POST",
-        body:formData,
+        body:data,
         headers:{
           "Accept":"application/json"
         }
       }
     );
 
-    if(!response.ok){
-      throw new Error(
-        "Sales application failed"
-      );
-    }
-
-    form.reset();
+    if(!response.ok)
+      throw new Error("Sales form failed");
 
     closeSales();
 
-    toast(
+    showToast(
       "Application sent successfully!"
     );
+
+    const form =
+    document.querySelector(
+      "#salesModal form"
+    );
+
+    if(form)
+      form.reset();
 
   }catch(error){
 
     console.error(error);
 
-    toast(
-      "Unable to send application."
+    showToast(
+      "Unable to send application. Please try again."
     );
+
   }
+
 }
 
-function openSales(){
 
-  document
-    .getElementById("salesModal")
-    .classList.add("open");
-}
+/* =========================
+   TOAST
+========================= */
 
-function closeSales(){
+function showToast(message){
 
-  document
-    .getElementById("salesModal")
-    .classList.remove("open");
-}
-
-/* ---------- MODAL BACKDROP ---------- */
-
-document.querySelectorAll(".modal")
-.forEach(modal => {
-
-  modal.addEventListener(
-    "click",
-    function(event){
-
-      if(event.target === modal){
-        modal.classList.remove("open");
-      }
-
-    }
+  const toast =
+  document.getElementById(
+    "toast"
   );
 
-});
+  if(!toast) return;
 
-/* ---------- INITIALIZE ---------- */
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(function(){
+
+    toast.classList.remove("show");
+
+  },3500);
+
+}
+
+
+/* =========================
+   START WEBSITE
+========================= */
 
 renderCategories();
 renderProducts();
@@ -1481,3 +2434,4 @@ updateCart();
 
 </body>
 </html>
+      

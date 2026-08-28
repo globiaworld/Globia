@@ -476,7 +476,9 @@ const PAYMENT_GATEWAY="PAYSTACK";
 
 const PAYSTACK_PUBLIC_KEY=
 "pk_test_f1a02bf2a0d437eeaff6995e005dd6dc74473780";
-
+const DISPLAY_CURRENCY="AED";
+const PAYMENT_CURRENCY="KES";
+const AED_TO_KES_RATE=35.25;
 
 /* =========================================================
    PAYMENT GATEWAY MODULE
@@ -507,36 +509,24 @@ return false;
 function payWithPaystack(orderData){
 
 if(!window.PaystackPop){
-
 toast("Payment system is still loading. Please try again.");
 return false;
-
 }
 
-const email=orderData.email;
+const aedAmount=Number(orderData.total);
 
-const amountAED=Number(orderData.total);
-
-if(!amountAED || amountAED<=0){
-
+if(!aedAmount || aedAmount<=0){
 toast("Invalid payment amount.");
 return false;
-
 }
 
+/* AED → KES */
+const kesAmount=Math.round(
+aedAmount*AED_TO_KES_RATE
+);
 
-/*
-IMPORTANT:
-
-Paystack amount is normally supplied in the
-smallest currency unit.
-
-This section is isolated so that if you later
-change payment provider, this calculation does
-not affect the rest of GLOBIA.
-*/
-
-const amountSmallestUnit=Math.round(amountAED*100);
+/* Paystack uses the smallest KES unit */
+const paystackAmount=kesAmount*100;
 
 const popup=new PaystackPop();
 
@@ -544,17 +534,29 @@ popup.newTransaction({
 
 key:PAYSTACK_PUBLIC_KEY,
 
-email:email,
+email:orderData.email,
 
-amount:amountSmallestUnit,
+amount:paystackAmount,
 
-currency:"AED",
+currency:"KES",
+
+metadata:{
+order_number:orderData.order,
+customer_name:orderData.name,
+phone:orderData.phone,
+city:orderData.city,
+currency_display:"AED",
+aed_amount:aedAmount,
+kes_amount:kesAmount,
+exchange_rate:AED_TO_KES_RATE
+},
 
 onSuccess:function(transaction){
 
 showPaymentSuccess(
 orderData,
-transaction.reference
+transaction.reference,
+kesAmount
 );
 
 },
@@ -568,17 +570,12 @@ toast("Payment cancelled.");
 });
 
 return true;
-
 }
-
-
 /* =========================================================
    PAYMENT SUCCESS
    ========================================================= */
 
-function showPaymentSuccess(orderData,reference){
-
-const order=orderData.order;
+function showPaymentSuccess(orderData,reference,kesAmount){
 
 $("checkoutModal").querySelector(".box").innerHTML=`
 
@@ -593,23 +590,32 @@ $("checkoutModal").querySelector(".box").innerHTML=`
 <div class="orderNo">
 
 Order Number<br>
-
-<strong>${order}</strong>
+<strong>${orderData.order}</strong>
 
 <br><br>
 
 Payment Reference<br>
-
 <strong>${reference}</strong>
 
 </div>
 
 <p>
-Order Total:
+GLOBIA Order Total:
 <strong>${money(orderData.total)}</strong>
 </p>
 
-<button class="place"
+<p style="margin-top:10px">
+Paystack Amount:
+<strong>KES ${kesAmount.toLocaleString()}</strong>
+</p>
+
+<p style="margin-top:10px;font-size:12px;color:#777">
+Exchange rate used:
+1 AED = ${AED_TO_KES_RATE} KES
+</p>
+
+<button
+class="place"
 style="margin-top:20px"
 onclick="location.reload()">
 

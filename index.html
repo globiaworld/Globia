@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GLOBIA — Shop Smart. Live Better.</title>
+<meta name="description" content="GLOBIA online marketplace">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f6f7f9;color:#222}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+
+.top{background:#111;color:#fff;text-align:center;padding:7px;font-size:13px}
+header{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px #0001}
+.nav{max-width:1250px;margin:auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
+.logo{font-size:28px;font-weight:900;color:#e65100;white-space:nowrap}
+.logo span{color:#111}
+.search{flex:1;display:flex;background:#f2f3f5;border-radius:30px;overflow:hidden}
+.search input{flex:1;border:0;background:transparent;padding:13px 18px;outline:0}
+.search button{background:#ff6a00;color:white;padding:0 22px}
+.navbtn{background:white;font-size:24px;position:relative}
+.count{position:absolute;right:-7px;top:-7px;background:#e65100;color:#fff;border-radius:50%;font-size:11px;width:20px;height:20px;display:flex;align-items:center;justify-content:center}
+
+.hero{background:linear-gradient(120deg,#ff6a00,#ff9d2e);color:#fff}
+.heroIn{max-width:1250px;margin:auto;padding:45px 18px;display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:center}
+.hero h1{font-size:48px;line-height:1.05;margin-bottom:15px}
+.hero p{font-size:18px;line-height:1.6;max-width:600px}
+.hero button{margin-top:22px;background:#111;color:white;padding:13px 24px;border-radius:25px;font-weight:bold}
+.heroArt{font-size:110px;text-align:center}
+
+.wrap{max-width:1250px;margin:auto;padding:25px 18px}
+.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.sectionTitle h2{font-size:24px}
+.categories{display:flex;gap:9px;overflow:auto;padding-bottom:8px}
+.cat{background:#fff;padding:10px 17px;border-radius:22px;white-space:nowrap;border:1px solid #ddd}
+.cat.active,.cat:hover{background:#ff6a00;color:#fff;border-color:#ff6a00}
+
+.deals{background:#fff3e9;border-radius:15px;padding:18px;margin-bottom:25px}
+.deals strong{color:#e65100}
+
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px #0000000d;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 7px 20px #0002}
+.pic{height:190px;position:relative;background:#eee}
+.pic img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;top:8px;left:8px;background:#e65100;color:white;padding:5px 8px;border-radius:5px;font-size:10px;font-weight:bold}
+.info{padding:12px}
+.catname{font-size:11px;color:#888;margin-bottom:5px}
+.card h3{font-size:15px;height:38px;overflow:hidden}
+.desc{font-size:12px;color:#777;height:32px;margin:5px 0;overflow:hidden}
+.rating{font-size:12px;color:#f59d00;margin:5px 0}
+.rating span{color:#777}
+.price{font-size:19px;font-weight:800}
+.old{text-decoration:line-through;color:#999;font-size:12px;margin-left:6px}
+.add{width:100%;background:#111;color:#fff;padding:10px;border-radius:7px;margin-top:9px;font-weight:bold}
+.add:hover{background:#e65100}
+
+.pages{display:flex;justify-content:center;gap:6px;margin:25px 0}
+.pages button{background:white;border:1px solid #ddd;padding:8px 13px;border-radius:6px}
+.pages button.active{background:#e65100;color:white}
+
+footer{background:#111;color:#ddd;margin-top:35px}
+.foot{max-width:1250px;margin:auto;padding:35px 18px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+.foot h2{color:#fff;margin-bottom:10px}
+.foot h3{color:#fff;margin-bottom:10px}
+.foot p{color:#aaa;line-height:1.6;font-size:14px}
+.copy{text-align:center;border-top:1px solid #333;padding:15px;color:#888;font-size:12px}
+
+.drawer{position:fixed;right:-430px;top:0;width:min(430px,100%);height:100%;background:white;z-index:50;box-shadow:-5px 0 25px #0003;transition:.3s;display:flex;flex-direction:column}
+.drawer.open{right:0}
+.drawerHead{padding:18px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between}
+.drawerHead button,.close{background:none;font-size:28px}
+.cartList{flex:1;overflow:auto;padding:15px}
+.cartItem{display:grid;grid-template-columns:65px 1fr 25px;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.cartItem img{width:65px;height:65px;object-fit:cover;border-radius:7px}
+.cartItem h4{font-size:14px}
+.qty{display:flex;gap:10px;align-items:center;margin-top:8px}
+.qty button{width:25px;height:25px;border-radius:50%;background:#eee}
+.remove{background:none;color:#e00}
+.cartFoot{padding:18px;border-top:1px solid #ddd}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:bold;margin-bottom:12px}
+.checkoutBtn{width:100%;padding:13px;background:#e65100;color:#fff;border-radius:7px;font-weight:bold}
+
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:60;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.box{background:white;border-radius:15px;width:min(700px,100%);max-height:92vh;overflow:auto;padding:22px;position:relative}
+.box .close{position:absolute;right:15px;top:10px}
+.productDetail{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.productDetail img{width:100%;height:350px;object-fit:cover;border-radius:10px}
+.productDetail h2{font-size:27px;margin:8px 0}
+.bigprice{font-size:27px;font-weight:bold;color:#e65100;margin:15px 0}
+.detailAdd{background:#111;color:white;padding:13px 20px;border-radius:7px;width:100%}
+
+.form h2{margin-bottom:15px}
+.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid #ccc;border-radius:7px;outline:0}
+.field textarea{height:80px;resize:vertical}
+.full{grid-column:1/-1}
+.place{width:100%;padding:14px;background:#e65100;color:#fff;border-radius:8px;font-weight:bold}
+.summary{background:#f7f7f7;padding:12px;border-radius:8px;margin-bottom:15px}
+.summaryLine{display:flex;justify-content:space-between;font-size:13px;padding:5px 0}
+.success{text-align:center;padding:35px 10px}
+.successIcon{font-size:60px;color:#1a9b45}
+.success h2{font-size:28px;margin:10px}
+.orderNo{background:#f3f3f3;padding:15px;border-radius:8px;margin:15px 0;font-weight:bold}
+.empty{text-align:center;padding:50px 10px;color:#777}
+.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:white;padding:12px 20px;border-radius:25px;z-index:100;opacity:0;transition:.3s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:750px){
+.nav{gap:8px}.logo{font-size:21px}.search button{padding:0 14px}
+.heroIn{grid-template-columns:1fr;padding:35px 18px}.hero h1{font-size:36px}.heroArt{display:none}
+.grid{grid-template-columns:repeat(2,1fr);gap:10px}.pic{height:170px}
+.foot{grid-template-columns:1fr 1fr}.productDetail{grid-template-columns:1fr}.productDetail img{height:250px}
+.formGrid{grid-template-columns:1fr}.full{grid-column:auto}
+}
+@media(max-width:430px){.grid{grid-template-columns:repeat(2,1fr)}.pic{height:145px}.info{padding:9px}.card h3{font-size:13px}}
+</style>
+</head>
+
+<body>
+
+<div class="top">🔥 FREE DELIVERY ON SELECTED ORDERS • GLOBIA UAE MARKETPLACE</div>
+
+<header>
+<div class="nav">
+<div class="logo">GLOBIA<span>World</span></div>
+
+<div class="search">
+<input id="search" placeholder="Search products...">
+<button onclick="searchProducts()">🔍</button>
+</div>
+
+<button class="navbtn" onclick="openCart()">🛒<span id="count" class="count">0</span></button>
+</div>
+</header>
+
+<section class="hero">
+<div class="heroIn">
+<div>
+<h1>Shop Smart.<br>Live Better.</h1>
+<p>Discover electronics, fashion, home products, tools, car accessories and more at great prices.</p>
+<button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">SHOP NOW →</button>
+</div>
+<div class="heroArt">🛍️📱🎧</div>
+</div>
+</section>
+
+<main class="wrap" id="shop">
+
+<div class="sectionTitle">
+<h2>Shop by Category</h2>
+</div>
+
+<div class="categories" id="cats"></div>
+
+<div class="deals">
+<strong>🔥 TODAY'S DEALS</strong>
+&nbsp; Save more on selected GLOBIA products. New products added regularly.
+</div>
+
+<div class="sectionTitle">
+<h2 id="title">Featured Products</h2>
+<span id="shown"></span>
+</div>
+
+<div class="grid" id="products"></div>
+
+<div class="pages" id="pages"></div>
+
+</main>
+
+<footer>
+<div class="foot">
+<div>
+<h2>GLOBIA<span style="color:#e65100">World</span></h2>
+<p>Your growing online marketplace for smart shopping. We connect customers with useful products at competitive prices.</p>
+</div>
+<div>
+<h3>Shop</h3>
+<p>Electronics</p>
+<p>Fashion</p>
+<p>Home & Living</p>
+<p>Tools</p>
+</div>
+<div>
+<h3>Customer Service</h3>
+<p>Secure ordering</p>
+<p>Order support</p>
+<p>Fast delivery</p>
+<p>Contact GLOBIA</p>
+</div>
+</div>
+<div class="copy">© 2026 GLOBIAWorld. All rights reserved.</div>
+</footer>
+
+
+<!-- CART -->
+
+<div class="drawer" id="drawer">
+<div class="drawerHead">
+<h2>Your Cart</h2>
+<button onclick="closeCart()">×</button>
+</div>
+
+<div class="cartList" id="cartList"></div>
+
+<div class="cartFoot">
+<div class="total">
+<span>Total</span>
+<span id="cartTotal">AED 0</span>
+</div>
+<button class="checkoutBtn" onclick="checkout()">Proceed to Checkout</button>
+</div>
+</div>
+
+
+<!-- PRODUCT MODAL -->
+
+<div class="modal" id="productModal">
+<div class="box">
+<button class="close" onclick="closeProduct()">×</button>
+<div id="productDetail"></div>
+</div>
+</div>
+
+
+<!-- CHECKOUT -->
+
+<div class="modal" id="checkoutModal">
+<div class="box">
+<button class="close" onclick="closeCheckout()">×</button>
+
+<div class="form">
+<h2>Secure Checkout</h2>
+
+<div class="summary" id="summary"></div>
+
+<form id="orderForm">
+
+<div class="formGrid">
+
+<div class="field">
+<label>Full Name *</label>
+<input name="customer_name" required>
+</div>
+
+<div class="field">
+<label>Email *</label>
+<input type="email" name="email" required>
+</div>
+
+<div class="field">
+<label>Phone / WhatsApp *</label>
+<input name="phone" required>
+</div>
+
+<div class="field">
+<label>City *</label>
+<input name="city" placeholder="e.g. Ajman" required>
+</div>
+
+<div class="field full">
+<label>Delivery Address *</label>
+<textarea name="address" required></textarea>
+</div>
+
+<div class="field">
+<label>Payment Method</label>
+<select name="payment_method">
+<option>Cash on Delivery</option>
+<option>Paystack</option>
+</select>
+</div>
+
+</div>
+
+<button class="place" type="submit">PLACE ORDER</button>
+
+</form>
+</div>
+</div>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   GLOBIA PRODUCT DATABASE
+   TO ADD A PRODUCT:
+   COPY ONE { ... } BLOCK AND CHANGE THE VALUES.
+   ========================================================= */
+
+const products=[
+
+{id:1,n:"Wireless Earbuds",c:"Electronics",d:"Bluetooth earbuds with charging case",p:59,o:89,r:4.7,i:"https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80"},
+{id:2,n:"Smart Watch",c:"Electronics",d:"Fitness smartwatch with activity tracking",p:129,o:179,r:4.6,i:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80"},
+{id:3,n:"Bluetooth Speaker",c:"Electronics",d:"Portable wireless speaker",p:79,o:119,r:4.7,i:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=700&q=80"},
+{id:4,n:"Power Bank 20000mAh",c:"Electronics",d:"High capacity portable charger",p:89,o:129,r:4.5,i:"https://images.unsplash.com/photo-1609592424876-6f0c8c3c0b9c?auto=format&fit=crop&w=700&q=80"},
+{id:5,n:"USB-C Fast Charger",c:"Electronics",d:"Fast charging wall adapter",p:49,o:69,r:4.6,i:"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80"},
+{id:6,n:"LED Desk Lamp",c:"Home & Living",d:"Modern adjustable LED desk lamp",p:69,o:99,r:4.5,i:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=80"},
+{id:7,n:"Portable Blender",c:"Home & Living",d:"Rechargeable personal smoothie blender",p:99,o:139,r:4.6,i:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=700&q=80"},
+{id:8,n:"Digital Kitchen Scale",c:"Home & Living",d:"Precise electronic kitchen scale",p:39,o:59,r:4.5,i:"https://images.unsplash.com/photo-1596450514735-111a2f2e1d7a?auto=format&fit=crop&w=700&q=80"},
+{id:9,n:"Storage Organizer",c:"Home & Living",d:"Foldable home storage organizer",p:45,o:69,r:4.4,i:"https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=700&q=80"},
+{id:10,n:"Water Bottle",c:"Sports & Fitness",d:"Reusable insulated sports bottle",p:49,o:69,r:4.7,i:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=700&q=80"},
+
+{id:11,n:"Magnetic Car Phone Mount",c:"Car Accessories",d:"Strong magnetic dashboard phone holder",p:49,o:69,r:4.7,i:"https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=700&q=80"},
+{id:12,n:"Car Vacuum Cleaner",c:"Car Accessories",d:"Compact rechargeable vehicle vacuum",p:129,o:169,r:4.6,i:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=80"},
+{id:13,n:"Digital Tire Inflator",c:"Car Accessories",d:"Portable digital air compressor",p:159,o:219,r:4.7,i:"https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=700&q=80"},
+{id:14,n:"Car Cleaning Kit",c:"Car Accessories",d:"Complete microfiber detailing kit",p:69,o:99,r:4.6,i:"https://images.unsplash.com/photo-1525609004556-c46c7cf9cf7b?auto=format&fit=crop&w=700&q=80"},
+{id:15,n:"Car Charger",c:"Car Accessories",d:"Dual USB fast car charger",p:39,o:59,r:4.5,i:"https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=700&q=80"},
+
+{id:16,n:"Cordless Drill",c:"Tools & DIY",d:"18V rechargeable drill driver",p:229,o:299,r:4.7,i:"https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=700&q=80"},
+{id:17,n:"Screwdriver Set",c:"Tools & DIY",d:"Multi-bit precision screwdriver set",p:59,o:79,r:4.6,i:"https://images.unsplash.com/photo-1581147036324-c17ac41a5d4b?auto=format&fit=crop&w=700&q=80"},
+{id:18,n:"Digital Multimeter",c:"Tools & DIY",d:"Auto-ranging electrical tester",p:89,o:119,r:4.6,i:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80"},
+{id:19,n:"Tool Bag",c:"Tools & DIY",d:"Multi-pocket professional tool bag",p:79,o:109,r:4.7,i:"https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=700&q=80"},
+{id:20,n:"LED Work Light",c:"Tools & DIY",d:"Rechargeable workshop lamp",p:75,o:99,r:4.5,i:"https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=700&q=80"},
+
+{id:21,n:"Women's Handbag",c:"Fashion",d:"Elegant everyday shoulder handbag",p:99,o:149,r:4.6,i:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"},
+{id:22,n:"Classic Sunglasses",c:"Fashion",d:"Stylish UV protection sunglasses",p:59,o:89,r:4.5,i:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80"},
+{id:23,n:"Casual Backpack",c:"Fashion",d:"Lightweight everyday backpack",p:89,o:129,r:4.7,i:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80"},
+{id:24,n:"Men's Wallet",c:"Fashion",d:"Slim everyday leather-style wallet",p:45,o:69,r:4.5,i:"https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=700&q=80"},
+{id:25,n:"Sports Cap",c:"Fashion",d:"Adjustable breathable sports cap",p:35,o:49,r:4.4,i:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=700&q=80"},
+
+{id:26,n:"Yoga Mat",c:"Sports & Fitness",d:"Non-slip exercise yoga mat",p:69,o:95,r:4.7,i:"https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=700&q=80"},
+{id:27,n:"Resistance Bands",c:"Sports & Fitness",d:"Multi-level home workout bands",p:55,o:75,r:4.6,i:"https://images.unsplash.com/photo-1598289431512-b97b0917affc?auto=format&fit=crop&w=700&q=80"},
+{id:28,n:"Gym Gloves",c:"Sports & Fitness",d:"Training gloves with wrist support",p:45,o:65,r:4.5,i:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=700&q=80"},
+{id:29,n:"Jump Rope",c:"Sports & Fitness",d:"Fast training skipping rope",p:35,o:49,r:4.5,i:"https://images.unsplash.com/photo-1526401485004-2aa7c7a0a2d5?auto=format&fit=crop&w=700&q=80"},
+{id:30,n:"Mini Massage Gun",c:"Sports & Fitness",d:"Portable muscle recovery device",p:149,o:199,r:4.6,i:"https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=700&q=80"},
+
+{id:31,n:"Teddy Bear",c:"Kids & Toys",d:"Soft cuddly plush toy",p:59,o:79,r:4.7,i:"https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=700&q=80"},
+{id:32,n:"Building Blocks",c:"Kids & Toys",d:"Creative construction block set",p:79,o:109,r:4.7,i:"https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=700&q=80"},
+{id:33,n:"Remote Control Car",c:"Kids & Toys",d:"Rechargeable RC toy car",p:129,o:169,r:4.6,i:"https://images.unsplash.com/photo-1594784055417-3d5d4c0f1d8f?auto=format&fit=crop&w=700&q=80"},
+{id:34,n:"Kids Drawing Tablet",c:"Kids & Toys",d:"Reusable LCD writing tablet",p:49,o:69,r:4.5,i:"https://images.unsplash.com/photo-1607453998774-d533f65dac99?auto=format&fit=crop&w=700&q=80"},
+{id:35,n:"Coloring Kit",c:"Kids & Toys",d:"Creative children's art kit",p:65,o:89,r:4.7,i:"https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=700&q=80"},
+
+{id:36,n:"USB LED Strip Lights",c:"Home & Living",d:"Decorative LED lighting strip",p:59,o:89,r:4.6,i:"https://images.unsplash.com/photo-1550985543-49bee316728a?auto=format&fit=crop&w=700&q=80"},
+{id:37,n:"Digital Alarm Clock",c:"Home & Living",d:"Modern LED bedside clock",p:49,o:69,r:4.5,i:"https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=700&q=80"},
+{id:38,n:"Aroma Diffuser",c:"Home & Living",d:"Ultrasonic room aroma diffuser",p:89,o:129,r:4.6,i:"https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80"},
+{id:39,n:"Kitchen Storage Set",c:"Home & Living",d:"Reusable food storage containers",p:69,o:99,r:4.5,i:"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=700&q=80"},
+{id:40,n:"Microfiber Cleaning Cloths",c:"Home & Living",d:"Reusable household cleaning cloths",p:39,o:55,r:4.7,i:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=700&q=80"}
+
+];
+
+let cart=JSON.parse(localStorage.getItem("globiaCart")||"[]");
+let category="All";
+let page=1;
+const perPage=10;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $=id=>document.getElementById(id);
+
+function money(n){
+return "AED "+Number(n).toFixed(2);
+}
+
+function stars(r){
+return "★★★★★".split("").map((x,i)=>i<Math.round(r)?"★":"☆").join("");
+}
+
+function save(){
+localStorage.setItem("globiaCart",JSON.stringify(cart));
+}
+
+function toast(msg){
+$("toast").textContent=msg;
+$("toast").classList.add("show");
+clearTimeout(window.tt);
+window.tt=setTimeout(()=>$("toast").classList.remove("show"),2200);
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+function renderCats(){
+
+let cats=["All",...new Set(products.map(x=>x.c))];
+
+$("cats").innerHTML=cats.map(x=>
+`<button class="cat ${x==category?"active":""}" onclick="setCategory('${x.replace(/'/g,"\\'")}')">${x}</button>`
+).join("");
+
+}
+
+function setCategory(c){
+category=c;
+page=1;
+renderCats();
+renderProducts();
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function filtered(){
+
+let q=$("search").value.toLowerCase().trim();
+
+return products.filter(x=>
+(category=="All"||x.c==category)&&
+(!q||
+x.n.toLowerCase().includes(q)||
+x.d.toLowerCase().includes(q)||
+x.c.toLowerCase().includes(q))
+);
+
+}
+
+function searchProducts(){
+page=1;
+renderProducts();
+$("shop").scrollIntoView({behavior:"smooth"});
+}
+
+$("search").addEventListener("input",()=>{
+page=1;
+renderProducts();
+});
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+function renderProducts(){
+
+let list=filtered();
+let total=Math.max(1,Math.ceil(list.length/perPage));
+let start=(page-1)*perPage;
+let shown=list.slice(start,start+perPage);
+
+$("title").textContent=category=="All"?"Featured Products":category;
+$("shown").textContent=list.length+" products";
+
+if(!shown.length){
+
+$("products").innerHTML=
+`<div class="empty" style="grid-column:1/-1">
+<h2>No products found</h2>
+<p>Try another search or category.</p>
+</div>`;
+
+}else{
+
+$("products").innerHTML=shown.map(x=>`
+
+<div class="card">
+
+<div class="pic">
+${x.p<x.o?'<span class="badge">HOT DEAL</span>':""}
+<img src="${x.i}" alt="${x.n}" loading="lazy"
+onerror="this.src='https://placehold.co/700x700?text=GLOBIA'">
+</div>
+
+<div class="info">
+
+<div class="catname">${x.c}</div>
+
+<h3>${x.n}</h3>
+
+<div class="desc">${x.d}</div>
+
+<div class="rating">${stars(x.r)} <span>(${x.r})</span></div>
+
+<div>
+<span class="price">${money(x.p)}</span>
+<span class="old">${money(x.o)}</span>
+</div>
+
+<button class="add" onclick="add(${x.id})">🛒 Add to Cart</button>
+
+<button style="background:none;color:#e65100;width:100%;margin-top:8px;font-size:12px"
+onclick="details(${x.id})">View Details</button>
+
+</div>
+</div>
+
+`).join("");
+
+}
+
+$("pages").innerHTML="";
+
+for(let i=1;i<=total;i++){
+
+let b=document.createElement("button");
+b.textContent=i;
+if(i==page)b.className="active";
+b.onclick=()=>{
+page=i;
+renderProducts();
+window.scrollTo({top:0,behavior:"smooth"});
+};
+$("pages").appendChild(b);
+
+}
+
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+function add(id){
+
+let p=products.find(x=>x.id==id);
+if(!p)return;
+
+let item=cart.find(x=>x.id==id);
+
+if(item)item.q++;
+else cart.push({
+id:p.id,
+n:p.n,
+p:p.p,
+i:p.i,
+q:1
+});
+
+save();
+updateCart();
+toast(p.n+" added to cart");
+
+}
+
+function removeItem(id){
+cart=cart.filter(x=>x.id!=id);
+save();
+updateCart();
+}
+
+function qty(id,num){
+
+let x=cart.find(a=>a.id==id);
+if(!x)return;
+
+x.q+=num;
+
+if(x.q<=0)removeItem(id);
+else{
+save();
+updateCart();
+}
+
+}
+
+function total(){
+
+return cart.reduce(
+(s,x)=>s+x.p*x.q,
+0
+);
+
+}
+
+function updateCart(){
+
+$("count").textContent=
+cart.reduce((s,x)=>s+x.q,0);
+
+$("cartTotal").textContent=money(total());
+
+if(!cart.length){
+
+$("cartList").innerHTML=
+`<div class="empty">
+<div style="font-size:45px">🛒</div>
+<h3>Your cart is empty</h3>
+<p>Add products to continue.</p>
+</div>`;
+
+return;
+
+}
+
+$("cartList").innerHTML=cart.map(x=>`
+
+<div class="cartItem">
+
+<img src="${x.i}"
+onerror="this.src='https://placehold.co/100x100?text=GLOBIA'">
+
+<div>
+<h4>${x.n}</h4>
+<div style="color:#e65100;font-weight:bold">${money(x.p)}</div>
+
+<div class="qty">
+<button onclick="qty(${x.id},-1)">−</button>
+<strong>${x.q}</strong>
+<button onclick="qty(${x.id},1)">+</button>
+</div>
+</div>
+
+<button class="remove" onclick="removeItem(${x.id})">×</button>
+
+</div>
+
+`).join("");
+
+}
+
+function openCart(){
+$("drawer").classList.add("open");
+updateCart();
+}
+
+function closeCart(){
+$("drawer").classList.remove("open");
+}
+
+
+/* =========================================================
+   PRODUCT DETAILS
+========================================================= */
+
+function details(id){
+
+let p=products.find(x=>x.id==id);
+if(!p)return;
+
+$("productDetail").innerHTML=`
+
+<div class="productDetail">
+
+<div>
+<img src="${p.i}" onerror="this.src='https://placehold.co/700x700?text=GLOBIA'">
+</div>
+
+<div>
+
+<div class="catname">${p.c}</div>
+
+<h2>${p.n}</h2>
+
+<div class="rating">${stars(p.r)} (${p.r})</div>
+
+<p style="line-height:1.6;color:#666;margin-top:12px">${p.d}</p>
+
+<div class="bigprice">
+${money(p.p)}
+<del style="font-size:14px;color:#999;margin-left:8px">${money(p.o)}</del>
+</div>
+
+<button class="detailAdd" onclick="add(${p.id});closeProduct();openCart()">
+🛒 Add to Cart
+</button>
+
+</div>
+
+</div>
+`;
+
+$("productModal").classList.add("show");
+
+}
+
+function closeProduct(){
+$("productModal").classList.remove("show");
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+function checkout(){
+
+if(!cart.length){
+toast("Your cart is empty");
+return;
+}
+
+closeCart();
+
+$("summary").innerHTML=cart.map(x=>
+`<div class="summaryLine">
+<span>${x.n} × ${x.q}</span>
+<strong>${money(x.p*x.q)}</strong>
+</div>`
+).join("")+
+`<hr style="margin:8px 0">
+<div class="summaryLine">
+<strong>Total</strong>
+<strong>${money(total())}</strong>
+</div>`;
+
+$("checkoutModal").classList.add("show");
+
+}
+
+function closeCheckout(){
+$("checkoutModal").classList.remove("show");
+}
+
+
+/* =========================================================
+   FORMSPREE ORDER SUBMISSION
+========================================================= */
+
+$("orderForm").addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+if(!cart.length){
+toast("Your cart is empty");
+return;
+}
+
+let button=this.querySelector("button[type=submit]");
+button.disabled=true;
+button.textContent="Sending Order...";
+
+let order=
+"GLOBIA-"+Date.now().toString().slice(-8);
+
+let items=cart.map(x=>
+x.n+" | Qty: "+x.q+
+" | Price: "+money(x.p)+
+" | Subtotal: "+money(x.p*x.q)
+).join("\n");
+
+let data=new FormData(this);
+
+data.append("order_number",order);
+data.append("store","GLOBIAWorld");
+data.append("items",items);
+data.append("order_total",money(total()));
+data.append("currency","AED");
+data.append("_subject","New GLOBIA Order "+order);
+
+try{
+
+let response=await fetch(
+"https://formspree.io/f/xnpaedab",
+{
+method:"POST",
+body:data,
+headers:{Accept:"application/json"}
+}
+);
+
+if(response.ok){
+
+$("checkoutModal").querySelector(".box").innerHTML=`
+
+<div class="success">
+
+<div class="successIcon">✓</div>
+
+<h2>Order Received!</h2>
+
+<p>Thank you for shopping with GLOBIA.</p>
+
+<div class="orderNo">
+Order Number<br>
+<strong>${order}</strong>
+</div>
+
+<p>Your order has been submitted successfully.</p>
+
+<p style="margin-top:10px">
+Order Total:
+<strong>${money(total())}</strong>
+</p>
+
+<button class="place"
+style="margin-top:20px"
+onclick="location.reload()">
+Continue Shopping
+</button>
+
+</div>
+`;
+
+cart=[];
+save();
+updateCart();
+
+}else{
+
+let error="Unable to submit order.";
+
+try{
+let result=await response.json();
+if(result.errors)
+error=result.errors.map(x=>x.message).join(", ");
+}catch(err){}
+
+toast(error);
+button.disabled=false;
+button.textContent="PLACE ORDER";
+
+}
+
+}catch(err){
+
+console.error(err);
+
+toast("Internet connection error. Please try again.");
+
+button.disabled=false;
+button.textContent="PLACE ORDER";
+
+}
+
+});
+
+
+/* =========================================================
+   START WEBSITE
+========================================================= */
+
+renderCats();
+renderProducts();
+updateCart();
+
+</script>
+
+</body>
+</html>

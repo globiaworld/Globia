@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Services | GLOBIAWorld</title>
+<meta name="description" content="Discover digital solutions, business support, technology and creative services with GLOBIAWorld.">
+
+<style>
+:root {
+  --navy:#071b35;
+  --blue:#1264a3;
+  --cyan:#16b8cf;
+  --gold:#e6b653;
+  --light:#f3f7fb;
+  --text:#26384b;
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+header{
+  background:var(--navy);color:white;padding:17px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:15px
+}
+.logo{font-size:26px;font-weight:800}
+.logo span{color:var(--cyan)}
+nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+nav a{font-size:13px;color:#e8f0f8}
+nav a:hover{color:var(--gold)}
+.nav-button{background:var(--gold);color:var(--navy);padding:9px 15px;border-radius:5px;font-weight:bold}
+
+.hero{
+  min-height:510px;padding:90px 8%;color:white;
+  display:flex;align-items:center;
+  background:linear-gradient(90deg,rgba(4,18,39,.94),rgba(4,18,39,.57)),
+  url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=85") center/cover
+}
+.hero-content{max-width:750px}
+.eyebrow{color:var(--gold);font-size:13px;font-weight:bold;letter-spacing:3px;text-transform:uppercase}
+h1{font-size:clamp(40px,6vw,65px);line-height:1.12;margin:18px 0}
+.hero p{font-size:18px;color:#e0eaf4;max-width:650px}
+.button{display:inline-block;background:var(--gold);color:var(--navy);padding:13px 23px;border-radius:5px;font-weight:bold;margin-top:24px}
+.button:hover{background:white}
+
+section{padding:70px 8%}
+.heading{text-align:center;max-width:760px;margin:0 auto 40px}
+.heading h2{font-size:34px;color:var(--navy);margin-bottom:10px}
+.heading p{color:#68798a}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:23px}
+.card{background:white;border:1px solid #e3eaf1;border-radius:11px;overflow:hidden;box-shadow:0 7px 23px rgba(10,35,65,.06)}
+.card img{width:100%;height:185px;object-fit:cover;display:block}
+.card-content{padding:22px}
+.card h3{color:var(--navy);margin-bottom:9px;font-size:20px}
+.card p{font-size:14px;color:#68798a}
+
+.light{background:var(--light)}
+.info-card{background:white;padding:25px;border:1px solid #e3eaf1;border-radius:10px}
+.info-card h3{color:var(--blue);margin-bottom:9px}
+.info-card p{font-size:14px;color:#68798a}
+.icon{font-size:29px;margin-bottom:10px}
+
+.cta{text-align:center;background:linear-gradient(120deg,var(--navy),var(--blue));color:white}
+.cta h2{font-size:34px;margin-bottom:12px}
+.cta p{max-width:680px;margin:auto;color:#e0eaf4}
+
+footer{background:#041326;color:#c6d2df;text-align:center;padding:30px 7%;font-size:13px}
+footer a{color:var(--cyan)}
+
+@media(max-width:800px){
+  header{justify-content:center}
+  nav{justify-content:center}
+  .hero{padding:70px 7%;min-height:430px}
+  section{padding:55px 6%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="index.html">GLOBIA<span>World</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About Us</a>
+    <a href="index.html#services">Our Ecosystem</a>
+    <a href="index.html#vision">Our Vision</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="careers.html">Careers</a>
+    <a href="conferences.html">Conferences</a>
+    <a href="digital-services.html">Digital Services</a>
+    <a href="partnerships.html">Partnerships</a>
+    <a href="index.html#contact" class="nav-button">Connect With Us</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Technology • Creativity • Business Solutions</div>
+    <h1>Digital Solutions for a Connected World.</h1>
+    <p>
+      Discover digital services, innovative solutions and
+      technology-driven opportunities designed to help individuals
+      and businesses grow in a connected global economy.
+    </p>
+    <a href="#services" class="button">Explore Digital Services</a>
+  </div>
+</div>
+
+<section id="services">
+  <div class="heading">
+    <h2>Our Digital Service Areas</h2>
+    <p>Explore services that support individuals, entrepreneurs and organizations.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Digital business analytics">
+      <div class="card-content">
+        <h3>Business Digital Solutions</h3>
+        <p>Explore digital tools and solutions that help businesses improve their operations and online presence.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Website development">
+      <div class="card-content">
+        <h3>Web & Technology</h3>
+        <p>Discover website development, digital platforms, software solutions and technology services.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=800&q=80" alt="Creative graphic design">
+      <div class="card-content">
+        <h3>Creative & Design Services</h3>
+        <p>Explore branding, graphic design, visual communication and creative digital content.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="Business consulting">
+      <div class="card-content">
+        <h3>Digital Business Support</h3>
+        <p>Discover administrative support, digital consultancy and business productivity services.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="light">
+  <div class="heading">
+    <h2>Technology & Innovation</h2>
+    <p>Digital opportunities for a changing world.</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="info-card">
+      <div class="icon">🌐</div>
+      <h3>Online Presence</h3>
+      <p>Explore websites, digital branding and online communication solutions.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">📊</div>
+      <h3>Business Productivity</h3>
+      <p>Discover digital systems and tools that support business organization and efficiency.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">🤖</div>
+      <h3>Emerging Technologies</h3>
+      <p>Explore innovation, automation and new technology-driven possibilities.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">🔗</div>
+      <h3>Digital Connections</h3>
+      <p>Connect with service providers, technology professionals and business partners.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="heading">
+    <h2>Who We Connect</h2>
+    <p>GLOBIAWorld aims to create a collaborative digital service ecosystem.</p>
+  </div>
+
+  <div class="grid">
+    <div class="info-card">
+      <h3>Individuals</h3>
+      <p>Find digital services and solutions for personal and professional needs.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Entrepreneurs & Startups</h3>
+      <p>Explore technology, creative and business support for developing ventures.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Businesses & Organizations</h3>
+      <p>Discover digital service partnerships and solutions for organizational growth.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Let's Build Something Better</h2>
+  <p>
+    Are you a digital service provider, technology professional,
+    entrepreneur or organization interested in collaboration?
+    Connect with GLOBIAWorld.
+  </p>
+  <a class="button" href="mailto:info@globiaworld.com?subject=GLOBIAWorld%20Digital%20Services%20Enquiry">
+    Contact Our Team
+  </a>
+</section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> GLOBIAWorld. One World. One Platform. Infinite Connections.</p>
+  <p style="margin-top:10px">
+    <a href="index.html">Home</a> |
+    <a href="tourism.html">Tourism</a> |
+    <a href="careers.html">Careers</a> |
+    <a href="conferences.html">Conferences</a> |
+    <a href="mailto:info@globiaworld.com">Contact</a>
+  </p>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

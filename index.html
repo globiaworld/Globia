@@ -1,0 +1,684 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b35">
+
+  <title>GLOBIAWorld | One World. One Platform.</title>
+
+  <meta name="description" content="GLOBIAWorld connects people, opportunities, tourism, conferences, digital services and global partnerships.">
+
+  <style>
+    :root {
+      --navy: #071b35;
+      --blue: #1268db;
+      --cyan: #18b8d2;
+      --gold: #e9b957;
+      --white: #ffffff;
+      --light: #f4f7fb;
+      --text: #26364b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: #dce8f5;
+      padding: 9px 7%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    header {
+      background: white;
+      padding: 17px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .logo small {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #738196;
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .nav-button {
+      background: var(--blue);
+      color: white;
+      padding: 11px 19px;
+      border-radius: 5px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 27px;
+      cursor: pointer;
+      color: var(--navy);
+    }
+
+    .hero {
+      min-height: 590px;
+      padding: 100px 7%;
+      display: flex;
+      align-items: center;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(5,22,45,.96), rgba(5,22,45,.76)),
+        radial-gradient(circle at 80% 30%, #1679b5, #071b35 65%);
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.12;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: #51c6e3;
+    }
+
+    .hero p {
+      color: #d3dfed;
+      max-width: 610px;
+      font-size: 17px;
+      margin-bottom: 32px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 25px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.7);
+      color: white;
+    }
+
+    section {
+      padding: 85px 7%;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 45px;
+    }
+
+    .section-heading .eyebrow {
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .section-heading h2 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 14px;
+    }
+
+    .section-heading p {
+      color: #68788b;
+      font-size: 15px;
+    }
+
+    .intro {
+      background: white;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .intro h2 {
+      color: var(--navy);
+      font-size: 36px;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .intro p {
+      color: #64748b;
+      margin-bottom: 17px;
+    }
+
+    .intro-panel {
+      background: var(--navy);
+      padding: 40px;
+      color: white;
+      border-radius: 12px;
+      border-bottom: 5px solid var(--cyan);
+    }
+
+    .intro-panel h3 {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .intro-panel p {
+      color: #d3dfed;
+    }
+
+    .services {
+      background: var(--light);
+    }
+
+    .service-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 30px;
+      border-radius: 9px;
+      border: 1px solid #e9eef5;
+      transition: .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(10,35,70,.09);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: #e9f3ff;
+      color: var(--blue);
+      font-size: 25px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      color: var(--navy);
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: #68788b;
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .learn {
+      color: var(--blue);
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .vision {
+      background: white;
+      text-align: center;
+    }
+
+    .vision-box {
+      max-width: 850px;
+      margin: auto;
+      padding: 45px;
+      border-radius: 12px;
+      background: var(--navy);
+      color: white;
+    }
+
+    .vision-box h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .vision-box p {
+      color: #d3dfed;
+      margin-bottom: 25px;
+    }
+
+    .contact {
+      background: var(--light);
+      text-align: center;
+    }
+
+    .contact h2 {
+      color: var(--navy);
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .contact p {
+      color: #68788b;
+      margin-bottom: 25px;
+    }
+
+    footer {
+      background: #041326;
+      color: #d3dfed;
+      padding: 45px 7% 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 35px;
+      margin-bottom: 35px;
+    }
+
+    footer h3, footer h4 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    footer p, footer a {
+      font-size: 13px;
+      color: #aebed0;
+    }
+
+    footer a {
+      display: block;
+      margin-bottom: 9px;
+    }
+
+    .copyright {
+      border-top: 1px solid #26384c;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #8fa1b6;
+    }
+
+    @media(max-width: 850px) {
+      nav {
+        display: none;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 25px 7%;
+        flex-direction: column;
+        align-items: flex-start;
+        box-shadow: 0 10px 20px rgba(0,0,0,.08);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width: 550px) {
+      .topbar {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero {
+        min-height: 530px;
+        padding-top: 75px;
+        padding-bottom: 75px;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 6%;
+      }
+
+      .vision-box {
+        padding: 30px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <span>Connecting People, Opportunities & Markets</span>
+    <span>Global Access • Local Connections</span>
+  </div>
+
+  <header>
+    <a href="#" class="logo">
+      GLOBIA<span>World</span>
+      <small>ONE WORLD. INFINITE CONNECTIONS.</small>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+    <nav id="navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#services">Our Ecosystem</a>
+      <a href="#vision">Our Vision</a>
+      <a href="#contact" class="nav-button">Connect With Us</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">A World of Possibilities</div>
+
+        <h1>
+          One World.<br>
+          One Platform.<br>
+          <span>Infinite Connections.</span>
+        </h1>
+
+        <p>
+          GLOBIAWorld is building a connected ecosystem that brings
+          people, businesses, opportunities and ideas together
+          across borders.
+        </p>
+
+        <div class="actions">
+          <a href="#services" class="btn btn-primary">Explore Our Ecosystem</a>
+          <a href="#about" class="btn btn-outline">Discover GLOBIAWorld</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro" id="about">
+      <div class="intro-grid">
+        <div>
+          <div class="eyebrow">Who We Are</div>
+          <h2>Connecting the World Through Opportunities.</h2>
+
+          <p>
+            GLOBIAWorld is a growing international platform designed
+            to connect individuals, businesses, organizations and
+            communities through accessible digital services and
+            meaningful partnerships.
+          </p>
+
+          <p>
+            Our approach brings different opportunities together
+            under one ecosystem, making it easier to discover,
+            connect, collaborate and grow.
+          </p>
+
+          <a href="#services" class="btn btn-primary">Explore More</a>
+        </div>
+
+        <div class="intro-panel">
+          <h3>Our Purpose</h3>
+          <p>
+            To create connections that open doors, simplify access
+            to opportunities and encourage collaboration across
+            industries and international markets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="section-heading">
+        <div class="eyebrow">The GLOBIA Ecosystem</div>
+        <h2>One Platform. Multiple Possibilities.</h2>
+        <p>
+          Discover the different areas through which GLOBIAWorld
+          connects people, ideas, businesses and opportunities.
+        </p>
+      </div>
+
+      <div class="service-grid">
+
+        <article class="service-card">
+          <div class="service-icon">✈</div>
+          <h3>Tourism</h3>
+          <p>
+            Discover destinations, travel opportunities,
+            experiences and connections that bring the world closer.
+          </p>
+          <a href="#contact" class="learn">Explore Tourism →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">◈</div>
+          <h3>Careers</h3>
+          <p>
+            Connect talent with professional opportunities,
+            career resources and pathways to growth.
+          </p>
+          <a href="#contact" class="learn">Explore Careers →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">▣</div>
+          <h3>Conferences</h3>
+          <p>
+            Discover events, professional gatherings,
+            networking opportunities and knowledge exchange.
+          </p>
+          <a href="#contact" class="learn">Explore Conferences →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">⌘</div>
+          <h3>Digital Services</h3>
+          <p>
+            Access digital solutions, online services and
+            tools that support individuals and businesses.
+          </p>
+          <a href="#contact" class="learn">Explore Digital Services →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">◎</div>
+          <h3>Partnerships & Innovation</h3>
+          <p>
+            Build collaborations, explore new ideas and
+            create opportunities for sustainable growth.
+          </p>
+          <a href="#contact" class="learn">Explore Partnerships →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">✧</div>
+          <h3>Global Connections</h3>
+          <p>
+            Bring people, organizations and markets together
+            through a shared international network.
+          </p>
+          <a href="#contact" class="learn">Connect With Us →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="vision" id="vision">
+      <div class="vision-box">
+        <div class="eyebrow">Our Vision</div>
+        <h2>A More Connected World.</h2>
+        <p>
+          We believe opportunities should not be limited by
+          borders. Through technology, collaboration and innovation,
+          GLOBIAWorld aims to make global connections more accessible.
+        </p>
+        <a href="#contact" class="btn btn-primary">Be Part of the Journey</a>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="eyebrow">Let's Connect</div>
+      <h2>Let's Create Opportunities Together.</h2>
+      <p>
+        Interested in collaborating, partnering or connecting
+        with GLOBIAWorld?
+      </p>
+      <a href="mailto:info@globiaworld.com" class="btn btn-primary">
+        Contact GLOBIAWorld
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>GLOBIAWorld</h3>
+        <p>
+          One World. One Platform. Infinite Connections.
+          Connecting people, opportunities and ideas across borders.
+        </p>
+      </div>
+
+      <div>
+        <h4>Explore</h4>
+        <a href="#about">About Us</a>
+        <a href="#services">Our Ecosystem</a>
+        <a href="#vision">Our Vision</a>
+      </div>
+
+      <div>
+        <h4>Connect</h4>
+        <a href="#contact">Contact Us</a>
+        <a href="mailto:info@globiaworld.com">Email Us</a>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span> GLOBIAWorld. All rights reserved.
+      <br>
+      One World. One Platform. Infinite Connections.
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navigation = document.getElementById('navigation');
+
+    menuToggle.addEventListener('click', () => {
+      navigation.classList.toggle('active');
+    });
+
+    document.querySelectorAll('#navigation a').forEach(link => {
+      link.addEventListener('click', () => {
+        navigation.classList.remove('active');
+      });
+    });
+
+    document.getElementById('year').textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>

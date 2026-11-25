@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conferences & Events | GLOBIAWorld</title>
+<meta name="description" content="Discover conferences, exhibitions, business events and international networking opportunities with GLOBIAWorld.">
+
+<style>
+:root {
+  --navy:#071b35;
+  --blue:#1264a3;
+  --cyan:#16b8cf;
+  --gold:#e6b653;
+  --light:#f3f7fb;
+  --text:#26384b;
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+header{
+  background:var(--navy);color:white;padding:17px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:15px
+}
+.logo{font-size:26px;font-weight:800}
+.logo span{color:var(--cyan)}
+nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+nav a{font-size:13px;color:#e8f0f8}
+nav a:hover{color:var(--gold)}
+.nav-button{background:var(--gold);color:var(--navy);padding:9px 15px;border-radius:5px;font-weight:bold}
+
+.hero{
+  min-height:510px;padding:90px 8%;color:white;
+  display:flex;align-items:center;
+  background:linear-gradient(90deg,rgba(4,18,39,.94),rgba(4,18,39,.57)),
+  url("https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1800&q=85") center/cover
+}
+.hero-content{max-width:750px}
+.eyebrow{color:var(--gold);font-size:13px;font-weight:bold;letter-spacing:3px;text-transform:uppercase}
+h1{font-size:clamp(40px,6vw,65px);line-height:1.12;margin:18px 0}
+.hero p{font-size:18px;color:#e0eaf4;max-width:650px}
+.button{display:inline-block;background:var(--gold);color:var(--navy);padding:13px 23px;border-radius:5px;font-weight:bold;margin-top:24px}
+.button:hover{background:white}
+
+section{padding:70px 8%}
+.heading{text-align:center;max-width:760px;margin:0 auto 40px}
+.heading h2{font-size:34px;color:var(--navy);margin-bottom:10px}
+.heading p{color:#68798a}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:23px}
+.card{background:white;border:1px solid #e3eaf1;border-radius:11px;overflow:hidden;box-shadow:0 7px 23px rgba(10,35,65,.06)}
+.card img{width:100%;height:185px;object-fit:cover;display:block}
+.card-content{padding:22px}
+.card h3{color:var(--navy);margin-bottom:9px;font-size:20px}
+.card p{font-size:14px;color:#68798a}
+
+.light{background:var(--light)}
+.info-card{background:white;padding:25px;border:1px solid #e3eaf1;border-radius:10px}
+.info-card h3{color:var(--blue);margin-bottom:9px}
+.info-card p{font-size:14px;color:#68798a}
+.icon{font-size:29px;margin-bottom:10px}
+
+.cta{text-align:center;background:linear-gradient(120deg,var(--navy),var(--blue));color:white}
+.cta h2{font-size:34px;margin-bottom:12px}
+.cta p{max-width:680px;margin:auto;color:#e0eaf4}
+
+footer{background:#041326;color:#c6d2df;text-align:center;padding:30px 7%;font-size:13px}
+footer a{color:var(--cyan)}
+
+@media(max-width:800px){
+  header{justify-content:center}
+  nav{justify-content:center}
+  .hero{padding:70px 7%;min-height:430px}
+  section{padding:55px 6%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="index.html">GLOBIA<span>World</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About Us</a>
+    <a href="index.html#services">Our Ecosystem</a>
+    <a href="index.html#vision">Our Vision</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="careers.html">Careers</a>
+    <a href="conferences.html">Conferences</a>
+    <a href="digital-services.html">Digital Services</a>
+    <a href="partnerships.html">Partnerships</a>
+    <a href="index.html#contact" class="nav-button">Connect With Us</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Conferences • Events • Networking</div>
+    <h1>Where Ideas Meet. Connections Grow.</h1>
+    <p>
+      Discover professional gatherings, international conferences,
+      exhibitions and networking opportunities that bring people,
+      industries and ideas together.
+    </p>
+    <a href="#event-types" class="button">Explore Events</a>
+  </div>
+</div>
+
+<section id="event-types">
+  <div class="heading">
+    <h2>Explore Events & Conferences</h2>
+    <p>Connect with people, organizations and industries through meaningful events.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80" alt="Conference speaker">
+      <div class="card-content">
+        <h3>International Conferences</h3>
+        <p>Discover professional conferences, industry discussions and knowledge-sharing events.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80" alt="Exhibition event">
+      <div class="card-content">
+        <h3>Exhibitions & Trade Fairs</h3>
+        <p>Explore exhibitions, product showcases and opportunities to meet businesses and innovators.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80" alt="Business networking event">
+      <div class="card-content">
+        <h3>Networking Events</h3>
+        <p>Build professional relationships, exchange ideas and discover collaboration opportunities.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1559223607-a43c990c692c?auto=format&fit=crop&w=800&q=80" alt="Business seminar">
+      <div class="card-content">
+        <h3>Workshops & Seminars</h3>
+        <p>Participate in learning sessions, industry workshops and professional development activities.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="light">
+  <div class="heading">
+    <h2>Our Event Ecosystem</h2>
+    <p>Supporting event discovery, participation and collaboration.</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="info-card">
+      <div class="icon">📅</div>
+      <h3>Event Discovery</h3>
+      <p>Find conferences, exhibitions and professional gatherings relevant to your interests.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">🤝</div>
+      <h3>Business Networking</h3>
+      <p>Connect with organizations, entrepreneurs, professionals and potential partners.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">🌍</div>
+      <h3>International Connections</h3>
+      <p>Explore opportunities to participate in events and build connections across countries.</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">🎤</div>
+      <h3>Event Partnerships</h3>
+      <p>Discuss collaborations with conference organizers, exhibitors and event professionals.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="heading">
+    <h2>For Event Organizers & Partners</h2>
+    <p>Work with GLOBIAWorld to expand the reach of your events and connect with new audiences.</p>
+  </div>
+
+  <div class="grid">
+    <div class="info-card">
+      <h3>Event Promotion</h3>
+      <p>Discuss opportunities to feature conferences, exhibitions and professional events on our platform.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Strategic Partnerships</h3>
+      <p>Explore partnerships with organizers, institutions, businesses and professional associations.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Exhibitor Connections</h3>
+      <p>Help businesses and exhibitors discover new audiences and networking opportunities.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Let's Create Meaningful Connections</h2>
+  <p>
+    Are you organizing an event, looking for a conference,
+    or interested in becoming an event partner?
+    Get in touch with the GLOBIAWorld team.
+  </p>
+  <a class="button" href="mailto:info@globiaworld.com?subject=GLOBIAWorld%20Conferences%20Enquiry">
+    Contact Our Team
+  </a>
+</section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> GLOBIAWorld. One World. One Platform. Infinite Connections.</p>
+  <p style="margin-top:10px">
+    <a href="index.html">Home</a> |
+    <a href="tourism.html">Tourism</a> |
+    <a href="careers.html">Careers</a> |
+    <a href="mailto:info@globiaworld.com">Contact</a>
+  </p>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
